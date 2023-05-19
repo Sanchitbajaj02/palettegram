@@ -8,7 +8,7 @@ Contribution guidelines are listed below. Please take the time to go through the
 
 ## Table of Contents
 
-- [Contributing to palettegram 🪡](#contributing-to-palettegram-)
+- [Contributing to Palettegram 🪡](#contributing-to-Palettegram-)
   - [Table of Contents](#table-of-contents)
   - [First time Contributor](#first-time-contributor)
   - [I Want To Contribute](#i-want-to-contribute)
@@ -25,11 +25,11 @@ Contribution guidelines are listed below. Please take the time to go through the
 
 To get an idea of the app, feel free to check out the website(to be added soon).
 
-A good place to start would be our list of [good first issues](https://github.com/Sanchitbajaj02/palettegram/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
+You can start with available list of [issues](https://github.com/Sanchitbajaj02/Palettegram/issues)
 
 ## I Want To Contribute
 
-- Always check for [existing issues](https://github.com/Sanchitbajaj02/palettegram/issues) before creating a new issue.
+- Always check for [existing issues](https://github.com/Sanchitbajaj02/Palettegram/issues) before creating a new issue.
 - Only start working on an issue if it has been assigned to you. This avoids multiple PRs for the same issue.
 - Every change in this project must have an associated issue. **Issue before PR**
 
@@ -48,14 +48,14 @@ To start contributing to this project, follow the steps below.
 - Now clone the forked repository on your local machine
 
   ```bash
-  git clone https://github.com/<your-username>/palettegram.git
+  git clone https://github.com/<your-username>/Palettegram.git
   ```
 
 - Keep a reference to the original project in `upstream` remote.
 
   ```bash
-  cd palettegram
-  git remote add upstream https://github.com/Sanchitbajaj02/palettegram.git
+  cd Palettegram
+  git remote add upstream https://github.com/Sanchitbajaj02/Palettegram.git
   ```
 
 - If you have created the fork a while ago, synchronize your copy before working.
@@ -109,7 +109,7 @@ git push -u origin branch_name
 ### Pull Request
 
 Go to your repository in the browser and click on compare and pull requests.
-This will send a request to the maintainer to add your contribution to the main repository `https://github.com/Sanchitbajaj02/palettegram.git`
+This will send a request to the maintainer to add your contribution to the main repository `https://github.com/Sanchitbajaj02/Palettegram.git`
 
 <br/>
 
@@ -121,7 +121,7 @@ Make sure to mention which issue is solved with this Pull Request by mentioning 
 
 ### Review
 
-🎉🌟Congratulations! Sit and relax, you've made your contribution to the palettegram project. Wait until the PR is reviewed and incorporate changes suggested by the reviewers. After which the PR can be successfully merged.
+🎉🌟Congratulations! Sit and relax, you've made your contribution to the Palettegram project. Wait until the PR is reviewed and incorporate changes suggested by the reviewers. After which the PR can be successfully merged.
 
 ## Other Ways to Contribute
 
