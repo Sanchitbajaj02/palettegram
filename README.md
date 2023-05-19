@@ -1,70 +1,80 @@
-# Getting Started with Create React App
+# Palletegram
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Palletegrm is a social media application dedicated to professionals like graphic designers, UI designers, UX designers, Developers, etc. to post and their color palletes as well as use other's color palletes.
 
-## Available Scripts
+This application provides streamline workflow among the users to find the best color pallete for their use as well as contribute the color pallete if they want to.
 
-In the project directory, you can run:
+## 👥 Project Maintainers
 
-### `yarn start`
+**Sanchit Bajaj**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**Kunal Arora**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**Kunal Kukreja**
 
-### `yarn test`
+**Sahil Gill**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 👩🏽‍💻 Demo
 
-### `yarn build`
+<!-- Check out the website: [Threadify](https://threadify.vercel.app)
+ -->
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Demo website will be available soon 😊
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 👇🏽 Prerequisites
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Before installation, please make sure you have already installed the following tools:
 
-### `yarn eject`
+- [Git](https://git-scm.com/downloads)
+- [NodeJs (14 or above)](https://nodejs.org/en/download/)
+- [Yarn](https://yarnpkg.com/)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🛠️ Installation Steps
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [Fork](https://github.com/Sanchitbajaj02/palettegram/fork) the project. Click on the <a href="https://github.com/Sanchitbajaj02/palettegram/fork"><img src="https://i.imgur.com/G4z1kEe.png" height="15" width="15"></a> icon in the top right to get started.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Use these commands in your git bash to make a clone of the project in your pc.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### SSH [Github Docs](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)
 
-## Learn More
+```bash
+$ git clone git@github.com:Sanchitbajaj02/palettegram.git
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### HTTPS
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+$ git clone https://github.com/Sanchitbajaj02/palettegram.git
+```
 
-### Code Splitting
+- Navigate to the project directory:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+cd palletegram
+```
 
-### Analyzing the Bundle Size
+- Install the dependencies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+yarn install
+```
 
-### Making a Progressive Web App
+- Start serving
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+yarn start
+```
 
-### Advanced Configuration
+## 🛡️ License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Threadify is licensed under the MIT License - see the [LICENSE](Licence) file for details.
 
-### Deployment
+## 💪🏽 Contributors
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Thank you so much all for spending your time to improve Threadify. Keep shining ⭐
 
-### `yarn build` fails to minify
+[![Contributors](https://contrib.rocks/image?repo=sanchitbajaj02/palletegram)](https://github.com/sanchitbajaj02/palletegram/graphs/contributors)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🙏🏽 Support
+
+This project needs a star️ from you. Don't forget to leave a star 🌟
