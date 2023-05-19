@@ -1,4 +1,4 @@
-# Palletegram
+# Palettegram
 
 Palletegrm is a social media application dedicated to professionals like graphic designers, UI designers, UX designers, Developers, etc. to post and their color palletes as well as use other's color palletes.
 
@@ -50,7 +50,7 @@ $ git clone https://github.com/Sanchitbajaj02/palettegram.git
 - Navigate to the project directory:
 
 ```bash
-cd palletegram
+cd palettegram
 ```
 
 - Install the dependencies
@@ -73,7 +73,7 @@ Threadify is licensed under the MIT License - see the [LICENSE](Licence) file fo
 
 Thank you so much all for spending your time to improve Threadify. Keep shining ⭐
 
-[![Contributors](https://contrib.rocks/image?repo=sanchitbajaj02/palletegram)](https://github.com/sanchitbajaj02/palletegram/graphs/contributors)
+[![Contributors](https://contrib.rocks/image?repo=sanchitbajaj02/palettegram)](https://github.com/sanchitbajaj02/palettegram/graphs/contributors)
 
 ## 🙏🏽 Support
 
