@@ -1,6 +1,6 @@
 import React from "react";
 
 const CreatePost = () => {
-  return <div class="px-2 py-4">CreatePost</div>;
+  return <div>CreatePost</div>;
 };
 export default CreatePost;
