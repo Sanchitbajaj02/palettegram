@@ -1,6 +1,6 @@
 import React from "react";
 
-const Post = () => {
-  return <div>Post</div>;
+const Post = ({ index }) => {
+  return <div class="h-40 border border-lime-500">Post {index}</div>;
 };
 export default Post;
