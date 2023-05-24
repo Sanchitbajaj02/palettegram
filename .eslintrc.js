@@ -3,13 +3,15 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ["eslint:recommended", "plugin:react/recommended"],
+  extends: [
+    "react-app",
+    "react-app/jest",
+    "eslint:recommended",
+    "plugin:react/recommended",
+  ],
   overrides: [
     {
       files: ["*.md"],
-      rules: {
-        "commit-convention/commit-convention": "on",
-      },
     },
   ],
   parserOptions: {
@@ -19,9 +21,11 @@ module.exports = {
   plugins: ["react"],
   rules: {
     indent: ["error", 2],
-    "linebreak-style": ["error", "windows"],
+    // "linebreak-style": ["error", "unix"],
     quotes: ["error", "double"],
     semi: ["error", "always"],
     curly: ["error", "all"],
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-uses-react": "off",
   },
 };
