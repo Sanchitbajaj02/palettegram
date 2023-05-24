@@ -21,7 +21,7 @@ function App() {
           }
         />
         <Route
-          path="/profilepage"
+          path="/post/:id"
           element={
             <>
               <Navbar />

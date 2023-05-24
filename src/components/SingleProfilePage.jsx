@@ -2,9 +2,9 @@ import logo from "../logo.svg";
 
 const SingleProfilePage = () => {
   return (
-    <main className="my-4 mx-8">
-      <div className="flex gap-4">
-        <div className="flex-[3] border">
+    <main className="mt-8 w-full flex justify-center">
+      <div className="flex gap-4 w-[80%]">
+        <div className="flex-[2] border">
           <div className="flex flex-col items-center">
             {/* Profile Info */}
             <div className="flex justify-between py-2 px-4 w-full">
@@ -12,7 +12,7 @@ const SingleProfilePage = () => {
               <p>Bookmark</p>
             </div>
             {/* Image */}
-            <img className="w-60 h-60 border m-4" src="" alt="post" />
+            <img className="w-80 h-80 border m-4" src="" alt="post" />
             {/* Post Info */}
             <div className="flex justify-evenly w-full my-2">
               <p>likes</p>
@@ -33,7 +33,7 @@ const SingleProfilePage = () => {
             </div>
           </div>
         </div>
-        <div className="flex-[1]"></div>
+        <div className="flex-[1] h-full border">Profile</div>
       </div>
     </main>
   );

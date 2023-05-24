@@ -8,7 +8,6 @@ const CreatePost = () => {
         placeholder="Placeholder"
         className="p-3 placeholder-slate-300 text-slate-600 bg-white rounded border-0 shadow outline-none focus:outline-none focus:ring w-full ring-[#F1396D]"
       />
-      <div className="">Send</div>
     </div>
   );
 };
