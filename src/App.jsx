@@ -4,6 +4,7 @@ import Feed from "./components/Feed";
 import Home from "./components/Home";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SingleProfilePage from "./components/SingleProfilePage";
 
 function App() {
   return (
@@ -16,6 +17,15 @@ function App() {
             <>
               <Navbar />
               <Feed />
+            </>
+          }
+        />
+        <Route
+          path="/profilepage"
+          element={
+            <>
+              <Navbar />
+              <SingleProfilePage />
             </>
           }
         />
