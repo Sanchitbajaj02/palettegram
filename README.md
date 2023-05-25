@@ -4,15 +4,14 @@ Palletegrm is a social media application dedicated to professionals like graphic
 
 This application provides streamline workflow among the users to find the best color pallete for their use as well as contribute the color pallete if they want to.
 
-## 👥 Project Maintainers
+## Project Status
 
-**Sanchit Bajaj**
-
-**Kunal Arora**
-
-**Kunal Kukreja**
-
-**Sahil Gill**
+[![Contributers](https://img.shields.io/github/contributors/sanchitbajaj02/palettegram?color=blue)](https://github.com/Sanchitbajaj02/palettegram/graphs/contributors)
+[![license MIT](https://img.shields.io/github/license/sanchitbajaj02/palettegram?color=blue)](https://github.com/Sanchitbajaj02/palettegram/blob/master/LICENSE)
+[![Issues](https://img.shields.io/github/issues/sanchitbajaj02/palettegram?color=blue)](https://github.com/Sanchitbajaj02/palettegram/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/sanchitbajaj02/palettegram?color=blue)](https://github.com/Sanchitbajaj02/palettegram/issues)
+[![Forks](https://img.shields.io/github/forks/sanchitbajaj02/palettegram?color=blue)](https://github.com/Sanchitbajaj02/palettegram/network/members)
+[![Stars](https://img.shields.io/github/stars/sanchitbajaj02/palettegram?color=blue)](https://github.com/Sanchitbajaj02/palettegram/stargazers)
 
 ## 👩🏽‍💻 Demo
 
@@ -21,7 +20,7 @@ This application provides streamline workflow among the users to find the best c
 
 Demo website will be available soon 😊
 
-## 👇🏽 Prerequisites
+## 🤏 Prerequisites
 
 Before installation, please make sure you have already installed the following tools:
 
@@ -67,7 +66,16 @@ yarn start
 
 ## 🛡️ License
 
-Threadify is licensed under the MIT License - see the [LICENSE](Licence) file for details.
+Palettegram is licensed under the MIT License - see the [LICENSE](Licence) file for details.
+
+## 🤔 How to contribute ?
+Contributing to open-source software (OSS) projects can be a rewarding and fulfilling experience. Not only can you learn new skills, but you can also help make a valuable contribution to a project that benefits the broader community
+
+- Remember to read [Code of Conduct](CODE_OF_CONDUCT.md) before contributing.
+- Follow the [Contribution Documents](CONTRIBUTING.md).
+- Create an [issue](https://github.com/Sanchitbajaj02/palettegram/issues) to report bugs, and vulnerabilities or add a new feature.
+- Remember to add a good commit message.
+- Don't spam if you do it your PR/issue will be closed.
 
 ## 💪🏽 Contributors
 
