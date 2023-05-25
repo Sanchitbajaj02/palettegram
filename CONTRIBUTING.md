@@ -1,4 +1,4 @@
-# Contributing to Palettegram
+# Contribution to Palettegram
 
 Firstly, thank you for taking the time to contribute.
 
@@ -41,7 +41,7 @@ To start contributing to this project, follow the steps below.
 
 ### Fork the Project
 
-- Fork this repository. This will create a local copy of this repository on your github profile.
+- Star & Fork this repository. This will create a local copy of this repository on your github profile.
 
   <a href='https://postimages.org/' target='_blank'><img src='https://i.postimg.cc/J4pdgJZH/Screenshot-2022-10-10-at-18-51-49.png' border='0' alt='Fork Repository'/></a>
 
@@ -113,7 +113,13 @@ This will send a request to the maintainer to add your contribution to the main 
 
 <br/>
 
-Add a title to your Pull Request.
+### Add a title to your Pull Request.
+
+Add a meaningful title to the pull request so that reviewing will be easy for our team.
+
+```text
+Fix minor issues to increase performance by 20%
+```
 
 <br/>
 
