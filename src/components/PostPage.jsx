@@ -1,18 +1,22 @@
 import logo from "../logo.svg";
+import meme1 from "../Assets//meme1.jfif";
 
-const SingleProfilePage = () => {
+const PostPage = () => {
   return (
-    <main className="mt-8 w-full flex justify-center">
-      <div className="flex gap-4 w-[80%]">
-        <div className="flex-[2] border">
+    <main className="w-full flex justify-center border h-[93vh]">
+      <div
+        className="flex gap-4
+    h-full w-[90%]"
+      >
+        <div className="flex-[2] border h-full overflow-y-scroll [&::-webkit-scrollbar]:hidden p-4">
           <div className="flex flex-col items-center">
             {/* Profile Info */}
-            <div className="flex justify-between py-2 px-4 w-full">
+            <div className="flex h-10 justify-between py-2 px-4 w-full">
               <p>FullName</p>
               <p>Bookmark</p>
             </div>
             {/* Image */}
-            <img className="w-80 h-80 border m-4" src="" alt="post" />
+            <img className="w-[90%] border m-4" src={meme1} alt="post" />
             {/* Post Info */}
             <div className="flex justify-evenly w-full my-2">
               <p>likes</p>
@@ -33,9 +37,9 @@ const SingleProfilePage = () => {
             </div>
           </div>
         </div>
-        <div className="flex-[1] h-full border">Profile</div>
+        <div className="flex-[1] border ">Profile</div>
       </div>
     </main>
   );
 };
-export default SingleProfilePage;
+export default PostPage;
