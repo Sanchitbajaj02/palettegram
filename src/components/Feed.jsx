@@ -3,13 +3,13 @@ import CreatePost from "./CreatePost";
 import Posts from "./Posts";
 const Feed = () => {
   return (
-    <main className="flex w-full px-20 h-[90vh] border">
+    <main className="flex w-full px-20 border ">
       <div className="max-w-40 max-h-24 border border-red-500">
         <img className="w-10 h-10" src={logo} alt="logo" />
         <img className="w-10 h-10" src={logo} alt="settings" />
       </div>
       <div className="flex flex-[10] gap-2">
-        <div className=" flex-[3] border border-blue-600  overflow-y-scroll">
+        <div className=" flex-[3] border border-blue-600">
           <CreatePost />
           <Posts />
         </div>
