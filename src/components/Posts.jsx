@@ -11,3 +11,9 @@ const Posts = () => {
 };
 
 export default Posts;
+/*
+  fullName
+  avatarImage
+  content : Array of strings
+  No. of views
+*/
