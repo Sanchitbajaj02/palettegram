@@ -1,5 +1,5 @@
 import logo from "../logo.svg";
-import meme1 from "../Assets//meme1.jfif";
+import meme1 from "../Assets//meme1.png";
 
 const PostPage = () => {
   return (
