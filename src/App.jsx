@@ -4,7 +4,7 @@ import Feed from "./components/Feed";
 import Home from "./components/Home";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import PostPage from "./components/PostPage";
+import PostProfilePage from "./components/PostProfilePage";
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
           element={
             <>
               <Navbar />
-              <PostPage />
+              <PostProfilePage />
             </>
           }
         />
