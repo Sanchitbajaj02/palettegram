@@ -4,6 +4,7 @@ import Feed from "./components/Feed";
 import Home from "./components/Home";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import PostPage from "./components/PostPage";
 
 function App() {
   return (
@@ -16,6 +17,15 @@ function App() {
             <>
               <Navbar />
               <Feed />
+            </>
+          }
+        />
+        <Route
+          path="/post/:id"
+          element={
+            <>
+              <Navbar />
+              <PostPage />
             </>
           }
         />
