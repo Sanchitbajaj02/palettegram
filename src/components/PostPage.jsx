@@ -3,7 +3,7 @@ import meme1 from "../Assets//meme1.png";
 
 const PostPage = () => {
   return (
-    <main className="w-full flex justify-center border h-[93vh]">
+    <main className="max-w-screen-lg mx-auto flex justify-center border h-[93vh] ">
       <div
         className="flex gap-4
     h-full w-[90%]"
