@@ -3,8 +3,8 @@ import Posts from "./Posts";
 import TrendingFeed from "./TrendingFeed";
 const Feed = () => {
   return (
-    <main className="grid grid-flow-col max-w-screen-lg mx-auto pt-8 content-center  ">
-      <div className="max-w-40 h-80 sticky top-24 flex flex-col items-end">
+    <main className="flex max-w-screen-lg mx-auto pt-8 content-center ">
+      <div className="flex-[1] max-w-40 h-80 sticky top-24 flex flex-col items-end">
         {/* FIX USER AND BOOKMARK ICONS */}
         {/* <div className="rounded-[100px] shadow-lg h-32 w-32 bg-slate-100 mb-4 relative"> */}
         {/* <i className="fa-3x absolute "></i>
@@ -27,14 +27,14 @@ const Feed = () => {
           <i className="fa fa-bookmark fa-2x "></i>
         </div>
       </div>
-      <div className="flex  gap-2">
-        <div className=" flex-[3] border border-blue-600  overflow-y-scroll ">
+      <div className="flex flex-[3] gap-2 p-4">
+        <div className="flex-1 flex flex-col border border-blue-600  overflow-y-scroll ">
           <CreatePost />
           <Posts />
         </div>
-        <div className=" hidden sm:block ml-8">
-          <TrendingFeed />
-        </div>
+      </div>
+      <div className="flex-[2] hidden md:block ml-8">
+        <TrendingFeed />
       </div>
     </main>
   );
