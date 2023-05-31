@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../DB/api";
 
 // function checkUsername(username) {
@@ -9,6 +10,7 @@ import { loginUser } from "../../DB/api";
 // }
 
 export default function Login() {
+  const navigate = useNavigate();
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -27,7 +29,19 @@ export default function Login() {
 
     console.log(data);
 
-    loginUser(data).then(console.log).catch(err=>console.log(err.message));
+    if (data.email !== "" && data.password !== "") {
+      loginUser(data)
+        .then((res) => {
+          if (res["providerUid"] === data.email) {
+            localStorage.setItem("userId", res.userId);
+            localStorage.setItem("email", res.providerUid);
+            localStorage.setItem("expiry", res.expire);
+
+            navigate("/feed");
+          }
+        })
+        .catch((err) => console.log(err.message));
+    }
   }
 
   return (
