@@ -1,0 +1,32 @@
+name: 🔖 Documentation update
+description: Improve Documentation
+title: 'Docs: '
+labels: ['📄 docs update', '🚦status: awaiting triage']
+body:
+  - type: textarea
+    id: improve-docs
+    attributes:
+      label: What's wrong in the documentation?
+      description: which things do we need to add?
+      placeholder: Add an appropriate descriptions
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Add screenshots
+      description: Add screenshots to see the demo
+      placeholder: Add screenshots
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: 'Record'
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true
+
+        - label: I want to work on this issue
