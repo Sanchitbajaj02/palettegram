@@ -1,7 +1,7 @@
 name: 🔖 Documentation update
 description: Improve Documentation
-title: 'Docs:'
-labels: ['📄 docs: text', '🚦status: awaiting triage']
+title: 'Docs: '
+labels: ['📄 docs update', '🚦status: awaiting triage']
 body:
   - type: textarea
     id: improve-docs
@@ -19,7 +19,7 @@ body:
       description: Add screenshots to see the demo
       placeholder: Add screenshots
     validations:
-      required: true
+      required: false
 
   - type: checkboxes
     id: terms
