@@ -7,9 +7,17 @@ export const registerReducer = createSlice({
     fullName: "",
     createdAt: "",
     username: "",
+    password: "",
   },
   reducers: {
-    updateRegisterDetails: (state, payload) => {},
+    updateRegisterDetails: (state, action) => {
+      const {email,password,fullName,username} = action.payload;
+      state.email = email;
+      state.password = password;
+      state.fullName = fullName;
+      state.username = username;
+      state.createdAt = new Date().toLocaleString();
+    },
   },
 });
 

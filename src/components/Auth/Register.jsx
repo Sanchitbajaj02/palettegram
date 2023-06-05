@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { registerUser } from "../../DB/api";
+import { useDispatch } from "react-redux";
+import {updateRegisterDetails} from "../../features/register/registerReducer";
 
 // function checkUsername(username) {
 //   const test =
@@ -9,6 +11,8 @@ import { registerUser } from "../../DB/api";
 // }
 
 export default function Register() {
+  const dispatch = useDispatch();
+
   const [data, setData] = useState({
     fullName: "",
     email: "",
@@ -27,7 +31,9 @@ export default function Register() {
     event.preventDefault();
 
     console.log(data);
-    registerUser(data).then(console.log).catch(console.log);
+    registerUser(data).then(() => {
+      dispatch(updateRegisterDetails(data));
+    }).catch(console.log);
   }
 
   return (
