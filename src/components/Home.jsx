@@ -1,14 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import HeaderImage from "../Assets/header.png";
 import PalettegramFor from "../Assets/palettegram_for.png";
 
 const Home = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <nav className="py-4 shadow-md">
         <div className=" max-w-screen-xl mx-auto flex flex-row justify-between items-center">
-          <Link>Logo</Link>
-          <button className="px-20 py-3 text-xl rounded-full text-white bg-[#F1396D]">
+          <Link to="/">Logo</Link>
+          <button
+            className="px-20 py-3 text-xl rounded-full text-white bg-[#F1396D]"
+            onClick={() => navigate("/register")}
+          >
             Register
           </button>
         </div>
@@ -23,7 +28,10 @@ const Home = () => {
             <p className="text-xl md:text-2xl my-8">
               Transform ideas into Beautiful Palettes, Inspire Fellow Designers.
             </p>
-            <button className="px-16 py-4 text-xl rounded-full text-white bg-[#F1396D]">
+            <button
+              className="px-16 py-4 text-xl rounded-full text-white bg-[#F1396D]"
+              onClick={() => navigate("/register")}
+            >
               Start your journey
             </button>
           </article>
