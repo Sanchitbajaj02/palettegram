@@ -1,7 +1,7 @@
 import logo from "../logo.svg";
 import meme1 from "../Assets//meme1.png";
 
-const PostProfilePage = () => {
+const PostPage = () => {
   return (
     <main className="max-w-screen-lg mx-auto flex justify-center border">
       <div
@@ -54,4 +54,4 @@ const PostProfilePage = () => {
     </main>
   );
 };
-export default PostProfilePage;
+export default PostPage;
