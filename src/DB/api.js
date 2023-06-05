@@ -10,18 +10,18 @@ const registerUser = async (userData) => {
       ID.unique(),
       userData.email,
       userData.password,
-      userData.fullName
+      userData.fullName,
     );
     console.log(authResponse);
     if (authResponse && Object.keys(authResponse).length > 0) {
       const session = await account.createEmailSession(
         userData.email,
-        userData.password
+        userData.password,
       );
 
       if (session) {
         const createVerify = await account.createVerification(
-          "http://localhost:3000/verify"
+          "http://localhost:3000/verify",
         );
 
         if (createVerify && createVerify["$id"]) {
@@ -62,7 +62,7 @@ const verifyUser = async (userId, secret) => {
             email: session.email,
             fullName: session.name,
             createdAt: session["$createdAt"],
-          }
+          },
         );
 
         if (resp) {
@@ -89,7 +89,7 @@ const loginUser = async (userData) => {
   try {
     const response = await account.createEmailSession(
       userData.email,
-      userData.password
+      userData.password,
     );
 
     if (response && response["$id"]) {
