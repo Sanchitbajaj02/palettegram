@@ -1,7 +1,20 @@
 import CreatePost from "./CreatePost";
 import Posts from "./Posts";
 import TrendingFeed from "./TrendingFeed";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+
 const Feed = () => {
+  const registerDetails = useSelector((state) => state.register);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!registerDetails.fullName || !registerDetails.email) {
+      navigate("/register");
+    }
+  }, [registerDetails, navigate]);
+
   return (
     <main className="flex max-w-screen-lg mx-auto pt-8 content-center">
       <div className="flex-[1] h-80 sticky top-24 flex flex-col items-end">
