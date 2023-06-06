@@ -94,7 +94,7 @@ const loginUser = async (userData) => {
       userData.password
     );
 
-    if (response && response["$id"]) {
+    if (response && response["$id"] && response.emailVerification) {
       return response;
     } else {
       throw new Error("Login failed");
