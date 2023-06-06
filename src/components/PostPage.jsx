@@ -1,7 +1,18 @@
 import logo from "../logo.svg";
 import meme1 from "../Assets//meme1.png";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const PostPage = () => {
+  const registerDetails = useSelector((state) => state.register);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!registerDetails.fullName || !registerDetails.email) {
+      navigate("/register");
+    }
+  }, [registerDetails, navigate]);
   return (
     <main className="max-w-screen-lg mx-auto flex justify-center border">
       <div
