@@ -87,6 +87,7 @@ const verifyUser = async (userId, secret) => {
 };
 
 const loginUser = async (userData) => {
+  console.log(userData);
   try {
     const response = await account.createEmailSession(
       userData.email,
