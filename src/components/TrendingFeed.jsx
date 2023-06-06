@@ -2,8 +2,8 @@ import TrendingArray from "../Assets/trendingPosts.json";
 export default function TrendingFeed() {
   return (
     <>
-      <div className="flex flex-col sticky top-24  ">
-        <div className="w-60 border rounded-2xl  shadow-2xl   ">
+      <div className="flex flex-col sticky top-24 w-full items-center">
+        <div className="w-[80%] border rounded-2xl  shadow-2xl">
           <div className="text-center font-serif text-xl font-bold   bg-white drop-shadow-md rounded-t-2xl ">
             Trending
           </div>

@@ -1,12 +1,23 @@
 import logo from "../logo.svg";
 import meme1 from "../Assets//meme1.png";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const PostPage = () => {
+  const registerDetails = useSelector((state) => state.register);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!registerDetails.fullName || !registerDetails.email) {
+      navigate("/register");
+    }
+  }, [registerDetails, navigate]);
   return (
-    <main className="max-w-screen-lg mx-auto flex justify-center border h-[93vh] ">
+    <main className="max-w-screen-lg mx-auto flex justify-center border">
       <div
         className="flex gap-4
-    h-full w-[90%]"
+    h-full p-4"
       >
         <div className="flex-[2] border h-full overflow-y-scroll [&::-webkit-scrollbar]:hidden p-4">
           <div className="flex flex-col items-center">
@@ -37,7 +48,19 @@ const PostPage = () => {
             </div>
           </div>
         </div>
-        <div className="flex-[1] border ">Profile</div>
+        <div className="flex-[1] border items-center flex-grow h-[20%] justify-evenly py-4 hidden md:flex">
+          <div className="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center">
+            <i className="fa fa-user fa-2x"></i>
+          </div>
+          <h4>Full Name</h4>
+          <button
+            className="w-20
+          outline-none bg-blue-500
+          rounded-md py-2 hover:ring"
+          >
+            Follow
+          </button>
+        </div>
       </div>
     </main>
   );

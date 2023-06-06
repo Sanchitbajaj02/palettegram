@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../DB/api";
+import { useDispatch } from "react-redux";
+import {updateRegisterDetails} from "../../features/register/registerReducer";
 
 // function checkUsername(username) {
 //   const test =
@@ -10,6 +12,8 @@ import { loginUser } from "../../DB/api";
 // }
 
 export default function Login() {
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const [data, setData] = useState({
     email: "",
@@ -32,11 +36,11 @@ export default function Login() {
     if (data.email !== "" && data.password !== "") {
       loginUser(data)
         .then((res) => {
+          dispatch(updateRegisterDetails(data));
           if (res["providerUid"] === data.email) {
             localStorage.setItem("userId", res.userId);
             localStorage.setItem("email", res.providerUid);
             localStorage.setItem("expiry", res.expire);
-
             navigate("/feed");
           }
         })
