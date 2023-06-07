@@ -1,10 +1,24 @@
+import { useEffect, useState } from "react";
 import SinglePost from "./SinglePost.jsx";
+import { getAllPosts } from "../DB/api.js";
 const Posts = () => {
-  const allposts = [1, 2, 3, 4, 5, 6];
+  const [allPosts, setAllPosts] = useState([]);
+  useEffect(()=>{
+    getAllPosts()
+      .then((res)=>{
+        setAllPosts(res.documents);
+      })
+      .catch((err)=>{
+        console.log(err);
+      });
+  },[]);
+  const tweetsSortedByCreatedDate = allPosts.sort(function (a, b) {
+    return new Date(b.$createdAt) - new Date(a.$createdAt);
+  });
   return (
     <div className="flex flex-col items-center gap-4 p-4">
-      {allposts.map((index) => (
-        <SinglePost key={index} index={index} />
+      {tweetsSortedByCreatedDate.map((posts, index) => (
+        <SinglePost key={index} posts={posts} />
       ))}
     </div>
   );

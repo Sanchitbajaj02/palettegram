@@ -31,8 +31,6 @@ export default function Login() {
   function submitHander(event) {
     event.preventDefault();
 
-    console.log(data);
-
     if (data.email !== "" && data.password !== "") {
       loginUser(data)
         .then((res) => {
