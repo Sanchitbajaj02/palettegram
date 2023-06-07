@@ -6,13 +6,17 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 const Feed = () => {
-  const registerDetails = useSelector((state) => state.register);
+  const registerDetails = useSelector((state) => state.authenticator);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if ( !registerDetails.email) {
+    if (registerDetails && !registerDetails?.email) {
       navigate("/register");
     }
+
+    return () => {
+      console.log("cleaner");
+    };
   }, [registerDetails, navigate]);
 
   return (
