@@ -10,7 +10,7 @@ const Feed = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!registerDetails.fullName || !registerDetails.email) {
+    if ( !registerDetails.email) {
       navigate("/register");
     }
   }, [registerDetails, navigate]);

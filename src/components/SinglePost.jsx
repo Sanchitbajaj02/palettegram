@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 
-const SinglePost = ({ index }) => {
+const SinglePost = (posts) => {
+  const post = posts.posts;
   return (
-    <Link className="w-[100%] h-80 border" to={`/post/${index}`}>
-      <div>Post {index}</div>
+    <Link className="w-[100%] h-80 border" to={`/post/${post.$userId}`}>
+      <div>{post.postTitle}</div>
     </Link>
   );
 };
