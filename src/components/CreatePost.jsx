@@ -5,7 +5,7 @@ import { createPost } from "../DB/api";
 const CreatePost = () => {
   const [tweetForm, setTweetForm] = React.useState({
     text: "",
-    colors:0
+    colors: 0,
   });
   const onChangeInput = (event) => {
     const {
@@ -18,16 +18,18 @@ const CreatePost = () => {
     const postData = {
       userId: localStorage.getItem("userId"),
       createdAt: new Date().toLocaleString(),
-      postTitle: tweetForm.text
+      postTitle: tweetForm.text,
     };
     createPost(postData)
-      .then((res) =>{
-        if(res){
-          setTweetForm({text: "", });
+      .then((res) => {
+        if (res) {
+          setTweetForm({ text: "" });
           window.location.reload(false);
         }
       })
-      .catch((err) =>{console.log(err);});
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

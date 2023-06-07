@@ -3,15 +3,15 @@ import SinglePost from "./SinglePost.jsx";
 import { getAllPosts } from "../DB/api.js";
 const Posts = () => {
   const [allPosts, setAllPosts] = useState([]);
-  useEffect(()=>{
+  useEffect(() => {
     getAllPosts()
-      .then((res)=>{
+      .then((res) => {
         setAllPosts(res.documents);
       })
-      .catch((err)=>{
+      .catch((err) => {
         console.log(err);
       });
-  },[]);
+  }, []);
   const tweetsSortedByCreatedDate = allPosts.sort(function (a, b) {
     return new Date(b.$createdAt) - new Date(a.$createdAt);
   });
