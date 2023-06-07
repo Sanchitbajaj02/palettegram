@@ -15,7 +15,7 @@ export const registerReducer = createSlice({
   },
   reducers: {
     updateRegisterDetails: (state, action) => {
-      const {email,fullName,username} = action.payload;
+      const { email, fullName, username } = action.payload;
       state.email = email;
       state.fullName = fullName;
       state.username = username;

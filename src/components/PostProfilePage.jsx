@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-const PostPage = () => {
+const PostProfilePage = () => {
   const registerDetails = useSelector((state) => state.register);
   const navigate = useNavigate();
 
@@ -65,4 +65,4 @@ const PostPage = () => {
     </main>
   );
 };
-export default PostPage;
+export default PostProfilePage;
