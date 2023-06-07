@@ -3,6 +3,7 @@ import { account, db } from "./appwrite.config";
 
 const palettegramDB = process.env.REACT_APP_DATABASE_ID;
 const usersCollection = process.env.REACT_APP_USER_COLLECTION;
+const postsCollection = process.env.REACT_APP_POSTS_COLLECTION;
 
 const registerUser = async (userData) => {
   try {
@@ -10,18 +11,18 @@ const registerUser = async (userData) => {
       ID.unique(),
       userData.email,
       userData.password,
-      userData.fullName,
+      userData.fullName
     );
     console.log(authResponse);
     if (authResponse && Object.keys(authResponse).length > 0) {
       const session = await account.createEmailSession(
         userData.email,
-        userData.password,
+        userData.password
       );
 
       if (session) {
         const createVerify = await account.createVerification(
-          "http://localhost:3000/verify",
+          "http://localhost:3000/verify"
         );
 
         if (createVerify && createVerify["$id"]) {
@@ -62,7 +63,7 @@ const verifyUser = async (userId, secret) => {
             email: session.email,
             fullName: session.name,
             createdAt: session["$createdAt"],
-          },
+          }
         );
 
         if (resp) {
@@ -86,13 +87,14 @@ const verifyUser = async (userId, secret) => {
 };
 
 const loginUser = async (userData) => {
+  console.log(userData);
   try {
     const response = await account.createEmailSession(
       userData.email,
-      userData.password,
+      userData.password
     );
 
-    if (response && response["$id"]) {
+    if (response && response["$id"] && response.emailVerification) {
       return response;
     } else {
       throw new Error("Login failed");
@@ -110,4 +112,35 @@ const getCurrentUser = async () => {
     console.log(error);
   }
 };
-export { registerUser, verifyUser, loginUser, getCurrentUser };
+
+const createPost = async (data) => {
+  console.log(data);
+  try {
+    const tweet = await db.createDocument(
+      palettegramDB,
+      postsCollection,
+      ID.unique(),
+      (data)
+    );
+    if(tweet){
+      return tweet;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getAllPosts = async () => {
+  try {
+    const tweets = await db.listDocuments(
+      palettegramDB,
+      postsCollection
+    );
+    if(tweets){
+      return tweets;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+export { registerUser, verifyUser, loginUser, getCurrentUser, createPost, getAllPosts };
