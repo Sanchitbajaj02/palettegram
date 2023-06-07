@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { registerUser } from "../../DB/api";
 import { useDispatch } from "react-redux";
-import {updateRegisterDetails} from "../../features/register/registerReducer";
+import { saveUser } from "../../Redux/auth/authReducer";
 
 // function checkUsername(username) {
 //   const test =
@@ -31,9 +31,23 @@ export default function Register() {
     event.preventDefault();
 
     console.log(data);
-    registerUser(data).then(() => {
-      dispatch(updateRegisterDetails(data));
-    }).catch(console.log);
+    registerUser(data)
+      .then((resp) => {
+        localStorage.setItem("userId", resp["$id"]);
+        localStorage.setItem("email", resp.email);
+        localStorage.setItem("fullName", resp.name);
+        localStorage.setItem("createdAt", resp["$createdAt"]);
+
+        dispatch(
+          saveUser({
+            userId: resp["$id"],
+            email: resp.email,
+            fullName: resp.name,
+            createdAt: resp["$createdAt"],
+          }),
+        );
+      })
+      .catch((err) => console.log(err));
   }
 
   return (
@@ -70,7 +84,7 @@ export default function Register() {
                 />
               </div>
 
-              <div className="mb-6">
+              {/* <div className="mb-6">
                 <label
                   htmlFor="username"
                   aria-required="true"
@@ -91,7 +105,7 @@ export default function Register() {
                   Must be a unique value. Only use characters(A-Z or a-z) or
                   numbers(0-9) or underscore(_)
                 </small>
-              </div>
+              </div> */}
 
               <div className="mb-6">
                 <label

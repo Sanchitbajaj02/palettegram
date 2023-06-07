@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
+import postsReducer from "./posts/postsReducer";
+import authReducer from "./auth/authReducer";
 
-const store = configureStore({
+export default configureStore({
   reducer: {
-    auth: "",
+    posts: postsReducer,
+    authenticator: authReducer,
   },
 });
-
-export { store };

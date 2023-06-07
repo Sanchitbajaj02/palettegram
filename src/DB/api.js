@@ -11,24 +11,25 @@ const registerUser = async (userData) => {
       ID.unique(),
       userData.email,
       userData.password,
-      userData.fullName
+      userData.fullName,
     );
     console.log(authResponse);
     if (authResponse && Object.keys(authResponse).length > 0) {
       const session = await account.createEmailSession(
         userData.email,
-        userData.password
+        userData.password,
       );
 
       if (session) {
+        console.log(process.env.REACT_APP_BASE_URL);
         const createVerify = await account.createVerification(
-          "http://localhost:3000/verify"
+          `${process.env.REACT_APP_BASE_URL}/verify`,
         );
 
         if (createVerify && createVerify["$id"]) {
-          console.log("success");
+          return authResponse;
         } else {
-          throw Error("User not verified");
+          throw Error("Error sending verification email");
         }
       } else {
         throw Error("Session failed");
@@ -63,7 +64,7 @@ const verifyUser = async (userId, secret) => {
             email: session.email,
             fullName: session.name,
             createdAt: session["$createdAt"],
-          }
+          },
         );
 
         if (resp) {
@@ -86,16 +87,24 @@ const verifyUser = async (userId, secret) => {
   return response;
 };
 
+const getAccount = () => {
+  return account.get();
+};
+
 const loginUser = async (userData) => {
   console.log(userData);
   try {
     const response = await account.createEmailSession(
       userData.email,
-      userData.password
+      userData.password,
     );
 
-    if (response && response["$id"] && response.emailVerification) {
-      return response;
+    if (response && response["$id"]) {
+      const userAccount = await getAccount();
+
+      if (userAccount && userAccount.emailVerification) {
+        return userAccount;
+      }
     } else {
       throw new Error("Login failed");
     }
@@ -120,9 +129,9 @@ const createPost = async (data) => {
       palettegramDB,
       postsCollection,
       ID.unique(),
-      (data)
+      data,
     );
-    if(tweet){
+    if (tweet) {
       return tweet;
     }
   } catch (error) {
@@ -132,15 +141,20 @@ const createPost = async (data) => {
 
 const getAllPosts = async () => {
   try {
-    const tweets = await db.listDocuments(
-      palettegramDB,
-      postsCollection
-    );
-    if(tweets){
+    const tweets = await db.listDocuments(palettegramDB, postsCollection);
+    if (tweets) {
       return tweets;
     }
   } catch (error) {
     console.log(error);
   }
 };
-export { registerUser, verifyUser, loginUser, getCurrentUser, createPost, getAllPosts };
+export {
+  registerUser,
+  verifyUser,
+  getAccount,
+  loginUser,
+  getCurrentUser,
+  createPost,
+  getAllPosts,
+};
