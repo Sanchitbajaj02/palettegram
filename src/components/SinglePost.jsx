@@ -22,18 +22,18 @@ const SinglePost = (posts) => {
         <div className="w-full">
           <div className="rounded-md">
             <Link className="w-12" to={`/user/${post.userId}`}>
-              <span className="font-bold">{userName}</span>
+              <span className="font-bold text-lg">{userName}</span>
             </Link>
-            <p>{post.postTitle}</p>
+            <p className="text-md">{post.postTitle}</p>
             <img
-              className="w-[90%] border"
+              className="w-[90%]"
               src={
                 "https://pbs.twimg.com/media/FyB8cZnWIAc21rw?format=jpg&name=360x360"
               }
               alt=""
             />
           </div>
-          <div className="flex justify-start gap-6 p-2">
+          <div className="flex justify-start gap-8 pt-2">
             <div className="flex items-center gap-3 group text-blue-500">
               <div className="w-8 h-8 rounded-full group-hover:bg-blue-800 group-hover:text-blue-300 flex justify-center items-center">
                 <i className="fa fa-heart-o"></i>
