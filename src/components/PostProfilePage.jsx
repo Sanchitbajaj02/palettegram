@@ -3,13 +3,14 @@ import meme1 from "../Assets//meme1.png";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { User } from "react-feather";
 
 const PostProfilePage = () => {
   const registerDetails = useSelector((state) => state.register);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!registerDetails.fullName || !registerDetails.email) {
+    if (!registerDetails?.fullName || !registerDetails?.email) {
       navigate("/register");
     }
   }, [registerDetails, navigate]);
@@ -50,7 +51,7 @@ const PostProfilePage = () => {
         </div>
         <div className="flex-[1] border items-center flex-grow h-[20%] justify-evenly py-4 hidden md:flex">
           <div className="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center">
-            <i className="fa fa-user fa-2x"></i>
+            <User />
           </div>
           <h4>Full Name</h4>
           <button
