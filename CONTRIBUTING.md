@@ -45,27 +45,7 @@ To start contributing to this project, follow the steps below.
 
   <a href='https://postimages.org/' target='_blank'><img src='https://i.postimg.cc/J4pdgJZH/Screenshot-2022-10-10-at-18-51-49.png' border='0' alt='Fork Repository'/></a>
 
-- Now clone the forked repository on your local machine
-
-  ```bash
-  git clone https://github.com/<your-username>/Palettegram.git
-  ```
-
-- Keep a reference to the original project in `upstream` remote.
-
-  ```bash
-  cd Palettegram
-  git remote add upstream https://github.com/Sanchitbajaj02/Palettegram.git
-  ```
-
-- If you have created the fork a while ago, synchronize your copy before working.
-
-  ```bash
-  git remote update
-  git checkout -b main
-  git rebase upstream/main
-  ```
-
+- Follow [Git](docs/git.md)
 ### Create a new branch
 
 Creating a new branch lets you work on your issue without creating merge conflicts while making PRs.
