@@ -28,16 +28,14 @@ Before installation, please make sure you have already installed the following t
  - Use these commands in your git bash to make a clone of the project in your pc.
  - Clone your forked repo by replacing the URL in this command: 
 
-    git clone https://WikiEducationFoundation/WikiEduDashboard.git
+    `git clone https://WikiEducationFoundation/WikiEduDashboard.git`
 
 - Navigate to the project directory:
 
-    cd  palettegram
+    `cd  palettegram`
 - Install the dependencies
 
-    yarn  install
+    `yarn  install`
 - Start serving
 
-    yarn  start
-
-```
+    `yarn  start`
