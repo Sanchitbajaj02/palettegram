@@ -7,6 +7,7 @@ const Posts = () => {
     getAllPosts()
       .then((res) => {
         setAllPosts(res.documents);
+        console.log(allPosts);
       })
       .catch((err) => {
         console.log(err);
@@ -16,7 +17,7 @@ const Posts = () => {
     return new Date(b.$createdAt) - new Date(a.$createdAt);
   });
   return (
-    <div className="flex flex-col items-center gap-4 p-4">
+    <div className="flex flex-col items-center">
       {tweetsSortedByCreatedDate.map((posts, index) => (
         <SinglePost key={index} posts={posts} />
       ))}
