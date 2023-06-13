@@ -12,6 +12,7 @@ const Posts = () => {
         console.log(err);
       });
   }, [allPosts]);
+
   const tweetsSortedByCreatedDate = allPosts.sort(function (a, b) {
     return new Date(b.$createdAt) - new Date(a.$createdAt);
   });

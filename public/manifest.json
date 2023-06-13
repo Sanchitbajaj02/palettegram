@@ -1,25 +1,50 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Palettegram",
+  "name": "Palettegram",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "src": "icons/favicon.ico",
+      "sizes": "32x32",
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "icons/android-icon-48x48.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "icons/android-icon-96x96.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "icons/android-icon-192x192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "icons/apple-icon-72x72.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "72x72"
+    },
+    {
+      "src": "icons/apple-icon-120x120.png",
+      "type": "image/png",
+      "sizes": "120x120"
+    },
+    {
+      "src": "icons/apple-icon-152x152.png",
+      "type": "image/png",
+      "sizes": "152x152"
+    },
+    {
+      "src": "icons/apple-icon-180x180.png",
+      "type": "image/png",
+      "sizes": "180x180"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#F1396D",
+  "background_color": "#1C223A"
 }

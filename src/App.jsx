@@ -1,4 +1,3 @@
-import "./Styles/App.css";
 import Navbar from "./components/Navbar";
 import Feed from "./components/Feed";
 import Home from "./components/Home";
@@ -8,6 +7,7 @@ import UserProfile from "./components/UserProfile";
 import Register from "./components/Auth/Register";
 import Verification from "./components/Auth/Verification";
 import Login from "./components/Auth/Login";
+import PostProfilePage from "./components/PostProfilePage";
 
 function App() {
   return (
@@ -27,7 +27,16 @@ function App() {
           }
         />
         <Route
-          path="/:userId"
+          path="/post/:id"
+          element={
+            <>
+              <Navbar />
+              <PostProfilePage />
+            </>
+          }
+        />
+        <Route
+          path="/user/:userId"
           element={
             <>
               <Navbar />

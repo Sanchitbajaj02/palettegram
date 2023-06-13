@@ -1,16 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+.bg-pg-pink {
+  background: #f1396d;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+.bg-pg-pink-light {
+  background: #f592ae;
+}
+
+.bg-pg-blue {
+  background: #1c223a;
+}
+
+.bg-pg-blue-light {
+  background: #2a2c34;
 }
