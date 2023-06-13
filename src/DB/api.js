@@ -1,4 +1,4 @@
-import { ID } from "appwrite";
+import { ID, Query } from "appwrite";
 import { account, db } from "./appwrite.config";
 
 const palettegramDB = process.env.REACT_APP_DATABASE_ID;
@@ -149,6 +149,20 @@ const getAllPosts = async () => {
     console.log(error);
   }
 };
+
+const getAllUserPosts = async (userId) => {
+  try {
+    const tweets = await db.listDocuments(palettegramDB, postsCollection, [
+      Query.equal("userId",userId),
+    ]);
+    if (tweets) {
+      return tweets;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export {
   registerUser,
   verifyUser,
@@ -157,4 +171,5 @@ export {
   getCurrentUser,
   createPost,
   getAllPosts,
+  getAllUserPosts
 };

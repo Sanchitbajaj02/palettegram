@@ -3,10 +3,11 @@ import Feed from "./components/Feed";
 import Home from "./components/Home";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import PostProfilePage from "./components/PostProfilePage";
+import UserProfile from "./components/UserProfile";
 import Register from "./components/Auth/Register";
 import Verification from "./components/Auth/Verification";
 import Login from "./components/Auth/Login";
+import PostProfilePage from "./components/PostProfilePage";
 
 function App() {
   return (
@@ -31,6 +32,15 @@ function App() {
             <>
               <Navbar />
               <PostProfilePage />
+            </>
+          }
+        />
+        <Route
+          path="/user/:userId"
+          element={
+            <>
+              <Navbar />
+              <UserProfile />
             </>
           }
         />
