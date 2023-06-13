@@ -7,12 +7,11 @@ const Posts = () => {
     getAllPosts()
       .then((res) => {
         setAllPosts(res.documents);
-        console.log(allPosts);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [allPosts]);
   const tweetsSortedByCreatedDate = allPosts.sort(function (a, b) {
     return new Date(b.$createdAt) - new Date(a.$createdAt);
   });

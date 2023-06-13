@@ -8,13 +8,13 @@ const SinglePost = ({ singlePost }) => {
   return (
     <Link
       className="flex px-4 py-2 mb-4 rounded shadow-lg border-slate-100 border-b-0 last:border-b-1"
-      to={`/post/${post.$id}`}
+      to={`/${post.$id}`}
     >
       <div className="w-full">
         <div className="">
           <Link
             className="flex items-center gap-4 mb-2"
-            to={`/user/${post.userId}`}
+            to={`/${post.userId}`}
           >
             <img
               className="w-8 h-8 rounded-full"

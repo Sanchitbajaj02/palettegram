@@ -4,7 +4,7 @@ import Feed from "./components/Feed";
 import Home from "./components/Home";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import PostProfilePage from "./components/PostProfilePage";
+import UserProfile from "./components/UserProfile";
 import Register from "./components/Auth/Register";
 import Verification from "./components/Auth/Verification";
 import Login from "./components/Auth/Login";
@@ -27,11 +27,11 @@ function App() {
           }
         />
         <Route
-          path="/post/:id"
+          path="/:userId"
           element={
             <>
               <Navbar />
-              <PostProfilePage />
+              <UserProfile />
             </>
           }
         />
