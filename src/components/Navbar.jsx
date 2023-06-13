@@ -1,4 +1,4 @@
-import logo from "../logo.svg";
+import Logo from "../Assets/logo.png";
 
 const Navbar = () => {
   const settingRedirect = () => {
@@ -9,7 +9,7 @@ const Navbar = () => {
       <div className="flex  items-center content-center justify-between h-12">
         <img
           className="navbar-brand fw-bold w-10 h-10 cursor pointer mx-4"
-          src={logo}
+          src={Logo}
           alt="settings"
         />
         <i
