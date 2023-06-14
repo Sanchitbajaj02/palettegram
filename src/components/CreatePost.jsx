@@ -9,7 +9,7 @@ const CreatePost = () => {
 
   const [togglePalette, setTogglePalette] = useState(false);
 
-  const [colors, setcolors] = useState({
+  const [colors, setColors] = useState({
     color01: "",
     color02: "",
     color03: "",
@@ -59,7 +59,7 @@ const CreatePost = () => {
             maxLength={1000}
           ></textarea>
 
-          {togglePalette ? <Colorpicker setcolors={setcolors} /> : null}
+          {togglePalette ? <Colorpicker setColors={setColors} /> : null}
         </div>
       </div>
 
