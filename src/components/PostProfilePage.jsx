@@ -1,5 +1,4 @@
 // import logo from "../logo.svg";
-import meme1 from "../Assets//meme1.png";
 import { useState } from "react";
 import { getSinglePost } from "../DB/api";
 import { useSelector } from "react-redux";
@@ -58,18 +57,28 @@ const PostProfilePage = () => {
 
           {singlePostState?.colors?.length > 0 ? (
             <div className="my-2 flex flex-row gap-1 justify-between items-center w-full">
-              {singlePostState?.colors.map((color, index) => {
+              {singlePostState?.colors?.map((color, index) => {
                 return (
-                  <div key={index} className={`flex-grow h-40 bg-[${color}]`}>
-                    {color}
+                  <div
+                    key={index}
+                    className="flex-grow h-40"
+                    style={{
+                      backgroundColor: `#${color}`,
+                    }}
+                  >
+                    #{color}
                   </div>
                 );
               })}
             </div>
           ) : null}
 
-          {singlePostState?.postImage > 0 ? (
-            <img className="w-[90%] border m-4" src={meme1} alt="post" />
+          {singlePostState?.postImage?.length > 0 ? (
+            <img
+              className="w-full"
+              src={singlePostState?.postImage[0]}
+              alt={singlePostState?.postTitle}
+            />
           ) : null}
           {/* Post Info */}
           <div className="flex justify-around">

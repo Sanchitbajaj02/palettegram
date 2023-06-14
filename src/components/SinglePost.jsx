@@ -32,18 +32,24 @@ const SinglePost = ({ singlePost, onLikeClick }) => {
             <div className="my-2 flex flex-row gap-1 justify-between items-center w-full">
               {post?.colors.map((color, index) => {
                 return (
-                  <div key={index} className={`flex-grow h-40 bg-[${color}]`}>
-                    {color}
+                  <div
+                    key={index}
+                    className={`flex-grow h-40`}
+                    style={{
+                      backgroundColor: `#${color}`,
+                    }}
+                  >
+                    #{color}
                   </div>
                 );
               })}
             </div>
           ) : null}
 
-          {post?.postImage.length > 0 ? (
+          {post?.postImage[0]?.length > 0 ? (
             <img
               className="w-full"
-              src={post?.postImage}
+              src={post?.postImage[0]}
               alt={post?.postTitle}
             />
           ) : null}

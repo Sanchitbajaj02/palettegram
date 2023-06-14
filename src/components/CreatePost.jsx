@@ -1,11 +1,57 @@
-import { useState } from "react";
+/* eslint-disable quotes */
+import { useRef, useState } from "react";
 import { Command, Image } from "react-feather";
-import { createPost } from "../DB/api";
+import { addNewImage, createPost, deleteImage } from "../DB/api";
 import Colorpicker from "./Colorpicker";
 
 // import logo from "../logo.svg";
 const CreatePost = () => {
   const [postTitle, setPostTitle] = useState("");
+  const [postImages, setPostImages] = useState({
+    image01: "",
+    image02: "",
+    image03: "",
+    image04: "",
+  });
+  const inputRef = useRef(null);
+  const handleClick = () => {
+    // 👇️ open file input box on click of another element
+    inputRef.current.click();
+  };
+
+  const handleFileChange = (event) => {
+    const fileObj = event.target.files && event.target.files[0];
+    if (!fileObj) {
+      return;
+    }
+    addNewImage(fileObj)
+      .then((res) => {
+        setPostImages((prev) => {
+          return {
+            ...prev,
+            image01: `https://cloud.appwrite.io/v1/storage/buckets/${process.env.REACT_APP_BUCKET_ID}/files/${res.$id}/view?project=64685bc4ecb8d4ee9f38&mode=admin`,
+          };
+        });
+        console.log(typeof postImages);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleClickDelete = (id) => {
+    deleteImage(id)
+      .then((res) => {
+        setPostImages((prev) => {
+          return {
+            ...prev,
+            image01: "",
+            image02: "",
+            image03: "",
+            image04: "",
+          };
+        });
+      })
+      .catch((err) => console.log(err));
+  };
 
   const [togglePalette, setTogglePalette] = useState(false);
 
@@ -32,25 +78,38 @@ const CreatePost = () => {
       colors.color02 !== null &&
       colors.color03 !== null &&
       colors.color04 !== null
-        ? colors
+        ? colors.map((color) => `#${color}`)
         : [];
 
     const postData = {
       userId: localStorage.getItem("userId"),
       postTitle: postTitle,
       colors: Object.values(newColors),
+      postImage: Object.values(postImages),
     };
-
+    console.log(postData);
     createPost(postData)
       .then((res) => {
         if (res) {
           setPostTitle("");
-          setColors({
-            color01: "",
-            color02: "",
-            color03: "",
-            color04: "",
+          setColors((prev) => {
+            return {
+              color01: "",
+              color02: "",
+              color03: "",
+              color04: "",
+            };
           });
+          setPostImages((prev) => {
+            return {
+              ...prev,
+              image01: "",
+              image02: "",
+              image03: "",
+              image04: "",
+            };
+          });
+          // window.location.reload(false);
         }
       })
       .catch((err) => {
@@ -80,11 +139,29 @@ const CreatePost = () => {
           ) : null}
         </div>
       </div>
+      {postImages?.image01?.length > 0 ? (
+        <img
+          className="w-full"
+          src={postImages?.image01}
+          alt="hi"
+          onClick={() => handleClickDelete(postImages?.image01.slice(72, 92))}
+        />
+      ) : null}
 
       <div className="flex items-center justify-between">
         <div className="flex gap-2">
           <div className="flex items-center gap-3 group ">
-            <span className="p-2 rounded-full group-hover:bg-blue-800 group-hover:text-blue-300 flex justify-center items-center">
+            <input
+              style={{ display: "none" }}
+              ref={inputRef}
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
+            />
+            <span
+              className="p-2 rounded-full group-hover:bg-blue-800 group-hover:text-blue-300 flex justify-center items-center"
+              onClick={handleClick}
+            >
               <Image />
             </span>
           </div>

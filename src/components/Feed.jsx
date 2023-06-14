@@ -15,7 +15,6 @@ const Feed = () => {
     if (registerDetails && !registerDetails?.email) {
       navigate("/register");
     }
-
     return () => {
       console.log("cleaner");
     };
