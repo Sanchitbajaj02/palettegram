@@ -1,12 +1,16 @@
 import Logo from "../Assets/logo.png";
-import { Link } from "react-router-dom";
-import { Settings } from "react-feather";
+import { Link, useNavigate } from "react-router-dom";
+import { Settings, LogOut } from "react-feather";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  // const settingRedirect = () => {
-  //   console.log("redirecting to setting");
-  // };
+  const navigate = useNavigate();
+
+  const logout = () => {
+    localStorage.clear();
+
+    navigate("/");
+  };
 
   const userAuth = useSelector((state) => state.authenticator);
 
@@ -21,9 +25,15 @@ const Navbar = () => {
           />
         </Link>
 
-        <Link to={`/user/${userAuth.userId}`}>
-          <Settings />
-        </Link>
+        <div className="flex gap-10">
+          <Link to={`/user/${userAuth.userId}`}>
+            <Settings />
+          </Link>
+
+          <div onClick={logout} className="cursor-pointer">
+            <LogOut />
+          </div>
+        </div>
       </div>
     </nav>
   );

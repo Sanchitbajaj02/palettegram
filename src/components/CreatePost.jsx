@@ -10,10 +10,10 @@ const CreatePost = () => {
   const [togglePalette, setTogglePalette] = useState(false);
 
   const [colors, setColors] = useState({
-    color01: "",
-    color02: "",
-    color03: "",
-    color04: "",
+    color01: null,
+    color02: null,
+    color03: null,
+    color04: null,
   });
 
   const onChangeInput = (event) => {
@@ -25,17 +25,32 @@ const CreatePost = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log(colors);
+
+    const newColors =
+      colors.color01 !== null &&
+      colors.color02 !== null &&
+      colors.color03 !== null &&
+      colors.color04 !== null
+        ? colors
+        : [];
+
     const postData = {
       userId: localStorage.getItem("userId"),
-      createdAt: new Date().toLocaleString(),
       postTitle: postTitle,
-      colors: Object.values(colors),
+      colors: Object.values(newColors),
     };
+
     createPost(postData)
       .then((res) => {
         if (res) {
           setPostTitle("");
-          // window.location.reload(false);
+          setColors({
+            color01: "",
+            color02: "",
+            color03: "",
+            color04: "",
+          });
         }
       })
       .catch((err) => {
@@ -57,9 +72,12 @@ const CreatePost = () => {
             cols="50"
             placeholder="What's happening?"
             maxLength={1000}
+            required
           ></textarea>
 
-          {togglePalette ? <Colorpicker setColors={setColors} /> : null}
+          {togglePalette ? (
+            <Colorpicker colors={colors} setColors={setColors} />
+          ) : null}
         </div>
       </div>
 

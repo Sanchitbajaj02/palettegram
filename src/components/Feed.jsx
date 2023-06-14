@@ -25,7 +25,7 @@ const Feed = () => {
     <main className="flex max-w-screen-lg mx-auto pt-8 content-center">
       <div className="flex-[1] h-80 sticky top-24 flex flex-col items-end">
         <Link
-          to="/feed"
+          to={`/user/${registerDetails?.userId}`}
           className="w-12 h-12 rounded-full border hover:bg-black hover:text-white flex items-center justify-center m-8 mt-0 shadow-md transition duration-300"
         >
           <User />

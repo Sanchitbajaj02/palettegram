@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../DB/api";
 import { useDispatch } from "react-redux";
 import { saveUser } from "../../Redux/auth/authReducer";
+import { Link } from "react-router-dom";
 
 // function checkUsername(username) {
 //   const test =
@@ -106,6 +107,15 @@ export default function Login() {
                   placeholder="Enter your password"
                   className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-base font-medium text-[#1C223A] outline-none focus:border-[#6A64F1] focus:shadow-md"
                 />
+              </div>
+
+              <div className="mb-6">
+                <p>
+                  Do not have an account?{" "}
+                  <Link to="/register" className="text-[#F1396D]">
+                    Register
+                  </Link>
+                </p>
               </div>
 
               <div className="mb-4">

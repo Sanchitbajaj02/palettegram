@@ -88,7 +88,11 @@ const verifyUser = async (userId, secret) => {
 };
 
 const getAccount = () => {
-  return account.get();
+  try {
+    return account.get();
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const loginUser = async (userData) => {
@@ -153,7 +157,7 @@ const getAllPosts = async () => {
 const getSinglePost = async (id) => {
   console.log(id);
   try {
-    const tweets = await db.getDocument(palettegramDB, postsCollection,id);
+    const tweets = await db.getDocument(palettegramDB, postsCollection, id);
     if (tweets) {
       return tweets;
     }
@@ -165,7 +169,7 @@ const getSinglePost = async (id) => {
 const getAllUserPosts = async (userId) => {
   try {
     const tweets = await db.listDocuments(palettegramDB, postsCollection, [
-      Query.equal("userId",userId),
+      Query.equal("userId", userId),
     ]);
     if (tweets) {
       return tweets;
@@ -178,10 +182,13 @@ const getAllUserPosts = async (userId) => {
 const likeTweet = async (tweet) => {
   try {
     console.log(tweet.$id);
-    const tweets = await db.updateDocument(palettegramDB, postsCollection,tweet.$id, 
+    const tweets = await db.updateDocument(
+      palettegramDB,
+      postsCollection,
+      tweet.$id,
       {
         likes: tweet.likes,
-      }
+      },
     );
     if (tweets) {
       return tweets;
@@ -201,5 +208,5 @@ export {
   getAllPosts,
   getAllUserPosts,
   getSinglePost,
-  likeTweet
+  likeTweet,
 };

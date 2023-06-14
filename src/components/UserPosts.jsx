@@ -2,14 +2,17 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 // import React from "react";
 
-const UserPosts = ({user}) => {
+const UserPosts = ({ user }) => {
   console.log(user);
   return (
-    <div className="h-16 border-t border-gray-primary mt-12 pt-4">
+    <div className="mt-4 pt-4">
       <div className="grid grid-cols-3 gap-8 mt-4 mb-12">
         {user.map((photo) => (
           <div key={photo.docId} className="relative group">
-            <img src="https://pbs.twimg.com/media/FyCXwYdWYBULeZW?format=jpg&name=small" alt={photo.caption} />
+            <img
+              src="https://pbs.twimg.com/media/FyCXwYdWYBULeZW?format=jpg&name=small"
+              alt={photo.caption}
+            />
 
             <div className="absolute bottom-0 left-0 bg-gray-200 z-10 w-full justify-evenly items-center h-full bg-black-faded group-hover:flex hidden">
               <p className="flex items-center text-white font-bold">
@@ -47,7 +50,10 @@ const UserPosts = ({user}) => {
         ))}
       </div>
 
-      {!user || (user.length === 0 && <p className="text-center text-2xl">No Posts Yet</p>)}
+      {!user ||
+        (user.length === 0 && (
+          <p className="text-center text-2xl">No Posts Yet</p>
+        ))}
     </div>
   );
 };
