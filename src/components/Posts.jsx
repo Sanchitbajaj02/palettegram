@@ -7,19 +7,21 @@ const Posts = () => {
     getAllPosts()
       .then((res) => {
         setAllPosts(res.documents);
-        console.log(allPosts);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [allPosts]);
+
   const tweetsSortedByCreatedDate = allPosts.sort(function (a, b) {
     return new Date(b.$createdAt) - new Date(a.$createdAt);
   });
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center w-full">
       {tweetsSortedByCreatedDate.map((posts, index) => (
-        <SinglePost key={index} posts={posts} />
+        <div key={index} className="w-full">
+          <SinglePost singlePost={posts} />
+        </div>
       ))}
     </div>
   );

@@ -1,71 +1,72 @@
+import { Download, Heart, MessageCircle, Share } from "react-feather";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const SinglePost = (posts) => {
-  const post = posts.posts;
-  // const { postImage } = post;
-  const userName = "XYZ";
+// eslint-disable-next-line react/prop-types
+const SinglePost = ({ singlePost }) => {
+  const post = singlePost;
+
+  const authState = useSelector((state) => state.authenticator);
   return (
     <Link
-      className="border w-full p-4 pb-2 border-b-0 last:border-b"
-      to={`/post/${post.$id}`}
+      className="flex px-4 py-2 mb-4 rounded shadow-lg border-slate-100 border-b-0 last:border-b-1"
+      to={`/post/${post?.$id}`}
     >
-      <div className="flex w-full">
-        <div className="w-12">
-          <Link className="w-12" to={`/user/${post.userId}`}>
+      <div className="w-full">
+        <div>
+          <Link
+            className="flex items-center gap-4 mb-2"
+            to={`/user/${post?.userId}`}
+          >
             <img
               className="w-8 h-8 rounded-full"
               src="https://pbs.twimg.com/media/FyCXwYdWYBULeZW?format=jpg&name=small"
               alt=""
             />
+            <span className="font-medium text-md">{authState?.fullName}</span>
           </Link>
         </div>
-        <div className="w-full">
-          <div className="rounded-md">
-            <Link className="w-12" to={`/user/${post.userId}`}>
-              <span className="font-bold text-lg">{userName}</span>
-            </Link>
-            <p className="text-md">{post.postTitle}</p>
-            <img
-              className="w-[90%]"
-              src={
-                "https://pbs.twimg.com/media/FyB8cZnWIAc21rw?format=jpg&name=360x360"
-              }
-              alt=""
-            />
-          </div>
-          <div className="flex justify-start gap-8 pt-2">
-            <div className="flex items-center gap-3 group text-blue-500">
-              <div className="w-8 h-8 rounded-full group-hover:bg-blue-800 group-hover:text-blue-300 flex justify-center items-center">
-                <i className="fa fa-heart-o"></i>
-              </div>
-              <span className="font-light">3213</span>
-            </div>
 
-            <div className="flex items-center gap-3 group text-blue-500">
-              <div className="w-8 h-8 rounded-full group-hover:bg-blue-800 group-hover:text-blue-300 flex justify-center items-center">
-                <i className="fa fa-comment-o"></i>
-              </div>
-              <span className="font-light">3213</span>
+        <div className="my-3">
+          <p className="text-lg">
+            {post?.postTitle ? post?.postTitle : "No Title"}
+          </p>
+          {post?.postImage.length > 0 ? (
+            <img
+              className="w-full"
+              src={post?.postImage}
+              alt={post?.postTitle}
+            />
+          ) : null}
+        </div>
+
+        <div className="flex justify-around">
+          <div className="flex items-center gap-2 group text-blue-500">
+            <div className="p-2 rounded-full group-hover:bg-blue-800 group-hover:text-blue-300 flex justify-center items-center">
+              <Heart size={16} />
             </div>
-            <div className="flex items-center gap-3 group text-blue-500">
-              <div className="w-8 h-8 rounded-full group-hover:bg-blue-800 group-hover:text-blue-300 flex justify-center items-center">
-                <i className="fa fa-share"></i>
-              </div>
-              <span className="font-light">3213</span>
+            <span className="font-light">3213</span>
+          </div>
+
+          <div className="flex items-center gap-2 group text-blue-500">
+            <div className="p-2 rounded-full group-hover:bg-blue-800 group-hover:text-blue-300 flex justify-center items-center">
+              <MessageCircle size={16} />
             </div>
-            <div className="">
-              <div className="w-8 h-8 rounded-full flex justify-center items-center text-blue-500 hover:bg-blue-800 hover:text-blue-300">
-                <i className="fa fa-arrow-down"></i>
-              </div>
+            <span className="font-light">3213</span>
+          </div>
+          <div className="flex items-center gap-2 group text-blue-500">
+            <div className="p-2 rounded-full group-hover:bg-blue-800 group-hover:text-blue-300 flex justify-center items-center">
+              <Share size={16} />
             </div>
+            <span className="font-light">3213</span>
+          </div>
+          <div className="p-2 rounded-full flex justify-center items-center text-blue-500 hover:bg-blue-800 hover:text-blue-300">
+            <Download size={16} />
           </div>
         </div>
       </div>
     </Link>
   );
-};
-SinglePost.propTypes = {
-  index: Number,
 };
 
 export default SinglePost;

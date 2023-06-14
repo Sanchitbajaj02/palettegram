@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import HeaderImage from "../Assets/header.png";
 import PalettegramFor from "../Assets/palettegram_for.png";
+import Logo from "../Assets/logo.png";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -9,7 +10,9 @@ const Home = () => {
     <>
       <nav className="py-4 shadow-md">
         <div className=" max-w-screen-xl mx-auto flex flex-row justify-between items-center">
-          <Link to="/">Logo</Link>
+          <Link to="/">
+            <img src={Logo} alt="profile logo" width={50} height={50} />
+          </Link>
           <button
             className="px-20 py-3 text-xl rounded-full text-white bg-[#F1396D]"
             onClick={() => navigate("/register")}
