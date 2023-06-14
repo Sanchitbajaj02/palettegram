@@ -172,6 +172,7 @@ const getAllUserPosts = async (userId) => {
     const tweets = await db.listDocuments(palettegramDB, postsCollection, [
       Query.equal("userId", userId),
     ]);
+
     if (tweets) {
       return tweets;
     }
@@ -199,13 +200,8 @@ const likeTweet = async (tweet) => {
   }
 };
 const addNewImage = async (image) => {
-  console.log(bucket);
   try {
-    const resImage = await storage.createFile(
-      bucket,
-      ID.unique(),
-      image
-    );
+    const resImage = await storage.createFile(bucket, ID.unique(), image);
     if (resImage) {
       return resImage;
     }
@@ -216,10 +212,7 @@ const addNewImage = async (image) => {
 const deleteImage = async (id) => {
   console.log(bucket);
   try {
-    const resImage = await storage.deleteFile(
-      bucket,
-      id
-    );
+    const resImage = await storage.deleteFile(bucket, id);
     if (resImage) {
       return resImage;
     }
@@ -240,5 +233,5 @@ export {
   getSinglePost,
   likeTweet,
   addNewImage,
-  deleteImage
+  deleteImage,
 };

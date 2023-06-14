@@ -63,7 +63,7 @@ const SinglePost = ({ singlePost, onLikeClick }) => {
         >
           <div
             className={`p-2 rounded-full ${
-              post.likes.includes(authState?.userId)
+              post?.likes.includes(authState?.userId)
                 ? "bg-blue-800 text-blue-300"
                 : "group-hover:bg-blue-800 group-hover:text-blue-300"
             } flex justify-center items-center`}

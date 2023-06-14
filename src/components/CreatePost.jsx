@@ -26,6 +26,7 @@ const CreatePost = () => {
     }
     addNewImage(fileObj)
       .then((res) => {
+        console.log(res);
         setPostImages((prev) => {
           return {
             ...prev,
@@ -87,13 +88,14 @@ const CreatePost = () => {
       colors: Object.values(newColors),
       postImage: Object.values(postImages),
     };
-    console.log(postData);
+
     createPost(postData)
       .then((res) => {
         if (res) {
           setPostTitle("");
           setColors((prev) => {
             return {
+              ...prev,
               color01: "",
               color02: "",
               color03: "",
@@ -109,7 +111,6 @@ const CreatePost = () => {
               image04: "",
             };
           });
-          // window.location.reload(false);
         }
       })
       .catch((err) => {
@@ -143,7 +144,7 @@ const CreatePost = () => {
         <img
           className="w-full"
           src={postImages?.image01}
-          alt="hi"
+          alt="post"
           onClick={() => handleClickDelete(postImages?.image01.slice(72, 92))}
         />
       ) : null}

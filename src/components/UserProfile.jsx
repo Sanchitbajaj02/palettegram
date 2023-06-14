@@ -14,6 +14,7 @@ export default function Profile() {
   useEffect(() => {
     getAllUserPosts(userId)
       .then((res) => {
+        console.log(res);
         setUser(res.documents);
       })
       .catch((err) => {
