@@ -9,6 +9,8 @@ import { saveUser } from "../../Redux/auth/authReducer";
 
 //   return username.match(test);
 // }
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Register() {
   const dispatch = useDispatch();
@@ -47,11 +49,24 @@ export default function Register() {
           }),
         );
       })
+      .then(() =>
+        toast.success("Register Successful", {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: "light",
+        }),
+      )
       .catch((err) => console.log(err));
   }
 
   return (
     <>
+      <ToastContainer />
       <section className="max-w-screen-sm mx-auto h-screen flex justify-center items-center">
         <div className="bg-white w-full p-4 rounded-xl shadow-lg">
           <article>

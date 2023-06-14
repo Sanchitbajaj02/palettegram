@@ -48,7 +48,7 @@ export default function Login() {
                 createdAt: res["$createdAt"],
               }),
             );
-            navigate("/feed");
+            navigate("/feed", { state: { method: "Login" } });
           }
         })
         .catch((err) => console.log(err.message));
@@ -113,7 +113,7 @@ export default function Login() {
                   type="submit"
                   className="w-full py-2 text-xl rounded-full text-white bg-[#F1396D] transition duration-300 ease hover:bg-[#1C223A]"
                 >
-                  Register Now
+                  Login Now
                 </button>
               </div>
             </form>
