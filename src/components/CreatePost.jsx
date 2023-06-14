@@ -78,7 +78,7 @@ const CreatePost = () => {
       colors.color02 !== null &&
       colors.color03 !== null &&
       colors.color04 !== null
-        ? colors.map((color) => `#${color}`)
+        ? colors
         : [];
 
     const postData = {
