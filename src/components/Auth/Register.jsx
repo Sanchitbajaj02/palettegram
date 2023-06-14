@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { registerUser } from "../../DB/api";
 import { useDispatch } from "react-redux";
 import { saveUser } from "../../Redux/auth/authReducer";
@@ -20,6 +20,7 @@ export default function Register() {
     email: "",
     password: "",
   });
+  const [registerStatus, setRegisterStatus] = useState("initial");
 
   function changeHandler(event) {
     const { name, value } = event.target;
@@ -29,10 +30,26 @@ export default function Register() {
     });
   }
 
+  useEffect(() => {
+    if (registerStatus === "success") {
+      toast.success("Register Successful", {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: false,
+        pauseOnHover: false,
+        pauseOnFocusLoss: false,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  }, [registerStatus]);
+
   function submitHander(event) {
     event.preventDefault();
 
-    console.log(data);
+    setRegisterStatus("registering");
     registerUser(data)
       .then((resp) => {
         localStorage.setItem("userId", resp["$id"]);
@@ -48,25 +65,17 @@ export default function Register() {
             createdAt: resp["$createdAt"],
           }),
         );
+        setRegisterStatus("success");
       })
-      .then(() =>
-        toast.success("Register Successful", {
-          position: "bottom-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: false,
-          progress: undefined,
-          theme: "light",
-        }),
-      )
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setRegisterStatus("failure");
+      });
   }
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer limit={1} />
       <section className="max-w-screen-sm mx-auto h-screen flex justify-center items-center">
         <div className="bg-white w-full p-4 rounded-xl shadow-lg">
           <article>
@@ -164,6 +173,10 @@ export default function Register() {
                 <button
                   type="submit"
                   className="w-full py-2 text-xl rounded-full text-white bg-[#F1396D] transition duration-300 ease hover:bg-[#1C223A]"
+                  disabled={
+                    registerStatus === "success" ||
+                    registerStatus === "registering"
+                  }
                 >
                   Register Now
                 </button>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../DB/api";
 import { useDispatch } from "react-redux";
@@ -10,6 +10,8 @@ import { saveUser } from "../../Redux/auth/authReducer";
 
 //   return username.match(test);
 // }
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -19,6 +21,7 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const [loginStatus, setLoginStatus] = useState("initial");
 
   function changeHandler(event) {
     const { name, value } = event.target;
@@ -28,9 +31,28 @@ export default function Login() {
     });
   }
 
+  useEffect(() => {
+    if (loginStatus === "success") {
+      toast.success("Login Successful", {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: false,
+        pauseOnHover: false,
+        pauseOnFocusLoss: false,
+        progress: undefined,
+        theme: "light",
+      });
+      setTimeout(() => {
+        navigate("/feed");
+      }, 3500);
+    }
+  }, [loginStatus, navigate]);
+
   function submitHander(event) {
     event.preventDefault();
-
+    setLoginStatus("logging");
     if (data.email !== "" && data.password !== "") {
       loginUser(data)
         .then((res) => {
@@ -48,15 +70,20 @@ export default function Login() {
                 createdAt: res["$createdAt"],
               }),
             );
-            navigate("/feed", { state: { method: "Login" } });
+            setLoginStatus("success");
           }
         })
-        .catch((err) => console.log(err.message));
+        .catch((err) => {
+          console.log(err.message);
+          setLoginStatus("failure");
+        });
     }
   }
 
   return (
     <>
+      <ToastContainer limit={1} />
+
       <section className="max-w-screen-sm mx-auto h-screen flex justify-center items-center">
         <div className="bg-white w-full p-4 rounded-xl shadow-lg">
           <article>
@@ -112,6 +139,9 @@ export default function Login() {
                 <button
                   type="submit"
                   className="w-full py-2 text-xl rounded-full text-white bg-[#F1396D] transition duration-300 ease hover:bg-[#1C223A]"
+                  disabled={
+                    loginStatus === "success" || loginStatus === "logging"
+                  }
                 >
                   Login Now
                 </button>
