@@ -150,11 +150,39 @@ const getAllPosts = async () => {
   }
 };
 
+const getSinglePost = async (id) => {
+  console.log(id);
+  try {
+    const tweets = await db.getDocument(palettegramDB, postsCollection,id);
+    if (tweets) {
+      return tweets;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const getAllUserPosts = async (userId) => {
   try {
     const tweets = await db.listDocuments(palettegramDB, postsCollection, [
       Query.equal("userId",userId),
     ]);
+    if (tweets) {
+      return tweets;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const likeTweet = async (tweet) => {
+  try {
+    console.log(tweet.$id);
+    const tweets = await db.updateDocument(palettegramDB, postsCollection,tweet.$id, 
+      {
+        likes: tweet.likes,
+      }
+    );
     if (tweets) {
       return tweets;
     }
@@ -171,5 +199,7 @@ export {
   getCurrentUser,
   createPost,
   getAllPosts,
-  getAllUserPosts
+  getAllUserPosts,
+  getSinglePost,
+  likeTweet
 };
