@@ -32,7 +32,7 @@ const SinglePost = ({ singlePost, onLikeClick }) => {
             {post?.postTitle ? post?.postTitle : "No Title"}
           </p>
           {post?.postImage.length > 0 ? (
-            <img className="w-full" src={post?.postImage} alt={post?.postTitle} />
+            <img className="w-full" src={post?.postImage[0]} alt={post?.postTitle} />
           ) : null}
         </div>
       </Link>

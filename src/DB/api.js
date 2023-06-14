@@ -1,9 +1,10 @@
 import { ID, Query } from "appwrite";
-import { account, db } from "./appwrite.config";
+import { account, db, storage } from "./appwrite.config";
 
 const palettegramDB = process.env.REACT_APP_DATABASE_ID;
 const usersCollection = process.env.REACT_APP_USER_COLLECTION;
 const postsCollection = process.env.REACT_APP_POSTS_COLLECTION;
+const bucket = process.env.REACT_APP_BUCKET_ID;
 
 const registerUser = async (userData) => {
   try {
@@ -190,6 +191,21 @@ const likeTweet = async (tweet) => {
     console.log(error);
   }
 };
+const addNewImage = async (image) => {
+  console.log(bucket);
+  try {
+    const resImage = await storage.createFile(
+      bucket,
+      ID.unique(),
+      image
+    );
+    if (resImage) {
+      return resImage;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export {
   registerUser,
@@ -201,5 +217,6 @@ export {
   getAllPosts,
   getAllUserPosts,
   getSinglePost,
-  likeTweet
+  likeTweet,
+  addNewImage
 };

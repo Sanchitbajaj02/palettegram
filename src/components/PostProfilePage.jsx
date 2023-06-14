@@ -1,5 +1,4 @@
 // import logo from "../logo.svg";
-import meme1 from "../Assets//meme1.png";
 import { useState } from "react";
 import { getSinglePost } from "../DB/api";
 import { useSelector } from "react-redux";
@@ -56,8 +55,8 @@ const PostProfilePage = () => {
             {singlePostState?.postTitle ? singlePostState?.postTitle : ""}
           </p>
 
-          {singlePostState?.postImage > 0 ? (
-            <img className="w-[90%] border m-4" src={meme1} alt="post" />
+          {singlePostState?.postImage.length > 0 ? (
+            <img className="w-full" src={singlePostState?.postImage[0]} alt={singlePostState?.postTitle} />
           ) : null}
           {/* Post Info */}
           <div className="flex justify-around">
