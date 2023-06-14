@@ -1,9 +1,9 @@
 // eslint-disable-next-line react/prop-types
-function Colorpicker({ setColors }) {
+function Colorpicker({ setcolors }) {
   const changeHandler = (event) => {
     const { name, value } = event.target;
 
-    setColors((prev) => {
+    setcolors((prev) => {
       return { ...prev, [name]: value };
     });
   };
