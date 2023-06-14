@@ -2,6 +2,8 @@
 import { Download, Heart, MessageCircle, Share } from "react-feather";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+// import { useState } from "react";
+import { User } from "react-feather";
 
 // eslint-disable-next-line react/prop-types
 const SinglePost = ({ singlePost, onLikeClick }) => {
@@ -9,42 +11,26 @@ const SinglePost = ({ singlePost, onLikeClick }) => {
 
   const authState = useSelector((state) => state.authenticator);
 
+  const copyText = async (color) => {
+    await navigator.clipboard.writeText(color);
+  };
+
   return (
     <div className="w-full mb-4 shadow-lg p-4 rounded">
       <Link
         className="flex items-center gap-4 mb-2"
         to={`/user/${post?.userId}`}
       >
-        <img
-          className="w-8 h-8 rounded-full"
-          src="https://pbs.twimg.com/media/FyCXwYdWYBULeZW?format=jpg&name=small"
-          alt=""
-        />
-        <span className="font-medium text-md">{authState?.fullName}</span>
+        <div className="w-10 h-10 rounded-full border flex items-center justify-center shadow">
+          <User size={18} />
+        </div>
+        <span className="font-medium text-md">{post?.userId}</span>
       </Link>
       <Link className="mb-2" to={`/post/${post?.$id}`}>
         <div className="my-3">
           <p className="text-lg">
             {post?.postTitle ? post?.postTitle : "No Title"}
           </p>
-
-          {post?.colors?.length > 0 ? (
-            <div className="my-2 flex flex-row gap-1 justify-between items-center w-full">
-              {post?.colors.map((color, index) => {
-                return (
-                  <div
-                    key={index}
-                    className={`flex-grow h-40`}
-                    style={{
-                      backgroundColor: `#${color}`,
-                    }}
-                  >
-                    #{color}
-                  </div>
-                );
-              })}
-            </div>
-          ) : null}
 
           {post?.postImage[0]?.length > 0 ? (
             <img
@@ -55,6 +41,23 @@ const SinglePost = ({ singlePost, onLikeClick }) => {
           ) : null}
         </div>
       </Link>
+
+      {post?.colors?.length > 0 ? (
+        <div className="my-2 flex flex-row justify-between items-center w-full">
+          {post?.colors.map((color, index) => {
+            return (
+              <div
+                key={index}
+                className="flex-grow h-52 cursor-pointer  transition duration-200"
+                onClick={() => copyText(`#${color}`)}
+                style={{
+                  backgroundColor: `#${color}`,
+                }}
+              ></div>
+            );
+          })}
+        </div>
+      ) : null}
 
       <div className="flex justify-between">
         <div

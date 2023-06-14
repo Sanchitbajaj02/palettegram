@@ -9,19 +9,24 @@ const UserPosts = ({ user }) => {
       <div className="grid grid-cols-3 gap-8">
         {user &&
           user?.map((photo, index) => (
-            <div
-              key={index}
-              className="relative p-4 bg-gray-200 z-10 w-full flex justify-evenly items-center h-full"
-            >
-              <p className="flex items-center gap-2 font-bold">
-                <Heart size={30} />
-                {photo?.likes.length}
-              </p>
-              <p className="flex items-center gap-2 font-bold">
-                <MessageCircle size={30} />
-                {photo?.comments?.length}
-              </p>
-            </div>
+            <>
+              <div className="p-4 bg-gray-100 z-10 w-full h-full">
+                <p className="mb-4">{photo?.postTitle}</p>
+                <div
+                  key={index}
+                  className="relative flex justify-between items-center"
+                >
+                  <p className="flex items-center gap-2 font-bold">
+                    <Heart size={24} />
+                    {photo?.likes.length}
+                  </p>
+                  <p className="flex items-center gap-2 font-bold">
+                    <MessageCircle size={24} />
+                    {photo?.comments?.length}
+                  </p>
+                </div>
+              </div>
+            </>
           ))}
       </div>
 
