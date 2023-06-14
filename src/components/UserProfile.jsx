@@ -4,20 +4,20 @@ import { getAllUserPosts } from "../DB/api";
 import UserPosts from "./UserPosts";
 
 export default function Profile() {
-  const { username } = useParams();
-  console.log(username);
+  const { userId } = useParams();
+  console.log(userId);
   const [user, setUser] = useState(null);
 
   
   useEffect(() => {
-    getAllUserPosts("647316b4e96e496746e9")
+    getAllUserPosts(userId)
       .then((res) => {
         setUser(res.documents);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [username]);
+  }, [userId]);
 
   return user && (
     <div className="bg-gray-background">

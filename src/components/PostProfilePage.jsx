@@ -1,7 +1,7 @@
 // import logo from "../logo.svg";
 import meme1 from "../Assets//meme1.png";
 import { useState } from "react";
-import { getAllPosts } from "../DB/api";
+import { getSinglePost } from "../DB/api";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
@@ -23,15 +23,13 @@ const PostProfilePage = () => {
   const [singlePostState, setSinglePostState] = useState({});
 
   useEffect(() => {
-    if (!registerDetails?.fullName || !registerDetails?.email) {
+    if (!registerDetails?.email) {
       navigate("/register");
     } else {
-      getAllPosts()
+      getSinglePost(id)
         .then((resp) => {
-          if (resp.documents.length > 0) {
-            const newResp = resp?.documents.filter((ele) => ele?.$id === id);
-            setSinglePostState(newResp[0]);
-          }
+          setSinglePostState(resp);
+          console.log(resp);
         })
         .catch((err) => {
           console.log(err);
@@ -64,17 +62,17 @@ const PostProfilePage = () => {
           {/* Post Info */}
           <div className="flex justify-around">
             <div className="flex items-center gap-2 group text-blue-500">
-              <div className="p-2 rounded-full group-hover:bg-blue-800 group-hover:text-blue-300 flex justify-center items-center">
+              <div className={`p-2 rounded-full ${singlePostState?.likes?.includes(registerDetails.userId)? "bg-blue-800 text-blue-300" : "group-hover:bg-blue-800 group-hover:text-blue-300"} flex justify-center items-center`}>
                 <Heart size={16} />
               </div>
-              <span className="font-light">3213</span>
+              <span className="font-light">{singlePostState?.likes?.length}</span>
             </div>
 
             <div className="flex items-center gap-2 group text-blue-500">
               <div className="p-2 rounded-full group-hover:bg-blue-800 group-hover:text-blue-300 flex justify-center items-center">
                 <MessageCircle size={16} />
               </div>
-              <span className="font-light">3213</span>
+              <span className="font-light">{singlePostState?.comments?.length}</span>
             </div>
             <div className="flex items-center gap-2 group text-blue-500">
               <div className="p-2 rounded-full group-hover:bg-blue-800 group-hover:text-blue-300 flex justify-center items-center">
