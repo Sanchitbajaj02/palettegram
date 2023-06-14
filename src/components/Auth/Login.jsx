@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../DB/api";
 import { useDispatch } from "react-redux";
@@ -10,7 +10,7 @@ import { saveUser } from "../../Redux/auth/authReducer";
 
 //   return username.match(test);
 // }
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Login() {
@@ -31,25 +31,22 @@ export default function Login() {
     });
   }
 
-  useEffect(() => {
-    if (loginStatus === "success") {
-      toast.success("Login Successful", {
-        position: "bottom-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        draggable: false,
-        pauseOnHover: false,
-        pauseOnFocusLoss: false,
-        progress: undefined,
-        theme: "light",
-      });
-      setTimeout(() => {
-        navigate("/feed");
-      }, 3500);
-    }
-  }, [loginStatus, navigate]);
-
+  function showLoginToast() {
+    toast.success("Login Successful", {
+      position: "bottom-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      draggable: false,
+      pauseOnHover: false,
+      pauseOnFocusLoss: false,
+      progress: undefined,
+      theme: "light",
+    });
+    setTimeout(() => {
+      navigate("/feed");
+    }, 3500);
+  }
   function submitHander(event) {
     event.preventDefault();
     setLoginStatus("logging");
@@ -71,6 +68,7 @@ export default function Login() {
               }),
             );
             setLoginStatus("success");
+            showLoginToast();
           }
         })
         .catch((err) => {
@@ -82,8 +80,6 @@ export default function Login() {
 
   return (
     <>
-      <ToastContainer limit={1} />
-
       <section className="max-w-screen-sm mx-auto h-screen flex justify-center items-center">
         <div className="bg-white w-full p-4 rounded-xl shadow-lg">
           <article>

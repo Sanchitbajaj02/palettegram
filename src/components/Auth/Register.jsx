@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { registerUser } from "../../DB/api";
 import { useDispatch } from "react-redux";
 import { saveUser } from "../../Redux/auth/authReducer";
@@ -9,7 +9,7 @@ import { saveUser } from "../../Redux/auth/authReducer";
 
 //   return username.match(test);
 // }
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Register() {
@@ -30,21 +30,19 @@ export default function Register() {
     });
   }
 
-  useEffect(() => {
-    if (registerStatus === "success") {
-      toast.success("Register Successful", {
-        position: "bottom-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        draggable: false,
-        pauseOnHover: false,
-        pauseOnFocusLoss: false,
-        progress: undefined,
-        theme: "light",
-      });
-    }
-  }, [registerStatus]);
+  function showRegisterToast() {
+    toast.success("Register Successful", {
+      position: "bottom-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      draggable: false,
+      pauseOnHover: false,
+      pauseOnFocusLoss: false,
+      progress: undefined,
+      theme: "light",
+    });
+  }
 
   function submitHander(event) {
     event.preventDefault();
@@ -66,6 +64,7 @@ export default function Register() {
           }),
         );
         setRegisterStatus("success");
+        showRegisterToast();
       })
       .catch((err) => {
         console.log(err);
@@ -75,7 +74,6 @@ export default function Register() {
 
   return (
     <>
-      <ToastContainer limit={1} />
       <section className="max-w-screen-sm mx-auto h-screen flex justify-center items-center">
         <div className="bg-white w-full p-4 rounded-xl shadow-lg">
           <article>
