@@ -1,7 +1,7 @@
 /* eslint-disable quotes */
 import { useRef, useState } from "react";
 import { Command, Image } from "react-feather";
-import { addNewImage, createPost } from "../DB/api";
+import { addNewImage, createPost, deleteImage } from "../DB/api";
 import Colorpicker from "./Colorpicker";
 
 // import logo from "../logo.svg";
@@ -30,6 +30,20 @@ const CreatePost = () => {
           return { ...prev, image01: `https://cloud.appwrite.io/v1/storage/buckets/${process.env.REACT_APP_BUCKET_ID}/files/${res.$id}/view?project=64685bc4ecb8d4ee9f38&mode=admin` };
         });
         console.log(typeof postImages);
+      })
+      .catch(err => console.log(err));
+  };
+
+  const handleClickDelete = (id) => {
+    deleteImage(id)
+      .then((res) => {
+        setPostImages((prev) => {
+          return { ...prev,
+            image01: "",
+            image02: "",
+            image03: "",
+            image04: ""
+          };});
       })
       .catch(err => console.log(err));
   };
@@ -64,6 +78,13 @@ const CreatePost = () => {
       .then((res) => {
         if (res) {
           setPostTitle("");
+          setPostImages((prev) => {
+            return { ...prev,
+              image01: "",
+              image02: "",
+              image03: "",
+              image04: ""
+            };});
           // window.location.reload(false);
         }
       })
@@ -92,7 +113,7 @@ const CreatePost = () => {
         </div>
       </div>
       {postImages?.image01?.length > 0 ? (
-        <img className="w-full" src={postImages?.image01} alt="hi"/>
+        <img className="w-full" src={postImages?.image01} alt="hi" onClick={()=>handleClickDelete(postImages?.image01.slice(72,92))}/>
       ) : null}
 
       <div className="flex items-center justify-between">

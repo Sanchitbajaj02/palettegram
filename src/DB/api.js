@@ -206,6 +206,20 @@ const addNewImage = async (image) => {
     console.log(error);
   }
 };
+const deleteImage = async (id) => {
+  console.log(bucket);
+  try {
+    const resImage = await storage.deleteFile(
+      bucket,
+      id
+    );
+    if (resImage) {
+      return resImage;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export {
   registerUser,
@@ -218,5 +232,6 @@ export {
   getAllUserPosts,
   getSinglePost,
   likeTweet,
-  addNewImage
+  addNewImage,
+  deleteImage
 };
