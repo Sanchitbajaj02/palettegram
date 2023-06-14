@@ -30,20 +30,6 @@ export default function Register() {
     });
   }
 
-  function showRegisterToast() {
-    toast.success("Register Successful", {
-      position: "bottom-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      draggable: false,
-      pauseOnHover: false,
-      pauseOnFocusLoss: false,
-      progress: undefined,
-      theme: "light",
-    });
-  }
-
   function submitHander(event) {
     event.preventDefault();
 
@@ -64,7 +50,7 @@ export default function Register() {
           }),
         );
         setRegisterStatus("success");
-        showRegisterToast();
+        toast.success("Register Successful");
       })
       .catch((err) => {
         console.log(err);

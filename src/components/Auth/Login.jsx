@@ -31,22 +31,6 @@ export default function Login() {
     });
   }
 
-  function showLoginToast() {
-    toast.success("Login Successful", {
-      position: "bottom-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      draggable: false,
-      pauseOnHover: false,
-      pauseOnFocusLoss: false,
-      progress: undefined,
-      theme: "light",
-    });
-    setTimeout(() => {
-      navigate("/feed");
-    }, 3500);
-  }
   function submitHander(event) {
     event.preventDefault();
     setLoginStatus("logging");
@@ -68,7 +52,10 @@ export default function Login() {
               }),
             );
             setLoginStatus("success");
-            showLoginToast();
+            toast.success("Login Successful");
+            setTimeout(() => {
+              navigate("/feed");
+            }, 3500);
           }
         })
         .catch((err) => {
