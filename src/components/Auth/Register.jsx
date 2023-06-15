@@ -2,6 +2,7 @@ import { useState } from "react";
 import { registerUser } from "../../DB/api";
 import { useDispatch } from "react-redux";
 import { saveUser } from "../../Redux/auth/authReducer";
+import { Link } from "react-router-dom";
 
 // function checkUsername(username) {
 //   const test =
@@ -92,29 +93,6 @@ export default function Register() {
                 />
               </div>
 
-              {/* <div className="mb-6">
-                <label
-                  htmlFor="username"
-                  aria-required="true"
-                  className="mb-3 block text-base font-medium"
-                >
-                  User name <span className="text-red-600">*</span>
-                </label>
-                <input
-                  type="text"
-                  name="username"
-                  id="username"
-                  required={true}
-                  onChange={changeHandler}
-                  placeholder="Enter your unique username"
-                  className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-base font-medium text-[#1C223A] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                />
-                <small className="text-slate-600">
-                  Must be a unique value. Only use characters(A-Z or a-z) or
-                  numbers(0-9) or underscore(_)
-                </small>
-              </div> */}
-
               <div className="mb-6">
                 <label
                   htmlFor="email"
@@ -151,6 +129,15 @@ export default function Register() {
                   placeholder="Enter your password"
                   className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-base font-medium text-[#1C223A] outline-none focus:border-[#6A64F1] focus:shadow-md"
                 />
+              </div>
+
+              <div className="mb-6">
+                <p>
+                  Already have an account?{" "}
+                  <Link to="/login" className="text-[#F1396D]">
+                    Login
+                  </Link>
+                </p>
               </div>
 
               <div className="mb-4">

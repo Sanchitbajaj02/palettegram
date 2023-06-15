@@ -2,9 +2,12 @@ import { Link, useNavigate } from "react-router-dom";
 import HeaderImage from "../Assets/header.png";
 import PalettegramFor from "../Assets/palettegram_for.png";
 import Logo from "../Assets/logo.png";
+import { useSelector } from "react-redux";
 
 const Home = () => {
   const navigate = useNavigate();
+
+  const state = useSelector((state) => state.authenticator);
 
   return (
     <>
@@ -13,12 +16,21 @@ const Home = () => {
           <Link to="/">
             <img src={Logo} alt="profile logo" width={50} height={50} />
           </Link>
-          <button
-            className="px-20 py-3 text-xl rounded-full text-white bg-[#F1396D]"
-            onClick={() => navigate("/register")}
-          >
-            Register
-          </button>
+          <div>
+            <button
+              className="mx-4 px-16 py-2 text-lg rounded-full text-white bg-[#F1396D]"
+              onClick={() => navigate("/register")}
+            >
+              Register
+            </button>
+
+            <button
+              className="px-16 py-2 text-lg  rounded-full text-white bg-[#F1396D]"
+              onClick={() => navigate("/login")}
+            >
+              Login
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -31,12 +43,21 @@ const Home = () => {
             <p className="text-xl md:text-2xl my-8">
               Transform ideas into Beautiful Palettes, Inspire Fellow Designers.
             </p>
-            <button
-              className="px-16 py-4 text-xl rounded-full text-white bg-[#F1396D]"
-              onClick={() => navigate("/register")}
-            >
-              Start your journey
-            </button>
+            {state?.userId ? (
+              <button
+                className="px-16 py-4 text-xl rounded-full text-white bg-[#F1396D]"
+                onClick={() => navigate("/feed")}
+              >
+                Checkout your feed
+              </button>
+            ) : (
+              <button
+                className="px-16 py-4 text-xl rounded-full text-white bg-[#F1396D]"
+                onClick={() => navigate("/register")}
+              >
+                Start your journey
+              </button>
+            )}
           </article>
           <figure className="w-[80%] my-4">
             <img

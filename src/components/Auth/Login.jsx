@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../DB/api";
 import { useDispatch } from "react-redux";
 import { saveUser } from "../../Redux/auth/authReducer";
+import { Link } from "react-router-dom";
 
 // function checkUsername(username) {
 //   const test =
@@ -21,7 +22,6 @@ export default function Login() {
     email: "",
     password: "",
   });
-  const [loginStatus, setLoginStatus] = useState("initial");
 
   function changeHandler(event) {
     const { name, value } = event.target;
@@ -33,7 +33,6 @@ export default function Login() {
 
   function submitHander(event) {
     event.preventDefault();
-    setLoginStatus("logging");
     if (data.email !== "" && data.password !== "") {
       loginUser(data)
         .then((res) => {
@@ -51,7 +50,6 @@ export default function Login() {
                 createdAt: res["$createdAt"],
               }),
             );
-            setLoginStatus("success");
             toast.success("Login Successful");
             setTimeout(() => {
               navigate("/feed");
@@ -60,7 +58,7 @@ export default function Login() {
         })
         .catch((err) => {
           console.log(err.message);
-          setLoginStatus("failure");
+          toast.error("Login Failed");
         });
     }
   }
@@ -118,13 +116,19 @@ export default function Login() {
                 />
               </div>
 
+              <div className="mb-6">
+                <p>
+                  Do not have an account?{" "}
+                  <Link to="/register" className="text-[#F1396D]">
+                    Register
+                  </Link>
+                </p>
+              </div>
+
               <div className="mb-4">
                 <button
                   type="submit"
                   className="w-full py-2 text-xl rounded-full text-white bg-[#F1396D] transition duration-300 ease hover:bg-[#1C223A]"
-                  disabled={
-                    loginStatus === "success" || loginStatus === "logging"
-                  }
                 >
                   Login Now
                 </button>

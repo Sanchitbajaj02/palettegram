@@ -89,7 +89,11 @@ const verifyUser = async (userId, secret) => {
 };
 
 const getAccount = () => {
-  return account.get();
+  try {
+    return account.get();
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const loginUser = async (userData) => {
@@ -154,7 +158,7 @@ const getAllPosts = async () => {
 const getSinglePost = async (id) => {
   console.log(id);
   try {
-    const tweets = await db.getDocument(palettegramDB, postsCollection,id);
+    const tweets = await db.getDocument(palettegramDB, postsCollection, id);
     if (tweets) {
       return tweets;
     }
@@ -166,8 +170,9 @@ const getSinglePost = async (id) => {
 const getAllUserPosts = async (userId) => {
   try {
     const tweets = await db.listDocuments(palettegramDB, postsCollection, [
-      Query.equal("userId",userId),
+      Query.equal("userId", userId),
     ]);
+
     if (tweets) {
       return tweets;
     }
@@ -179,10 +184,13 @@ const getAllUserPosts = async (userId) => {
 const likeTweet = async (tweet) => {
   try {
     console.log(tweet.$id);
-    const tweets = await db.updateDocument(palettegramDB, postsCollection,tweet.$id, 
+    const tweets = await db.updateDocument(
+      palettegramDB,
+      postsCollection,
+      tweet.$id,
       {
         likes: tweet.likes,
-      }
+      },
     );
     if (tweets) {
       return tweets;
@@ -192,13 +200,8 @@ const likeTweet = async (tweet) => {
   }
 };
 const addNewImage = async (image) => {
-  console.log(bucket);
   try {
-    const resImage = await storage.createFile(
-      bucket,
-      ID.unique(),
-      image
-    );
+    const resImage = await storage.createFile(bucket, ID.unique(), image);
     if (resImage) {
       return resImage;
     }
@@ -209,10 +212,7 @@ const addNewImage = async (image) => {
 const deleteImage = async (id) => {
   console.log(bucket);
   try {
-    const resImage = await storage.deleteFile(
-      bucket,
-      id
-    );
+    const resImage = await storage.deleteFile(bucket, id);
     if (resImage) {
       return resImage;
     }
@@ -233,5 +233,5 @@ export {
   getSinglePost,
   likeTweet,
   addNewImage,
-  deleteImage
+  deleteImage,
 };
