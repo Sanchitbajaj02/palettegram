@@ -8,6 +8,7 @@ import Register from "./components/Auth/Register";
 import Verification from "./components/Auth/Verification";
 import Login from "./components/Auth/Login";
 import PostProfilePage from "./components/PostProfilePage";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
           }
         />
       </Routes>
+      <ToastContainer />
     </BrowserRouter>
   );
 }

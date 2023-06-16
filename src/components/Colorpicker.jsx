@@ -1,5 +1,5 @@
 // eslint-disable-next-line react/prop-types
-function Colorpicker({ setColors }) {
+function Colorpicker({ colors, setColors }) {
   const changeHandler = (event) => {
     const { name, value } = event.target;
 
@@ -16,6 +16,8 @@ function Colorpicker({ setColors }) {
             type="text"
             name="color01"
             id="color01"
+            // eslint-disable-next-line react/prop-types
+            value={colors?.color01 && colors?.color01}
             required={true}
             onChange={changeHandler}
             placeholder="Enter 1st color"
@@ -30,6 +32,8 @@ function Colorpicker({ setColors }) {
             name="color02"
             id="color02"
             required={true}
+            // eslint-disable-next-line react/prop-types
+            value={colors?.color02 && colors?.color02}
             onChange={changeHandler}
             placeholder="Enter 2nd color"
             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-base font-medium text-[#1C223A] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -43,6 +47,8 @@ function Colorpicker({ setColors }) {
             name="color03"
             id="color03"
             required={true}
+            // eslint-disable-next-line react/prop-types
+            value={colors?.color03 && colors?.color03}
             onChange={changeHandler}
             placeholder="Enter 3rd color"
             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-base font-medium text-[#1C223A] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -56,6 +62,8 @@ function Colorpicker({ setColors }) {
             name="color04"
             id="color04"
             required={true}
+            // eslint-disable-next-line react/prop-types
+            value={colors?.color04 && colors?.color04}
             onChange={changeHandler}
             placeholder="Enter 4th color"
             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-base font-medium text-[#1C223A] outline-none focus:border-[#6A64F1] focus:shadow-md"

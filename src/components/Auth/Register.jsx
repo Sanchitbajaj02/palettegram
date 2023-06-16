@@ -2,6 +2,7 @@ import { useState } from "react";
 import { registerUser } from "../../DB/api";
 import { useDispatch } from "react-redux";
 import { saveUser } from "../../Redux/auth/authReducer";
+import { Link } from "react-router-dom";
 
 // function checkUsername(username) {
 //   const test =
@@ -9,6 +10,8 @@ import { saveUser } from "../../Redux/auth/authReducer";
 
 //   return username.match(test);
 // }
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Register() {
   const dispatch = useDispatch();
@@ -18,6 +21,7 @@ export default function Register() {
     email: "",
     password: "",
   });
+  const [registerStatus, setRegisterStatus] = useState("initial");
 
   function changeHandler(event) {
     const { name, value } = event.target;
@@ -30,7 +34,7 @@ export default function Register() {
   function submitHander(event) {
     event.preventDefault();
 
-    console.log(data);
+    setRegisterStatus("registering");
     registerUser(data)
       .then((resp) => {
         localStorage.setItem("userId", resp["$id"]);
@@ -46,8 +50,13 @@ export default function Register() {
             createdAt: resp["$createdAt"],
           }),
         );
+        setRegisterStatus("success");
+        toast.success("Register Successful");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setRegisterStatus("failure");
+      });
   }
 
   return (
@@ -83,29 +92,6 @@ export default function Register() {
                   className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-base font-medium text-[#1C223A] outline-none focus:border-[#6A64F1] focus:shadow-md"
                 />
               </div>
-
-              {/* <div className="mb-6">
-                <label
-                  htmlFor="username"
-                  aria-required="true"
-                  className="mb-3 block text-base font-medium"
-                >
-                  User name <span className="text-red-600">*</span>
-                </label>
-                <input
-                  type="text"
-                  name="username"
-                  id="username"
-                  required={true}
-                  onChange={changeHandler}
-                  placeholder="Enter your unique username"
-                  className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-base font-medium text-[#1C223A] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                />
-                <small className="text-slate-600">
-                  Must be a unique value. Only use characters(A-Z or a-z) or
-                  numbers(0-9) or underscore(_)
-                </small>
-              </div> */}
 
               <div className="mb-6">
                 <label
@@ -145,10 +131,23 @@ export default function Register() {
                 />
               </div>
 
+              <div className="mb-6">
+                <p>
+                  Already have an account?{" "}
+                  <Link to="/login" className="text-[#F1396D]">
+                    Login
+                  </Link>
+                </p>
+              </div>
+
               <div className="mb-4">
                 <button
                   type="submit"
                   className="w-full py-2 text-xl rounded-full text-white bg-[#F1396D] transition duration-300 ease hover:bg-[#1C223A]"
+                  disabled={
+                    registerStatus === "success" ||
+                    registerStatus === "registering"
+                  }
                 >
                   Register Now
                 </button>

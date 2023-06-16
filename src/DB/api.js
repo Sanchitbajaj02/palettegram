@@ -1,9 +1,10 @@
 import { ID, Query } from "appwrite";
-import { account, db } from "./appwrite.config";
+import { account, db, storage } from "./appwrite.config";
 
 const palettegramDB = process.env.REACT_APP_DATABASE_ID;
 const usersCollection = process.env.REACT_APP_USER_COLLECTION;
 const postsCollection = process.env.REACT_APP_POSTS_COLLECTION;
+const bucket = process.env.REACT_APP_BUCKET_ID;
 
 const registerUser = async (userData) => {
   try {
@@ -88,7 +89,11 @@ const verifyUser = async (userId, secret) => {
 };
 
 const getAccount = () => {
-  return account.get();
+  try {
+    return account.get();
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const loginUser = async (userData) => {
@@ -153,8 +158,20 @@ const getAllPosts = async () => {
 const getSinglePost = async (id) => {
   console.log(id);
   try {
-    const tweets = await db.getDocument(palettegramDB, postsCollection,id);
+    const tweets = await db.getDocument(palettegramDB, postsCollection, id);
     if (tweets) {
+      return tweets;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getSingleUser = async (id) => {
+  try {
+    const tweets = await db.getDocument(palettegramDB, usersCollection, id);
+    if (tweets) {
+      console.log(tweets);
       return tweets;
     }
   } catch (error) {
@@ -165,8 +182,9 @@ const getSinglePost = async (id) => {
 const getAllUserPosts = async (userId) => {
   try {
     const tweets = await db.listDocuments(palettegramDB, postsCollection, [
-      Query.equal("userId",userId),
+      Query.equal("userId", userId),
     ]);
+
     if (tweets) {
       return tweets;
     }
@@ -178,13 +196,37 @@ const getAllUserPosts = async (userId) => {
 const likeTweet = async (tweet) => {
   try {
     console.log(tweet.$id);
-    const tweets = await db.updateDocument(palettegramDB, postsCollection,tweet.$id, 
+    const tweets = await db.updateDocument(
+      palettegramDB,
+      postsCollection,
+      tweet.$id,
       {
         likes: tweet.likes,
-      }
+      },
     );
     if (tweets) {
       return tweets;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+const addNewImage = async (image) => {
+  try {
+    const resImage = await storage.createFile(bucket, ID.unique(), image);
+    if (resImage) {
+      return resImage;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+const deleteImage = async (id) => {
+  console.log(bucket);
+  try {
+    const resImage = await storage.deleteFile(bucket, id);
+    if (resImage) {
+      return resImage;
     }
   } catch (error) {
     console.log(error);
@@ -198,8 +240,11 @@ export {
   loginUser,
   getCurrentUser,
   createPost,
+  getSingleUser,
   getAllPosts,
   getAllUserPosts,
   getSinglePost,
-  likeTweet
+  likeTweet,
+  addNewImage,
+  deleteImage,
 };

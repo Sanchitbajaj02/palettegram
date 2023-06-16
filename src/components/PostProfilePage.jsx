@@ -1,5 +1,4 @@
 // import logo from "../logo.svg";
-import meme1 from "../Assets//meme1.png";
 import { useState } from "react";
 import { getSinglePost } from "../DB/api";
 import { useSelector } from "react-redux";
@@ -21,6 +20,10 @@ const PostProfilePage = () => {
   const { id } = useParams();
 
   const [singlePostState, setSinglePostState] = useState({});
+
+  const copyText = async (color) => {
+    await navigator.clipboard.writeText(color);
+  };
 
   useEffect(() => {
     if (!registerDetails?.email) {
@@ -44,35 +47,72 @@ const PostProfilePage = () => {
       <button className="mt-4 flex items-center" onClick={() => navigate(-1)}>
         <ArrowLeftCircle size={20} /> Back to feed
       </button>
-      <div className="flex gap-4 h-full p-8">
+      <div className="flex items-start gap-4 h-full p-8">
         <div className="flex-[2] h-full overflow-y-scroll [&::-webkit-scrollbar]:hidden ">
           {/* Profile Info */}
-          <h4 className="text-xl font-medium mb-6">
-            {registerDetails?.fullName ? registerDetails?.fullName : ""}
-          </h4>
+          <div className="flex gap-4 items-center">
+            <div className="w-10 h-10 rounded-full border flex items-center justify-center shadow">
+              <User size={18} />
+            </div>
+            <h4 className="text-xl font-medium">
+              {registerDetails?.fullName ? registerDetails?.fullName : ""}
+            </h4>
+          </div>
           {/* Image */}
 
           <p className="text-lg my-4">
             {singlePostState?.postTitle ? singlePostState?.postTitle : ""}
           </p>
 
-          {singlePostState?.postImage > 0 ? (
-            <img className="w-[90%] border m-4" src={meme1} alt="post" />
+          {singlePostState?.postImage && singlePostState?.postImage[0]?.length > 0 ? (
+            <img
+              className="w-full"
+              src={singlePostState?.postImage[0]}
+              alt={singlePostState?.postTitle}
+            />
           ) : null}
+
+          {singlePostState?.colors?.length > 0 ? (
+            <div className="my-2 flex flex-row justify-between items-center w-full">
+              {singlePostState?.colors?.map((color, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="flex-grow h-52 cursor-pointer"
+                    onClick={() => copyText(`#${color}`)}
+                    style={{
+                      backgroundColor: `#${color}`,
+                    }}
+                  ></div>
+                );
+              })}
+            </div>
+          ) : null}
+
           {/* Post Info */}
           <div className="flex justify-around">
             <div className="flex items-center gap-2 group text-blue-500">
-              <div className={`p-2 rounded-full ${singlePostState?.likes?.includes(registerDetails.userId)? "bg-blue-800 text-blue-300" : "group-hover:bg-blue-800 group-hover:text-blue-300"} flex justify-center items-center`}>
+              <div
+                className={`p-2 rounded-full ${
+                  singlePostState?.likes?.includes(registerDetails.userId)
+                    ? "bg-blue-800 text-blue-300"
+                    : "group-hover:bg-blue-800 group-hover:text-blue-300"
+                } flex justify-center items-center`}
+              >
                 <Heart size={16} />
               </div>
-              <span className="font-light">{singlePostState?.likes?.length}</span>
+              <span className="font-light">
+                {singlePostState?.likes?.length}
+              </span>
             </div>
 
             <div className="flex items-center gap-2 group text-blue-500">
               <div className="p-2 rounded-full group-hover:bg-blue-800 group-hover:text-blue-300 flex justify-center items-center">
                 <MessageCircle size={16} />
               </div>
-              <span className="font-light">{singlePostState?.comments?.length}</span>
+              <span className="font-light">
+                {singlePostState?.comments?.length}
+              </span>
             </div>
             <div className="flex items-center gap-2 group text-blue-500">
               <div className="p-2 rounded-full group-hover:bg-blue-800 group-hover:text-blue-300 flex justify-center items-center">

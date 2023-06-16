@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../DB/api";
 import { useDispatch } from "react-redux";
 import { saveUser } from "../../Redux/auth/authReducer";
+import { Link } from "react-router-dom";
 
 // function checkUsername(username) {
 //   const test =
@@ -10,6 +11,8 @@ import { saveUser } from "../../Redux/auth/authReducer";
 
 //   return username.match(test);
 // }
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -30,7 +33,6 @@ export default function Login() {
 
   function submitHander(event) {
     event.preventDefault();
-
     if (data.email !== "" && data.password !== "") {
       loginUser(data)
         .then((res) => {
@@ -48,10 +50,16 @@ export default function Login() {
                 createdAt: res["$createdAt"],
               }),
             );
-            navigate("/feed");
+            toast.success("Login Successful");
+            setTimeout(() => {
+              navigate("/feed");
+            }, 3500);
           }
         })
-        .catch((err) => console.log(err.message));
+        .catch((err) => {
+          console.log(err.message);
+          toast.error("Login Failed");
+        });
     }
   }
 
@@ -108,12 +116,21 @@ export default function Login() {
                 />
               </div>
 
+              <div className="mb-6">
+                <p>
+                  Do not have an account?{" "}
+                  <Link to="/register" className="text-[#F1396D]">
+                    Register
+                  </Link>
+                </p>
+              </div>
+
               <div className="mb-4">
                 <button
                   type="submit"
                   className="w-full py-2 text-xl rounded-full text-white bg-[#F1396D] transition duration-300 ease hover:bg-[#1C223A]"
                 >
-                  Register Now
+                  Login Now
                 </button>
               </div>
             </form>
