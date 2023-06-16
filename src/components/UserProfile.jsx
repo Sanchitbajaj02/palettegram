@@ -27,7 +27,6 @@ export default function Profile() {
       <div className="bg-gray-background">
         <div className="mx-auto max-w-screen-lg mt-4">
           <h1 className="text-2xl font-medium">{authState?.fullName}</h1>
-
           <UserPosts user={user} />
         </div>
       </div>

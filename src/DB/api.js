@@ -167,6 +167,18 @@ const getSinglePost = async (id) => {
   }
 };
 
+const getSingleUser = async (id) => {
+  try {
+    const tweets = await db.getDocument(palettegramDB, usersCollection, id);
+    if (tweets) {
+      console.log(tweets);
+      return tweets;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const getAllUserPosts = async (userId) => {
   try {
     const tweets = await db.listDocuments(palettegramDB, postsCollection, [
@@ -228,6 +240,7 @@ export {
   loginUser,
   getCurrentUser,
   createPost,
+  getSingleUser,
   getAllPosts,
   getAllUserPosts,
   getSinglePost,
