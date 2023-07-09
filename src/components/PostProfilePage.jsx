@@ -64,7 +64,8 @@ const PostProfilePage = () => {
             {singlePostState?.postTitle ? singlePostState?.postTitle : ""}
           </p>
 
-          {singlePostState?.postImage && singlePostState?.postImage[0]?.length > 0 ? (
+          {singlePostState?.postImage &&
+          singlePostState?.postImage[0]?.length > 0 ? (
             <img
               className="w-full"
               src={singlePostState?.postImage[0]}
