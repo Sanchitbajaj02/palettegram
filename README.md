@@ -8,8 +8,6 @@ Palletegrm is a social media application dedicated to professionals like graphic
 
 This application provides a streamlined workflow for the users to find the best color palette for their use and contribute the color palette if they want to.
 
-<br/>
-
 ## ⚡ Project Status
 
 [![Contributers](https://img.shields.io/github/contributors/sanchitbajaj02/palettegram?color=blue)](https://github.com/Sanchitbajaj02/palettegram/graphs/contributors)
@@ -18,8 +16,6 @@ This application provides a streamlined workflow for the users to find the best 
 [![Pull Requests](https://img.shields.io/github/issues-pr/sanchitbajaj02/palettegram?color=blue)](https://github.com/Sanchitbajaj02/palettegram/issues)
 [![Forks](https://img.shields.io/github/forks/sanchitbajaj02/palettegram?color=blue)](https://github.com/Sanchitbajaj02/palettegram/network/members)
 [![Stars](https://img.shields.io/github/stars/sanchitbajaj02/palettegram?color=blue)](https://github.com/Sanchitbajaj02/palettegram/stargazers)
-
-<br/>
 
 ## 🔨 What does it do?
 
@@ -45,8 +41,6 @@ There are many benefits to a social media platform for UI designers, including:
 - Improved collaboration: The platform would provide a forum for designers to collaborate and get feedback on their work.
 - New inspiration: The platform would be an excellent way for designers to find new inspiration for their work.
 - Opportunities for growth: The platform could provide opportunities for designers to grow their businesses or find new jobs.
-
-<br/>
 
 ## 🛡️ License
 
