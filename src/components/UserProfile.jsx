@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getAllUserPosts } from "../DB/api";
+import { getAllUserPosts } from "../DB/posts.api";
 import UserPosts from "./UserPosts";
 import { useSelector } from "react-redux";
 

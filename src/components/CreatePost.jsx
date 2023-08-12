@@ -1,7 +1,7 @@
 /* eslint-disable quotes */
 import { useRef, useState } from "react";
 import { Command, Image } from "react-feather";
-import { addNewImage, createPost, deleteImage } from "../DB/api";
+import { addNewImage, createPost, deleteImage } from "../DB/posts.api";
 import Colorpicker from "./Colorpicker";
 
 // import logo from "../logo.svg";

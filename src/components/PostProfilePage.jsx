@@ -1,6 +1,5 @@
-// import logo from "../logo.svg";
 import { useState } from "react";
-import { getSinglePost } from "../DB/api";
+import { getSinglePost } from "../DB/posts.api";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
@@ -64,13 +63,14 @@ const PostProfilePage = () => {
             {singlePostState?.postTitle ? singlePostState?.postTitle : ""}
           </p>
 
-          {singlePostState?.postImage &&
-          singlePostState?.postImage[0]?.length > 0 ? (
-            <img
-              className="w-full"
-              src={singlePostState?.postImage[0]}
-              alt={singlePostState?.postTitle}
-            />
+          {singlePostState?.postImage[0]?.length > 0 ? (
+            <>
+              <img
+                className="w-full"
+                src={singlePostState?.postImage[0]}
+                alt={singlePostState?.postTitle}
+              />
+            </>
           ) : null}
 
           {singlePostState?.colors?.length > 0 ? (

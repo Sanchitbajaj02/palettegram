@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../../DB/api";
-import { useDispatch } from "react-redux";
-import { saveUser } from "../../Redux/auth/authReducer";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import { loginUser } from "../../DB/auth.api";
+import { saveUser } from "../../Redux/auth/authReducer";
+import toastify from "../../lib/toastify";
 
 // function checkUsername(username) {
 //   const test =
@@ -11,11 +13,12 @@ import { Link } from "react-router-dom";
 
 //   return username.match(test);
 // }
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import { toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 
 export default function Login() {
   const dispatch = useDispatch();
+  const authSelector = useSelector((state) => state.auth);
 
   const navigate = useNavigate();
   const [data, setData] = useState({
@@ -31,36 +34,50 @@ export default function Login() {
     });
   }
 
-  function submitHander(event) {
+  async function submitHander(event) {
     event.preventDefault();
-    if (data.email !== "" && data.password !== "") {
-      loginUser(data)
-        .then((res) => {
-          if (res.email === data.email) {
-            localStorage.setItem("userId", res["$id"]);
-            localStorage.setItem("email", res.email);
-            localStorage.setItem("fullName", res.name);
-            localStorage.setItem("createdAt", res["$createdAt"]);
+    try {
+      if (data.email !== "" && data.password !== "") {
+        const userCredentials = await loginUser(data);
 
-            dispatch(
-              saveUser({
-                userId: res["$id"],
-                email: res.email,
-                fullName: res.name,
-                createdAt: res["$createdAt"],
-              }),
-            );
-            toast.success("Login Successful");
-            setTimeout(() => {
-              navigate("/feed");
-            }, 3500);
-          }
-        })
-        .catch((err) => {
-          console.log(err.message);
-          toast.error("Login Failed");
-        });
+        if (userCredentials.email === data.email) {
+          localStorage.setItem("userId", userCredentials["$id"]);
+          localStorage.setItem("email", userCredentials.email);
+          localStorage.setItem("fullName", userCredentials.name);
+          localStorage.setItem("createdAt", userCredentials["$createdAt"]);
+
+          dispatch(
+            saveUser({
+              userId: userCredentials["$id"],
+              email: userCredentials.email,
+              fullName: userCredentials.name,
+              createdAt: userCredentials["$createdAt"],
+            }),
+          );
+          // toast.success("Login Successful");
+          toastify("Login Successful", "success");
+
+          setTimeout(() => {
+            navigate("/feed");
+          }, 3500);
+        }
+      }
+    } catch (error) {
+      console.log(error.message);
+
+      toastify(
+        "Login failed! Please click on register to make account",
+        "error",
+      );
     }
+  }
+
+  if (authSelector.loading) {
+    return <h1>Loading...</h1>;
+  }
+
+  if (authSelector.error) {
+    return <h1>Error</h1>;
   }
 
   return (

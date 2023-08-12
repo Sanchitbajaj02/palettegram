@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { registerUser } from "../../DB/api";
+import { registerUser } from "../../DB/auth.api";
 import { useDispatch } from "react-redux";
 import { saveUser } from "../../Redux/auth/authReducer";
 import { Link } from "react-router-dom";
@@ -10,8 +10,7 @@ import { Link } from "react-router-dom";
 
 //   return username.match(test);
 // }
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toastify from "../../lib/toastify";
 
 export default function Register() {
   const dispatch = useDispatch();
@@ -31,32 +30,32 @@ export default function Register() {
     });
   }
 
-  function submitHander(event) {
+  async function submitHander(event) {
     event.preventDefault();
 
-    setRegisterStatus("registering");
-    registerUser(data)
-      .then((resp) => {
-        localStorage.setItem("userId", resp["$id"]);
-        localStorage.setItem("email", resp.email);
-        localStorage.setItem("fullName", resp.name);
-        localStorage.setItem("createdAt", resp["$createdAt"]);
+    try {
+      setRegisterStatus("registering");
+      const resp = await registerUser(data);
+      localStorage.setItem("userId", resp["$id"]);
+      localStorage.setItem("email", resp.email);
+      localStorage.setItem("fullName", resp.name);
+      localStorage.setItem("createdAt", resp["$createdAt"]);
 
-        dispatch(
-          saveUser({
-            userId: resp["$id"],
-            email: resp.email,
-            fullName: resp.name,
-            createdAt: resp["$createdAt"],
-          }),
-        );
-        setRegisterStatus("success");
-        toast.success("Register Successful");
-      })
-      .catch((err) => {
-        console.log(err);
-        setRegisterStatus("failure");
-      });
+      dispatch(
+        saveUser({
+          userId: resp["$id"],
+          email: resp.email,
+          fullName: resp.name,
+          createdAt: resp["$createdAt"],
+        }),
+      );
+      setRegisterStatus("success");
+      toastify("Register Successful", "success");
+    } catch (error) {
+      console.log(error);
+      setRegisterStatus("failure");
+      toastify(error.message, "error");
+    }
   }
 
   return (

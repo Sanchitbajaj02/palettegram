@@ -1,6 +1,6 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { verifyUser } from "../../DB/api";
+import { verifyUser } from "../../DB/auth.api";
 
 export default function Verify() {
   const navigate = useNavigate();

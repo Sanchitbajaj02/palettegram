@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import SinglePost from "./SinglePost.jsx";
-import { getAllPosts, likeTweet } from "../DB/api.js";
+import { getAllPosts, likeTweet } from "../DB/posts.api";
 import { useSelector } from "react-redux";
 
 const Posts = () => {

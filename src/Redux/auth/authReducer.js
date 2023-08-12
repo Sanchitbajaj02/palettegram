@@ -7,11 +7,15 @@ const localUsername = localStorage.getItem("username");
 const localCreatedAt = localStorage.getItem("createdAt");
 
 const initialState = {
-  userId: localUserId ?? "",
-  email: localEmail ?? "",
-  fullName: localfullName ?? "",
-  createdAt: localCreatedAt ?? "",
-  username: localUsername ?? "",
+  creds: {
+    userId: localUserId ?? "",
+    email: localEmail ?? "",
+    fullName: localfullName ?? "",
+    createdAt: localCreatedAt ?? "",
+    username: localUsername ?? "",
+  },
+  error: false,
+  loading: false,
 };
 
 export const registerReducer = createSlice({
@@ -19,11 +23,16 @@ export const registerReducer = createSlice({
   initialState,
   reducers: {
     saveUser: (state, action) => {
-      const { userId, email, fullName, createdAt } = action.payload;
-      state.userId = userId;
-      state.email = email;
-      state.fullName = fullName;
-      state.createdAt = createdAt;
+      state.loading = true;
+      // const { userId, email, fullName, createdAt } = action.payload;
+      // state.userId = userId;
+      // state.email = email;
+      // state.fullName = fullName;
+      // state.createdAt = createdAt;
+
+      state.creds = action.payload;
+      state.error = false;
+      state.loading = false;
 
       return state;
     },
