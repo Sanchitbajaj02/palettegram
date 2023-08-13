@@ -21,3 +21,19 @@ body {
   background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
     rgb(var(--background-start-rgb));
 }
+
+.bg-pg-pink {
+  background: #f1396d;
+}
+
+.bg-pg-pink-light {
+  background: #f592ae;
+}
+
+.bg-pg-blue {
+  background: #1c223a;
+}
+
+.bg-pg-blue-light {
+  background: #2a2c34;
+}
