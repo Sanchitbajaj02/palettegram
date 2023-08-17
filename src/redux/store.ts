@@ -1,10 +1,11 @@
-// import { configureStore } from "@reduxjs/toolkit";
-// // import postsReducer from "./posts/postsReducer";
-// // import authReducer from "./auth/authReducer";
+"use client";
+import { configureStore } from "@reduxjs/toolkit";
+import postsReducer from "@/redux/reducers/postsReducer";
+import authReducer from "@/redux/reducers/authReducer";
 
-// export default configureStore({
-//   reducer: {
-//     posts: postsReducer,
-//     auth: authReducer,
-//   },
-// });
+export const store = configureStore({
+  reducer: {
+    posts: postsReducer,
+    auth: authReducer,
+  },
+});

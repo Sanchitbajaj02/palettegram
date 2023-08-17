@@ -1,12 +1,26 @@
+"use client";
 import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 
-const localUserId = localStorage.getItem("userId");
-const localEmail = localStorage.getItem("email");
-const localfullName = localStorage.getItem("fullName");
-const localUsername = localStorage.getItem("username");
-const localCreatedAt = localStorage.getItem("createdAt");
+const localUserId = localStorage.getItem("userId")!;
+const localEmail = localStorage.getItem("email")!;
+const localfullName = localStorage.getItem("fullName")!;
+const localUsername = localStorage.getItem("username")!;
+const localCreatedAt = localStorage.getItem("createdAt")!;
 
-const initialState = {
+export type userDetail = {
+  creds: {
+    userId: string;
+    email: string;
+    fullName: string;
+    createdAt: string;
+    username: string;
+  };
+  error: boolean;
+  loading: boolean;
+};
+
+const initialState: userDetail = {
   creds: {
     userId: localUserId ?? "",
     email: localEmail ?? "",
@@ -22,7 +36,7 @@ export const registerReducer = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    saveUser: (state, action) => {
+    saveUser: (state, action: PayloadAction<any>) => {
       state.loading = true;
       // const { userId, email, fullName, createdAt } = action.payload;
       // state.userId = userId;
@@ -33,8 +47,6 @@ export const registerReducer = createSlice({
       state.creds = action.payload;
       state.error = false;
       state.loading = false;
-
-      return state;
     },
   },
 });

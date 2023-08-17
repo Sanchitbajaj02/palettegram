@@ -1,4 +1,6 @@
+"use client";
 import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 
 export const postsReducer = createSlice({
   name: "posts",
@@ -6,7 +8,7 @@ export const postsReducer = createSlice({
     posts: [],
   },
   reducers: {
-    updatePosts: (state, payload) => {},
+    updatePosts: (state, payload: PayloadAction<any>) => {},
   },
 });
 
