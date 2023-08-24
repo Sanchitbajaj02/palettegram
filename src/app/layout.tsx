@@ -1,11 +1,12 @@
 import "@/styles/globals.css";
-import { Poppins } from "next/font/google";
+import { Inter } from "next/font/google";
 import { Metadata } from "next";
 import ReduxProvider from "@/redux/ReduxProvider";
 
-const poppinFont = Poppins({
-  weight: ["400", "500", "600", "700"],
+const interFont = Inter({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={poppinFont.className}>
+      <body className={interFont.className}>
         <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>

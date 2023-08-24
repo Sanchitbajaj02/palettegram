@@ -4,15 +4,18 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
+  /* --background-start-rgb: 214, 219, 220; */
+  --background-start-rgb: 255, 255, 255;
   --background-end-rgb: 255, 255, 255;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    /* --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0; */
+    --background-start-rgb: 28, 34, 58;
+    --background-end-rgb: 28, 34, 58;
   }
 }
 
@@ -35,5 +38,16 @@ body {
 }
 
 .bg-pg-blue-light {
-  background: #2a2c34;
+  /* background: #2a2c34; */
+  background: #424551;
 }
+
+/*
+colors: {
+      "pg-pink": "#F1396D",
+      "pg-pink-disabled": "#f1396db1",
+      "pg-dark-blue": "#1c223a",
+      "pg-blue": "#2a2c34",
+      gray: colors.gray,
+    },
+*/
