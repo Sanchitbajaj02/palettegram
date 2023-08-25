@@ -46,7 +46,7 @@ export default function LoginComponent() {
 
         console.log(userCredentials);
 
-        // if (userCredentials?.email === data.email) {
+        // if (userCredentials && userCredentials?.email === data.email) {
         //   localStorage.setItem("userId", userCredentials["$id"]);
         //   localStorage.setItem("email", userCredentials?.email);
         //   localStorage.setItem("fullName", userCredentials?.name);

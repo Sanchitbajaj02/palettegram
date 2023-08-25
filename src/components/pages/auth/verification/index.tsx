@@ -1,24 +1,23 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
+"use client";
 import { useEffect, useState } from "react";
-import { verifyUser } from "../../DB/auth.api";
+import { verifyUser } from "@/backend/auth.api";
+import { useRouter } from "next/navigation";
 
-export default function Verify() {
-  const navigate = useNavigate();
+type Verification = {
+  userId: string;
+  secret: string;
+};
 
-  let [searchParams] = useSearchParams();
-
+export default function VerificationComponent({ userId, secret }: Verification) {
   const [isVerified, setVerified] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
-    console.log(searchParams.get("userId"));
-
-    const userId = searchParams.get("userId");
-    const secret = searchParams.get("secret");
-
     verifyUser(userId, secret)
       .then((resp) => {
         if (resp.status) {
           // navigate("/feed");
+          router.push("/feed");
           console.log(resp);
           setVerified(resp.status);
         }
@@ -26,7 +25,7 @@ export default function Verify() {
       .catch((err) => {
         console.log(err);
       });
-  }, [navigate, searchParams]);
+  }, [router, secret, userId]);
 
   return (
     <>
@@ -34,7 +33,7 @@ export default function Verify() {
         <h1 className="text-4xl text-center font-bold">You are verified</h1>
         <button
           className="px-16 py-2 mt-8 text-xl rounded-full text-white bg-pg-pink disabled:pg-pink-light"
-          onClick={() => navigate("/feed")}
+          onClick={() => router.push("/feed")}
           disabled={isVerified}
         >
           Start your feed

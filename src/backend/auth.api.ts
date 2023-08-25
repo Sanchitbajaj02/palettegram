@@ -34,7 +34,7 @@ const registerUser = async (userData: any) => {
     }
 
     const createVerify = await account.createVerification(
-      `${process.env.REACT_APP_BASE_URL}/verify`,
+      `${process.env.NEXT_APP_BASE_URL}/verify`,
     );
 
     if (!createVerify && !createVerify["$id"]) {
