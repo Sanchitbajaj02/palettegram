@@ -43,7 +43,7 @@ const registerUser = async (userData: any) => {
 
     return authResponse;
   } catch (error: any) {
-    console.log(error.message);
+    console.log(error);
     throw new Error(error.message);
   }
 };
