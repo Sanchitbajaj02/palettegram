@@ -86,7 +86,7 @@ export default function LoginComponent() {
   return (
     <>
       <section className="max-w-screen-sm mx-auto h-screen flex justify-center items-center">
-        <div className="bg-white w-full p-4 mx-2 md:m-0 md:p-8 rounded-xl shadow-lg">
+        <div className="bg-gray-200/50 w-full p-4 mx-2 md:m-0 md:p-8 rounded-xl shadow-lg">
           <article className="mb-8">
             <ArrowLeftCircle
               size={20}
@@ -94,10 +94,10 @@ export default function LoginComponent() {
               onClick={() => router.back()}
               className="hover:cursor-pointer"
             />
-            <h1 className="text-xl md:text-3xl mb-2 md:mb-4 text-center font-bold  dark:text-[#1c223a]">
+            <h1 className="text-xl md:text-3xl mb-2 md:mb-4 text-center font-bold  text-secondary">
               Welcome to Palettegram
             </h1>
-            <p className="text-md md:text-xl text-center font-normal dark:text-[#424551]">
+            <p className="text-md md:text-xl text-center font-normal dark:text-secondary-text">
               Login and start your journey
             </p>
           </article>
@@ -107,7 +107,7 @@ export default function LoginComponent() {
               <label
                 htmlFor="email"
                 aria-required="true"
-                className="mb-3 block text-sm md:text-base font-medium dark:text-[#424551]"
+                className="mb-3 block text-sm md:text-base font-medium dark:text-secondary-text"
               >
                 Email Address <span className="text-red-600">*</span>
               </label>
@@ -126,7 +126,7 @@ export default function LoginComponent() {
               <label
                 htmlFor="password"
                 aria-required="true"
-                className="mb-3 block text-sm md:text-base font-medium dark:text-[#424551]"
+                className="mb-3 block text-sm md:text-base font-medium dark:text-secondary-text"
               >
                 Password <span className="text-red-600">*</span>
               </label>
@@ -142,9 +142,9 @@ export default function LoginComponent() {
             </div>
 
             <div className="mb-6">
-              <p className="dark:text-[#424551]">
+              <p className="dark:text-secondary-text">
                 Do not have an account?{" "}
-                <Link href="/register" className="text-[#F1396D]">
+                <Link href="/register" className="text-primary">
                   Register
                 </Link>
               </p>
@@ -153,7 +153,7 @@ export default function LoginComponent() {
             <div className="mb-4">
               <button
                 type="submit"
-                className="w-full py-2 text-sm md:text-base rounded-full text-white bg-pg-pink transition duration-300 ease hover:bg-[#1C223A]"
+                className="w-full py-2 text-sm md:text-base rounded-full text-white bg-primary transition duration-300 ease hover:bg-secondary"
               >
                 Login Now
               </button>

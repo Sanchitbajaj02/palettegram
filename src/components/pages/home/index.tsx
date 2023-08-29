@@ -27,14 +27,14 @@ function HomePage() {
           </Link>
           <div>
             <button
-              className="mx-4 px-16 py-2 text-lg rounded-full text-white bg-pg-pink"
+              className="mx-4 px-16 py-2 text-lg rounded-full text-white bg-primary"
               onClick={() => router.push("/register")}
             >
               Register
             </button>
 
             <button
-              className="px-16 py-2 text-lg rounded-full text-white bg-pg-pink"
+              className="px-16 py-2 text-lg rounded-full text-white bg-primary"
               onClick={() => router.push("/login")}
             >
               Login
@@ -46,22 +46,22 @@ function HomePage() {
       <main className="max-w-screen-xl mx-auto px-2">
         <section className="flex items-center flex-col md:flex-row gap-4 mt-20 mb-24">
           <article>
-            <h1 className="text-3xl md:text-6xl font-extrabold tracking-wide">
+            <h1 className="text-3xl md:text-6xl font-extrabold tracking-wide text-black">
               Present Palettes Around the World
             </h1>
-            <p className="text-xl md:text-2xl my-8">
+            <p className="text-xl md:text-2xl my-8 text-black">
               Transform ideas into Beautiful Palettes, Inspire Fellow Designers.
             </p>
             {state?.userId ? (
               <button
-                className="px-16 py-4 text-xl rounded-full text-white bg-pg-pink"
+                className="px-16 py-4 text-xl rounded-full text-white bg-primary"
                 onClick={() => router.push("/feed")}
               >
                 Checkout your feed
               </button>
             ) : (
               <button
-                className="px-16 py-4 text-xl rounded-full text-white bg-pg-pink"
+                className="px-16 py-4 text-xl rounded-full text-white bg-primary"
                 onClick={() => router.push("/register")}
               >
                 Start your journey
@@ -92,8 +92,8 @@ function HomePage() {
             />
           </figure>
           <article>
-            <h1 className="text-3xl md:text-6xl font-extrabold">Who is Palettegram for?</h1>
-            <p className="text-xl md:text-2xl my-8">
+            <h1 className="text-3xl md:text-6xl font-extrabold tracking-wide text-black">Who is Palettegram for?</h1>
+            <p className="text-xl md:text-2xl my-8 text-black">
               Anyone who wants to share their designs and color palettes to get the review among the
               professionals.
             </p>

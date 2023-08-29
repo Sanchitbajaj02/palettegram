@@ -65,7 +65,7 @@ export default function RegisterComponent() {
   return (
     <>
       <section className="max-w-screen-sm mx-auto h-screen flex justify-center items-center">
-        <div className="bg-white w-full p-4 mx-2 md:m-0 md:p-8 rounded-xl shadow-lg">
+        <div className="bg-gray-200/50 w-full p-4 mx-2 md:m-0 md:p-8 rounded-xl shadow-lg">
           <article className="mb-8">
             <ArrowLeftCircle
               size={20}
@@ -142,7 +142,7 @@ export default function RegisterComponent() {
             <div className="mb-6">
               <p className="block text-sm md:text-base font-medium dark:text-[#424551]">
                 Already have an account?{" "}
-                <Link href="/login" className="text-[#F1396D]">
+                <Link href="/login" className="text-primary">
                   Login
                 </Link>
               </p>
@@ -151,7 +151,7 @@ export default function RegisterComponent() {
             <div className="mb-4">
               <button
                 type="submit"
-                className="w-full py-2 text-sm md:text-base rounded-full text-white bg-pg-pink transition duration-300 ease hover:bg-[#1C223A]"
+                className="w-full py-2 text-sm md:text-base rounded-full text-white bg-primary transition duration-300 ease hover:bg-secondary"
                 disabled={registerStatus === "success" || registerStatus === "registering"}
               >
                 Register Now
