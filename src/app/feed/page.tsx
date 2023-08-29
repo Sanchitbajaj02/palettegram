@@ -5,9 +5,9 @@ import Navbar from "@/components/core/navbar";
 export default function FeedComponent() {
   return (
     <>
-      <Navbar/>
+      <Navbar />
 
-      <Feed/>
+      <Feed />
     </>
   );
 }

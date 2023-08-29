@@ -36,6 +36,28 @@ export const registerReducer = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    me: (state, action: PayloadAction<any>) => {
+      state.loading = true;
+      // const cookies = parseCookies();
+      const id = localStorage.getItem("userId");
+
+      if (id) {
+        console.log(id);
+        //   const {
+        //     email_id,
+        //     username,
+        //     user_type,
+        //     supplier_type,
+        //     phone_no,
+        //     status,
+        //     id,
+        //   }: UserState = jwtDecode(cookies.token);
+        //   state.user = { email_id, username, user_type, phone_no, status, id, supplier_type };
+        //   state.isAuth = true;
+      } else {
+        // state.isAuth = fa
+      }
+    },
     saveUser: (state, action: PayloadAction<any>) => {
       state.loading = true;
       // const { userId, email, fullName, createdAt } = action.payload;

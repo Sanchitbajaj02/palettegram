@@ -12,6 +12,8 @@ function HomePage() {
 
   const state = useSelector((state: any) => state.authenticator);
 
+  const userid = localStorage.getItem("userId");
+
   return (
     <>
       <nav className="py-4 shadow-md dark:shadow-gray-600">
@@ -46,10 +48,10 @@ function HomePage() {
       <main className="max-w-screen-xl mx-auto px-2">
         <section className="flex items-center flex-col md:flex-row gap-4 mt-20 mb-24">
           <article>
-            <h1 className="text-3xl md:text-6xl font-extrabold tracking-wide text-black">
+            <h1 className="text-3xl md:text-6xl font-extrabold tracking-wide text-black dark:text-white">
               Present Palettes Around the World
             </h1>
-            <p className="text-xl md:text-2xl my-8 text-black">
+            <p className="text-xl md:text-2xl my-8 text-black dark:text-white">
               Transform ideas into Beautiful Palettes, Inspire Fellow Designers.
             </p>
             {state?.userId ? (
@@ -92,7 +94,9 @@ function HomePage() {
             />
           </figure>
           <article>
-            <h1 className="text-3xl md:text-6xl font-extrabold tracking-wide text-black">Who is Palettegram for?</h1>
+            <h1 className="text-3xl md:text-6xl font-extrabold tracking-wide text-black">
+              Who is Palettegram for?
+            </h1>
             <p className="text-xl md:text-2xl my-8 text-black">
               Anyone who wants to share their designs and color palettes to get the review among the
               professionals.

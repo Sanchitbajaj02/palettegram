@@ -46,27 +46,27 @@ export default function LoginComponent() {
 
         console.log(userCredentials);
 
-        // if (userCredentials && userCredentials?.email === data.email) {
-        //   localStorage.setItem("userId", userCredentials["$id"]);
-        //   localStorage.setItem("email", userCredentials?.email);
-        //   localStorage.setItem("fullName", userCredentials?.name);
-        //   localStorage.setItem("createdAt", userCredentials["$createdAt"]);
+        if (userCredentials && userCredentials?.providerUid === data.email) {
+          localStorage.setItem("userId", userCredentials?.userId);
+          localStorage.setItem("email", userCredentials?.providerUid);
+          // localStorage.setItem("fullName", userCredentials?.name);
+          localStorage.setItem("createdAt", userCredentials["$createdAt"]);
 
-        //   dispatch(
-        //     saveUser({
-        //       userId: userCredentials["$id"],
-        //       email: userCredentials.email,
-        //       fullName: userCredentials.name,
-        //       createdAt: userCredentials["$createdAt"],
-        //     }),
-        //   );
-        //   // toast.success("Login Successful");
-        //   toastify("Login Successful", "success");
+          dispatch(
+            saveUser({
+              userId: userCredentials?.userId,
+              email: userCredentials?.providerUid,
+              // fullName: userCredentials.name,
+              createdAt: userCredentials["$createdAt"],
+            }),
+          );
+          // toast.success("Login Successful");
+          toastify("Login Successful", "success");
 
-        //   setTimeout(() => {
-        //     router.push("/feed");
-        //   }, 3500);
-        // }
+          setTimeout(() => {
+            router.push("/feed");
+          }, 3500);
+        }
       }
     } catch (error: any) {
       console.log(error.message);

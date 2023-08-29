@@ -1,3 +1,5 @@
+"use client";
+
 import { account, db, ID, palettegramDB, usersCollection } from "./appwrite.config";
 
 /**
@@ -16,7 +18,7 @@ const registerUser = async (userData: any) => {
       userData.fullName,
     );
 
-    console.log(authResponse);
+    console.log("Auth Response:", authResponse);
 
     if (!authResponse || Object.keys(authResponse).length <= 0) {
       throw Error("User registration failed");
@@ -34,8 +36,10 @@ const registerUser = async (userData: any) => {
     }
 
     const createVerify = await account.createVerification(
-      `${process.env.NEXT_APP_BASE_URL}/verify`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/verify`,
     );
+
+    console.log("Verify Object:", createVerify);
 
     if (!createVerify && !createVerify["$id"]) {
       throw Error("Error sending verification email");
@@ -65,16 +69,23 @@ const verifyUser = async (userId: string, secret: string) => {
   };
   try {
     const verifyResponse = await account.updateVerification(userId, secret);
+
+    console.log("Verify response:", verifyResponse);
+
     if (!verifyResponse) {
       throw new Error("User not verified");
     }
     const session = await getCurrentUser();
+
+    console.log("Session:", session);
 
     if (!session || Object.keys(session).length < 0) {
       throw new Error("Session not maintained");
     }
 
     const dbData = await saveDataToDatabase(session);
+
+    console.log("DB data:", dbData);
 
     response = {
       status: true,
@@ -101,6 +112,8 @@ const loginUser = async (userData: any) => {
     }
 
     const response = await account.createEmailSession(userData?.email, userData?.password);
+
+    console.log("Email session:", response);
 
     if (!response || !response["$id"]) {
       throw new Error("Login failed");
@@ -143,6 +156,8 @@ const saveDataToDatabase = async (session: any) => {
       fullName: session.name,
       createdAt: session["$createdAt"],
     });
+
+    console.log("DB log response:", resp);
 
     if (!resp) {
       throw new Error("Database not working");
