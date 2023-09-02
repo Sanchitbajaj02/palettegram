@@ -35,19 +35,6 @@ function HomePage() {
             />
           </Link>
           <div className="flex items-center justify-center">
-            {/* <button
-              className="mx-4 px-16 py-2 text-lg rounded-full text-white bg-primary"
-              onClick={() => router.push("/register")}
-            >
-              Register
-            </button> */}
-
-            {/* <button
-              className="px-16 py-2 text-lg rounded-full text-white bg-primary"
-              onClick={() => router.push("/login")}
-            >
-              Login
-            </button> */}
             <Link
               href="https://github.com/Sanchitbajaj02/palettegram"
               target="_blank"
@@ -84,19 +71,16 @@ function HomePage() {
               Transform ideas into Beautiful Palettes, Inspire Fellow Designers.
             </p>
             {state?.creds.userId ? (
-              <button
-                className="px-16 py-4 text-lg rounded-full text-white bg-primary"
-                onClick={() => router.push("/feed")}
-              >
+              <Link href="/feed" className="px-16 py-4 text-lg rounded-full text-white bg-primary">
                 Checkout your feed
-              </button>
+              </Link>
             ) : (
-              <button
+              <Link
+                href="register"
                 className="px-16 py-4 text-lg rounded-full text-white bg-primary"
-                onClick={() => router.push("/register")}
               >
                 Start your journey
-              </button>
+              </Link>
             )}
           </article>
           <figure className="w-[80%] my-4">
