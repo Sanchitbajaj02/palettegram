@@ -47,25 +47,22 @@ export default function LoginComponent() {
         console.log(userCredentials);
 
         if (userCredentials && userCredentials?.providerUid === data.email) {
-          localStorage.setItem("userId", userCredentials?.userId);
-          localStorage.setItem("email", userCredentials?.providerUid);
-          // localStorage.setItem("fullName", userCredentials?.name);
-          localStorage.setItem("createdAt", userCredentials["$createdAt"]);
+          const localObject = {
+            userId: userCredentials?.userId,
+            email: userCredentials?.providerUid,
+            createdAt: userCredentials.$createdAt,
+          };
 
-          dispatch(
-            saveUser({
-              userId: userCredentials?.userId,
-              email: userCredentials?.providerUid,
-              // fullName: userCredentials.name,
-              createdAt: userCredentials["$createdAt"],
-            }),
-          );
-          // toast.success("Login Successful");
+          localStorage.setItem("credentials", JSON.stringify(localObject));
+          // localStorage.setItem("userId", );
+          // localStorage.setItem("email", );
+          // // localStorage.setItem("fullName", userCredentials?.name);
+          // localStorage.setItem("createdAt", userCredentials["$createdAt"]);
+
+          dispatch(saveUser(localObject));
           toastify("Login Successful", "success");
 
-          setTimeout(() => {
-            router.push("/feed");
-          }, 3500);
+          router.push("/feed");
         }
       }
     } catch (error: any) {

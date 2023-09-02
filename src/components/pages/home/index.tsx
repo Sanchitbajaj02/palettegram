@@ -1,18 +1,25 @@
-// import HeaderImage from "@/public/assets/header.png";
-// import PalettegramFor from "@/public/assets/palettegram_for.png";
-// import Logo from "@/public/assets/logo.png";
 "use client";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { GitHub } from "react-feather";
 
 function HomePage() {
   const router = useRouter();
 
   const state = useSelector((state: any) => state.authenticator);
 
-  const userid = localStorage.getItem("userId");
+  const [stars, setStars] = useState(0);
+
+  useEffect(() => {
+    fetch("https://api.github.com/repos/sanchitbajaj02/palettegram")
+      .then((res) => res.json())
+      .then((res) => {
+        setStars(res.stargazers_count);
+      });
+  }, []);
 
   return (
     <>
@@ -27,20 +34,42 @@ function HomePage() {
               className="dark:shadow-md dark:shadow-gray-500 rounded-full"
             />
           </Link>
-          <div>
-            <button
+          <div className="flex items-center justify-center">
+            {/* <button
               className="mx-4 px-16 py-2 text-lg rounded-full text-white bg-primary"
               onClick={() => router.push("/register")}
             >
               Register
-            </button>
+            </button> */}
 
-            <button
+            {/* <button
               className="px-16 py-2 text-lg rounded-full text-white bg-primary"
               onClick={() => router.push("/login")}
             >
               Login
-            </button>
+            </button> */}
+            <Link
+              href="https://github.com/Sanchitbajaj02/palettegram"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center text-md mx-2 px-8 py-2 rounded-full bg-primary text-white"
+            >
+              <GitHub size={20} className="mr-4" /> {stars} Stars
+            </Link>
+
+            <Link
+              href="/register"
+              className="inline-block mx-2 px-8 py-2 text-md rounded-full text-white bg-primary"
+            >
+              Register
+            </Link>
+
+            <Link
+              href="/login"
+              className="inline-block mx-2 px-8 py-2 text-md rounded-full text-white bg-primary"
+            >
+              Login
+            </Link>
           </div>
         </div>
       </nav>
@@ -54,16 +83,16 @@ function HomePage() {
             <p className="text-xl md:text-2xl my-8 text-black dark:text-white">
               Transform ideas into Beautiful Palettes, Inspire Fellow Designers.
             </p>
-            {state?.userId ? (
+            {state?.creds.userId ? (
               <button
-                className="px-16 py-4 text-xl rounded-full text-white bg-primary"
+                className="px-16 py-4 text-lg rounded-full text-white bg-primary"
                 onClick={() => router.push("/feed")}
               >
                 Checkout your feed
               </button>
             ) : (
               <button
-                className="px-16 py-4 text-xl rounded-full text-white bg-primary"
+                className="px-16 py-4 text-lg rounded-full text-white bg-primary"
                 onClick={() => router.push("/register")}
               >
                 Start your journey
@@ -71,6 +100,7 @@ function HomePage() {
             )}
           </article>
           <figure className="w-[80%] my-4">
+            <div className="shape1 -z-10" />
             <Image
               src="/assets/header.png"
               alt="Header section"
@@ -94,10 +124,10 @@ function HomePage() {
             />
           </figure>
           <article>
-            <h1 className="text-3xl md:text-6xl font-extrabold tracking-wide text-black">
+            <h1 className="text-3xl md:text-6xl font-extrabold tracking-wide text-black dark:text-white">
               Who is Palettegram for?
             </h1>
-            <p className="text-xl md:text-2xl my-8 text-black">
+            <p className="text-xl md:text-2xl my-8 text-black dark:text-white">
               Anyone who wants to share their designs and color palettes to get the review among the
               professionals.
             </p>

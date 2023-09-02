@@ -182,7 +182,7 @@ const CreatePost = () => {
         <div className="">
           <button
             type="submit"
-            className="bg-pg-pink hover:bg-pg-pink-light text-white font-bold py-2 px-8 rounded-full"
+            className="primary hover:primary-light text-white font-bold py-2 px-8 rounded-full"
           >
             Post
           </button>

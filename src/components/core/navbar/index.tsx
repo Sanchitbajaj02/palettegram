@@ -4,12 +4,16 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Settings, LogOut } from "react-feather";
 import { useSelector } from "react-redux";
+import { logoutUser } from "@/backend/auth.api";
+import { setCookie } from "nookies";
 
 const Navbar = () => {
   const router = useRouter();
 
-  const logout = () => {
+  const logout = async () => {
+    await logoutUser();
     localStorage.clear();
+    setCookie(null, "userId", "");
 
     router.push("/");
   };

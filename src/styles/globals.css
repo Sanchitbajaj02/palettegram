@@ -25,7 +25,7 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-.bg-pg-pink {
+/* .bg-pg-pink {
   background: #f1396d;
 }
 
@@ -38,8 +38,23 @@ body {
 }
 
 .bg-pg-blue-light {
-  /* background: #2a2c34; */
   background: #424551;
+} */
+
+.shape1 {
+  position: absolute;
+  /* width: 731.5px;
+  height: 401.5px;
+  right: 2%;
+  top: 20.5px; */
+
+  width: 700px;
+  height: 400px;
+  right: 0%;
+  top: 25%;
+
+  background: linear-gradient(100deg, #b6005596 10.98%, rgba(110, 93, 248, 0) 100%);
+  filter: blur(100px);
 }
 
 /*
