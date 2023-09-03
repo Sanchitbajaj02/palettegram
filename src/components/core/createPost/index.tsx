@@ -16,13 +16,6 @@ const CreatePost = () => {
   });
   const inputRef = useRef(null);
 
-  const handleClick = () => {
-    if (inputRef && inputRef.current !== null) {
-      // 👇️ open file input box on click of another element
-      // inputRef.current?.click()
-    }
-  };
-
   const handleFileChange = (event: any) => {
     const fileObj = event.target.files && event.target.files[0];
     if (!fileObj) {
@@ -123,7 +116,66 @@ const CreatePost = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="px-4 py-2 shadow-lg mb-4">
+    <>
+      <section className="border shadow-sm mb-8">
+        <form className="p-4" method="post">
+          <div className="mb-2">
+            <small className="text-slate-400">Character limit is upto 1000</small>
+            <textarea
+              onChange={onChangeInput}
+              value={postTitle}
+              name="postTitle"
+              className="dark:bg-secondary-light outline-none border focus:ring rounded-lg p-3 text-black dark:text-white placholder:text-gray-400 text-lg w-full mb-2"
+              rows={3}
+              cols={50}
+              placeholder="What's happening?"
+              maxLength={1000}
+              required
+            />
+
+            {togglePalette ? <Colorpicker colors={colors} setColors={setColors} /> : null}
+          </div>
+
+          <div className="flex flex-row justify-between items-center">
+            <article className="flex flex-row gap-2">
+              <input
+                style={{ display: "none" }}
+                type="file"
+                id="uploadImage"
+                accept="image/jpg, image/png, image/jpeg"
+              />
+              <label
+                htmlFor="uploadImage"
+                className="transition-all duration-300 p-2 hover:bg-secondary-light hover:text-white rounded-full hover:cursor-pointer"
+              >
+                <NewImageFeather size={22} />
+              </label>
+
+              <button
+                onClick={() => setTogglePalette(!togglePalette)}
+                className="transition-all duration-300 p-2 hover:bg-secondary-light hover:text-white rounded-full"
+              >
+                <Command size={22} />
+              </button>
+            </article>
+            <article>
+              <button
+                type="submit"
+                className="transition-all duration-300 bg-primary hover:bg-primary-light text-white font-normal py-1 px-8 rounded-full"
+              >
+                Post
+              </button>
+            </article>
+          </div>
+        </form>
+      </section>
+    </>
+  );
+};
+export default CreatePost;
+
+/*
+<form onSubmit={handleSubmit} className="px-4 py-2 shadow-lg mb-4">
       <div className="flex">
         <div className="flex-1 ">
           <small className="text-slate-400">Character limit is upto 1000</small>
@@ -189,6 +241,5 @@ const CreatePost = () => {
         </div>
       </div>
     </form>
-  );
-};
-export default CreatePost;
+
+*/

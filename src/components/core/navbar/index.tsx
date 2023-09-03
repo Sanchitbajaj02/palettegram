@@ -21,7 +21,7 @@ const Navbar = () => {
   const userAuth = useSelector((state: any) => state.auth);
 
   return (
-    <nav className="w-full sticky top-0 shadow-md bg-[#ffff] px-4 py-2 ">
+    <nav className="w-full sticky top-0 shadow-md py-2 dark:shadow-gray-600">
       <div className="max-w-screen-lg mx-auto flex items-center content-center justify-between  h-12">
         <Link href={userAuth?.creds?.userId ? "/feed" : "/"}>
           <Image
@@ -33,13 +33,19 @@ const Navbar = () => {
           />
         </Link>
 
-        <div className="flex gap-10">
+        <div className="flex gap-8">
           <Link href={`/user/${userAuth?.creds?.userId}`}>
-            <Settings />
+            <Settings
+              size={20}
+              className="transition-all duration-300 text-black dark:text-white  hover:text-primary"
+            />
           </Link>
 
           <div onClick={logout} className="cursor-pointer">
-            <LogOut />
+            <LogOut
+              size={20}
+              className="transition-all duration-300 text-black dark:text-white  hover:text-primary"
+            />
           </div>
         </div>
       </div>

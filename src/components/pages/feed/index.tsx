@@ -23,25 +23,23 @@ const Feed = () => {
 
   return (
     <main className="flex max-w-screen-lg mx-auto pt-8 content-center">
-      <div className="flex-[1] h-80 sticky top-24 flex flex-col items-end">
+      <div className="flex-1 sticky flex flex-col items-center gap-8">
         <Link
           href={`/user/${userDetails.creds.userId}`}
-          className="w-12 h-12 rounded-full border hover:bg-black hover:text-white flex items-center justify-center m-8 mt-0 shadow-md transition duration-300"
+          className="w-12 h-12 rounded-full flex items-center justify-center shadow-md dark:shadow-gray-600 transition-all duration-300 text-black dark:text-white hover:text-primary-light border hover:border-primary-light"
         >
-          <User />
+          <User size={20} />
         </Link>
         <Link
           href="/user/bookmarks"
-          className="w-12 h-12 rounded-full border hover:bg-black hover:text-white flex items-center justify-center m-8 mt-0 shadow-md transition duration-300"
+          className="w-12 h-12 rounded-full flex items-center justify-center shadow-md dark:shadow-gray-600 transition-all duration-300 text-black dark:text-white hover:text-primary-light border hover:border-primary-light"
         >
-          <Bookmark />
+          <Bookmark size={20} />
         </Link>
       </div>
-      <div className="flex flex-[3] gap-2">
-        <div className="flex-1 flex flex-col ">
-          <CreatePost />
-          <Posts />
-        </div>
+      <div className="flex-[5]">
+        <CreatePost />
+        <Posts />
       </div>
       <div className="flex-[2] hidden md:block">
         <TrendingFeed />
