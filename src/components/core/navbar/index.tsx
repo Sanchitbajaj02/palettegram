@@ -18,12 +18,12 @@ const Navbar = () => {
     router.push("/");
   };
 
-  const userAuth = useSelector((state: any) => state.authenticator);
+  const userAuth = useSelector((state: any) => state.auth);
 
   return (
     <nav className="w-full sticky top-0 shadow-md bg-[#ffff] px-4 py-2 ">
       <div className="max-w-screen-lg mx-auto flex items-center content-center justify-between  h-12">
-        <Link href={userAuth?.userId ? "/feed" : "/"}>
+        <Link href={userAuth?.creds?.userId ? "/feed" : "/"}>
           <Image
             className="navbar-brand fw-bold w-10 h-10 cursor pointer mx-4"
             src={"/assets/logo.png"}
@@ -34,7 +34,7 @@ const Navbar = () => {
         </Link>
 
         <div className="flex gap-10">
-          <Link href={`/user/${userAuth?.userId}`}>
+          <Link href={`/user/${userAuth?.creds?.userId}`}>
             <Settings />
           </Link>
 

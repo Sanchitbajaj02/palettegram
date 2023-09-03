@@ -94,7 +94,7 @@ export default function LoginComponent() {
             <h1 className="text-xl md:text-3xl mb-2 md:mb-4 text-center font-bold  text-secondary">
               Welcome to Palettegram
             </h1>
-            <p className="text-md md:text-xl text-center font-normal dark:text-secondary-text">
+            <p className="text-md md:text-xl text-center font-normal dark:text-secondary-light">
               Login and start your journey
             </p>
           </article>
@@ -104,7 +104,7 @@ export default function LoginComponent() {
               <label
                 htmlFor="email"
                 aria-required="true"
-                className="mb-3 block text-sm md:text-base font-medium dark:text-secondary-text"
+                className="mb-3 block text-sm md:text-base font-medium dark:text-secondary-light"
               >
                 Email Address <span className="text-red-600">*</span>
               </label>
@@ -123,7 +123,7 @@ export default function LoginComponent() {
               <label
                 htmlFor="password"
                 aria-required="true"
-                className="mb-3 block text-sm md:text-base font-medium dark:text-secondary-text"
+                className="mb-3 block text-sm md:text-base font-medium dark:text-secondary-light"
               >
                 Password <span className="text-red-600">*</span>
               </label>
@@ -139,7 +139,7 @@ export default function LoginComponent() {
             </div>
 
             <div className="mb-6">
-              <p className="dark:text-secondary-text">
+              <p className="dark:text-secondary-light">
                 Do not have an account?{" "}
                 <Link href="/register" className="text-primary">
                   Register

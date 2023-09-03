@@ -43,7 +43,9 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={interFont.className}>
+      <body
+        className={`${interFont.className} scrollbar-thin scrollbar-thumb-primary scrollbar-track-secondary-light scrollbar-track-rounded-full`}
+      >
         <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>

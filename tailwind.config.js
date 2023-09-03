@@ -9,9 +9,9 @@ module.exports = {
     extend: {
       colors: {
         primary: "#f02e65",
-        "primary-light": '#ff729b',
+        "primary-light": "#ff729b",
         secondary: "#1c223a",
-        "secondary-text": "#40404c"
+        "secondary-light": "#40404c",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -19,5 +19,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwind-scrollbar")({ nocompatible: true })],
+  plugins: [require("tailwind-scrollbar")],
 };

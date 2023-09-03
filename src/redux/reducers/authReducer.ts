@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { setCookie } from "nookies";
 
-const localObject = JSON.parse(localStorage.getItem("credentials")!);
+const localObject = JSON.parse(window.localStorage.getItem("credentials")!);
 
 export type userDetail = {
   creds: {

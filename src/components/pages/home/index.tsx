@@ -9,7 +9,7 @@ import { GitHub } from "react-feather";
 function HomePage() {
   const router = useRouter();
 
-  const state = useSelector((state: any) => state.authenticator);
+  const state = useSelector((state: any) => state.auth);
 
   const [stars, setStars] = useState(0);
 

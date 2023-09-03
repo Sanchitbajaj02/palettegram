@@ -16,7 +16,6 @@ export default function VerificationComponent({ userId, secret }: Verification) 
     verifyUser(userId, secret)
       .then((resp) => {
         if (resp.status) {
-          // navigate("/feed");
           router.push("/feed");
           console.log(resp);
           setVerified(resp.status);
