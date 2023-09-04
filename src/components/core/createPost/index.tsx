@@ -8,6 +8,7 @@ import Image from "next/image";
 // import logo from "../logo.svg";
 const CreatePost = () => {
   const [postTitle, setPostTitle] = useState("");
+  const [imagePreview, setImagePreview] = useState<any>();
   const [postImages, setPostImages] = useState({
     image01: "",
     image02: "",
@@ -73,9 +74,9 @@ const CreatePost = () => {
 
     const newColors =
       colors.color01 !== null &&
-      colors.color02 !== null &&
-      colors.color03 !== null &&
-      colors.color04 !== null
+        colors.color02 !== null &&
+        colors.color03 !== null &&
+        colors.color04 !== null
         ? colors
         : [];
 
@@ -115,6 +116,18 @@ const CreatePost = () => {
       });
   };
 
+  const handleFileUpload = async (event: any) => {
+    const reader = new FileReader();
+
+    reader.readAsDataURL(event.target.files[0])
+
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setImagePreview(reader?.result);
+      }
+    }
+  }
+
   return (
     <>
       <section className="border shadow-sm mb-8">
@@ -136,6 +149,12 @@ const CreatePost = () => {
             {togglePalette ? <Colorpicker colors={colors} setColors={setColors} /> : null}
           </div>
 
+          <article>
+            {imagePreview && (
+              <Image src={imagePreview} alt="user image" loading="lazy" width={600} height={200} />
+            )}
+          </article>
+
           <div className="flex flex-row justify-between items-center">
             <article className="flex flex-row gap-2">
               <input
@@ -143,6 +162,8 @@ const CreatePost = () => {
                 type="file"
                 id="uploadImage"
                 accept="image/jpg, image/png, image/jpeg"
+                ref={inputRef}
+                onChange={handleFileUpload}
               />
               <label
                 htmlFor="uploadImage"
@@ -158,6 +179,8 @@ const CreatePost = () => {
                 <Command size={22} />
               </button>
             </article>
+
+
             <article>
               <button
                 type="submit"

@@ -12,14 +12,14 @@ const Feed = () => {
   const userDetails = useSelector((state: any) => state.auth);
   const router = useRouter();
 
-  useEffect(() => {
-    if (userDetails && !userDetails.creds.email) {
-      router.push("/register");
-    }
-    return () => {
-      console.log("cleaner");
-    };
-  }, [router, userDetails]);
+  // useEffect(() => {
+  //   if (userDetails && !userDetails.creds.email) {
+  //     router.push("/register");
+  //   }
+  //   return () => {
+  //     console.log("cleaner");
+  //   };
+  // }, [router, userDetails]);
 
   return (
     <main className="flex max-w-screen-lg mx-auto pt-8 content-center">

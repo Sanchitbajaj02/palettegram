@@ -8,9 +8,7 @@ export function middleware(request: NextRequest) {
   const isPrivateRoutes =
     pathname === "/feed" || pathname === "/post" || pathname === "/post/:path*";
 
-  // const token = request.cookies.get("token")?.value || "";
   let isTokenAvailable: string = request.cookies.get("userId")?.value || "";
-  // console.log("middleware:", request);
 
   if (isPublicRoutes && isTokenAvailable) {
     return NextResponse.redirect(new URL("/", request.nextUrl));
