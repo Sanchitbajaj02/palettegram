@@ -1,16 +1,21 @@
-# Git workflow best practices
+# Git workflow best practices 🛠️
 
 ## Initial setup
 
 - Fork the repository
 - Clone this repository on your local machine
+
+```bash
+git clone https://github.com/<username>/palettegram.git
+```
+
 - Add the main repository as "upstream"
 
 ```bash
 git remote add upstream https://github.com/Sanchitbajaj02/palettegram.git
 ```
 
-## Starting a new issue
+## Working on the issues 
 
 1. Get the latest version of the project
 
@@ -20,7 +25,7 @@ git remote add upstream https://github.com/Sanchitbajaj02/palettegram.git
 
 <br/>
 
-2. Create a new branch starting from that newly updated main branch, and link it to your GitHub fork.
+2. Create a new branch starting from that newly updated main branch, and link it to your GitHub fork. (For example your branch name is MyNewIssue)
 
 - `git checkout -b MyNewIssue`
 - `git push --set-upstream origin MyNewIssue`
@@ -30,9 +35,10 @@ git remote add upstream https://github.com/Sanchitbajaj02/palettegram.git
 3. Make your changes, commit them, and push them to your fork
 
 - _make changes_
-- `git commit -a`
+- `git add <files to add>`
+- `git commit -m "<commit message>"`
 - _write a good commit message_
-- `git push`
+- `git push origin MyNewIssue`
 
 ## Rebasing your branch
 
@@ -48,7 +54,6 @@ When there have been changes in the main repo that you want to get, the cleanest
 
 - `git checkout MyInProgressFeature`
 - `git rebase master`
-- `git push -f`
 
 ## Resetting a branch after you've messed it up
 

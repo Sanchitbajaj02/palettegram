@@ -1,0 +1,44 @@
+name: 🐞 Bug Report
+description: File a bug report
+title: 'Bug: '
+labels: ['🛠 goal: fix', '🪲 bug', '🚦status: awaiting triage']
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      placeholder: Add an appropriate description to describe the bug
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Add screenshots
+      description: Add screenshots to see the demo
+      placeholder: Add the required screenshots to explain problem
+    validations:
+      required: false
+
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: What browsers are you seeing the problem on?
+      multiple: true
+      options:
+        - Firefox
+        - Chrome
+        - Safari
+        - Microsoft Edge
+        - Brave
+        - Other
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: 'Record'
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true
+
+        - label: I want to work on this issue
