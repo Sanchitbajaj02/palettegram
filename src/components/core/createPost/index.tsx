@@ -74,9 +74,9 @@ const CreatePost = () => {
 
     const newColors =
       colors.color01 !== null &&
-        colors.color02 !== null &&
-        colors.color03 !== null &&
-        colors.color04 !== null
+      colors.color02 !== null &&
+      colors.color03 !== null &&
+      colors.color04 !== null
         ? colors
         : [];
 
@@ -119,14 +119,14 @@ const CreatePost = () => {
   const handleFileUpload = async (event: any) => {
     const reader = new FileReader();
 
-    reader.readAsDataURL(event.target.files[0])
+    reader.readAsDataURL(event.target.files[0]);
 
     reader.onload = () => {
       if (reader.readyState === 2) {
         setImagePreview(reader?.result);
       }
-    }
-  }
+    };
+  };
 
   return (
     <>
@@ -179,7 +179,6 @@ const CreatePost = () => {
                 <Command size={22} />
               </button>
             </article>
-
 
             <article>
               <button
