@@ -10,7 +10,7 @@ import {
 } from "./appwrite.config";
 
 const createPost = async (data: any) => {
-  console.log(data);
+  // console.log(data);
   try {
     const tweet = await db.createDocument(palettegramDB, postsCollection, ID.unique(), data);
     if (tweet) {
@@ -33,7 +33,7 @@ const getAllPosts = async () => {
 };
 
 const getSinglePost = async (id: string) => {
-  console.log(id);
+  // console.log(id);
   try {
     const tweets = await db.getDocument(palettegramDB, postsCollection, id);
     if (tweets) {
@@ -48,7 +48,7 @@ const getSingleUser = async (id: string) => {
   try {
     const tweets = await db.getDocument(palettegramDB, usersCollection, id);
     if (tweets) {
-      console.log(tweets);
+      // console.log(tweets);
       return tweets;
     }
   } catch (error: any) {
@@ -72,7 +72,7 @@ const getAllUserPosts = async (userId: string) => {
 
 const likeTweet = async (tweet: any) => {
   try {
-    console.log(tweet.$id);
+    // console.log(tweet.$id);
     const tweets = await db.updateDocument(palettegramDB, postsCollection, tweet.$id, {
       likes: tweet.likes,
     });

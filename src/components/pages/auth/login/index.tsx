@@ -44,8 +44,6 @@ export default function LoginComponent() {
       if (data.email !== "" && data.password !== "") {
         const userCredentials = await loginUser(data);
 
-        console.log(userCredentials);
-
         if (userCredentials && userCredentials?.providerUid === data.email) {
           const localObject = {
             userId: userCredentials?.userId,

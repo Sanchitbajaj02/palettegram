@@ -24,14 +24,12 @@ const CreatePost = () => {
     }
     addNewImage(fileObj)
       .then((res) => {
-        console.log(res);
         setPostImages((prev) => {
           return {
             ...prev,
             image01: `https://cloud.appwrite.io/v1/storage/buckets/${process.env.REACT_APP_BUCKET_ID}/files/${res?.$id}/view?project=64685bc4ecb8d4ee9f38&mode=admin`,
           };
         });
-        console.log(typeof postImages);
       })
       .catch((err) => console.log(err));
   };
@@ -70,7 +68,6 @@ const CreatePost = () => {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    console.log(colors);
 
     const newColors =
       colors.color01 !== null &&
@@ -130,7 +127,7 @@ const CreatePost = () => {
 
   return (
     <>
-      <section className="border shadow-sm mb-8">
+      <section className="border border-gray-500 rounded-md shadow-sm mb-8">
         <form className="p-4" method="post">
           <div className="mb-2">
             <small className="text-slate-400">Character limit is upto 1000</small>
@@ -138,7 +135,7 @@ const CreatePost = () => {
               onChange={onChangeInput}
               value={postTitle}
               name="postTitle"
-              className="dark:bg-secondary-light outline-none border focus:ring rounded-lg p-3 text-black dark:text-white placholder:text-gray-400 text-lg w-full mb-2"
+              className="dark:bg-secondary-light outline-none focus:ring rounded-lg p-3 text-black dark:text-white placholder:text-gray-400 text-lg w-full mb-2"
               rows={3}
               cols={50}
               placeholder="What's happening?"

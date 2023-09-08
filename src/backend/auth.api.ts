@@ -9,7 +9,7 @@ import { account, db, ID, palettegramDB, usersCollection } from "./appwrite.conf
  */
 const registerUser = async (userData: any) => {
   try {
-    console.log("register: ", userData.email, userData.password, userData.fullName);
+    // console.log("register: ", userData.email, userData.password, userData.fullName);
 
     const authResponse = await account.create(
       ID.unique(),
@@ -18,16 +18,11 @@ const registerUser = async (userData: any) => {
       userData.fullName,
     );
 
-    console.log("Auth Response:", authResponse);
+    // console.log("Auth Response:", authResponse);
 
     if (!authResponse || Object.keys(authResponse).length <= 0) {
       throw Error("User registration failed");
     }
-
-    // const session = await account.createEmailSession(
-    //   userData.email,
-    //   userData.password,
-    // );
 
     const session = await loginUser(userData);
 
@@ -39,7 +34,7 @@ const registerUser = async (userData: any) => {
       `${process.env.NEXT_PUBLIC_BASE_URL}/verify`,
     );
 
-    console.log("Verify Object:", createVerify);
+    // console.log("Verify Object:", createVerify);
 
     if (!createVerify && !createVerify["$id"]) {
       throw Error("Error sending verification email");
@@ -70,14 +65,14 @@ const verifyUser = async (userId: string, secret: string) => {
   try {
     const verifyResponse = await account.updateVerification(userId, secret);
 
-    console.log("Verify response:", verifyResponse);
+    // console.log("Verify response:", verifyResponse);
 
     if (!verifyResponse) {
       throw new Error("User not verified");
     }
     const session = await getCurrentUser();
 
-    console.log("Session:", session);
+    // console.log("Session:", session);
 
     if (!session || Object.keys(session).length < 0) {
       throw new Error("Session not maintained");
@@ -85,7 +80,7 @@ const verifyUser = async (userId: string, secret: string) => {
 
     const dbData = await saveDataToDatabase(session);
 
-    console.log("DB data:", dbData);
+    // console.log("DB data:", dbData);
 
     response = {
       status: true,
@@ -106,14 +101,14 @@ const verifyUser = async (userId: string, secret: string) => {
  */
 const loginUser = async (userData: any) => {
   try {
-    console.log("login:", userData?.email, userData?.password);
+    // console.log("login:", userData?.email, userData?.password);
     if (!userData?.email || !userData?.password) {
       throw new Error("email or password is empty");
     }
 
     const response = await account.createEmailSession(userData?.email, userData?.password);
 
-    console.log("Email session:", response);
+    // console.log("Email session:", response);
 
     if (!response || !response["$id"]) {
       throw new Error("Login failed");
@@ -157,7 +152,7 @@ const saveDataToDatabase = async (session: any) => {
       createdAt: session["$createdAt"],
     });
 
-    console.log("DB log response:", resp);
+    // console.log("DB log response:", resp);
 
     if (!resp) {
       throw new Error("Database not working");
