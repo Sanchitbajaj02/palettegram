@@ -1,20 +1,50 @@
 export const trendingPosts = [
   {
-    UserId: "kunal1234",
-    caption: "i am good boy",
-    img: "",
-    "post Refrence": "link link",
+    username: "johndoexx",
+    caption: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, laborum?",
   },
   {
-    UserId: "sahil243",
-    caption: "i am smart boy",
-    img: "",
-    "post Refrence": "link link",
+    username: "xjohndoex",
+    caption: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, laborum?",
   },
   {
-    UserId: "sanchit109",
-    caption: "i am anime boy",
-    img: "",
-    "post Refrence": "link link",
+    username: "xxjohndoe",
+    caption: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, laborum?",
+  },
+  {
+    username: "johndoexx",
+    caption: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, laborum?",
+  },
+  {
+    username: "xjohndoex",
+    caption: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, laborum?",
+  },
+  {
+    username: "xxjohndoe",
+    caption: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, laborum?",
+  },
+  {
+    username: "johndoexx",
+    caption: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, laborum?",
+  },
+  {
+    username: "xjohndoex",
+    caption: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, laborum?",
+  },
+  {
+    username: "xxjohndoe",
+    caption: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, laborum?",
+  },
+  {
+    username: "johndoexx",
+    caption: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, laborum?",
+  },
+  {
+    username: "xjohndoex",
+    caption: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, laborum?",
+  },
+  {
+    username: "xxjohndoe",
+    caption: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, laborum?",
   },
 ];

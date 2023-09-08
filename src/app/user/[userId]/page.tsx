@@ -1,3 +1,5 @@
+import User from "@/components/pages/user";
+
 type UserPageProps = {
   params: {
     userId: string;
@@ -5,5 +7,9 @@ type UserPageProps = {
 };
 
 export default function UserPage({ params: { userId } }: UserPageProps) {
-  return <div>page {userId}</div>;
+  return (
+    <>
+      <User />
+    </>
+  );
 }

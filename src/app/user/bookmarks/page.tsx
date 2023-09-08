@@ -1,5 +1,9 @@
-import React from "react";
+import UserBookmark from "@/components/pages/user/bookmark";
 
 export default function Bookmarks() {
-  return <div>Bookmarks page</div>;
+  return (
+    <>
+      <UserBookmark />
+    </>
+  );
 }
