@@ -3,7 +3,7 @@ description: Improve Documentation
 title: "Docs: "
 labels: ["📄 docs update", "🚦status: awaiting triage"]
 body:
-  - type: markdown
+  - type: textarea
     id: improve-docs
     attributes:
       label: What you want to add in the documentation?
