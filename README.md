@@ -1,21 +1,28 @@
 # Palettegram
 
-A web app to get designs inspirations and color palettes for professionals by professionals.
-
-## 👋 Introducion
-
-Palletegrm is a social media application dedicated to professionals like graphic designers, UI designers, UX designers, Developers, etc. to post their color palettes and use others' color palettes.
-
-This application provides a streamlined workflow for the users to find the best color palette for their use and contribute the color palette if they want to.
+<!-- A web app to get designs inspirations and color palettes for professionals by professionals. -->
 
 ## ⚡ Project Status
 
-[![Contributers](https://img.shields.io/github/contributors/sanchitbajaj02/palettegram?color=blue)](https://github.com/Sanchitbajaj02/palettegram/graphs/contributors)
-[![license MIT](https://img.shields.io/github/license/sanchitbajaj02/palettegram?color=blue)](https://github.com/Sanchitbajaj02/palettegram/blob/master/LICENSE)
-[![Issues](https://img.shields.io/github/issues/sanchitbajaj02/palettegram?color=blue)](https://github.com/Sanchitbajaj02/palettegram/issues)
-[![Pull Requests](https://img.shields.io/github/issues-pr/sanchitbajaj02/palettegram?color=blue)](https://github.com/Sanchitbajaj02/palettegram/issues)
-[![Forks](https://img.shields.io/github/forks/sanchitbajaj02/palettegram?color=blue)](https://github.com/Sanchitbajaj02/palettegram/network/members)
-[![Stars](https://img.shields.io/github/stars/sanchitbajaj02/palettegram?color=blue)](https://github.com/Sanchitbajaj02/palettegram/stargazers)
+[![Contributers](https://img.shields.io/github/contributors/sanchitbajaj02/palettegram?color=greendark)](https://github.com/Sanchitbajaj02/palettegram/graphs/contributors)
+[![license MIT](https://img.shields.io/github/license/sanchitbajaj02/palettegram?color=greendark)](https://github.com/Sanchitbajaj02/palettegram/blob/master/LICENSE)
+[![Issues](https://img.shields.io/github/issues/sanchitbajaj02/palettegram?color=greendark)](https://github.com/Sanchitbajaj02/palettegram/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/sanchitbajaj02/palettegram?color=greendark)](https://github.com/Sanchitbajaj02/palettegram/issues)
+[![Forks](https://img.shields.io/github/forks/sanchitbajaj02/palettegram?color=greendark)](https://github.com/Sanchitbajaj02/palettegram/network/members)
+[![Stars](https://img.shields.io/github/stars/sanchitbajaj02/palettegram?color=greendark)](https://github.com/Sanchitbajaj02/palettegram/stargazers)
+
+## 💻 Tech Stack
+
+- [Next.js](https://nextjs.org) - Next.js is an open-source web development framework.
+- [TypeScript](https://www.typescriptlang.org) - TypeScript is a free and open-source high-level programming language.
+- [Tailwind CSS](https://tailwindcss.com) - Tailwind CSS is a utility-first CSS framework for rapidly building modern websites without ever leaving your HTML.
+- [Appwrite](https://appwrite.io/) - Appwrite is an open-source backend platform for developing Web, Mobile, and Flutter applications.
+
+## 👋 Introducion
+
+Palletegrm is a social media application dedicated to professionals like graphic designers, UI designers, UX designers, Developers, etc. to post their UI designs, design ideas, UX approaches and color palettes.
+
+This application provides a streamlined workflow for the users to find the best color palettes and design ideas for their use and contribute back to the community.
 
 ## 🔨 What does it do?
 
@@ -38,8 +45,11 @@ The platform would have a number of features that would make it valuable for UI 
 There are many benefits to a social media platform for UI designers, including:
 
 - Increased exposure: The platform would give designers a way to get their work seen by a wider audience.
+
 - Improved collaboration: The platform would provide a forum for designers to collaborate and get feedback on their work.
+
 - New inspiration: The platform would be an excellent way for designers to find new inspiration for their work.
+
 - Opportunities for growth: The platform could provide opportunities for designers to grow their businesses or find new jobs.
 
 ## 🛡️ License
