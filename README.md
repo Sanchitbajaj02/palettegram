@@ -66,12 +66,6 @@ Contributing to open-source software (OSS) projects can be a rewarding and fulfi
 
 - [Setting up Appwrite](docs/appwrite.md)
 
-### Technology overview
-
-- [Appwrite](https://appwrite.io/docs) - Databases, Authentication, Storage and Functions.
-
-- [Front end](docs/frontend.md) - built with React.js and Redux.
-
 ## 💪🏽 Contributors
 
 Thank you so much all for spending your time to improve Threadify. Keep shining ⭐

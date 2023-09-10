@@ -5,26 +5,16 @@
   },
   "CHECKS": {
     "prefixes": [
-      "fix: ",
-      "feat: ",
-      "docs: ",
-      "test: ",
+      "build: ",
       "chore: ",
-      "ci: ",
+      "docs: ",
+      "feat: ",
+      "fix: ",
       "perf: ",
       "refactor: ",
       "revert: ",
       "style: ",
-      "fix(",
-      "feat(",
-      "docs(",
-      "chore(",
-      "ci(",
-      "perf(",
-      "refactor(",
-      "revert(",
-      "style(",
-      "test("
+      "test: "
     ]
   },
   "MESSAGES": {

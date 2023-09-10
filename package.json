@@ -9,7 +9,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "preinstall": "npx only-allow yarn"
+    "preinstall": "npx only-allow yarn",
+    "huskyconf": "yarn husky install"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
@@ -32,6 +38,9 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
+    "husky": "^8.0.3",
     "prettier": "^3.0.1",
     "tailwind-scrollbar": "^3.0.5"
   }
