@@ -3,13 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { setCookie } from "nookies";
 
-const localObject = JSON.parse(String(localStorage.getItem("credentials")));
+// const localObject = JSON.parse(String(localStorage.getItem("credentials")));
 
 export type userDetail = {
   creds: {
     userId: string;
     email: string;
     createdAt: string;
+    isVerified: boolean;
   };
   error: boolean;
   loading: boolean;
@@ -17,9 +18,10 @@ export type userDetail = {
 
 const initialState: userDetail = {
   creds: {
-    userId: localObject?.userId ?? "",
-    email: localObject?.email ?? "",
-    createdAt: localObject?.createdAt ?? "",
+    userId: "",
+    email: "",
+    createdAt: "",
+    isVerified: false,
   },
   error: false,
   loading: false,
@@ -36,8 +38,9 @@ export const registerReducer = createSlice({
       state.error = false;
       state.loading = false;
     },
-    logout: (state, action: PayloadAction<any>) => {
+    logUserOut: (state) => {
       state.loading = true;
+      setCookie(null, "userId", "");
       state.error = false;
       state.creds.userId = "";
       state.creds.email = "";
@@ -47,6 +50,6 @@ export const registerReducer = createSlice({
   },
 });
 
-export const { saveUser } = registerReducer.actions;
+export const { saveUser, logUserOut } = registerReducer.actions;
 
 export default registerReducer.reducer;

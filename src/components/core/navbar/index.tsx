@@ -3,23 +3,33 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { Settings, LogOut, Home } from "react-feather";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "@/backend/auth.api";
-import { setCookie } from "nookies";
+import { logUserOut } from "@/redux/reducers/authReducer";
 
 const Navbar = () => {
   const router = useRouter();
   const pathname = usePathname();
 
+  const userAuth = useSelector((state: any) => state.auth);
+  const dispatch = useDispatch();
+
   const logout = async () => {
-    await logoutUser();
     localStorage.clear();
-    setCookie(null, "userId", "");
+    await logoutUser();
+
+    dispatch(logUserOut());
 
     router.push("/");
   };
 
-  const userAuth = useSelector((state: any) => state.auth);
+  if (userAuth.error) {
+    return <h1>Error</h1>;
+  }
+
+  if (userAuth.loading) {
+    return <h1>Loading...</h1>;
+  }
 
   return (
     <nav className="w-full sticky top-0 shadow-md py-2 dark:shadow-gray-600">

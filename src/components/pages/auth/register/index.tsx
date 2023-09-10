@@ -40,10 +40,10 @@ export default function RegisterComponent() {
     try {
       setRegisterStatus("registering");
       const resp = await registerUser(data);
-      localStorage.setItem("userId", resp["$id"]);
-      localStorage.setItem("email", resp.email);
-      localStorage.setItem("fullName", resp.name);
-      localStorage.setItem("createdAt", resp["$createdAt"]);
+      // localStorage.setItem("userId", resp["$id"]);
+      // localStorage.setItem("email", resp.email);
+      // localStorage.setItem("fullName", resp.name);
+      // localStorage.setItem("createdAt", resp["$createdAt"]);
 
       dispatch(
         saveUser({

@@ -1,13 +1,16 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { GitHub } from "react-feather";
+import { isLoggedIn } from "@/backend/auth.api";
+import { saveUser } from "@/redux/reducers/authReducer";
 
 function HomePage() {
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const state = useSelector((state: any) => state.auth);
 
@@ -19,7 +22,24 @@ function HomePage() {
       .then((res) => {
         setStars(res.stargazers_count);
       });
-  }, []);
+
+    isLoggedIn()
+      .then((resp) => {
+        console.log(resp);
+
+        if (resp) {
+          const payload = {
+            userId: resp["$id"],
+            email: resp["email"],
+            isVerified: resp["emailVerification"],
+            createdAt: resp["$createdAt"],
+          };
+
+          dispatch(saveUser(payload));
+        }
+      })
+      .catch(console.log);
+  }, [dispatch]);
 
   return (
     <>

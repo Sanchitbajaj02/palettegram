@@ -1,7 +1,7 @@
 import HomePage from "@/components/pages/home";
 import Footer from "@/components/core/footer";
 
-export default function Home() {
+export default async function Home() {
   return (
     <>
       <HomePage />

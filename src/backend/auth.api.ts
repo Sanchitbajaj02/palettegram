@@ -169,11 +169,11 @@ const saveDataToDatabase = async (session: any) => {
  * **Work**: Returns the status of the user
  * @returns {boolean} loggedin response
  */
-const isLoggedIn = async (): Promise<boolean> => {
+const isLoggedIn = async (): Promise<any> => {
   try {
     const loggedIn = await getCurrentUser();
 
-    return !!loggedIn;
+    return loggedIn;
   } catch (error) {
     console.log(error);
   }

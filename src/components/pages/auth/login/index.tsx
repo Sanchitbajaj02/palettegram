@@ -51,7 +51,7 @@ export default function LoginComponent() {
             createdAt: userCredentials.$createdAt,
           };
 
-          localStorage.setItem("credentials", JSON.stringify(localObject));
+          // localStorage.setItem("credentials", JSON.stringify(localObject));
           // localStorage.setItem("userId", );
           // localStorage.setItem("email", );
           // // localStorage.setItem("fullName", userCredentials?.name);

@@ -4,6 +4,7 @@ import { Command, Image as NewImageFeather } from "react-feather";
 import { addNewImage, createPost, deleteImage } from "@/backend/posts.api";
 import Colorpicker from "@/components/core/colorPicker";
 import Image from "next/image";
+import { parseCookies } from "nookies";
 
 // import logo from "../logo.svg";
 const CreatePost = () => {
@@ -16,6 +17,8 @@ const CreatePost = () => {
     image04: "",
   });
   const inputRef = useRef(null);
+
+  const cookies = parseCookies();
 
   const handleFileChange = (event: any) => {
     const fileObj = event.target.files && event.target.files[0];
