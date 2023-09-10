@@ -1,13 +1,13 @@
-name: 🔖 Documentation update
-description: Improve Documentation
-title: "Docs: "
-labels: ["📄 docs update", "🚦status: awaiting triage"]
+name: 👯‍♂️ Style Changing Request
+description: Suggest a style design
+title: "Style: "
+labels: ["✨ goal: improve interface", "🚦status: awaiting triage"]
 body:
-  - type: markdown
-    id: improve-docs
+  - type: textarea
+    id: style-idea
     attributes:
-      label: What you want to add in the documentation?
-      description: What are the things that you find it missing?
+      label: What's the suggested design idea?
+      description: What are the things that you feed needs to be redesigned or updated?
       placeholder: Add an appropriate descriptions
     validations:
       required: true
@@ -25,6 +25,7 @@ body:
     id: terms
     attributes:
       label: "Record"
+
       options:
         - label: I agree to follow this project's Code of Conduct
           required: true
