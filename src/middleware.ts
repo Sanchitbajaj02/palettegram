@@ -4,7 +4,7 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const isPublicRoutes =
-    pathname === "/login" || pathname === "/register" || pathname === "/verify";
+    pathname === "/login" || pathname === "/register" || pathname === "/verify/:path*";
   const isPrivateRoutes =
     pathname === "/feed" || pathname === "/post" || pathname === "/post/:path*";
 
@@ -27,7 +27,7 @@ export const config = {
     "/",
     "/login",
     "/register",
-    "/verify",
+    "/verify/:path*",
     "/feed",
     "/post",
     "/post/:path*",
