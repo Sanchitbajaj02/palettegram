@@ -54,7 +54,7 @@ export default function RegisterComponent() {
         }),
       );
       setRegisterStatus("success");
-      toastify("Register Successful", "success");
+      toastify("Register Successful. Please check your email to verify", "success");
     } catch (error: any) {
       console.log(error);
       setRegisterStatus("failure");
