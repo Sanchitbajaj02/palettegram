@@ -132,11 +132,7 @@ const getCurrentUser = async () => {
 };
 
 const logoutUser = async () => {
-  try {
-    return await account.deleteSession("current");
-  } catch (error: any) {
-    throw new Error(error.message);
-  }
+  return await account.deleteSession("current");
 };
 
 /**
@@ -146,10 +142,15 @@ const logoutUser = async () => {
  */
 const saveDataToDatabase = async (session: any) => {
   try {
+    let username = session.email.split("@")[0];
+
     const resp = await db.createDocument(palettegramDB, usersCollection, ID.unique(), {
       email: session.email,
       fullName: session.name,
-      createdAt: session["$createdAt"],
+      createdAt: session.$createdAt,
+      isVerified: session.emailVerification,
+      userId: session.$id,
+      username: username,
     });
 
     // console.log("DB log response:", resp);

@@ -2,6 +2,8 @@ import "@/styles/globals.css";
 import { Inter } from "next/font/google";
 import { Metadata } from "next";
 import ReduxProvider from "@/redux/ReduxProvider";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const interFont = Inter({
   subsets: ["latin"],
@@ -46,6 +48,17 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body
         className={`${interFont.className} scrollbar-thin scrollbar-thumb-primary scrollbar-track-secondary-light scrollbar-track-rounded-full`}
       >
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
         <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>

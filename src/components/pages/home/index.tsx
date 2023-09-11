@@ -64,19 +64,23 @@ function HomePage() {
               <GitHub size={20} className="mr-4" /> {stars} Stars
             </Link>
 
-            <Link
-              href="/register"
-              className="inline-block mx-2 px-8 py-2 text-md rounded-full text-white bg-primary"
-            >
-              Register
-            </Link>
+            {!state?.creds.userId && !state?.creds.isVerified && (
+              <>
+                <Link
+                  href="/register"
+                  className="inline-block mx-2 px-8 py-2 text-md rounded-full text-white bg-primary"
+                >
+                  Register
+                </Link>
 
-            <Link
-              href="/login"
-              className="inline-block mx-2 px-8 py-2 text-md rounded-full text-white bg-primary"
-            >
-              Login
-            </Link>
+                <Link
+                  href="/login"
+                  className="inline-block mx-2 px-8 py-2 text-md rounded-full text-white bg-primary"
+                >
+                  Login
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </nav>
@@ -90,7 +94,7 @@ function HomePage() {
             <p className="text-xl md:text-2xl my-8 text-black dark:text-white">
               Transform ideas into Beautiful Palettes, Inspire Fellow Designers.
             </p>
-            {state?.creds.userId ? (
+            {state?.creds.userId && state?.creds.isVerified ? (
               <Link href="/feed" className="px-16 py-4 text-lg rounded-full text-white bg-primary">
                 Checkout your feed
               </Link>
