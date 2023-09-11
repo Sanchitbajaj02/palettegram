@@ -11,12 +11,18 @@
 [![Forks](https://img.shields.io/github/forks/sanchitbajaj02/palettegram?color=greendark)](https://github.com/Sanchitbajaj02/palettegram/network/members)
 [![Stars](https://img.shields.io/github/stars/sanchitbajaj02/palettegram?color=greendark)](https://github.com/Sanchitbajaj02/palettegram/stargazers)
 
+![intro](https://github.com/Sanchitbajaj02/palettegram/assets/55249639/ffaf63eb-4e99-4add-8318-29b3ecb78dc8)
+
 ## 💻 Tech Stack
 
 - [Next.js](https://nextjs.org) - Next.js is an open-source web development framework.
 - [TypeScript](https://www.typescriptlang.org) - TypeScript is a free and open-source high-level programming language.
 - [Tailwind CSS](https://tailwindcss.com) - Tailwind CSS is a utility-first CSS framework for rapidly building modern websites without ever leaving your HTML.
 - [Appwrite](https://appwrite.io/) - Appwrite is an open-source backend platform for developing Web, Mobile, and Flutter applications.
+
+## 🤝 Community
+
+Join our [community](https://discord.gg/3vS3VdZGx) on discord.
 
 ## 👋 Introducion
 
