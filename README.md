@@ -1,5 +1,7 @@
 # Palettegram
 
+![Welcome to hacktoberfest](.github/assets/hacktoberfest-banner.png)
+
 <!-- A web app to get designs inspirations and color palettes for professionals by professionals. -->
 
 ## ⚡ Project Status
@@ -11,7 +13,7 @@
 [![Forks](https://img.shields.io/github/forks/sanchitbajaj02/palettegram?color=greendark)](https://github.com/Sanchitbajaj02/palettegram/network/members)
 [![Stars](https://img.shields.io/github/stars/sanchitbajaj02/palettegram?color=greendark)](https://github.com/Sanchitbajaj02/palettegram/stargazers)
 
-![intro](https://github.com/Sanchitbajaj02/palettegram/assets/55249639/ffaf63eb-4e99-4add-8318-29b3ecb78dc8)
+<!-- ![intro](https://github.com/Sanchitbajaj02/palettegram/assets/55249639/ffaf63eb-4e99-4add-8318-29b3ecb78dc8) -->
 
 ## 💻 Tech Stack
 
@@ -29,6 +31,8 @@ Join our [community](https://discord.gg/3vS3VdZGx) on discord.
 Palletegrm is a social media application dedicated to professionals like graphic designers, UI designers, UX designers, Developers, etc. to post their UI designs, design ideas, UX approaches and color palettes.
 
 This application provides a streamlined workflow for the users to find the best color palettes and design ideas for their use and contribute back to the community.
+
+![intro](.github/assets/intro.png)
 
 ## 🔨 What does it do?
 
@@ -82,11 +86,11 @@ Contributing to open-source software (OSS) projects can be a rewarding and fulfi
 
 - [Setting up Appwrite](docs/appwrite.md)
 
-## 💪🏽 Contributors
+<!-- ## 💪🏽 Contributors
 
 Thank you so much all for spending your time to improve Threadify. Keep shining ⭐
 
-[![Contributors](https://contrib.rocks/image?repo=sanchitbajaj02/palettegram)](https://github.com/sanchitbajaj02/palettegram/graphs/contributors)
+[![Contributors](https://contrib.rocks/image?repo=sanchitbajaj02/palettegram)](https://github.com/sanchitbajaj02/palettegram/graphs/contributors) -->
 
 ## 🙏🏽 Support
 
