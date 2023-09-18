@@ -1,4 +1,5 @@
-# Palettegram
+<h1 style="text-align: center;">Palettegram</h1>
+<br/>
 
 ![Welcome to hacktoberfest](.github/assets/hacktoberfest-banner.png)
 
@@ -15,16 +16,22 @@
 
 <!-- ![intro](https://github.com/Sanchitbajaj02/palettegram/assets/55249639/ffaf63eb-4e99-4add-8318-29b3ecb78dc8) -->
 
+## Why open source
+
+Contributing in open source increases your opportunities to work with different projects and mentors, getting to know various insights and ideas. It is a platform where contributors grow together with a construvtive and a positive attitude.
+
+This repository also provides one such platforms where contributers come over and put their ideas of new games and make our website as interactive as much they can!
+
+## 🤝 Join Community
+
+[![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/3vS3VdZGx)
+
 ## 💻 Tech Stack
 
 - [Next.js](https://nextjs.org) - Next.js is an open-source web development framework.
 - [TypeScript](https://www.typescriptlang.org) - TypeScript is a free and open-source high-level programming language.
 - [Tailwind CSS](https://tailwindcss.com) - Tailwind CSS is a utility-first CSS framework for rapidly building modern websites without ever leaving your HTML.
 - [Appwrite](https://appwrite.io/) - Appwrite is an open-source backend platform for developing Web, Mobile, and Flutter applications.
-
-## 🤝 Community
-
-Join our [community](https://discord.gg/3vS3VdZGx) on discord.
 
 ## 👋 Introducion
 
