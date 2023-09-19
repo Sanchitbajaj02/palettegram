@@ -1,4 +1,4 @@
-<h1 style="text-align: center;">Palettegram</h1>
+<h1 align="center">Palettegram</h1>
 <br/>
 
 ![Welcome to hacktoberfest](.github/assets/hacktoberfest-banner.png)
@@ -21,6 +21,8 @@
 Contributing in open source increases your opportunities to work with different projects and mentors, getting to know various insights and ideas. It is a platform where contributors grow together with a construvtive and a positive attitude.
 
 This repository also provides one such platforms where contributers come over and put their ideas of new games and make our website as interactive as much they can!
+
+<h5 align="center"><i>If you like the project, please <a href="https://github.com/Sanchitbajaj02/palettegram/stargazers">★</a> this repository to show your support! 🤩</i></h5>
 
 ## 🤝 Join Community
 
