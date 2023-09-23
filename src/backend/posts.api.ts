@@ -10,11 +10,10 @@ import {
 } from "./appwrite.config";
 
 const createPost = async (data: any) => {
-  // console.log(data);
   try {
-    const tweet = await db.createDocument(palettegramDB, postsCollection, ID.unique(), data);
-    if (tweet) {
-      return tweet;
+    const post = await db.createDocument(palettegramDB, postsCollection, ID.unique(), data);
+    if (post) {
+      return post;
     }
   } catch (error: any) {
     console.log(error);

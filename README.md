@@ -1,4 +1,7 @@
-# Palettegram
+<h1 align="center">Palettegram</h1>
+<br/>
+
+![Welcome to hacktoberfest](.github/assets/hacktoberfest-banner.png)
 
 <!-- A web app to get designs inspirations and color palettes for professionals by professionals. -->
 
@@ -10,6 +13,20 @@
 [![Pull Requests](https://img.shields.io/github/issues-pr/sanchitbajaj02/palettegram?color=greendark)](https://github.com/Sanchitbajaj02/palettegram/issues)
 [![Forks](https://img.shields.io/github/forks/sanchitbajaj02/palettegram?color=greendark)](https://github.com/Sanchitbajaj02/palettegram/network/members)
 [![Stars](https://img.shields.io/github/stars/sanchitbajaj02/palettegram?color=greendark)](https://github.com/Sanchitbajaj02/palettegram/stargazers)
+
+<!-- ![intro](https://github.com/Sanchitbajaj02/palettegram/assets/55249639/ffaf63eb-4e99-4add-8318-29b3ecb78dc8) -->
+
+## 🤔 Why open source
+
+Contributing in open source increases your opportunities to work with different projects and mentors, getting to know various insights and ideas. It is a platform where contributors grow together with a construvtive and a positive attitude.
+
+This repository also provides one such platforms where contributers come over and put their ideas of new games and make our website as interactive as much they can!
+
+<h5 align="center"><i>If you like the project, please <a href="https://github.com/Sanchitbajaj02/palettegram/stargazers">★</a> this repository to show your support! 🤩</i></h5>
+
+## 🤝 Join Community
+
+[![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/3vS3VdZGx)
 
 ## 💻 Tech Stack
 
@@ -23,6 +40,8 @@
 Palletegrm is a social media application dedicated to professionals like graphic designers, UI designers, UX designers, Developers, etc. to post their UI designs, design ideas, UX approaches and color palettes.
 
 This application provides a streamlined workflow for the users to find the best color palettes and design ideas for their use and contribute back to the community.
+
+![intro](.github/assets/intro.png)
 
 ## 🔨 What does it do?
 
@@ -76,11 +95,11 @@ Contributing to open-source software (OSS) projects can be a rewarding and fulfi
 
 - [Setting up Appwrite](docs/appwrite.md)
 
-## 💪🏽 Contributors
+<!-- ## 💪🏽 Contributors
 
 Thank you so much all for spending your time to improve Threadify. Keep shining ⭐
 
-[![Contributors](https://contrib.rocks/image?repo=sanchitbajaj02/palettegram)](https://github.com/sanchitbajaj02/palettegram/graphs/contributors)
+[![Contributors](https://contrib.rocks/image?repo=sanchitbajaj02/palettegram)](https://github.com/sanchitbajaj02/palettegram/graphs/contributors) -->
 
 ## 🙏🏽 Support
 

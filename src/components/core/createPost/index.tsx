@@ -6,116 +6,123 @@ import Colorpicker from "@/components/core/colorPicker";
 import Image from "next/image";
 import { parseCookies } from "nookies";
 
+const CHAR_LIMIT = 500;
+
 // import logo from "../logo.svg";
 const CreatePost = () => {
+  // State to manage text field
   const [postTitle, setPostTitle] = useState("");
+
+  // store image data
   const [imagePreview, setImagePreview] = useState<any>();
-  const [postImages, setPostImages] = useState({
-    image01: "",
-    image02: "",
-    image03: "",
-    image04: "",
+
+  // color palette toggle switch
+  const [togglePalette, setTogglePalette] = useState(false);
+
+  // colors grid
+  const [colors, setColors] = useState({
+    color01: "",
+    color02: "",
+    color03: "",
+    color04: "",
   });
+
   const inputRef = useRef(null);
 
   const cookies = parseCookies();
 
-  const handleFileChange = (event: any) => {
-    const fileObj = event.target.files && event.target.files[0];
-    if (!fileObj) {
-      return;
-    }
-    addNewImage(fileObj)
-      .then((res) => {
-        setPostImages((prev) => {
-          return {
-            ...prev,
-            image01: `https://cloud.appwrite.io/v1/storage/buckets/${process.env.REACT_APP_BUCKET_ID}/files/${res?.$id}/view?project=64685bc4ecb8d4ee9f38&mode=admin`,
-          };
-        });
-      })
-      .catch((err) => console.log(err));
-  };
+  // const handleFileChange = (event: any) => {
+  //   const fileObj = event.target.files && event.target.files[0];
+  //   if (!fileObj) {
+  //     return;
+  //   }
+  //   addNewImage(fileObj)
+  //     .then((res) => {
+  //       setPostImages((prev) => {
+  //         return {
+  //           ...prev,
+  //           image01: `https://cloud.appwrite.io/v1/storage/buckets/${process.env.REACT_APP_BUCKET_ID}/files/${res?.$id}/view?project=64685bc4ecb8d4ee9f38&mode=admin`,
+  //         };
+  //       });
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
-  const handleClickDelete = (id: string) => {
-    deleteImage(id)
-      .then((res) => {
-        setPostImages((prev) => {
-          return {
-            ...prev,
-            image01: "",
-            image02: "",
-            image03: "",
-            image04: "",
-          };
-        });
-      })
-      .catch((err) => console.log(err));
-  };
-
-  const [togglePalette, setTogglePalette] = useState(false);
-
-  const [colors, setColors] = useState({
-    color01: null,
-    color02: null,
-    color03: null,
-    color04: null,
-  });
+  // const handleClickDelete = (id: string) => {
+  //   deleteImage(id)
+  //     .then((res) => {
+  //       setPostImages((prev) => {
+  //         return {
+  //           ...prev,
+  //           image01: "",
+  //           image02: "",
+  //           image03: "",
+  //           image04: "",
+  //         };
+  //       });
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
   const onChangeInput = (event: any) => {
-    const {
-      target: { value },
-    } = event;
+    const { value } = event.target;
     setPostTitle(value);
   };
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
 
-    const newColors =
-      colors.color01 !== null &&
-      colors.color02 !== null &&
-      colors.color03 !== null &&
-      colors.color04 !== null
-        ? colors
-        : [];
+    console.log(postTitle);
+    console.log(imagePreview);
 
-    const postData = {
-      userId: localStorage.getItem("userId"),
-      postTitle: postTitle,
-      colors: Object.values(newColors),
-      postImage: Object.values(postImages),
-    };
+    // const newColors =
+    //   colors.color01 !== null &&
+    //   colors.color02 !== null &&
+    //   colors.color03 !== null &&
+    //   colors.color04 !== null
+    //     ? colors
+    //     : [];
 
-    createPost(postData)
-      .then((res) => {
-        if (res) {
-          setPostTitle("");
-          setColors((prev: any) => {
-            return {
-              ...prev,
-              color01: "",
-              color02: "",
-              color03: "",
-              color04: "",
-            };
-          });
-          setPostImages((prev) => {
-            return {
-              ...prev,
-              image01: "",
-              image02: "",
-              image03: "",
-              image04: "",
-            };
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // const postData = {
+    //   userId: localStorage.getItem("userId"),
+    //   postTitle: postTitle,
+    //   colors: Object.values(newColors),
+    //   postImage: Object.values(postImages),
+    // };
+
+    // createPost(postData)
+    //   .then((res) => {
+    //     if (res) {
+    //       setPostTitle("");
+    //       setColors((prev: any) => {
+    //         return {
+    //           ...prev,
+    //           color01: "",
+    //           color02: "",
+    //           color03: "",
+    //           color04: "",
+    //         };
+    //       });
+    //       setPostImages((prev) => {
+    //         return {
+    //           ...prev,
+    //           image01: "",
+    //           image02: "",
+    //           image03: "",
+    //           image04: "",
+    //         };
+    //       });
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
+  /**
+   * @work handles the file and convert it into base64 string
+   * @param event
+   */
   const handleFileUpload = async (event: any) => {
     const reader = new FileReader();
 
@@ -128,26 +135,39 @@ const CreatePost = () => {
     };
   };
 
+  const colorPaletteSwitch = () => {
+    if (togglePalette) {
+      setTogglePalette(false);
+      setColors({
+        color01: "",
+        color02: "",
+        color03: "",
+        color04: "",
+      });
+    } else {
+      setTogglePalette(true);
+    }
+  };
+
   return (
     <>
       <section className="border border-gray-500 rounded-md shadow-sm mb-8">
-        <form className="p-4" method="post">
+        <form className="p-4" method="post" onSubmit={handleSubmit}>
           <div className="mb-2">
-            <small className="text-slate-400">Character limit is upto 1000</small>
+            <small className="text-slate-400">Character limit is upto {CHAR_LIMIT}</small>
             <textarea
               onChange={onChangeInput}
               value={postTitle}
               name="postTitle"
               className="dark:bg-secondary-light outline-none focus:ring rounded-lg p-3 text-black dark:text-white placholder:text-gray-400 text-lg w-full mb-2"
-              rows={3}
+              rows={4}
               cols={50}
               placeholder="What's happening?"
-              maxLength={1000}
+              maxLength={CHAR_LIMIT}
               required
             />
-
-            {togglePalette ? <Colorpicker colors={colors} setColors={setColors} /> : null}
           </div>
+          {togglePalette ? <Colorpicker colors={colors} setColors={setColors} /> : null}
 
           <article>
             {imagePreview && (
@@ -173,7 +193,7 @@ const CreatePost = () => {
               </label>
 
               <button
-                onClick={() => setTogglePalette(!togglePalette)}
+                onClick={colorPaletteSwitch}
                 className="transition-all duration-300 p-2 hover:bg-secondary-light hover:text-white rounded-full"
               >
                 <Command size={22} />
