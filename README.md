@@ -1,7 +1,4 @@
-<h1 align="center">Palettegram</h1>
-<br/>
-
-![Welcome to hacktoberfest](.github/assets/hacktoberfest-banner.png)
+[![Palettegram](.github/assets/palettegram-cover.png)](https://github.com/Sanchitbajaj02/palettegram)
 
 <!-- A web app to get designs inspirations and color palettes for professionals by professionals. -->
 
@@ -15,6 +12,10 @@
 [![Stars](https://img.shields.io/github/stars/sanchitbajaj02/palettegram?color=greendark)](https://github.com/Sanchitbajaj02/palettegram/stargazers)
 
 <!-- ![intro](https://github.com/Sanchitbajaj02/palettegram/assets/55249639/ffaf63eb-4e99-4add-8318-29b3ecb78dc8) -->
+
+<h2 align="center">This project will be entered in Hacktoberfest 2023</h2>
+
+![Welcome to hacktoberfest](.github/assets/hacktoberfest-banner.png)
 
 ## 🤔 Why open source
 
