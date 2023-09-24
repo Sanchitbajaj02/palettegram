@@ -1,10 +1,11 @@
 /* eslint-disable quotes */
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Command, Image as NewImageFeather } from "react-feather";
-import { addNewImage, createPost, deleteImage } from "@/backend/posts.api";
+import { addNewImage, savePostToDb, getImageUrl } from "@/backend/posts.api";
 import Colorpicker from "@/components/core/colorPicker";
 import Image from "next/image";
 import { parseCookies } from "nookies";
+import { toastify } from "@/helper/toastify";
 
 const CHAR_LIMIT = 500;
 
@@ -14,7 +15,10 @@ const CreatePost = () => {
   const [postTitle, setPostTitle] = useState("");
 
   // store image data
-  const [imagePreview, setImagePreview] = useState<any>();
+  const [imageStorage, setimageStorage] = useState<any>({
+    preview: null,
+    file: null,
+  });
 
   // color palette toggle switch
   const [togglePalette, setTogglePalette] = useState(false);
@@ -26,8 +30,6 @@ const CreatePost = () => {
     color03: "",
     color04: "",
   });
-
-  const inputRef = useRef(null);
 
   const cookies = parseCookies();
 
@@ -73,7 +75,42 @@ const CreatePost = () => {
     event.preventDefault();
 
     console.log(postTitle);
-    console.log(imagePreview);
+    console.log(imageStorage);
+    console.log(cookies["userId"]);
+
+    try {
+      let imageURL: string = "";
+
+      if (imageStorage && imageStorage.file) {
+        const getFileObject = await addNewImage(imageStorage.file);
+
+        if (!getFileObject) {
+          throw new Error();
+        }
+
+        imageURL = getImageUrl(getFileObject["$id"])!;
+      }
+
+      const userIdFromCookies: string = cookies["userId"];
+
+      const imageArray = [imageURL];
+
+      const finalDataToUpload = {
+        userId: userIdFromCookies,
+        postTitle: postTitle,
+        postImage: imageArray.length > 0 ? imageArray : [],
+        colors: [],
+        comments: [],
+      };
+
+      const savetoDb = await savePostToDb(finalDataToUpload);
+
+      console.log(savetoDb);
+
+      toastify("Post uploaded successfully", "success", false);
+    } catch (error) {
+      console.log(error);
+    }
 
     // const newColors =
     //   colors.color01 !== null &&
@@ -130,7 +167,13 @@ const CreatePost = () => {
 
     reader.onload = () => {
       if (reader.readyState === 2) {
-        setImagePreview(reader?.result);
+        setimageStorage((prev: any) => {
+          return {
+            ...prev,
+            preview: reader?.result,
+            file: event.target.files[0],
+          };
+        });
       }
     };
   };
@@ -151,10 +194,11 @@ const CreatePost = () => {
 
   return (
     <>
-      <section className="border border-gray-500 rounded-md shadow-sm mb-8">
+      <section className="border border-gray-500 rounded-md shadow-sm mb-4">
         <form className="p-4" method="post" onSubmit={handleSubmit}>
           <div className="mb-2">
             <small className="text-slate-400">Character limit is upto {CHAR_LIMIT}</small>
+
             <textarea
               onChange={onChangeInput}
               value={postTitle}
@@ -167,11 +211,18 @@ const CreatePost = () => {
               required
             />
           </div>
+
           {togglePalette ? <Colorpicker colors={colors} setColors={setColors} /> : null}
 
           <article>
-            {imagePreview && (
-              <Image src={imagePreview} alt="user image" loading="lazy" width={600} height={200} />
+            {imageStorage && imageStorage.preview && (
+              <Image
+                src={imageStorage.preview}
+                alt="user image"
+                loading="lazy"
+                width={600}
+                height={200}
+              />
             )}
           </article>
 
@@ -182,7 +233,6 @@ const CreatePost = () => {
                 type="file"
                 id="uploadImage"
                 accept="image/jpg, image/png, image/jpeg"
-                ref={inputRef}
                 onChange={handleFileUpload}
               />
               <label
