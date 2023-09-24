@@ -1,16 +1,16 @@
 /* eslint-disable quotes */
 import Link from "next/link";
 import Image from "next/image";
-import { Download, Heart, MessageCircle, Share, User } from "react-feather";
+import { Download, Heart, MessageCircle, Share, Bookmark } from "react-feather";
 import { useSelector } from "react-redux";
 
 // eslint-disable-next-line react/prop-types
-const SinglePost = ({ singlePost, onLikeClick }) => {
+const SinglePost = ({ singlePost, onLikeClick }: { singlePost: any; onLikeClick: any }) => {
   const post = singlePost;
 
-  const authState = useSelector((state) => state.authenticator);
+  const authState = useSelector((state: any) => state.authenticator);
 
-  const copyText = async (color) => {
+  const copyText = async (color: string) => {
     await navigator.clipboard.writeText(color);
   };
 
@@ -38,7 +38,7 @@ const SinglePost = ({ singlePost, onLikeClick }) => {
 
       {post?.colors?.length > 0 ? (
         <div className="my-2 flex flex-row justify-between items-center w-full">
-          {post?.colors.map((color, index) => {
+          {post?.colors.map((color: string, index: string) => {
             return (
               <div
                 key={index}
@@ -64,7 +64,7 @@ const SinglePost = ({ singlePost, onLikeClick }) => {
         >
           <Heart
             size={22}
-            fill={true}
+            fill="true"
             className={`${
               post?.likes.includes(authState?.userId) ? "fill-primary" : "fill-transparent"
             }`}
@@ -72,16 +72,20 @@ const SinglePost = ({ singlePost, onLikeClick }) => {
           <span className="text-base">{post?.likes.length}</span>
         </article>
 
-        <article className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer">
+        <article className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary">
           <MessageCircle size={22} />
           <span className="text-base">{post?.comments.length}</span>
         </article>
 
-        <article className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer">
+        <article className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary">
+          <Bookmark size={22} />
+        </article>
+
+        <article className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary">
           <Share size={22} />
         </article>
 
-        <article className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer">
+        <article className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary">
           <Download size={22} />
         </article>
       </div>
