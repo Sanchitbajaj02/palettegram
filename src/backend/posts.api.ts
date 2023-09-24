@@ -9,12 +9,14 @@ import {
   bucketStorage,
 } from "./appwrite.config";
 
-const createPost = async (data: any) => {
+const savePostToDb = async (data: any) => {
   try {
     const post = await db.createDocument(palettegramDB, postsCollection, ID.unique(), data);
-    if (post) {
-      return post;
+    if (!post) {
+      throw new Error("Error in uploading data into database");
     }
+
+    return post;
   } catch (error: any) {
     console.log(error);
   }
@@ -23,9 +25,11 @@ const createPost = async (data: any) => {
 const getAllPosts = async () => {
   try {
     const tweets = await db.listDocuments(palettegramDB, postsCollection);
-    if (tweets) {
-      return tweets;
+    if (!tweets) {
+      throw new Error("Error fetching data");
     }
+
+    return tweets;
   } catch (error: any) {
     console.log(error);
   }
@@ -86,10 +90,25 @@ const likeTweet = async (tweet: any) => {
 const addNewImage = async (image: any) => {
   try {
     const resImage = await storage.createFile(bucketStorage, ID.unique(), image);
-    if (resImage) {
-      return resImage;
+    if (!resImage) {
+      throw new Error("File not found");
     }
+    return resImage;
   } catch (error: any) {
+    console.log(error);
+  }
+};
+
+const getImageUrl = (imageId: string) => {
+  try {
+    if (!imageId) {
+      throw new Error("Image can not be uploaded");
+    }
+
+    const url = `https://cloud.appwrite.io/v1/storage/buckets/${bucketStorage}/files/${imageId}/view?project=${process.env.NEXT_PUBLIC_PROJECT_ID}`;
+
+    return url;
+  } catch (error) {
     console.log(error);
   }
 };
@@ -106,7 +125,7 @@ const deleteImage = async (id: string) => {
 };
 
 export {
-  createPost,
+  savePostToDb,
   getSingleUser,
   getAllPosts,
   getAllUserPosts,
@@ -114,4 +133,5 @@ export {
   likeTweet,
   addNewImage,
   deleteImage,
+  getImageUrl,
 };

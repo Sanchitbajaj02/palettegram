@@ -12,6 +12,7 @@ const interFont = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://palettegram.vercel.app"),
   title: "Palettegram - from professionals by professionals",
   description:
     "Palletegrm is a social media application dedicated to professionals like graphic designers, UI designers, UX designers, Developers, etc. to post and their color palletes as well as use other's color palletes.",
@@ -31,14 +32,14 @@ export const metadata: Metadata = {
     title: "Palettegram - professionals by professionals",
     description:
       "Palletegrm is a social media application dedicated to professionals like graphic designers, UI designers, UX designers, Developers, etc. to post and their color palletes as well as use other's color palletes.",
-    // images: [
-    //   {
-    //     url: "https://mentoravinash.in/images/og-image.jpg", // Replace with your actual OG image URL
-    //     width: 1200,
-    //     height: 630,
-    //     alt: "Avinash Sharma - Career Mentor",
-    //   },
-    // ],
+    images: [
+      {
+        url: "/assets/meta-image.png", // Replace with your actual OG image URL
+        width: 1200,
+        height: 630,
+        alt: "Palettegram - from professionals by professionals",
+      },
+    ],
   },
 };
 
