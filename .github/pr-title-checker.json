@@ -1,7 +1,7 @@
 {
   "LABEL": {
-    "name": "title-needs-formatting",
-    "color": "EEEEEE"
+    "name": "title needs formatting",
+    "color": "F9D0C4"
   },
   "CHECKS": {
     "prefixes": [
