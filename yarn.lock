@@ -2477,6 +2477,11 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==
 
+next-themes@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/next-themes/-/next-themes-0.2.1.tgz#0c9f128e847979daf6c67f70b38e6b6567856e45"
+  integrity sha512-B+AKNfYNIzh0vqQQKqQItTS8evEouKD7H5Hj3kmuPERwddR2TxvDSFZuTj6T7Jfn1oyeUyJMydPl1Bkxkh0W7A==
+
 next@13.4.13:
   version "13.4.13"
   resolved "https://registry.yarnpkg.com/next/-/next-13.4.13.tgz#8824c5702daa2ef691386871c9158a6324df33d6"
@@ -2873,6 +2878,11 @@ react-feather@^2.0.10:
   integrity sha512-BLhukwJ+Z92Nmdcs+EMw6dy1Z/VLiJTzEQACDUEnWMClhYnFykJCGWQx+NmwP/qQHGX/5CzQ+TGi8ofg2+HzVQ==
   dependencies:
     prop-types "^15.7.2"
+
+react-icons@^4.11.0:
+  version "4.11.0"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.11.0.tgz#4b0e31c9bfc919608095cc429c4f1846f4d66c65"
+  integrity sha512-V+4khzYcE5EBk/BvcuYRq6V/osf11ODUM2J8hg2FDSswRrGvqiYUYPRy4OdrWaQOBj4NcpJfmHZLNaD+VH0TyA==
 
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
