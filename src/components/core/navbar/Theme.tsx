@@ -1,5 +1,4 @@
-import { FiMoon } from "react-icons/fi";
-import { BsSun } from "react-icons/bs";
+import { Sun, Moon } from "react-feather";
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 const Theme = () => {
@@ -15,9 +14,9 @@ const Theme = () => {
   return (
     <>
       {theme === "dark" ? (
-        <BsSun size={25} cursor="pointer" onClick={() => setTheme("light")} />
+        <Sun size={25} cursor="pointer" onClick={() => setTheme("light")} />
       ) : (
-        <FiMoon size={25} cursor="pointer" onClick={() => setTheme("dark")} />
+        <Moon size={25} cursor="pointer" onClick={() => setTheme("dark")} />
       )}
     </>
   );
