@@ -2,24 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/* :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 255, 255, 255;
-  --background-end-rgb: 255, 255, 255;
+  --background-rgb: 255, 255, 255;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 28, 34, 58;
-    --background-end-rgb: 28, 34, 58;
+    --background-rgb: 28, 34, 58;
   }
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-end-rgb));
-}
+  background: rgb(var(--background-rgb));
+} */
 
 .shape1 {
   position: absolute;

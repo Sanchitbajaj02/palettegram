@@ -6,7 +6,7 @@ import { Settings, LogOut, Home } from "react-feather";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "@/backend/auth.api";
 import { logUserOut } from "@/redux/reducers/authReducer";
-import Theme from "./Theme";
+import ThemeButton from "@/components/core/themeButton";
 
 const Navbar = () => {
   const router = useRouter();
@@ -46,7 +46,7 @@ const Navbar = () => {
         </Link>
 
         <div className="flex gap-8">
-          <Theme />
+          <ThemeButton />
           {pathname !== "/feed" && (
             <Link href="/feed">
               <Home
