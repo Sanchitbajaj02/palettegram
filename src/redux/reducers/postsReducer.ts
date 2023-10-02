@@ -2,16 +2,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
+const initialState = {
+  posts: [],
+  error: false,
+  loading: false,
+};
+
 export const postsReducer = createSlice({
   name: "posts",
-  initialState: {
-    posts: [],
-  },
+  initialState: initialState,
   reducers: {
-    updatePosts: (state, payload: PayloadAction<any>) => {},
+    getPosts: (state, action: PayloadAction<any>) => {
+      state.loading = true;
+      state.posts = action.payload;
+      state.loading = false;
+    },
+    addPost: (state, action: PayloadAction<any>) => {
+      state.loading = true;
+      state.loading = false;
+    },
   },
 });
 
-export const { updatePosts } = postsReducer.actions;
+export const { getPosts } = postsReducer.actions;
 
 export default postsReducer.reducer;

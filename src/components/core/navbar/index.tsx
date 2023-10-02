@@ -6,6 +6,7 @@ import { Settings, LogOut, Home } from "react-feather";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "@/backend/auth.api";
 import { logUserOut } from "@/redux/reducers/authReducer";
+import Theme from "./Theme";
 
 const Navbar = () => {
   const router = useRouter();
@@ -36,7 +37,7 @@ const Navbar = () => {
       <div className="max-w-screen-lg mx-auto flex items-center content-center justify-between  h-12">
         <Link href={userAuth.creds?.userId ? "/feed" : "/"}>
           <Image
-            className="navbar-brand fw-bold w-10 h-10 cursor pointer mx-4"
+            className="navbar-brand fw-bold w-10 h-10 cursor pointer mx-4 "
             src={"/assets/logo.png"}
             alt="settings"
             width={100}
@@ -45,6 +46,7 @@ const Navbar = () => {
         </Link>
 
         <div className="flex gap-8">
+          <Theme />
           {pathname !== "/feed" && (
             <Link href="/feed">
               <Home

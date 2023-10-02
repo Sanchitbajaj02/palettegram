@@ -1,7 +1,4 @@
-<h1 style="text-align: center;">Palettegram</h1>
-<br/>
-
-![Welcome to hacktoberfest](.github/assets/hacktoberfest-banner.png)
+[![Palettegram](.github/assets/palettegram-cover.png)](https://github.com/Sanchitbajaj02/palettegram)
 
 <!-- A web app to get designs inspirations and color palettes for professionals by professionals. -->
 
@@ -16,11 +13,17 @@
 
 <!-- ![intro](https://github.com/Sanchitbajaj02/palettegram/assets/55249639/ffaf63eb-4e99-4add-8318-29b3ecb78dc8) -->
 
-## Why open source
+<h2 align="center">This project will be entered in Hacktoberfest 2023</h2>
+
+![Welcome to hacktoberfest](.github/assets/hacktoberfest-banner.png)
+
+## 🤔 Why open source
 
 Contributing in open source increases your opportunities to work with different projects and mentors, getting to know various insights and ideas. It is a platform where contributors grow together with a construvtive and a positive attitude.
 
 This repository also provides one such platforms where contributers come over and put their ideas of new games and make our website as interactive as much they can!
+
+<h5 align="center"><i>If you like the project, please <a href="https://github.com/Sanchitbajaj02/palettegram/stargazers">★</a> this repository to show your support! 🤩</i></h5>
 
 ## 🤝 Join Community
 

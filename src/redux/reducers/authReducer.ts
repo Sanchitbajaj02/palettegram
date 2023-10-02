@@ -45,6 +45,7 @@ export const registerReducer = createSlice({
       state.creds.userId = "";
       state.creds.email = "";
       state.creds.createdAt = "";
+      state.creds.isVerified = false;
       state.loading = false;
     },
   },
