@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import ReduxProvider from "@/redux/ReduxProvider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Provider from "@/context/Provider";
 
 const interFont = Inter({
   subsets: ["latin"],
@@ -60,7 +61,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           pauseOnHover
           theme="colored"
         />
-        <ReduxProvider>{children}</ReduxProvider>
+
+        <Provider>
+          <ReduxProvider>{children}</ReduxProvider>
+        </Provider>
       </body>
     </html>
   );
