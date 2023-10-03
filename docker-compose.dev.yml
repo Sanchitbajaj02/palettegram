@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  palettegram:
+    image: palettegram-dev
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./src:/app/src
+      - ./public:/app/public
+      - /app/node_modules
+      - /app/.next
+    restart: always
+    environment:
+      NODE_ENV: development
+    
+    env_file:
+      - .env
+    ports:
+      - 3000:3000
+    command: ["yarn", "dev"]
