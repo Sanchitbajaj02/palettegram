@@ -7,7 +7,8 @@ import Image from "next/image";
 import { GitHub } from "react-feather";
 import { isLoggedIn } from "@/backend/auth.api";
 import { saveUser } from "@/redux/reducers/authReducer";
-import Theme from "@/components/core/navbar/Theme";
+// import Theme from "@/components/core/navbar/Theme";
+import ThemeButton from "@/components/core/themeButton";
 
 function HomePage() {
   const router = useRouter();
@@ -56,7 +57,7 @@ function HomePage() {
             />
           </Link>
           <div className="flex items-center justify-center">
-            <Theme />
+            <ThemeButton iconSize={24} />
             <Link
               href="https://github.com/Sanchitbajaj02/palettegram"
               target="_blank"

@@ -4,7 +4,7 @@ import { Metadata } from "next";
 import ReduxProvider from "@/redux/ReduxProvider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Provider from "@/context/Provider";
+import { Providers } from "./providers";
 
 const interFont = Inter({
   subsets: ["latin"],
@@ -46,9 +46,9 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${interFont.className} scrollbar-thin scrollbar-thumb-primary scrollbar-track-secondary-light scrollbar-track-rounded-full`}
+        className={`${interFont.className} scrollbar-thin scrollbar-thumb-primary scrollbar-track-secondary-light scrollbar-track-rounded-full bg-white dark:bg-secondary`}
       >
         <ToastContainer
           position="top-right"
@@ -62,9 +62,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           theme="colored"
         />
 
-        <Provider>
+        <Providers>
           <ReduxProvider>{children}</ReduxProvider>
-        </Provider>
+        </Providers>
       </body>
     </html>
   );
