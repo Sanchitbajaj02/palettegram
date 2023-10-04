@@ -48,7 +48,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${interFont.className} scrollbar-thin scrollbar-thumb-primary scrollbar-track-secondary-light scrollbar-track-rounded-full`}
+        className={`${interFont.className} scrollbar-thin scrollbar-thumb-primary scrollbar-track-secondary-light scrollbar-track-rounded-full bg-white dark:bg-secondary`}
       >
         <ToastContainer
           position="top-right"

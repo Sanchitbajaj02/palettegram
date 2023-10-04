@@ -57,7 +57,7 @@ function HomePage() {
             />
           </Link>
           <div className="flex items-center justify-center">
-            <ThemeButton />
+            <ThemeButton iconSize={24} />
             <Link
               href="https://github.com/Sanchitbajaj02/palettegram"
               target="_blank"

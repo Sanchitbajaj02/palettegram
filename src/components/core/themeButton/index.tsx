@@ -3,7 +3,7 @@ import { Sun, Moon } from "react-feather";
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 
-const ThemeButton = () => {
+export default function ThemeButton({ iconSize }: { iconSize: number }) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -20,21 +20,19 @@ const ThemeButton = () => {
     <>
       {theme === "dark" ? (
         <button
-          className="flex items-center text-md mx-2 px-4 py-2 rounded-full bg-primary text-white"
+          className="mx-2 px-2 py-2 rounded-full bg-primary text-white"
           onClick={() => setTheme("light")}
         >
-          <Sun size={24} cursor="pointer" />
+          <Sun size={iconSize} cursor="pointer" className="transition-all duration-300" />
         </button>
       ) : (
         <button
-          className="flex items-center text-md mx-2 px-4 py-2 rounded-full bg-primary text-white"
+          className="mx-2 px-2 py-2 rounded-full bg-primary text-white"
           onClick={() => setTheme("dark")}
         >
-          <Moon size={24} cursor="pointer" />
+          <Moon size={iconSize} cursor="pointer" className="transition-all duration-300" />
         </button>
       )}
     </>
   );
-};
-
-export default ThemeButton;
+}
