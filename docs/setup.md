@@ -22,7 +22,7 @@ Before installation, please make sure you have already installed the following t
 git clone https://github.com/Sanchitbajaj02/palettegram.git
 ```
 
-## 🏃‍♂️ Steps for running the developmen server
+## 🏃‍♂️ Steps for running the development server
 
 - Navigate to the project directory:
 
@@ -44,4 +44,32 @@ yarn  install
 
 ```bash
 yarn dev
+```
+
+## 🏃‍♂️ Set up using docker 
+
+- Navigate to the project directory:
+
+```bash
+cd  palettegram
+```
+
+- Fill the `.env` file with the environment variables.
+
+```bash
+cp .env.example .env
+```
+
+- Start the development server using the below command:
+
+```bash
+docker compose -f docker-compose.dev.yml up
+```
+
+- For the production server, run the following command:
+
+```bash
+docker compose -f docker-compose.yml up
+# or
+docker compose up
 ```

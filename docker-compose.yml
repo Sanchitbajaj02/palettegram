@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  palettegram:
+    image: palettegram
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    env_file:
+      - .env
+    restart: always
+    command: sh -c "yarn build && yarn start"
+    ports:
+      - 3000:3000
