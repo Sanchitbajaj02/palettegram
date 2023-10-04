@@ -6,7 +6,7 @@ import { Settings, LogOut, Home } from "react-feather";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "@/backend/auth.api";
 import { logUserOut } from "@/redux/reducers/authReducer";
-import Theme from "./Theme";
+import ThemeButton from "@/components/core/themeButton";
 
 const Navbar = () => {
   const router = useRouter();
@@ -45,29 +45,24 @@ const Navbar = () => {
           />
         </Link>
 
-        <div className="flex gap-8">
-          <Theme />
+        <div className="flex gap-2 flex-row items-center">
+          <ThemeButton iconSize={22} />
           {pathname !== "/feed" && (
-            <Link href="/feed">
-              <Home
-                size={20}
-                className="transition-all duration-300 text-black dark:text-white  hover:text-primary"
-              />
+            <Link href="/feed" className="mx-2 px-2 py-2 rounded-full bg-primary text-white">
+              <Home size={22} className="transition-all duration-300 " />
             </Link>
           )}
 
-          <Link href={`/user/${userAuth.creds?.userId}`}>
-            <Settings
-              size={20}
-              className="transition-all duration-300 text-black dark:text-white  hover:text-primary"
-            />
+          <Link
+            href={`/user/${userAuth.creds?.userId}`}
+            className="mx-2 px-2 py-2 rounded-full bg-primary text-white"
+          >
+            <Settings size={22} className="transition-all duration-300 " />
           </Link>
 
-          <LogOut
-            size={20}
-            className="transition-all duration-300 text-black dark:text-white  hover:text-primary cursor-pointer"
-            onClick={logout}
-          />
+          <button className="mx-2 px-2 py-2 rounded-full bg-primary text-white" onClick={logout}>
+            <LogOut size={22} className="transition-all duration-300" />
+          </button>
         </div>
       </div>
     </nav>
