@@ -1,4 +1,4 @@
-FROM node:18.17.0-alpine
+FROM node:16.20.2-alpine
 
 WORKDIR /app
 
@@ -6,7 +6,7 @@ WORKDIR /app
 RUN npm install -g npm@latest
 
 # Install app dependencies
-COPY ["package.json", "package-lock.json*", "yarn.lock*", "./"]
+COPY ["package.json", "yarn.lock*", "./"]
 RUN yarn install
 
 #  Copy source code
