@@ -147,8 +147,6 @@ function HomePage() {
                 >
                   Login
                 </Link>
-
-                
                 
               </>
             )}
