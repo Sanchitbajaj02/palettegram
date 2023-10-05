@@ -13,7 +13,7 @@
 
 <!-- ![intro](https://github.com/Sanchitbajaj02/palettegram/assets/55249639/ffaf63eb-4e99-4add-8318-29b3ecb78dc8) -->
 
-<h2 align="center">This project will be entered in Hacktoberfest 2023</h2>
+<h2 align="center">This project is registered in Hacktoberfest 2023</h2>
 
 ![Welcome to hacktoberfest](.github/assets/hacktoberfest-banner.png)
 
@@ -38,7 +38,7 @@ This repository also provides one such platforms where contributers come over an
 
 ## 👋 Introducion
 
-Palletegrm is a social media application dedicated to professionals like graphic designers, UI designers, UX designers, Developers, etc. to post their UI designs, design ideas, UX approaches and color palettes.
+Palletegram is a social media application dedicated to professionals like graphic designers, UI designers, UX designers, Developers, etc. to post their UI designs, design ideas, UX approaches and color palettes.
 
 This application provides a streamlined workflow for the users to find the best color palettes and design ideas for their use and contribute back to the community.
 
