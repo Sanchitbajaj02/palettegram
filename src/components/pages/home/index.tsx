@@ -8,6 +8,7 @@ import { GitHub } from "react-feather";
 import { isLoggedIn } from "@/backend/auth.api";
 import { saveUser } from "@/redux/reducers/authReducer";
 import Theme from "@/components/core/navbar/Theme";
+import { Menu, X } from "react-feather";
 
 function HomePage() {
   const router = useRouter();
@@ -74,16 +75,9 @@ function HomePage() {
         <div className="md:hidden flex items-center">
           <button
           onClick={handleMenuClick}
-          className={`lg:hidden dark:text-white dark:hover:text-primary focus:outline-none ${isMenuOpen ? 'hidden' : 'closed'} text-gray-600 hover:text-primary`}
+          className={`px-2 lg:hidden dark:text-white dark:hover:text-primary focus:outline-none ${isMenuOpen ? 'hidden' : 'closed'} text-gray-600 hover:text-primary`}
           >
-              <svg
-                className="w-10 h-10 z-50"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
-              </svg>
+              <Menu size={32}/>
          
           </button>
         </div>
@@ -123,16 +117,9 @@ function HomePage() {
         <div className="bg-primary bg-opacity-50 h-full z-10 w-1/2 fixed inset-y-0 right-0 md:hidden">
           <button
           onClick={handleMenuClick}
-          className={`absolute right-0 top-5 dark:text-white dark:hover:text-primary focus:outline-none ${isMenuOpen ? 'open' : 'closed'} text-gray-600 hover:text-primary lg:hidden`}
+          className={`absolute right-2 top-6 dark:text-white dark:hover:text-primary focus:outline-none ${isMenuOpen ? 'open' : 'closed'} text-gray-600 hover:text-primary lg:hidden`}
           >
-              <svg
-                className="w-10 h-10 z-50"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
+              <X size={32}/>
           </button>
 
           <div className="grid grid-cols-1 gap-10 mt-24"> 
@@ -211,7 +198,7 @@ function HomePage() {
         </section>
 
         <section className="flex items-center flex-col-reverse md:flex-row gap-4 mt-30 mb-20">
-          <figure className="w-[50%] md:w-[50%]">
+          <figure className="w-[50%]">
             <Image
               src="/assets/palettegram_for.png"
               alt="Who is palettegram for section"
