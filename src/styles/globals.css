@@ -2,63 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/* :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 255, 255, 255;
-  --background-end-rgb: 255, 255, 255;
+  --background-rgb: 255, 255, 255;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 28, 34, 58;
-    --background-end-rgb: 28, 34, 58;
+    --background-rgb: 28, 34, 58;
   }
 }
 
-/* body {
-  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
-    rgb(var(--background-start-rgb));
-} */
-
-/* .bg-pg-pink {
-  background: #f1396d;
-}
-
-.bg-pg-pink-light {
-  background: #f592ae;
-}
-
-.bg-pg-blue {
-  background: #1c223a;
-}
-
-.bg-pg-blue-light {
-  background: #424551;
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
 } */
 
 .shape1 {
   position: absolute;
-  /* width: 731.5px;
-  height: 401.5px;
-  right: 2%;
-  top: 20.5px; */
-
   width: 700px;
   height: 400px;
   right: 0%;
   top: 25%;
-
   background: linear-gradient(100deg, #b6005596 10.98%, rgba(110, 93, 248, 0) 100%);
   filter: blur(100px);
 }
-
-/*
-colors: {
-      "pg-pink": "#F1396D",
-      "pg-pink-disabled": "#f1396db1",
-      "pg-dark-blue": "#1c223a",
-      "pg-blue": "#2a2c34",
-      gray: colors.gray,
-    },
-*/

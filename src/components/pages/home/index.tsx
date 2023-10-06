@@ -7,8 +7,8 @@ import Image from "next/image";
 import { GitHub } from "react-feather";
 import { isLoggedIn } from "@/backend/auth.api";
 import { saveUser } from "@/redux/reducers/authReducer";
-import Theme from "@/components/core/navbar/Theme";
 import { Menu, X } from "react-feather";
+import ThemeButton from "@/components/core/themeButton";
 
 function HomePage() {
   const router = useRouter();
@@ -123,6 +123,7 @@ function HomePage() {
           </button>
 
           <div className="grid grid-cols-1 gap-10 mt-24"> 
+
             <Link
               href="https://github.com/Sanchitbajaj02/palettegram"
               target="_blank"
