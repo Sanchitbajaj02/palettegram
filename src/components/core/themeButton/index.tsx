@@ -20,14 +20,14 @@ export default function ThemeButton({ iconSize }: { iconSize: number }) {
     <>
       {theme === "dark" ? (
         <button
-          className="mx-2 px-2 py-2 rounded-full bg-primary text-white"
+          className="px-2 py-2 rounded-full bg-primary text-white"
           onClick={() => setTheme("light")}
         >
           <Sun size={iconSize} cursor="pointer" className="transition-all duration-300" />
         </button>
       ) : (
         <button
-          className="mx-2 px-2 py-2 rounded-full bg-primary text-white"
+          className="px-2 py-2 rounded-full bg-primary text-white"
           onClick={() => setTheme("dark")}
         >
           <Moon size={iconSize} cursor="pointer" className="transition-all duration-300" />

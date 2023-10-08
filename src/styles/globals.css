@@ -17,6 +17,7 @@
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
+  #b6005596
 } */
 
 .shape1 {
@@ -25,6 +26,12 @@ body {
   height: 400px;
   right: 0%;
   top: 25%;
-  background: linear-gradient(100deg, #b6005596 10.98%, rgba(110, 93, 248, 0) 100%);
+  background: linear-gradient(100deg, rgba(182, 0, 85, 0.588) 10.98%, rgba(110, 93, 248, 0) 100%);
   filter: blur(100px);
+}
+
+@media only screen and (max-width: 991px) {
+  .shape1 {
+    display: none;
+  }
 }

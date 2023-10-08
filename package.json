@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "/",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "scripts": {
     "format": "prettier --write src/",
     "dev": "next dev",

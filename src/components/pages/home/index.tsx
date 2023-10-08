@@ -59,21 +59,17 @@ function HomePage() {
               alt="profile logo"
               width={50}
               height={50}
-              className="dark:shadow-md dark:shadow-gray-500 rounded-full"
+              className="dark:shadow-md dark:shadow-gray-500 rounded-full ml-2 md:ml-0"
             />
           </Link>
-
-          <div className="md:hidden">
-            <Theme />
-          </div>
 
           {/* Hamburger menu button for small screens */}
           <div className="md:hidden flex items-center">
             <button
               onClick={handleMenuClick}
-              className={`px-2 lg:hidden dark:text-white dark:hover:text-primary focus:outline-none ${
+              className={`px-2 lg:hidden dark:text-white dark:hover:text-primary text-secondary hover:text-primary transition-all duration-300 focus:outline-none ${
                 isMenuOpen ? "hidden" : "closed"
-              } text-gray-600 hover:text-primary`}
+              }`}
             >
               <Menu size={32} />
             </button>
@@ -81,14 +77,14 @@ function HomePage() {
 
           {/* Desktop menu items */}
           <div className="hidden md:flex items-center justify-center space-x-4">
-            <Theme />
+            <ThemeButton iconSize={24} />
             <Link
               href="https://github.com/Sanchitbajaj02/palettegram"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center text-md mx-2 px-8 py-2 rounded-full bg-primary text-white"
             >
-              <GitHub size={20} className="mr-4" /> {stars} Stars
+              <GitHub size={20} className="mr-2" /> {stars} Stars
             </Link>
             {!state?.creds.userId && !state?.creds.isVerified && (
               <>
@@ -111,7 +107,7 @@ function HomePage() {
 
           {/* Mobile menu */}
           {isMenuOpen && (
-            <div className="bg-primary bg-opacity-50 h-full z-10 w-1/2 fixed inset-y-0 right-0 md:hidden">
+            <div className="bg-secondary-light bg-opacity-25 dark:bg-primary-light dark:bg-opacity-25 h-full z-10 w-1/2 fixed inset-y-0 right-0 md:hidden transition-all duration-300">
               <button
                 onClick={handleMenuClick}
                 className={`absolute right-2 top-6 dark:text-white dark:hover:text-primary focus:outline-none ${
@@ -122,11 +118,15 @@ function HomePage() {
               </button>
 
               <div className="grid grid-cols-1 gap-10 mt-24">
+                <div className="text-center">
+                  <ThemeButton iconSize={24} />
+                </div>
+
                 <Link
                   href="https://github.com/Sanchitbajaj02/palettegram"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center text-sm mx-2 px-6 py-2 rounded-full bg-primary text-white"
+                  className="flex items-center text-sm text-center mx-2 px-6 py-2 rounded-full bg-primary text-white"
                 >
                   <GitHub size={20} className="mr-4" /> {stars} Stars
                 </Link>
@@ -135,14 +135,14 @@ function HomePage() {
                   <>
                     <Link
                       href="/register"
-                      className="inline-block mx-2 px-6 py-2 text-sm rounded-full text-white bg-primary"
+                      className="inline-block mx-2 px-6 py-2 text-sm rounded-full text-white bg-primary text-center"
                     >
                       Register
                     </Link>
 
                     <Link
                       href="/login"
-                      className="inline-block mx-2 px-6 py-2 text-sm rounded-full text-white bg-primary"
+                      className="inline-block mx-2 px-6 py-2 text-sm rounded-full text-white bg-primary text-center"
                     >
                       Login
                     </Link>
@@ -157,10 +157,10 @@ function HomePage() {
       <main className="max-w-screen-lg mx-auto px-2">
         <section className="flex flex-col items-center mt-20 mb-24 gap-4 md:flex-row md:justify-between">
           <article>
-            <h1 className="text-4xl md:text-6xl text-center font-extrabold tracking-wide text-black dark:text-white md:text-left">
+            <h1 className="text-3xl md:text-6xl text-center font-extrabold tracking-wide text-black dark:text-white md:text-left">
               Present Palettes Around the World
             </h1>
-            <p className="text-2xl md:text-3xl my-8 text-black text-center dark:text-white md:text-left">
+            <p className="text-xl md:text-2xl my-8 text-black text-center dark:text-white md:text-left">
               Transform ideas into Beautiful Palettes, Inspire Fellow Designers.
             </p>
 
@@ -210,7 +210,7 @@ function HomePage() {
             <h1 className="text-3xl md:text-6xl text-center font-extrabold tracking-wide text-black dark:text-white md:text-right">
               Who is Palettegram for?
             </h1>
-            <p className="text-xl text-center md:text-2xl my-8 text-black dark:text-white md:text-right">
+            <p className="text-xl md:text-2xl text-center my-8 text-black dark:text-white md:text-right">
               Anyone who wants to share their designs and color palettes to get the review among the
               professionals.
             </p>
