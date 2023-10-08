@@ -36,7 +36,7 @@ This repository also provides one such platforms where contributers come over an
 - [Tailwind CSS](https://tailwindcss.com) - Tailwind CSS is a utility-first CSS framework for rapidly building modern websites without ever leaving your HTML.
 - [Appwrite](https://appwrite.io/) - Appwrite is an open-source backend platform for developing Web, Mobile, and Flutter applications.
 
-## 👋 Introducion
+## 👋 Introduction
 
 Palletegrm is a social media application dedicated to professionals like graphic designers, UI designers, UX designers, Developers, etc. to post their UI designs, design ideas, UX approaches and color palettes.
 
@@ -82,7 +82,9 @@ Contributing to open-source software (OSS) projects can be a rewarding and fulfi
 
 - Remember to read [Code of Conduct](CODE_OF_CONDUCT.md) before contributing.
 
-- Follow the [Contribution Documents](CONTRIBUTING.md).
+- Read the [Git Workflow](docs/git.md) to follow best practices.
+
+- Follow the [Contribution Guidelines](CONTRIBUTING.md).
 
 - Create an [issue](https://github.com/Sanchitbajaj02/palettegram/issues) to report bugs, and vulnerabilities or add a new feature.
 
