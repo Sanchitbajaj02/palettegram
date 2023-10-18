@@ -13,7 +13,7 @@
 
 <!-- ![intro](https://github.com/Sanchitbajaj02/palettegram/assets/55249639/ffaf63eb-4e99-4add-8318-29b3ecb78dc8) -->
 
-<h2 align="center">This project will be entered in Hacktoberfest 2023</h2>
+<h2 align="center">This project is registered in Hacktoberfest 2023</h2>
 
 ![Welcome to hacktoberfest](.github/assets/hacktoberfest-banner.png)
 
@@ -27,7 +27,7 @@ This repository also provides one such platforms where contributers come over an
 
 ## 🤝 Join Community
 
-[![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/3vS3VdZGx)
+[![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/TAW9vC2Hu7)
 
 ## 💻 Tech Stack
 
