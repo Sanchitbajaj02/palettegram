@@ -58,7 +58,11 @@ export default function RegisterComponent() {
     } catch (error: any) {
       console.log(error);
       setRegisterStatus("failure");
-      toastify(error.message, "error");
+      if(error.message.includes('password')){
+        toastify("Oops! Your password should be at least 8 characters and avoid commonly used choices.", "info");
+      }else{
+        toastify(error.message, "error");
+      }
     }
   }
 
