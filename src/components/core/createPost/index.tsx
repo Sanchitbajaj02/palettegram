@@ -13,7 +13,7 @@ import { PostInstanceType } from "@/types/index.d";
 const CHAR_LIMIT = 500;
 
 const CreatePost = () => {
-  const postSelector = useSelector((state: any) => state.post);
+  const postSelector = useSelector((state: any) => state.posts);
   const dispatch = useDispatch();
 
   // State to manage text field
@@ -112,6 +112,13 @@ const CreatePost = () => {
       console.log(savetoDb);
 
       toastify("Post uploaded successfully", "success", false);
+
+      // state resetters
+      setPostTitle("");
+      setimageStorage({
+        preview: null,
+        file: null,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -259,7 +266,7 @@ const CreatePost = () => {
                 type="submit"
                 className="transition-all duration-300 bg-primary hover:bg-primary-light text-white font-normal py-1 px-8 rounded-full"
               >
-                Post
+                {postSelector.loading ? "Load" : "Post"}
               </button>
             </article>
           </div>

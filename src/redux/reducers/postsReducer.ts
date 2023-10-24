@@ -17,6 +17,7 @@ export const postsReducer = createSlice({
       state.loading = true;
       state.posts = action.payload;
       state.loading = false;
+      state.error = false;
     },
     addPost: (state, action: PayloadAction<PostInstanceType>) => {
       state.loading = true;
