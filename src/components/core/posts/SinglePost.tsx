@@ -3,10 +3,19 @@ import Link from "next/link";
 import Image from "next/image";
 import { Download, Heart, MessageCircle, Share, Bookmark } from "react-feather";
 import { useSelector } from "react-redux";
+import { PostInstanceType } from "@/types/index.d";
 
 // eslint-disable-next-line react/prop-types
-const SinglePost = ({ singlePost, onLikeClick }: { singlePost: any; onLikeClick: any }) => {
-  const post = singlePost;
+const SinglePost = ({
+  singlePost,
+  onLikeClick,
+}: {
+  singlePost: PostInstanceType;
+  onLikeClick: any;
+}) => {
+  console.log(singlePost);
+
+  const post: PostInstanceType = singlePost;
 
   const authState = useSelector((state: any) => state.authenticator);
 
@@ -15,7 +24,7 @@ const SinglePost = ({ singlePost, onLikeClick }: { singlePost: any; onLikeClick:
   };
 
   return (
-    <div className="p-2 rounded-md shadow-sm mb-4">
+    <div className="p-3 rounded-md shadow dark:shadow-gray-600 mb-4">
       <Link className="flex items-center gap-3 mb-3" href={`/user/${post?.userId}`}>
         <div className="w-12 h-12 rounded-full border flex items-center justify-center shadow">
           <Image src="/assets/user.png" alt="user" width={40} height={40} />
@@ -36,9 +45,9 @@ const SinglePost = ({ singlePost, onLikeClick }: { singlePost: any; onLikeClick:
         ) : null}
       </Link>
 
-      {post?.colors?.length > 0 ? (
+      {post.colors && post.colors.length > 0 ? (
         <div className="my-2 flex flex-row justify-between items-center w-full">
-          {post?.colors.map((color: string, index: string) => {
+          {post.colors.map((color: string, index: number) => {
             return (
               <div
                 key={index}
@@ -57,7 +66,7 @@ const SinglePost = ({ singlePost, onLikeClick }: { singlePost: any; onLikeClick:
         <article
           onClick={() => onLikeClick(post)}
           className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${
-            post?.likes.includes(authState?.userId)
+            post.likes && post.likes.includes(authState?.userId)
               ? "text-primary hover:text-primary"
               : "text-secondary-light dark:text-white hover:text-primary"
           }`}
@@ -66,15 +75,17 @@ const SinglePost = ({ singlePost, onLikeClick }: { singlePost: any; onLikeClick:
             size={22}
             fill="true"
             className={`${
-              post?.likes.includes(authState?.userId) ? "fill-primary" : "fill-transparent"
+              post.likes && post.likes.includes(authState?.userId)
+                ? "fill-primary"
+                : "fill-transparent"
             }`}
           />
-          <span className="text-base">{post?.likes.length}</span>
+          <span className="text-base">{post.likes && post.likes.length}</span>
         </article>
 
         <article className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary">
           <MessageCircle size={22} />
-          <span className="text-base">{post?.comments.length}</span>
+          <span className="text-base">{post.comments && post.comments.length}</span>
         </article>
 
         <article className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary">

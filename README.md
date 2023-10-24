@@ -36,9 +36,14 @@ This repository also provides one such platforms where contributers come over an
 - [Tailwind CSS](https://tailwindcss.com) - Tailwind CSS is a utility-first CSS framework for rapidly building modern websites without ever leaving your HTML.
 - [Appwrite](https://appwrite.io/) - Appwrite is an open-source backend platform for developing Web, Mobile, and Flutter applications.
 
+## Live demo 💻
+
+Visit https://palettegram.vercel.app to see the live demo!
+
+
 ## 👋 Introduction
 
-Palletegrm is a social media application dedicated to professionals like graphic designers, UI designers, UX designers, Developers, etc. to post their UI designs, design ideas, UX approaches and color palettes.
+Palettegram is a social media application dedicated to professionals like graphic designers, UI/UX designers, Developers, etc. to leverage UI designs, design ideas, UX approaches and color palettes.
 
 This application provides a streamlined workflow for the users to find the best color palettes and design ideas for their use and contribute back to the community.
 

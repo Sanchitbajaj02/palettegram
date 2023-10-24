@@ -6,11 +6,16 @@ import Colorpicker from "@/components/core/colorPicker";
 import Image from "next/image";
 import { parseCookies } from "nookies";
 import { toastify } from "@/helper/toastify";
+import { useSelector, useDispatch } from "react-redux";
+import { addPost } from "@/redux/reducers/postsReducer";
+import { PostInstanceType } from "@/types/index.d";
 
 const CHAR_LIMIT = 500;
 
-// import logo from "../logo.svg";
 const CreatePost = () => {
+  const postSelector = useSelector((state: any) => state.post);
+  const dispatch = useDispatch();
+
   // State to manage text field
   const [postTitle, setPostTitle] = useState("");
 
@@ -31,6 +36,7 @@ const CreatePost = () => {
     color04: "",
   });
 
+  // get cookies from the browser
   const cookies = parseCookies();
 
   // const handleFileChange = (event: any) => {
@@ -66,17 +72,12 @@ const CreatePost = () => {
   //     .catch((err) => console.log(err));
   // };
 
-  const onChangeInput = (event: any) => {
-    const { value } = event.target;
-    setPostTitle(value);
-  };
-
   const handleSubmit = async (event: any) => {
     event.preventDefault();
 
-    console.log(postTitle);
-    console.log(imageStorage);
-    console.log(cookies["userId"]);
+    // console.log(postTitle);
+    // console.log(imageStorage);
+    // console.log(cookies["userId"]);
 
     try {
       let imageURL: string = "";
@@ -92,10 +93,9 @@ const CreatePost = () => {
       }
 
       const userIdFromCookies: string = cookies["userId"];
-
       const imageArray = [imageURL];
 
-      const finalDataToUpload = {
+      const finalDataToUpload: PostInstanceType = {
         userId: userIdFromCookies,
         postTitle: postTitle,
         postImage: imageArray.length > 0 ? imageArray : [],
@@ -104,6 +104,10 @@ const CreatePost = () => {
       };
 
       const savetoDb = await savePostToDb(finalDataToUpload);
+
+      if (savetoDb) {
+        dispatch(addPost(finalDataToUpload));
+      }
 
       console.log(savetoDb);
 
@@ -200,7 +204,7 @@ const CreatePost = () => {
             <small className="text-slate-400">Character limit is upto {CHAR_LIMIT}</small>
 
             <textarea
-              onChange={onChangeInput}
+              onChange={(event: any) => setPostTitle(event.target.value)}
               value={postTitle}
               name="postTitle"
               className="dark:bg-secondary-light outline-none focus:ring rounded-lg p-3 text-black dark:text-white placholder:text-gray-400 text-lg w-full mb-2"
