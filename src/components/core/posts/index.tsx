@@ -1,16 +1,19 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getPosts } from "@/redux/reducers/postsReducer";
+import { parseCookies } from "nookies";
+import { getPosts, addLikesToAPost } from "@/redux/reducers/postsReducer";
 import { getAllPosts, likeTweet } from "@/backend/posts.api";
-import SinglePost from "./SinglePost";
 import { PostInstanceType } from "@/types/index.d";
+
+import SinglePost from "./SinglePost";
 
 export default function Posts() {
   const [load, setLoad] = useState<boolean>(true);
-  const auth = useSelector((state: any) => state.auth);
   const postState = useSelector((state: any) => state.posts);
   const dispatch = useDispatch();
+
+  const cookies = parseCookies();
 
   let copyPosts: PostInstanceType[] = [];
 
@@ -18,8 +21,6 @@ export default function Posts() {
     getAllPosts()
       .then((posts) => {
         if (posts && posts?.documents.length > 0) {
-          console.log("posts:", posts.documents);
-
           dispatch(getPosts(posts.documents));
           setLoad(false);
         }
@@ -34,20 +35,25 @@ export default function Posts() {
     };
   }, [dispatch]);
 
-  const likePost = async (post: any) => {
-    if (post.likes.includes(auth.userId)) {
-      post.likes.pop(auth.userId);
-    } else {
-      post.likes.push(auth.userId);
-    }
+  const likePost = async (post: PostInstanceType) => {
+    const userIdFromCookies: string = cookies["userId"];
 
-    likeTweet(post)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    dispatch(
+      addLikesToAPost({
+        postId: post.$id!,
+        userId: userIdFromCookies,
+      }),
+    );
+
+    console.log("og:", postState);
+
+    // likeTweet(post)
+    //   .then((response) => {
+    //     console.log("original", response);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   if (postState.posts && postState.posts.length > 0) {
