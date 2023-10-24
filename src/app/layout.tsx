@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     "Palletegrm is a social media application dedicated to professionals like graphic designers, UI designers, UX designers, Developers, etc. to post and their color palletes as well as use other's color palletes.",
 
   keywords:
-    "Palettegram, Appwrite, Color Designer, Palettegram social media, behance, dribbble, made for designers",
+    "Palettegram, Appwrite, Color Designer, Palettegram social media, behance, dribbble, made for designers, Palatogram, Palette gram, Palettegram social, palettegram app",
 
   alternates: {
     canonical: "https://palettegram.vercel.app",
