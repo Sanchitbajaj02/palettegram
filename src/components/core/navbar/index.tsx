@@ -16,7 +16,6 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   const logout = async () => {
-    localStorage.clear();
     await logoutUser();
 
     dispatch(logUserOut());

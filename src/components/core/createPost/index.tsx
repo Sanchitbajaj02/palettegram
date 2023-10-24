@@ -101,6 +101,7 @@ const CreatePost = () => {
         postImage: imageArray.length > 0 ? imageArray : [],
         colors: [],
         comments: [],
+        likes: [],
       };
 
       const savetoDb = await savePostToDb(finalDataToUpload);
@@ -109,7 +110,7 @@ const CreatePost = () => {
         dispatch(addPost(finalDataToUpload));
       }
 
-      console.log(savetoDb);
+      // console.log(savetoDb);
 
       toastify("Post uploaded successfully", "success", false);
 
@@ -122,49 +123,6 @@ const CreatePost = () => {
     } catch (error) {
       console.log(error);
     }
-
-    // const newColors =
-    //   colors.color01 !== null &&
-    //   colors.color02 !== null &&
-    //   colors.color03 !== null &&
-    //   colors.color04 !== null
-    //     ? colors
-    //     : [];
-
-    // const postData = {
-    //   userId: localStorage.getItem("userId"),
-    //   postTitle: postTitle,
-    //   colors: Object.values(newColors),
-    //   postImage: Object.values(postImages),
-    // };
-
-    // createPost(postData)
-    //   .then((res) => {
-    //     if (res) {
-    //       setPostTitle("");
-    //       setColors((prev: any) => {
-    //         return {
-    //           ...prev,
-    //           color01: "",
-    //           color02: "",
-    //           color03: "",
-    //           color04: "",
-    //         };
-    //       });
-    //       setPostImages((prev) => {
-    //         return {
-    //           ...prev,
-    //           image01: "",
-    //           image02: "",
-    //           image03: "",
-    //           image04: "",
-    //         };
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
   };
 
   /**

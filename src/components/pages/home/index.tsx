@@ -33,7 +33,7 @@ function HomePage() {
 
     isLoggedIn()
       .then((resp) => {
-        console.log(resp);
+        // console.log(resp);
 
         if (resp) {
           const payload = {
