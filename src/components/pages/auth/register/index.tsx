@@ -8,12 +8,6 @@ import { toastify } from "@/helper/toastify";
 import { ArrowLeftCircle } from "react-feather";
 import { useRouter } from "next/navigation";
 
-// function checkUsername(username) {
-//   const test =
-//     /^[a-zA-Z0-9](_(?!(.|_))|.(?!(_|.))|[a-zA-Z0-9]){6,18}[a-zA-Z0-9]$/g;
-
-//   return username.match(test);
-// }
 
 export default function RegisterComponent() {
   const dispatch = useDispatch();
@@ -40,10 +34,6 @@ export default function RegisterComponent() {
     try {
       setRegisterStatus("registering");
       const resp = await registerUser(data);
-      // localStorage.setItem("userId", resp["$id"]);
-      // localStorage.setItem("email", resp.email);
-      // localStorage.setItem("fullName", resp.name);
-      // localStorage.setItem("createdAt", resp["$createdAt"]);
 
       dispatch(
         saveUser({
@@ -58,9 +48,12 @@ export default function RegisterComponent() {
     } catch (error: any) {
       console.log(error);
       setRegisterStatus("failure");
-      if(error.message.includes('password')){
-        toastify("Oops! Your password should be at least 8 characters and avoid commonly used choices.", "info");
-      }else{
+      if (error.message.includes("password")) {
+        toastify(
+          "Oops! Your password should be at least 8 characters and avoid commonly used choices.",
+          "info",
+        );
+      } else {
         toastify(error.message, "error");
       }
     }

@@ -1,7 +1,5 @@
 "use client";
 import React, { useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import { Link } from "react-router-dom";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,14 +9,7 @@ import { saveUser } from "@/redux/reducers/authReducer";
 import { toastify } from "@/helper/toastify";
 
 import { ArrowLeftCircle } from "react-feather";
-// function checkUsername(username) {
-//   const test =
-//     /^[a-zA-Z0-9](_(?!(.|_))|.(?!(_|.))|[a-zA-Z0-9]){6,18}[a-zA-Z0-9]$/g;
 
-//   return username.match(test);
-// }
-// import { toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
 
 export default function LoginComponent() {
   const dispatch = useDispatch();
@@ -50,12 +41,6 @@ export default function LoginComponent() {
             email: userCredentials?.providerUid,
             createdAt: userCredentials.$createdAt,
           };
-
-          // localStorage.setItem("credentials", JSON.stringify(localObject));
-          // localStorage.setItem("userId", );
-          // localStorage.setItem("email", );
-          // // localStorage.setItem("fullName", userCredentials?.name);
-          // localStorage.setItem("createdAt", userCredentials["$createdAt"]);
 
           dispatch(saveUser(localObject));
           toastify("Login Successful", "success");

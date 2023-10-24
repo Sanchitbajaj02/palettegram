@@ -36,7 +36,6 @@ const getAllPosts = async () => {
 };
 
 const getSinglePost = async (id: string) => {
-  // console.log(id);
   try {
     const tweets = await db.getDocument(palettegramDB, postsCollection, id);
     if (tweets) {
@@ -51,7 +50,6 @@ const getSingleUser = async (id: string) => {
   try {
     const tweets = await db.getDocument(palettegramDB, usersCollection, id);
     if (tweets) {
-      // console.log(tweets);
       return tweets;
     }
   } catch (error: any) {
@@ -75,7 +73,6 @@ const getAllUserPosts = async (userId: string) => {
 
 const likeTweet = async (tweet: any) => {
   try {
-    // console.log(tweet.$id);
     const tweets = await db.updateDocument(palettegramDB, postsCollection, tweet.$id, {
       likes: tweet.likes,
     });

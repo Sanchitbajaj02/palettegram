@@ -72,15 +72,11 @@ const verifyUser = async (userId: string, secret: string) => {
     }
     const session = await getCurrentUser();
 
-    // console.log("Session:", session);
-
     if (!session || Object.keys(session).length < 0) {
       throw new Error("Session not maintained");
     }
 
     const dbData = await saveDataToDatabase(session);
-
-    // console.log("DB data:", dbData);
 
     response = {
       status: true,

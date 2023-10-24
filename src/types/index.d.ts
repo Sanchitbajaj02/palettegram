@@ -4,7 +4,7 @@ export type PostInstanceType = {
   postImage: string[];
   colors?: string[];
   comments?: string[];
-  likes?: string[];
+  likes: string[];
   $id?: string;
   $collectionId?: string;
   $createdAt?: string;
