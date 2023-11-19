@@ -1,15 +1,21 @@
 import "@/styles/globals.css";
-import { Inter } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 import { Metadata } from "next";
 import ReduxProvider from "@/redux/ReduxProvider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Providers } from "./providers";
 
-const interFont = Inter({
+// const interFont = Inter({
+//   subsets: ["latin"],
+//   weight: ["400", "500", "600", "700", "800", "900"],
+//   variable: "--font-inter",
+// });
+
+const poppinsFont = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
-  variable: "--font-inter",
+  variable: "--font-poppins",
 });
 
 export const metadata: Metadata = {
@@ -48,7 +54,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${interFont.className} scrollbar-thin scrollbar-thumb-primary scrollbar-track-secondary-light scrollbar-track-rounded-full bg-white dark:bg-secondary`}
+        className={`${poppinsFont.className} scrollbar-thin scrollbar-thumb-primary scrollbar-track-secondary-light scrollbar-track-rounded-full bg-white dark:bg-secondary`}
       >
         <ToastContainer
           position="top-right"

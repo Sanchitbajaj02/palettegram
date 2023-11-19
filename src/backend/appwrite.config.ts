@@ -15,8 +15,9 @@ const storage = new Storage(appwriteClient);
 const palettegramDB = String(process.env.NEXT_PUBLIC_DATABASE_ID);
 const usersCollection = String(process.env.NEXT_PUBLIC_USER_COLLECTION);
 const postsCollection = String(process.env.NEXT_PUBLIC_POSTS_COLLECTION);
+const bookmarksCollection = String(process.env.NEXT_PUBLIC_BOOKMARKS_COLLECTION);
 const bucketStorage = String(process.env.NEXT_PUBLIC_BUCKET_ID);
 
 export { appwriteClient, account, db, storage, ID, Query };
 
-export { palettegramDB, usersCollection, postsCollection, bucketStorage };
+export { palettegramDB, usersCollection, postsCollection, bookmarksCollection, bucketStorage };

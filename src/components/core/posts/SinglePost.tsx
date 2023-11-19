@@ -2,21 +2,41 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Download, Heart, MessageCircle, Share, Bookmark } from "react-feather";
-import { useSelector } from "react-redux";
 import { PostInstanceType } from "@/types/index.d";
+import { useSelector, useDispatch } from "react-redux";
+import { removeBookmark } from "@/backend/bookmarks.api";
 
 // eslint-disable-next-line react/prop-types
-const SinglePost = ({
+export default function SinglePost({
   singlePost,
   onLikeClick,
 }: {
   singlePost: PostInstanceType;
   onLikeClick: any;
-}) => {
-  const authState = useSelector((state: any) => state.authenticator);
+}) {
+  const dispatch = useDispatch();
+  const authState = useSelector((state: any) => state.auth);
+  const userBookmarks = useSelector((state: any) => state.bookmarks);
 
   const copyText = async (color: string) => {
     await navigator.clipboard.writeText(color);
+  };
+
+  const handleUpdateBookmark = async (accountId: string, postId: string) => {
+    alert(`Account ID: ${accountId} & Post ID: ${postId}`);
+
+    for (let userData of userBookmarks.data) {
+      if (accountId === userData.accountId) {
+        if (userData.bookmarks.includes(postId)) {
+          console.log(accountId, "remove bookmark");
+          removeBookmark(accountId, postId).then(console.log)
+        } else {
+          console.log(accountId, "save bookmark");
+        }
+      } else {
+        console.log(accountId, "user does not exist");
+      }
+    }
   };
 
   return (
@@ -64,7 +84,7 @@ const SinglePost = ({
           className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${
             singlePost.likes && singlePost.likes.includes(authState?.userId)
               ? "text-primary hover:text-primary"
-              : "text-secondary-light dark:text-white hover:text-primary"
+              : "text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
           }`}
         >
           <Heart
@@ -84,7 +104,10 @@ const SinglePost = ({
           <span className="text-base">{singlePost.comments && singlePost.comments.length}</span>
         </article>
 
-        <article className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary">
+        <article
+          className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
+          onClick={() => handleUpdateBookmark(singlePost.userId, singlePost.$id!)}
+        >
           <Bookmark size={22} />
         </article>
 
@@ -98,6 +121,4 @@ const SinglePost = ({
       </div>
     </div>
   );
-};
-
-export default SinglePost;
+}

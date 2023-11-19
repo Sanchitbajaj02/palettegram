@@ -3,7 +3,7 @@
 import { account, db, ID, palettegramDB, usersCollection } from "./appwrite.config";
 
 /**
- * **Work:** Register the user into the database
+ * @description Register the user into the database
  * @param {Object} userData
  * @returns {Object} authResponse
  */
@@ -48,7 +48,7 @@ const registerUser = async (userData: any) => {
 };
 
 /**
- * **Work:** verifys the user based on the userId and secret sent to the user's email
+ * @description verifys the user based on the userId and secret sent to the user's email
  * @param {String} userId
  * @param {String} secret
  * @returns {Object} response status
@@ -91,7 +91,7 @@ const verifyUser = async (userId: string, secret: string) => {
 };
 
 /**
- * **Work:** log in the user based on emailId and password
+ * @description log in the user based on emailId and password
  * @param {Object} userData
  * @returns {Object} response
  */
@@ -117,6 +117,10 @@ const loginUser = async (userData: any) => {
   }
 };
 
+/**
+ * @description returns the state of current user
+ * @returns {Object} Session
+ */
 const getCurrentUser = async () => {
   try {
     return account.get();
@@ -127,12 +131,16 @@ const getCurrentUser = async () => {
   return null;
 };
 
+/**
+ * @description logs out the user by clearing current session
+ * @returns {Object} returns session
+ */
 const logoutUser = async () => {
   return await account.deleteSession("current");
 };
 
 /**
- * **Work:** Save Data into Appwrite Database
+ * @description Save Data into Appwrite Database
  * @param {Object} session
  * @returns {Object} dbResponse
  */
@@ -145,7 +153,7 @@ const saveDataToDatabase = async (session: any) => {
       fullName: session.name,
       createdAt: session.$createdAt,
       isVerified: session.emailVerification,
-      userId: session.$id,
+      accountId: session.$id,
       username: username,
     });
 
@@ -178,4 +186,20 @@ const isLoggedIn = async (): Promise<any> => {
   return false;
 };
 
-export { registerUser, verifyUser, loginUser, logoutUser, isLoggedIn };
+/**
+ * @description get single user data based on account id
+ * @param id
+ * @returns
+ */
+const getSingleUser = async (id: string) => {
+  try {
+    const tweets = await db.getDocument(palettegramDB, usersCollection, id);
+    if (tweets) {
+      return tweets;
+    }
+  } catch (error: any) {
+    console.log(error);
+  }
+};
+
+export { registerUser, verifyUser, loginUser, logoutUser, isLoggedIn, getSingleUser };
