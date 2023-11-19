@@ -8,6 +8,6 @@ export const store = configureStore({
   reducer: {
     posts: postsReducer,
     auth: authReducer,
-    bookmarks: bookmarkReducer
+    bookmarks: bookmarkReducer,
   },
 });

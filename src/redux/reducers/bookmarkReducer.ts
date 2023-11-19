@@ -3,32 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { setCookie } from "nookies";
 
-type Bookmark = {
-  accountId: string;
-  bookmarks: string[];
-};
+import { BookmarkInitType, Bookmark } from "@/types/index.d";
 
-export type BookmarkInitType = {
-  data: Bookmark[];
-  error: boolean;
-  loading: boolean;
-};
-
-const initialState: BookmarkInitType = {
-  data: [
-    {
-      accountId: "lorem",
-      bookmarks: ["a", "b", "c"],
-    },
-    {
-      accountId: "ipsum",
-      bookmarks: ["a", "b", "c"],
-    },
-    {
-      accountId: "651d8fe8b7acfb38b74a",
-      bookmarks: ["a", "b", "c", "65377973a36363480660", "651d9b163a46461f1c0f"],
-    },
-  ],
+const initialState: any = {
+  bookmark: [],
+  accountId: "",
   error: false,
   loading: false,
 };
@@ -37,9 +16,10 @@ const bookmarkSlice = createSlice({
   name: "bookmarks",
   initialState,
   reducers: {
-    saveBookmark: (state, action) => {
+    saveBookmarkToStore: (state, action) => {
       state.loading = true;
-      state.data.push(action.payload);
+      state.accountId = action.payload.accountId;
+      state.bookmark = action.payload.bookmark;
       state.error = false;
       state.loading = false;
     },
@@ -52,6 +32,6 @@ const bookmarkSlice = createSlice({
   },
 });
 
-export const { saveBookmark, getBookmarks } = bookmarkSlice.actions;
+export const { saveBookmarkToStore, getBookmarks } = bookmarkSlice.actions;
 
 export default bookmarkSlice.reducer;

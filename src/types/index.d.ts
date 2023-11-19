@@ -1,5 +1,5 @@
 export type PostInstanceType = {
-  userId: string;
+  accountId: string;
   postTitle: string;
   postImage: string[];
   colors?: string[];
@@ -12,6 +12,28 @@ export type PostInstanceType = {
 
 export type PostInitStateType = {
   posts: PostInstanceType[];
+  error: boolean;
+  loading: boolean;
+};
+
+export type userDetail = {
+  creds: {
+    userId: string;
+    email: string;
+    createdAt: string;
+    isVerified: boolean;
+  };
+  error: boolean;
+  loading: boolean;
+};
+
+export type Bookmark = {
+  accountId: string;
+  bookmark: string[];
+};
+
+export type BookmarkInitType = {
+  data: Bookmark[];
   error: boolean;
   loading: boolean;
 };

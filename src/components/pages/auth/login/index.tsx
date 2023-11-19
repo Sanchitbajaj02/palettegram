@@ -10,7 +10,6 @@ import { toastify } from "@/helper/toastify";
 
 import { ArrowLeftCircle } from "react-feather";
 
-
 export default function LoginComponent() {
   const dispatch = useDispatch();
   const authSelector = useSelector((state: any) => state.auth);

@@ -11,8 +11,8 @@ import {
 
 /**
  * @description Save a single post to database
- * @param data 
- * @returns 
+ * @param data
+ * @returns
  */
 const savePostToDb = async (data: any) => {
   try {
@@ -46,8 +46,8 @@ const getAllPosts = async () => {
 
 /**
  * @description gets single document based on the id
- * @param id 
- * @returns 
+ * @param id
+ * @returns
  */
 const getSinglePost = async (id: string) => {
   try {
@@ -60,11 +60,10 @@ const getSinglePost = async (id: string) => {
   }
 };
 
-
 /**
  * @description get user post based on account id
- * @param userId 
- * @returns 
+ * @param userId
+ * @returns
  */
 const getAllUserPosts = async (userId: string) => {
   try {
@@ -82,8 +81,8 @@ const getAllUserPosts = async (userId: string) => {
 
 /**
  * @description like tweet api
- * @param tweet 
- * @returns 
+ * @param tweet
+ * @returns
  */
 const likeTweet = async (tweet: any) => {
   try {
@@ -100,8 +99,8 @@ const likeTweet = async (tweet: any) => {
 
 /**
  * @description image adding api. Save image into bucket
- * @param image 
- * @returns 
+ * @param image
+ * @returns
  */
 const addNewImage = async (image: any) => {
   try {
@@ -117,8 +116,8 @@ const addNewImage = async (image: any) => {
 
 /**
  * @description get image url from bucket
- * @param imageId 
- * @returns 
+ * @param imageId
+ * @returns
  */
 const getImageUrl = (imageId: string) => {
   try {
@@ -136,8 +135,8 @@ const getImageUrl = (imageId: string) => {
 
 /**
  * @description delete image from bucket
- * @param id 
- * @returns 
+ * @param id
+ * @returns
  */
 const deleteImage = async (id: string) => {
   try {

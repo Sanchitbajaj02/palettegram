@@ -2,17 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { setCookie } from "nookies";
-
-export type userDetail = {
-  creds: {
-    userId: string;
-    email: string;
-    createdAt: string;
-    isVerified: boolean;
-  };
-  error: boolean;
-  loading: boolean;
-};
+import { userDetail } from "@/types/index.d";
 
 const initialState: userDetail = {
   creds: {

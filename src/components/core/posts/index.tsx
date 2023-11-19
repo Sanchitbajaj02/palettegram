@@ -2,9 +2,16 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { parseCookies } from "nookies";
+
+// Store
 import { getPosts, addLikesToAPost } from "@/redux/reducers/postsReducer";
-import { getAllPosts, likeTweet } from "@/backend/posts.api";
+import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
+
 import { PostInstanceType } from "@/types/index.d";
+
+// Api
+import { getAllPosts, likeTweet } from "@/backend/posts.api";
+import { getBookmarks } from "@/backend/bookmarks.api";
 
 import SinglePost from "./SinglePost";
 
@@ -24,6 +31,22 @@ export default function Posts() {
           dispatch(getPosts(posts.documents));
           setLoad(false);
         }
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoad(true);
+      });
+
+    getBookmarks(cookies["userId"])
+      .then((bookm) => {
+        console.log(bookm);
+        dispatch(
+          saveBookmarkToStore({
+            accountId: cookies["userId"],
+            bookmark: bookm?.documents[0].bookmark,
+          }),
+        );
+        setLoad(false);
       })
       .catch((error) => {
         console.log(error);

@@ -96,7 +96,7 @@ const CreatePost = () => {
       const imageArray = [imageURL];
 
       const finalDataToUpload: PostInstanceType = {
-        userId: userIdFromCookies,
+        accountId: userIdFromCookies,
         postTitle: postTitle,
         postImage: imageArray.length > 0 ? imageArray : [],
         colors: [],
