@@ -13,7 +13,7 @@
     "start": "next start",
     "lint": "next lint",
     "preinstall": "npx only-allow yarn",
-    "huskyconf": "yarn husky install"
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {

@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import { User, Bookmark } from "react-feather";
-import { useRouter } from "next/navigation";
 
 import CreatePost from "@/components/core/createPost";
 import Posts from "@/components/core/posts";
@@ -11,7 +10,6 @@ import Footer from "@/components/core/footer";
 
 const Feed = () => {
   const userDetails = useSelector((state: any) => state.auth);
-  const router = useRouter();
 
   return (
     <>

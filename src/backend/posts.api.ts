@@ -9,6 +9,11 @@ import {
   bucketStorage,
 } from "./appwrite.config";
 
+/**
+ * @description Save a single post to database
+ * @param data
+ * @returns
+ */
 const savePostToDb = async (data: any) => {
   try {
     const post = await db.createDocument(palettegramDB, postsCollection, ID.unique(), data);
@@ -22,6 +27,10 @@ const savePostToDb = async (data: any) => {
   }
 };
 
+/**
+ * @description get all posts present in the database
+ * @returns {Object} posts db
+ */
 const getAllPosts = async () => {
   try {
     const tweets = await db.listDocuments(palettegramDB, postsCollection);
@@ -35,6 +44,11 @@ const getAllPosts = async () => {
   }
 };
 
+/**
+ * @description gets single document based on the id
+ * @param id
+ * @returns
+ */
 const getSinglePost = async (id: string) => {
   try {
     const tweets = await db.getDocument(palettegramDB, postsCollection, id);
@@ -46,17 +60,11 @@ const getSinglePost = async (id: string) => {
   }
 };
 
-const getSingleUser = async (id: string) => {
-  try {
-    const tweets = await db.getDocument(palettegramDB, usersCollection, id);
-    if (tweets) {
-      return tweets;
-    }
-  } catch (error: any) {
-    console.log(error);
-  }
-};
-
+/**
+ * @description get user post based on account id
+ * @param userId
+ * @returns
+ */
 const getAllUserPosts = async (userId: string) => {
   try {
     const tweets = await db.listDocuments(palettegramDB, postsCollection, [
@@ -71,6 +79,11 @@ const getAllUserPosts = async (userId: string) => {
   }
 };
 
+/**
+ * @description like tweet api
+ * @param tweet
+ * @returns
+ */
 const likeTweet = async (tweet: any) => {
   try {
     const tweets = await db.updateDocument(palettegramDB, postsCollection, tweet.$id, {
@@ -84,6 +97,11 @@ const likeTweet = async (tweet: any) => {
   }
 };
 
+/**
+ * @description image adding api. Save image into bucket
+ * @param image
+ * @returns
+ */
 const addNewImage = async (image: any) => {
   try {
     const resImage = await storage.createFile(bucketStorage, ID.unique(), image);
@@ -96,6 +114,11 @@ const addNewImage = async (image: any) => {
   }
 };
 
+/**
+ * @description get image url from bucket
+ * @param imageId
+ * @returns
+ */
 const getImageUrl = (imageId: string) => {
   try {
     if (!imageId) {
@@ -110,6 +133,11 @@ const getImageUrl = (imageId: string) => {
   }
 };
 
+/**
+ * @description delete image from bucket
+ * @param id
+ * @returns
+ */
 const deleteImage = async (id: string) => {
   try {
     const resImage = await storage.deleteFile(bucketStorage, id);
@@ -123,7 +151,6 @@ const deleteImage = async (id: string) => {
 
 export {
   savePostToDb,
-  getSingleUser,
   getAllPosts,
   getAllUserPosts,
   getSinglePost,

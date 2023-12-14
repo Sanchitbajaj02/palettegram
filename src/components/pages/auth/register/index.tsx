@@ -8,7 +8,6 @@ import { toastify } from "@/helper/toastify";
 import { ArrowLeftCircle } from "react-feather";
 import { useRouter } from "next/navigation";
 
-
 export default function RegisterComponent() {
   const dispatch = useDispatch();
   const router = useRouter();

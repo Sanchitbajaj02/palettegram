@@ -2,35 +2,95 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Download, Heart, MessageCircle, Share, Bookmark } from "react-feather";
-import { useSelector } from "react-redux";
 import { PostInstanceType } from "@/types/index.d";
+import { useSelector, useDispatch } from "react-redux";
+import { removeBookmark, saveBookmark, createBookmarkEntry } from "@/backend/bookmarks.api";
+import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
+import { toastify } from "@/helper/toastify";
 
 // eslint-disable-next-line react/prop-types
-const SinglePost = ({
+export default function SinglePost({
   singlePost,
   onLikeClick,
 }: {
   singlePost: PostInstanceType;
-  onLikeClick: any;
-}) => {
-  const authState = useSelector((state: any) => state.authenticator);
+  onLikeClick?: any;
+}) {
+  const dispatch = useDispatch();
+  const authState = useSelector((state: any) => state.auth);
+  const userBookmarks = useSelector((state: any) => state.bookmarks);
 
   const copyText = async (color: string) => {
     await navigator.clipboard.writeText(color);
   };
 
+  const handleUpdateBookmark = async (accountId: string, postId: string) => {
+    if (userBookmarks.accountId === accountId) {
+      if (
+        userBookmarks.bookmark.reduce(
+          (prev: any, current: any) => prev || current === postId,
+          false,
+        )
+      ) {
+        console.log(accountId, "remove bookmark");
+        removeBookmark(accountId, postId)
+          .then((resp) => {
+            dispatch(
+              saveBookmarkToStore({
+                accountId: resp.accountId,
+                bookmark: resp.bookmark,
+              }),
+            );
+
+            toastify("Bookmark removed", "success");
+          })
+          .catch((err) => console.log(err));
+      } else {
+        console.log(accountId, "save bookmark");
+        saveBookmark(accountId, postId)
+          .then((resp) => {
+            dispatch(
+              saveBookmarkToStore({
+                accountId: resp.accountId,
+                bookmark: resp.bookmark,
+              }),
+            );
+            toastify("Bookmark saved", "success");
+          })
+          .catch((err) => console.log(err));
+      }
+    } else {
+      console.log(accountId, "account not exist");
+      createBookmarkEntry(accountId, postId)
+        .then((resp) => {
+          dispatch(
+            saveBookmarkToStore({
+              accountId: resp.accountId,
+              bookmark: resp.bookmark,
+            }),
+          );
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
   return (
     <div className="p-3 rounded-md shadow dark:shadow-gray-600 mb-4">
-      <Link className="flex items-center gap-3 mb-3" href={`/user/${singlePost.userId}`}>
+      <Link
+        className="flex items-center gap-3 mb-3"
+        href={`/user/${singlePost && singlePost.accountId}`}
+      >
         <div className="w-12 h-12 rounded-full border flex items-center justify-center shadow">
           <Image src="/assets/user.png" alt="user" width={40} height={40} />
         </div>
-        <span className="font-medium text-md">{singlePost.userId}</span>
+        <span className="font-medium text-md">{singlePost && singlePost.accountId}</span>
       </Link>
-      <Link href={`/post/${singlePost.$id}`}>
-        <p className="text-md mb-4">{singlePost.postTitle ? singlePost.postTitle : "No Title"}</p>
+      <Link href={`/post/${singlePost && singlePost.$id}`}>
+        <p className="text-md mb-4">
+          {singlePost && singlePost.postTitle ? singlePost.postTitle : "No Title"}
+        </p>
 
-        {singlePost.postImage[0]?.length > 0 ? (
+        {singlePost && singlePost.postImage && singlePost.postImage[0]?.length > 0 ? (
           <Image
             className="w-full mb-4"
             src={singlePost.postImage[0]}
@@ -64,7 +124,7 @@ const SinglePost = ({
           className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${
             singlePost.likes && singlePost.likes.includes(authState?.userId)
               ? "text-primary hover:text-primary"
-              : "text-secondary-light dark:text-white hover:text-primary"
+              : "text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
           }`}
         >
           <Heart
@@ -84,8 +144,27 @@ const SinglePost = ({
           <span className="text-base">{singlePost.comments && singlePost.comments.length}</span>
         </article>
 
-        <article className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary">
-          <Bookmark size={22} />
+        <article
+          onClick={() => handleUpdateBookmark(singlePost.accountId, singlePost.$id!)}
+          className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${
+            userBookmarks &&
+            userBookmarks.bookmark.length > 0 &&
+            userBookmarks.bookmark.includes(singlePost.$id)
+              ? "text-primary hover:text-primary dark:hover:text-primary"
+              : "text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
+          }`}
+        >
+          <Bookmark
+            size={22}
+            fill="true"
+            className={`${
+              userBookmarks &&
+              userBookmarks.bookmark.length > 0 &&
+              userBookmarks.bookmark.includes(singlePost.$id)
+                ? "fill-primary"
+                : "fill-transparent"
+            }`}
+          />
         </article>
 
         <article className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary">
@@ -98,6 +177,4 @@ const SinglePost = ({
       </div>
     </div>
   );
-};
-
-export default SinglePost;
+}
