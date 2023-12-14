@@ -2,6 +2,22 @@
 
 import { account, db, ID, Query, palettegramDB, bookmarksCollection } from "./appwrite.config";
 
+/**
+ * @abstract filtering bookmarks
+ * @param {string[]} bookmarks
+ * @param {string} postId
+ * @returns {string[]}
+ */
+const removePostIdFromBookmarks = function (bookmarks: string[], postId: string): string[] {
+  let idx = bookmarks.indexOf(postId);
+
+  let beforeIdx = bookmarks.slice(0, idx);
+
+  let afterIdx = bookmarks.slice(idx + 1, bookmarks.length);
+
+  return [...beforeIdx, ...afterIdx];
+};
+
 const getBookmarks = async (accountId: string) => {
   try {
     const getSavedBookmarkData = await db.listDocuments(palettegramDB, bookmarksCollection, [
@@ -12,16 +28,6 @@ const getBookmarks = async (accountId: string) => {
   } catch (error) {
     console.log(error);
   }
-};
-
-const removePostIdFromBookmarks = function (bookmarks: string[], postId: string): string[] {
-  let idx = bookmarks.indexOf(postId);
-
-  let beforeIdx = bookmarks.slice(0, idx);
-
-  let afterIdx = bookmarks.slice(idx + 1, bookmarks.length);
-
-  return [...beforeIdx, ...afterIdx];
 };
 
 const saveBookmark = async (accountId: string, postId: string) => {
@@ -65,7 +71,7 @@ const removeBookmark = async (accountId: string, postId: string) => {
     const documentId = getSavedBookmarkData.documents[0].$id;
     let oldBookmarkArray = getSavedBookmarkData.documents[0].bookmark;
 
-    let newBookmarkArray = removePostIdFromBookmarks(oldBookmarkArray, postId);
+    let newBookmarkArray: string[] = removePostIdFromBookmarks(oldBookmarkArray, postId);
 
     const updatedData = await db.updateDocument(palettegramDB, bookmarksCollection, documentId, {
       bookmark: newBookmarkArray,

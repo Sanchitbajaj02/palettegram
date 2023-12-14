@@ -1,57 +1,62 @@
 "use client";
-import { useEffect, useState } from "react";
-import { getBookmarks } from "@/backend/bookmarks.api";
-import { parseCookies } from "nookies";
 import { useSelector, useDispatch } from "react-redux";
-import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
+import SinglePost from "@/components/core/posts/SinglePost";
+import { ArrowLeft } from "react-feather";
+import { useRouter } from "next/navigation";
+
+import { PostInstanceType } from "@/types/index.d";
+
+function getSinglePostData(bookmarkId: string, posts: PostInstanceType[]) {
+  return posts.filter((post: PostInstanceType) => post.$id === bookmarkId)[0];
+}
 
 export default function UserBookmark() {
-  const [load, setLoad] = useState<boolean>(true);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const userBookmarks = useSelector((state: any) => state.bookmarks);
 
-  const cookies = parseCookies();
+  const totalPosts = useSelector((state: any) => state.posts);
 
-  useEffect(() => {
-    getBookmarks(cookies["userId"])
-      .then((bookm) => {
-        console.log(bookm);
-        dispatch(
-          saveBookmarkToStore({
-            accountId: cookies["userId"],
-            bookmark: bookm?.documents[0].bookmark,
-          }),
-        );
-        setLoad(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoad(true);
-      });
-
-    return () => {
-      console.log("clear");
-    };
-  }, [dispatch]);
-
-  if (userBookmarks.error || (userBookmarks && userBookmarks.bookmark.length <= 0)) {
-    return <h1 className="text-white text-3xl">error...</h1>;
+  if (userBookmarks.error) {
+    return <h1 className="text-white text-2xl text-center">Error...</h1>;
   }
 
-  if (userBookmarks.loading || load) {
-    return <h1 className="text-white text-3xl">Loading...</h1>;
+  if (userBookmarks.loading) {
+    return <h1 className="text-white text-2xl text-center">Loading...</h1>;
   }
 
   return (
     <>
-      <section className="mx-auto max-w-screen-lg mt-4">
-        <h1 className="text-black dark:text-white text-lg font-bold">My saved items</h1>
+      <section className="mx-auto max-w-screen-md mt-8">
+        <div className="flex gap-4 items-center">
+          <ArrowLeft
+            size={24}
+            onClick={() => {
+              router.back();
+            }}
+            className="hover:cursor-pointer hover:text-primary-light transition-all duration-300"
+          />
+          <h1 className="text-black dark:text-white text-xl font-bold">My saved items</h1>
+        </div>
 
-        {userBookmarks &&
-          userBookmarks.bookmark.map((ids: string, i: number) => {
-            return <p key={i}>{ids}</p>;
-          })}
+        <main className="my-8">
+          {userBookmarks && userBookmarks.bookmark.length > 0 ? (
+            userBookmarks.bookmark.map((ids: string, i: number) => {
+              return (
+                <>
+                  <SinglePost key={i} singlePost={getSinglePostData(ids, totalPosts.posts)} />
+                </>
+              );
+            })
+          ) : (
+            <>
+              <h1 className="text-black dark:text-white text-base font-medium">
+                No bookmarks saved
+              </h1>
+            </>
+          )}
+        </main>
       </section>
     </>
   );

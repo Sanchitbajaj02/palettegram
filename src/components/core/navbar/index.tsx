@@ -1,12 +1,21 @@
 "use client";
+import { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { Settings, LogOut, Home } from "react-feather";
 import { useSelector, useDispatch } from "react-redux";
-import { logoutUser } from "@/backend/auth.api";
-import { logUserOut } from "@/redux/reducers/authReducer";
 import ThemeButton from "@/components/core/themeButton";
+
+import { parseCookies } from "nookies";
+
+import { logoutUser } from "@/backend/auth.api";
+import { getAllPosts } from "@/backend/posts.api";
+import { getBookmarks } from "@/backend/bookmarks.api";
+
+import { logUserOut } from "@/redux/reducers/authReducer";
+import { getPosts } from "@/redux/reducers/postsReducer";
+import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
 
 const Navbar = () => {
   const router = useRouter();
@@ -14,6 +23,7 @@ const Navbar = () => {
 
   const userAuth = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
+  const cookies = parseCookies();
 
   const logout = async () => {
     await logoutUser();
@@ -22,6 +32,35 @@ const Navbar = () => {
 
     router.push("/");
   };
+
+  useEffect(() => {
+    getAllPosts()
+      .then((posts) => {
+        if (posts && posts?.documents.length > 0) {
+          dispatch(getPosts(posts.documents));
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    getBookmarks(cookies["userId"])
+      .then((bookm) => {
+        dispatch(
+          saveBookmarkToStore({
+            accountId: cookies["userId"],
+            bookmark: bookm?.documents[0].bookmark,
+          }),
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    return () => {
+      console.log("clear");
+    };
+  }, [cookies, dispatch]);
 
   if (userAuth.error) {
     return <h1>Error</h1>;

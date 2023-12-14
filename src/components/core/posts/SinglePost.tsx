@@ -6,6 +6,7 @@ import { PostInstanceType } from "@/types/index.d";
 import { useSelector, useDispatch } from "react-redux";
 import { removeBookmark, saveBookmark, createBookmarkEntry } from "@/backend/bookmarks.api";
 import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
+import { toastify } from "@/helper/toastify";
 
 // eslint-disable-next-line react/prop-types
 export default function SinglePost({
@@ -13,7 +14,7 @@ export default function SinglePost({
   onLikeClick,
 }: {
   singlePost: PostInstanceType;
-  onLikeClick: any;
+  onLikeClick?: any;
 }) {
   const dispatch = useDispatch();
   const authState = useSelector((state: any) => state.auth);
@@ -40,6 +41,8 @@ export default function SinglePost({
                 bookmark: resp.bookmark,
               }),
             );
+
+            toastify("Bookmark removed", "success");
           })
           .catch((err) => console.log(err));
       } else {
@@ -52,6 +55,7 @@ export default function SinglePost({
                 bookmark: resp.bookmark,
               }),
             );
+            toastify("Bookmark saved", "success");
           })
           .catch((err) => console.log(err));
       }
@@ -72,16 +76,21 @@ export default function SinglePost({
 
   return (
     <div className="p-3 rounded-md shadow dark:shadow-gray-600 mb-4">
-      <Link className="flex items-center gap-3 mb-3" href={`/user/${singlePost.accountId}`}>
+      <Link
+        className="flex items-center gap-3 mb-3"
+        href={`/user/${singlePost && singlePost.accountId}`}
+      >
         <div className="w-12 h-12 rounded-full border flex items-center justify-center shadow">
           <Image src="/assets/user.png" alt="user" width={40} height={40} />
         </div>
-        <span className="font-medium text-md">{singlePost.accountId}</span>
+        <span className="font-medium text-md">{singlePost && singlePost.accountId}</span>
       </Link>
-      <Link href={`/post/${singlePost.$id}`}>
-        <p className="text-md mb-4">{singlePost.postTitle ? singlePost.postTitle : "No Title"}</p>
+      <Link href={`/post/${singlePost && singlePost.$id}`}>
+        <p className="text-md mb-4">
+          {singlePost && singlePost.postTitle ? singlePost.postTitle : "No Title"}
+        </p>
 
-        {singlePost.postImage[0]?.length > 0 ? (
+        {singlePost && singlePost.postImage && singlePost.postImage[0]?.length > 0 ? (
           <Image
             className="w-full mb-4"
             src={singlePost.postImage[0]}
