@@ -15,11 +15,6 @@
     "preinstall": "npx only-allow yarn",
     "prepare": "husky install"
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@types/node": "20.4.10",
@@ -42,10 +37,9 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.7.1",
-    "@commitlint/config-conventional": "^17.7.0",
     "encoding": "^0.1.13",
     "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
     "prettier": "^3.0.1",
     "tailwind-scrollbar": "^3.0.5"
   }
