@@ -2,7 +2,7 @@
   "name": "palettegram",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/",
+  "homepage": ".",
   "engines": {
     "node": ">=16.0.0"
   },
