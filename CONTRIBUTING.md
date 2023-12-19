@@ -9,7 +9,7 @@ Contribution guidelines are listed below. Please take the time to go through the
 ## Table of Contents
 
 - [Contributing to Palettegram 🪡](#contributing-to-Palettegram-)
-  - [Table of Contents](#table-of-contents)
+  - [Table of Contents](#table-of-contents)[Title](CONTRIBUTING.md)
   - [First time Contributor](#first-time-contributor)
   - [I Want To Contribute](#i-want-to-contribute)
     - [Fork the Project](#fork-the-project)
@@ -72,7 +72,7 @@ git add <names of files changed or added>
 
 ### Commit
 
-- To commit this change, give a descriptive message for the convenience of reviewer
+- To commit this changes, give a descriptive message for the convenience of reviewer. Follow the [commitlint](docs/commitlint.md) guidelines to know more.
 
 ```bash
 # This message will be associated with all files you have changed
@@ -89,19 +89,16 @@ git push -u origin branch_name
 ### Pull Request
 
 Go to your repository in the browser and click on compare and pull requests.
-This will send a request to the maintainer to add your contribution to the main repository `https://github.com/Sanchitbajaj02/Palettegram.git`
+This will send a request to the maintainer to add your contribution to the main repository i.e., `https://github.com/Sanchitbajaj02/Palettegram.git`
 
-<br/>
 
 ### Add a title to your Pull Request.
 
-Add a meaningful title to the pull request so that reviewing will be easy for our team.
+Add a meaningful title to the pull request so that reviewing will be easy for our team. Follow the [commitlint](docs/commitlint.md) guidelines to know more
 
 ```text
-Fix minor issues to increase performance by 20%
+fix: minor issues to increase performance by 20%
 ```
-
-<br/>
 
 Make sure to mention which issue is solved with this Pull Request by mentioning the issue number #. Then add a description to your Pull Request that explains your contribution.
 
