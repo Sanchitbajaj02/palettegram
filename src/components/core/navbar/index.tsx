@@ -34,30 +34,33 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    getAllPosts()
-      .then((posts) => {
-        if (posts && posts?.documents.length > 0) {
-          dispatch(getPosts(posts.documents));
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const timeoutId = setTimeout(() => {
+      getAllPosts()
+        .then((posts) => {
+          if (posts && posts?.documents.length > 0) {
+            dispatch(getPosts(posts.documents));
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
 
-    getBookmarks(cookies["userId"])
-      .then((bookm) => {
-        dispatch(
-          saveBookmarkToStore({
-            accountId: cookies["userId"],
-            bookmark: bookm?.documents[0].bookmark,
-          }),
-        );
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      getBookmarks(cookies["userId"])
+        .then((bookm) => {
+          dispatch(
+            saveBookmarkToStore({
+              accountId: cookies["userId"],
+              bookmark: bookm?.documents[0].bookmark,
+            }),
+          );
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }, 2000);
 
     return () => {
+      clearTimeout(timeoutId)
       console.log("clear");
     };
   }, [cookies, dispatch]);
