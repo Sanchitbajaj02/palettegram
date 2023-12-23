@@ -54,7 +54,6 @@ export const postsReducer = createSlice({
 
       state.loading = false;
     },
-
   },
 });
 

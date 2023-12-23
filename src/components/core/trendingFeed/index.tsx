@@ -1,4 +1,3 @@
-import { User, ArrowRight } from "react-feather";
 import Link from "next/link";
 import Image from "next/image";
 import { trendingPosts } from "@/backend/trendingPosts.dummy";
@@ -30,11 +29,19 @@ export default function TrendingFeed() {
             );
           })}
       </div>
-      <div className="flex flex-wrap gap-2 justify-center items-center text-sm">
-        <Link href="/"> About</Link>
-        <Link href="/">Accessibility</Link>
-        <Link href="/">Help Center</Link>
-        <Link href="/">Privacy & Terms</Link>
+      <div className="flex flex-wrap gap-2 justify-center items-center">
+        <Link href="/" className="text-xs text-slate-500 hover:text-primary-light">
+          About
+        </Link>
+        <Link href="/" className="text-xs text-slate-500 hover:text-primary-light">
+          Accessibility
+        </Link>
+        <Link href="/" className="text-xs text-slate-500 hover:text-primary-light">
+          Help Center
+        </Link>
+        <Link href="/" className="text-xs text-slate-500 hover:text-primary-light">
+          Privacy & Terms
+        </Link>
       </div>
     </section>
   );

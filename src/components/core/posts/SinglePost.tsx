@@ -136,7 +136,9 @@ export default function SinglePost({
                 : "fill-transparent"
             }`}
           />
-          <span className="text-base">{singlePost && singlePost?.likes && singlePost?.likes.length}</span>
+          <span className="text-base">
+            {singlePost && singlePost?.likes && singlePost?.likes.length}
+          </span>
         </article>
 
         <article className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary">

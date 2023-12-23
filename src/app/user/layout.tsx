@@ -1,5 +1,8 @@
 import "@/styles/globals.css";
+import { Suspense } from "react";
+
 import { Metadata } from "next";
+import Loader from "@/app/loading";
 import Navbar from "@/components/core/navbar";
 
 export const metadata: Metadata = {
@@ -16,7 +19,7 @@ export default async function UserLayout({ children }: { children: React.ReactNo
   return (
     <>
       <Navbar />
-      {children}
+      <Suspense fallback={<Loader />}>{children}</Suspense>
     </>
   );
 }
