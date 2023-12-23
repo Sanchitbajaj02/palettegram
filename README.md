@@ -1,3 +1,5 @@
+# Palettegram:
+
 [![Palettegram](.github/assets/palettegram-cover.png)](https://github.com/Sanchitbajaj02/palettegram)
 
 <!-- A web app to get designs inspirations and color palettes for professionals by professionals. -->
@@ -13,9 +15,15 @@
 
 <!-- ![intro](https://github.com/Sanchitbajaj02/palettegram/assets/55249639/ffaf63eb-4e99-4add-8318-29b3ecb78dc8) -->
 
-<h2 align="center">This project is registered in Hacktoberfest 2023</h2>
+## 🏆 Featured in:
 
-![Welcome to hacktoberfest](.github/assets/hacktoberfest-banner.png)
+| Logos                                                                                                                         | Events             |
+| ----------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| <img src=".github/assets/hacktoberfest-banner.png" width="200" height="auto" loading="lazy" alt="Welcome to Hacktoberfest" /> | Hacktoberfest 2023 |
+
+<!-- ![Welcome to hacktoberfest](.github/assets/hacktoberfest-banner.png) -->
+
+<br/>
 
 ## 🤔 Why open source
 
@@ -39,7 +47,6 @@ This repository also provides one such platforms where contributers come over an
 ## Live demo 💻
 
 Visit https://palettegram.vercel.app to see the live demo!
-
 
 ## 👋 Introduction
 

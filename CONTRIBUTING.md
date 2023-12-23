@@ -43,9 +43,10 @@ To start contributing to this project, follow the steps below.
 
 - Star & Fork this repository. This will create a local copy of this repository on your github profile.
 
-  <a href='https://postimages.org/' target='_blank'><img src='https://i.postimg.cc/J4pdgJZH/Screenshot-2022-10-10-at-18-51-49.png' border='0' alt='Fork Repository'/></a>
+<img src=".github/assets/fork.png" src="fork" width="500" />
 
-- Follow [Git](docs/git.md)
+- Follow [git workflow](docs/git.md) to know more.
+
 ### Create a new branch
 
 Creating a new branch lets you work on your issue without creating merge conflicts while making PRs.
@@ -90,7 +91,6 @@ git push -u origin branch_name
 
 Go to your repository in the browser and click on compare and pull requests.
 This will send a request to the maintainer to add your contribution to the main repository i.e., `https://github.com/Sanchitbajaj02/Palettegram.git`
-
 
 ### Add a title to your Pull Request.
 

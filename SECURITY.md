@@ -5,17 +5,16 @@
 Use this section to tell people about which versions of your project are
 currently being supported with security updates.
 
+Currently **Palettegram** is in rapid development process and it will be better to always be on the latest version.
+
 | Version | Supported          |
 | ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+| 1.0.1   | :white_check_mark: |
+| 1.0.0   | :white_check_mark: |
+| 0.0.0   | :x:                |
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+If you find any vulnerability, please let me know :smile:.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+Address the issue in the [discord server](https://discord.gg/TAW9vC2Hu7) or reach out to me personally on the my email: [sanchit02@outlook.com](mailto:sanchit02@outlook.com?subject=Palettegram%20vulnerabilities)
