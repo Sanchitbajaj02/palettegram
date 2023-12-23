@@ -60,7 +60,7 @@ const Navbar = () => {
     }, 2000);
 
     return () => {
-      clearTimeout(timeoutId)
+      clearTimeout(timeoutId);
       console.log("clear");
     };
   }, [cookies, dispatch]);

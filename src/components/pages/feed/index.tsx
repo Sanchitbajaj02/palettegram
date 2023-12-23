@@ -1,8 +1,10 @@
 "use client";
+import { Suspense } from "react";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import { User, Bookmark } from "react-feather";
 
+import Loader from "@/app/loading";
 import CreatePost from "@/components/core/createPost";
 import Posts from "@/components/core/posts";
 import TrendingFeed from "@/components/core/trendingFeed";
@@ -30,7 +32,9 @@ const Feed = () => {
         </div>
         <div className="flex-[5]">
           <CreatePost />
-          <Posts />
+          <Suspense fallback={<Loader />}>
+            <Posts />
+          </Suspense>
         </div>
         <div className="flex-[2] hidden md:block">
           <TrendingFeed />
