@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { parseCookies } from "nookies";
 
 // Store
-import { getPosts, addLikesToAPost } from "@/redux/reducers/postsReducer";
+import { addLikesToAPost } from "@/redux/reducers/postsReducer";
 // import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
 
 import { PostInstanceType } from "@/types/index.d";

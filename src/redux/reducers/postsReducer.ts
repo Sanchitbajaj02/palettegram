@@ -16,8 +16,8 @@ export const postsReducer = createSlice({
     getPosts: (state, action: PayloadAction<any>) => {
       state.loading = true;
       state.posts = action.payload;
-      state.loading = false;
       state.error = false;
+      state.loading = false;
     },
     addPost: (state, action: PayloadAction<PostInstanceType>) => {
       state.loading = true;
@@ -54,6 +54,7 @@ export const postsReducer = createSlice({
 
       state.loading = false;
     },
+
   },
 });
 
