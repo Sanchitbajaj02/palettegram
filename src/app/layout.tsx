@@ -20,9 +20,9 @@ const poppinsFont = Poppins({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://palettegram.vercel.app"),
-  title: "Palettegram - from professionals by professionals",
+  title: "Palettegram - social media for professionals",
   description:
-    "Palletegrm is a social media application dedicated to professionals like graphic designers, UI designers, UX designers, Developers, etc. to post and their color palletes as well as use other's color palletes.",
+    "Palettegram is a social media application dedicated to professionals like graphic designers, UI/UX designers, Developers, etc. to leverage UI designs, design ideas, UX approaches and color palettes.",
 
   keywords:
     "Palettegram, Appwrite, Color Designer, Palettegram social media, behance, dribbble, made for designers, Palatogram, Palette gram, Palettegram social, palettegram app",
@@ -35,10 +35,10 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://palettegram.vercel.app",
-    siteName: "Palettegram - from professionals by professionals",
-    title: "Palettegram - from professionals by professionals",
+    siteName: "Palettegram - social media for professionals",
+    title: "Palettegram - social media for professionals",
     description:
-      "Palletegrm is a social media application dedicated to professionals like graphic designers, UI designers, UX designers, Developers, etc. to post and their color palletes as well as use other's color palletes.",
+      "Palettegram is a social media application dedicated to professionals like graphic designers, UI/UX designers, Developers, etc. to leverage UI designs, design ideas, UX approaches and color palettes.",
     images: [
       {
         url: "/assets/meta-image.png", // Replace with your actual OG image URL

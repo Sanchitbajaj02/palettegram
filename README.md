@@ -17,7 +17,7 @@
 
 ## 🏆 Featured in:
 
-| Logos                                                                                                                         | Events             |
+| Event Logo                                                                                                                    | Event Name         |
 | ----------------------------------------------------------------------------------------------------------------------------- | ------------------ |
 | <img src=".github/assets/hacktoberfest-banner.png" width="200" height="auto" loading="lazy" alt="Welcome to Hacktoberfest" /> | Hacktoberfest 2023 |
 
