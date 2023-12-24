@@ -151,7 +151,7 @@ export default function SinglePost({
           className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${
             userBookmarks &&
             userBookmarks?.bookmark?.length > 0 &&
-            userBookmarks?.bookmark.includes(singlePost?.$id)
+            userBookmarks?.bookmark.includes(singlePost && singlePost?.$id)
               ? "text-primary hover:text-primary dark:hover:text-primary"
               : "text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
           }`}
@@ -162,7 +162,7 @@ export default function SinglePost({
             className={`${
               userBookmarks &&
               userBookmarks?.bookmark.length > 0 &&
-              userBookmarks?.bookmark.includes(singlePost.$id)
+              userBookmarks?.bookmark.includes(singlePost && singlePost?.$id)
                 ? "fill-primary"
                 : "fill-transparent"
             }`}
