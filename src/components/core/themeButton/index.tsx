@@ -2,6 +2,7 @@
 import { Sun, Moon } from "react-feather";
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
+import Loader from "@/app/loading";
 
 export default function ThemeButton({ iconSize }: { iconSize: number }) {
   const { theme, setTheme } = useTheme();
@@ -13,7 +14,8 @@ export default function ThemeButton({ iconSize }: { iconSize: number }) {
   }, []);
 
   if (!mounted) {
-    return <small className="text-sm">Loading...</small>;
+    // return <small className="text-sm">Loading...</small>;
+    return <Loader />;
   }
 
   return (
@@ -24,6 +26,7 @@ export default function ThemeButton({ iconSize }: { iconSize: number }) {
           onClick={() => setTheme("light")}
         >
           <Sun size={iconSize} cursor="pointer" className="transition-all duration-300" />
+          <span className="sr-only">theme button</span>
         </button>
       ) : (
         <button
@@ -31,6 +34,7 @@ export default function ThemeButton({ iconSize }: { iconSize: number }) {
           onClick={() => setTheme("dark")}
         >
           <Moon size={iconSize} cursor="pointer" className="transition-all duration-300" />
+          <span className="sr-only">theme button</span>
         </button>
       )}
     </>
