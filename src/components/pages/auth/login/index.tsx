@@ -8,6 +8,7 @@ import { ArrowLeftCircle } from "react-feather";
 // Components
 import { saveUser } from "@/redux/reducers/authReducer";
 import { toastify } from "@/helper/toastify";
+import { ButtonLong } from "@/components/core/buttons";
 
 // API
 import { loginUser } from "@/backend/auth.api";
