@@ -20,7 +20,7 @@ body {
   #b6005596
 } */
 
-.shape1 {
+/* .shape1 {
   position: absolute;
   width: 700px;
   height: 400px;
@@ -28,10 +28,19 @@ body {
   top: 25%;
   background: linear-gradient(100deg, rgba(182, 0, 85, 0.588) 10.98%, rgba(110, 93, 248, 0) 100%);
   filter: blur(100px);
+} */
+
+@layer utilities {
+  .custom-shadow {
+    filter: drop-shadow(0 5px 150px rgba(182, 0, 85, 0.75));
+  }
 }
 
-@media only screen and (max-width: 991px) {
-  .shape1 {
-    display: none;
+@layer components {
+  .card {
+    @apply p-4 mx-2 md:m-0 md:p-8 rounded-xl;
+    @apply bg-gray-200/50 dark:bg-gray-700/50;
+    width: 100%;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
   }
 }

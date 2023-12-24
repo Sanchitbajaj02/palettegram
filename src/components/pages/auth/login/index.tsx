@@ -1,14 +1,17 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
+import { ArrowLeftCircle } from "react-feather";
 
-import { loginUser } from "@/backend/auth.api";
+// Components
 import { saveUser } from "@/redux/reducers/authReducer";
 import { toastify } from "@/helper/toastify";
+import { ButtonLong } from "@/components/core/buttons";
 
-import { ArrowLeftCircle } from "react-feather";
+// API
+import { loginUser } from "@/backend/auth.api";
 
 export default function LoginComponent() {
   const dispatch = useDispatch();
@@ -65,19 +68,18 @@ export default function LoginComponent() {
   return (
     <>
       <section className="max-w-screen-sm mx-auto h-screen flex justify-center items-center">
-        <div className="bg-gray-200/50 w-full p-4 mx-2 md:m-0 md:p-8 rounded-xl shadow-lg">
+        <div className="card">
           <article className="mb-8">
             <ArrowLeftCircle
-              size={20}
-              color="#1c223a"
+              size={22}
               onClick={() => router.back()}
-              className="hover:cursor-pointer"
+              className="hover:cursor-pointer text-secondary dark:text-white"
             />
-            <h1 className="text-xl md:text-3xl mb-2 md:mb-4 text-center font-bold  text-secondary">
+            <h1 className="text-xl md:text-3xl mb-2 text-center font-bold text-secondary dark:text-white">
               Welcome to Palettegram
             </h1>
-            <p className="text-md md:text-xl text-center font-normal dark:text-secondary-light">
-              Login and start your journey
+            <p className="text-base md:text-xl text-center font-normal text-secondary-light dark:text-gray-50">
+              Login to connect with the amazing community
             </p>
           </article>
 
@@ -86,7 +88,7 @@ export default function LoginComponent() {
               <label
                 htmlFor="email"
                 aria-required="true"
-                className="mb-3 block text-sm md:text-base font-medium dark:text-secondary-light"
+                className="mb-2 block text-sm font-medium text-secondary-light dark:text-gray-50"
               >
                 Email Address <span className="text-red-600">*</span>
               </label>
@@ -97,7 +99,7 @@ export default function LoginComponent() {
                 required={true}
                 onChange={changeHandler}
                 placeholder="Enter your email address"
-                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-sm md:text-base font-medium text-[#1c223a] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                className="w-full rounded-md bg-white py-2 px-4 text-sm md:text-base font-medium text-secondary outline-none border border-white focus:border-secondary-light dark:border-secondary-light dark:focus:border-white"
               />
             </div>
 
@@ -105,7 +107,7 @@ export default function LoginComponent() {
               <label
                 htmlFor="password"
                 aria-required="true"
-                className="mb-3 block text-sm md:text-base font-medium dark:text-secondary-light"
+                className="mb-2 block text-sm font-medium text-secondary-light dark:text-gray-50"
               >
                 Password <span className="text-red-600">*</span>
               </label>
@@ -116,14 +118,17 @@ export default function LoginComponent() {
                 required={true}
                 onChange={changeHandler}
                 placeholder="Enter your password"
-                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-sm md:text-base font-medium text-[#1c223a] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                className="w-full rounded-md bg-white py-2 px-4 text-sm md:text-base font-medium text-secondary outline-none border border-white focus:border-secondary-light dark:border-secondary-light dark:focus:border-white"
               />
             </div>
 
-            <div className="mb-6">
-              <p className="dark:text-secondary-light">
+            <div className="mb-4">
+              <p className="text-sm text-secondary-light dark:text-gray-50">
                 Do not have an account?{" "}
-                <Link href="/register" className="text-primary">
+                <Link
+                  href="/register"
+                  className="text-primary hover:text-secondary hover:dark:text-primary-light"
+                >
                   Register
                 </Link>
               </p>
@@ -134,7 +139,7 @@ export default function LoginComponent() {
                 type="submit"
                 className="w-full py-2 text-sm md:text-base rounded-full text-white bg-primary transition duration-300 ease hover:bg-secondary"
               >
-                Login Now
+                Login
               </button>
             </div>
           </form>

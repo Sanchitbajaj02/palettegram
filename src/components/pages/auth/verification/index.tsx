@@ -2,15 +2,14 @@
 import { useEffect, useState } from "react";
 import { verifyUser } from "@/backend/auth.api";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { toastify } from "@/helper/toastify";
+import { ButtonLong } from "@/components/core/buttons";
+import Loader from "@/app/loading";
 
-import { toast } from "react-toastify";
-
-type Verification = {
+interface Verification {
   userId: string;
   secret: string;
-};
+}
 
 export default function VerificationComponent({ userId, secret }: Verification) {
   const [isVerified, setVerified] = useState(false);
@@ -20,8 +19,6 @@ export default function VerificationComponent({ userId, secret }: Verification) 
     verifyUser(userId, secret)
       .then((resp) => {
         if (resp.status) {
-          router.push("/feed");
-          // console.log(resp);
           setVerified(resp.status);
         }
       })
@@ -34,15 +31,23 @@ export default function VerificationComponent({ userId, secret }: Verification) 
 
   return (
     <>
-      <section className="max-w-screen-sm mx-auto h-screen flex flex-col justify-center items-center">
-        <div className="bg-gray-200/50 w-full p-4 mx-2 md:m-0 md:p-8 rounded-xl shadow-lg flex flex-col">
-          <h1 className="text-4xl text-center font-bold">You are verified</h1>
-          <Link
-            href="/feed"
-            className="px-16 py-2 mt-8 text-center text-xl rounded-full text-white bg-primary"
-          >
-            Start your feed
-          </Link>
+      <section className="max-w-screen-sm mx-auto h-screen flex justify-center items-center">
+        <div className="card">
+          <h1 className="text-xl md:text-3xl mb-8 text-center font-bold text-secondary dark:text-white">
+            You are verified 👏
+          </h1>
+          {/* <p className="text-base md:text-xl text-center font-normal text-secondary-light dark:text-gray-50">
+            Register and be a part of the amazing community
+          </p> */}
+          <div className="text-center">
+            {isVerified ? (
+              <ButtonLong href="/feed" size="big">
+                Click to join community
+              </ButtonLong>
+            ) : (
+              <Loader />
+            )}
+          </div>
         </div>
       </section>
     </>

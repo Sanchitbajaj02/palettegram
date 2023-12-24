@@ -2,11 +2,15 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
-import { saveUser } from "@/redux/reducers/authReducer";
-import { registerUser } from "@/backend/auth.api";
-import { toastify } from "@/helper/toastify";
 import { ArrowLeftCircle } from "react-feather";
 import { useRouter } from "next/navigation";
+
+// Components
+import { saveUser } from "@/redux/reducers/authReducer";
+import { toastify } from "@/helper/toastify";
+
+// API
+import { registerUser } from "@/backend/auth.api";
 
 export default function RegisterComponent() {
   const dispatch = useDispatch();
@@ -61,19 +65,18 @@ export default function RegisterComponent() {
   return (
     <>
       <section className="max-w-screen-sm mx-auto h-screen flex justify-center items-center">
-        <div className="bg-gray-200/50 w-full p-4 mx-2 md:m-0 md:p-8 rounded-xl shadow-lg">
+        <div className="card">
           <article className="mb-8">
             <ArrowLeftCircle
               size={20}
-              color="#1c223a"
               onClick={() => router.back()}
-              className="hover:cursor-pointer"
+              className="hover:cursor-pointer text-secondary dark:text-white"
             />
-            <h1 className="text-xl md:text-3xl mb-2 md:mb-4 text-center font-bold  dark:text-[#1c223a]">
+            <h1 className="text-xl md:text-3xl mb-2 text-center font-bold text-secondary dark:text-white">
               Welcome to Palettegram
             </h1>
-            <p className="text-md md:text-xl text-center font-normal dark:text-[#424551]">
-              Register and be a part of community
+            <p className="text-base md:text-xl text-center font-normal text-secondary-light dark:text-gray-50">
+              Register and be a part of the amazing community
             </p>
           </article>
 
@@ -82,7 +85,7 @@ export default function RegisterComponent() {
               <label
                 htmlFor="fullName"
                 aria-required="true"
-                className="mb-3 block text-sm md:text-base font-medium dark:text-[#424551]"
+                className="mb-2 block text-sm font-medium text-secondary-light dark:text-gray-50"
               >
                 Full Name <span className="text-red-600">*</span>
               </label>
@@ -93,7 +96,7 @@ export default function RegisterComponent() {
                 required={true}
                 onChange={changeHandler}
                 placeholder="Enter your full name"
-                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-base font-medium text-[#1C223A] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                className="w-full rounded-md bg-white py-2 px-4 text-sm md:text-base font-medium text-secondary outline-none border border-white focus:border-secondary-light dark:border-secondary-light dark:focus:border-white"
               />
             </div>
 
@@ -101,7 +104,7 @@ export default function RegisterComponent() {
               <label
                 htmlFor="email"
                 aria-required="true"
-                className="mb-3 block text-sm md:text-base font-medium dark:text-[#424551]"
+                className="mb-2 block text-sm font-medium text-secondary-light dark:text-gray-50"
               >
                 Email Address <span className="text-red-600">*</span>
               </label>
@@ -112,7 +115,7 @@ export default function RegisterComponent() {
                 required={true}
                 onChange={changeHandler}
                 placeholder="Enter your email address"
-                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-base font-medium text-[#1C223A] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                className="w-full rounded-md bg-white py-2 px-4 text-sm md:text-base font-medium text-secondary outline-none border border-white focus:border-secondary-light dark:border-secondary-light dark:focus:border-white"
               />
             </div>
 
@@ -120,7 +123,7 @@ export default function RegisterComponent() {
               <label
                 htmlFor="password"
                 aria-required="true"
-                className="mb-3 block text-sm md:text-base font-medium dark:text-[#424551]"
+                className="mb-2 block text-sm font-medium text-secondary-light dark:text-gray-50"
               >
                 Password <span className="text-red-600">*</span>
               </label>
@@ -131,14 +134,14 @@ export default function RegisterComponent() {
                 required={true}
                 onChange={changeHandler}
                 placeholder="Enter your password"
-                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-base font-medium text-[#1C223A] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                className="w-full rounded-md bg-white py-2 px-4 text-sm md:text-base font-medium text-secondary outline-none border border-white focus:border-secondary-light dark:border-secondary-light dark:focus:border-white"
               />
             </div>
 
             <div className="mb-6">
-              <p className="block text-sm md:text-base font-medium dark:text-[#424551]">
+              <p className="text-sm text-secondary-light dark:text-gray-50">
                 Already have an account?{" "}
-                <Link href="/login" className="text-primary">
+                <Link href="/login" className="text-primary hover:text-secondary hover:dark:text-primary-light">
                   Login
                 </Link>
               </p>
