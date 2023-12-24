@@ -1,10 +1,8 @@
-import React from "react";
-
 type Props = {
   blur?: boolean;
 };
 
-const BlobBackground: React.FC<Props> = ({ blur = false }) => {
+const BlobBackground = ({ blur = false }: Props) => {
   return (
     <span className={blur ? "blur-md" : undefined}>
       <svg viewBox="0 0 200 200" className="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
