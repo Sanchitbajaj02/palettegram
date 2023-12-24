@@ -9,6 +9,7 @@ import { isLoggedIn } from "@/backend/auth.api";
 import { saveUser } from "@/redux/reducers/authReducer";
 import { Menu, X } from "react-feather";
 import ThemeButton from "@/components/core/themeButton";
+import { ButtonLong } from "@/components/core/buttons";
 
 function HomePage() {
   const router = useRouter();
@@ -78,29 +79,22 @@ function HomePage() {
           {/* Desktop menu items */}
           <div className="hidden md:flex items-center justify-center space-x-4">
             <ThemeButton iconSize={24} />
-            <Link
-              href="https://github.com/Sanchitbajaj02/palettegram"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center text-base mx-2 px-10 py-2 rounded-full bg-primary text-white"
-            >
-              <GitHub size={20} className="mr-2" /> {stars} Stars
-            </Link>
+
+            <ButtonLong href="https://github.com/Sanchitbajaj02/palettegram" newTab size="normal">
+              <span className="flex items-center">
+                <GitHub size={20} className="mr-2" /> {stars} Stars
+              </span>
+            </ButtonLong>
+
             {!state?.creds.userId && !state?.creds.isVerified && (
               <>
-                <Link
-                  href="/register"
-                  className="inline-block mx-2 px-10 py-2 text-base rounded-full text-white bg-primary"
-                >
+                <ButtonLong href="/register" size="normal">
                   Register
-                </Link>
+                </ButtonLong>
 
-                <Link
-                  href="/login"
-                  className="inline-block mx-2 px-10 py-2 text-base rounded-full text-white bg-primary"
-                >
+                <ButtonLong href="/login" size="normal">
                   Login
-                </Link>
+                </ButtonLong>
               </>
             )}
           </div>
@@ -155,47 +149,41 @@ function HomePage() {
       </nav>
 
       <main className="max-w-screen-lg mx-auto px-2">
-        <section className="flex flex-col items-center mt-24 mb-24 gap-4 md:flex-row md:justify-between">
+        <section className="flex flex-col items-center mt-32 mb-32 gap-4 md:flex-row md:justify-between">
           <article>
-            <h1 className="text-3xl md:text-6xl text-center font-bold tracking-wide text-black dark:text-white md:text-left">
+            <h1 className="text-3xl font-bold text-center tracking-wide text-secondary dark:text-white md:text-6xl md:text-left">
               Present Palettes Around the World
             </h1>
-            <p className="text-xl md:text-2xl my-8 text-black text-center dark:text-white md:text-left">
+            <p className="text-xl my-6 font-medium text-center text-secondary dark:text-white md:text-2xl md:text-left">
               Transform ideas into Beautiful Palettes, Inspire Fellow Designers.
             </p>
 
             <div className="flex justify-center md:justify-start">
               {state?.creds.userId && state?.creds.isVerified ? (
-                <Link
-                  href="/feed"
-                  className="px-10 py-3 text-md rounded-full text-white bg-primary md:px-16 md:py-4 md:text-xl"
-                >
+                <ButtonLong href="/feed" size="big">
                   Checkout your feed
-                </Link>
+                </ButtonLong>
               ) : (
-                <Link
-                  href="register"
-                  className="px-10 py-2 text-md rounded-full text-white bg-primary md:px-16 md:py-4 md:text-xl"
-                >
+                <ButtonLong href="/register" size="big">
                   Start your journey
-                </Link>
+                </ButtonLong>
               )}
             </div>
           </article>
-          <figure className="w-[70%] my-4">
-            <div className="shape1 -z-10" />
+
+          <figure className="w-[70%] my-4 text-center">
             <Image
               src="/assets/header.png"
               alt="Header section"
               loading="lazy"
-              width={450}
+              width={400}
               height={400}
-              className="mx-auto"
+              className="custom-shadow"
             />
           </figure>
         </section>
 
-        <section className="flex items-center flex-col-reverse md:flex-row gap-4 mt-24 mb-24">
+        <section className="flex items-center flex-col-reverse md:flex-row gap-4 mt-32 mb-32">
           <figure className="w-[70%]">
             <Image
               src="/assets/palettegram-for.png"
