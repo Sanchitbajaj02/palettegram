@@ -1,4 +1,4 @@
-# Palettegram:
+# Palettegram - social media for professionals
 
 [![Palettegram](.github/assets/palettegram-cover.png)](https://github.com/Sanchitbajaj02/palettegram)
 
