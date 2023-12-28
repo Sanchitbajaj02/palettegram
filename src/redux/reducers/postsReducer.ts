@@ -34,7 +34,7 @@ export const postsReducer = createSlice({
       state.posts.forEach((post: PostInstanceType) => {
         if (post.$id === postId) {
           if (post.likes.includes(userId)) {
-            console.log(post.likes.indexOf(userId));
+            // console.log(post.likes.indexOf(userId));
             post.likes.splice(post.likes.indexOf(userId), 1);
             console.log("dislike");
           } else {
@@ -46,11 +46,11 @@ export const postsReducer = createSlice({
         return post;
       });
 
-      for (let post of state.posts) {
-        if (post.$id === postId) {
-          console.log(post);
-        }
-      }
+      // for (let post of state.posts) {
+      //   if (post.$id === postId) {
+      //     console.log(post);
+      //   }
+      // }
 
       state.loading = false;
     },

@@ -9,7 +9,7 @@ type UserPageProps = {
 export default function UserPage({ params: { userId } }: UserPageProps) {
   return (
     <>
-      <User />
+      <User userId={userId} />
     </>
   );
 }

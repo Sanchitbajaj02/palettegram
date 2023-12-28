@@ -32,7 +32,7 @@ export default function Posts() {
       }),
     );
 
-    console.log("og:", postState);
+    // console.log("og:", postState);
 
     // likeTweet(post)
     //   .then((response) => {

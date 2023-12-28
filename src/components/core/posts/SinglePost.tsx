@@ -30,7 +30,7 @@ export default function SinglePost({
           false,
         )
       ) {
-        console.log(accountId, "remove bookmark");
+        // console.log(accountId, "remove bookmark");
         removeBookmark(accountId, postId)
           .then((resp) => {
             dispatch(
@@ -44,7 +44,7 @@ export default function SinglePost({
           })
           .catch((err) => console.log(err));
       } else {
-        console.log(accountId, "save bookmark");
+        // console.log(accountId, "save bookmark");
         saveBookmark(accountId, postId)
           .then((resp) => {
             dispatch(
@@ -58,7 +58,7 @@ export default function SinglePost({
           .catch((err) => console.log(err));
       }
     } else {
-      console.log(accountId, "account not exist");
+      // console.log(accountId, "account not exist");
       createBookmarkEntry(accountId, postId)
         .then((resp) => {
           dispatch(
@@ -72,7 +72,6 @@ export default function SinglePost({
     }
   };
 
-  console.log(authState);
 
   return (
     <div className="p-3 rounded-md shadow dark:shadow-gray-600 mb-4">

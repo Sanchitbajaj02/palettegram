@@ -194,12 +194,13 @@ const isLoggedIn = async (): Promise<any> => {
 const getSingleUser = async (id: string) => {
   try {
     const tweets = await db.getDocument(palettegramDB, usersCollection, id);
-    if (tweets) {
-      return tweets;
+    if (!tweets) {
+      throw new Error();
     }
+    return tweets;
   } catch (error: any) {
     console.log(error);
   }
 };
 
-export { registerUser, verifyUser, loginUser, logoutUser, isLoggedIn, getSingleUser };
+export { registerUser, verifyUser, loginUser, logoutUser, isLoggedIn, getSingleUser, getCurrentUser };

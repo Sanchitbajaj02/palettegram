@@ -25,6 +25,8 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const cookies = parseCookies();
 
+  const userIdFromCookies:string = cookies["userId"];
+
   const logout = async () => {
     await logoutUser();
 
@@ -45,11 +47,11 @@ const Navbar = () => {
           console.log(error);
         });
 
-      getBookmarks(cookies["userId"])
+      getBookmarks(userIdFromCookies)
         .then((bookm) => {
           dispatch(
             saveBookmarkToStore({
-              accountId: cookies["userId"],
+              accountId: userIdFromCookies,
               bookmark: bookm?.documents[0].bookmark,
             }),
           );
@@ -63,7 +65,7 @@ const Navbar = () => {
       clearTimeout(timeoutId);
       console.log("clear");
     };
-  }, [cookies, dispatch]);
+  }, [userIdFromCookies, dispatch]);
 
   if (userAuth.error) {
     return <h1>Error</h1>;
@@ -95,7 +97,7 @@ const Navbar = () => {
           )}
 
           <Link
-            href={`/user/${userAuth.creds?.userId}`}
+            href={`/user/${userIdFromCookies}`}
             className="mx-2 px-2 py-2 rounded-full bg-primary text-white"
           >
             <Settings size={22} className="transition-all duration-300 " />
