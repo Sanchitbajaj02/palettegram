@@ -1,7 +1,7 @@
 name: ✨ Feature Request
 description: Suggest a feature request
-title: 'Feat: '
-labels: ['⭐ enhancement', '🚦status: awaiting triage']
+title: "Feat: "
+labels: ["⭐ enhancement", "SWOC24"]
 body:
   - type: textarea
     id: what-feature
@@ -23,7 +23,7 @@ body:
   - type: checkboxes
     id: terms
     attributes:
-      label: 'Record'
+      label: "Record"
       options:
         - label: I agree to follow this project's Code of Conduct
           required: true

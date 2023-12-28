@@ -12,8 +12,6 @@ A meaningful message help the code reviewers, to know what you have commit along
 
 - **docs**: Changes which affect documentation
 
-- **build**: Changes which affect CI configuration files and scripts
-
 - **feat**: Changes which introduce a new feature or improve a feature
 
 - **fix**: Changes which patches a bug
@@ -27,8 +25,6 @@ A meaningful message help the code reviewers, to know what you have commit along
 - **style**: Changes which don't affect code logic, such as white-spaces, formatting, missing semi-colons
 
 - **test**: Changes which add missing tests or correct existing tests
-
-
 
 ## Examples
 
