@@ -1,7 +1,7 @@
 name: 👯‍♂️ Style Changing Request
 description: Suggest a style design
 title: "Style: "
-labels: ["✨ goal: improve interface", "🚦status: awaiting triage"]
+labels: ["✨ goal: improve interface", "SWOC24"]
 body:
   - type: textarea
     id: style-idea
