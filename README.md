@@ -1,6 +1,6 @@
 # Palettegram - social media for professionals
 
-[![Palettegram](.github/assets/palettegram-cover.png)](https://github.com/Sanchitbajaj02/palettegram)
+[![Palettegram Banner](.github/assets/palettegram-cover.png)](https://github.com/Sanchitbajaj02/palettegram)
 
 <!-- A web app to get designs inspirations and color palettes for professionals by professionals. -->
 
@@ -13,15 +13,28 @@
 [![Forks](https://img.shields.io/github/forks/sanchitbajaj02/palettegram?color=greendark)](https://github.com/Sanchitbajaj02/palettegram/network/members)
 [![Stars](https://img.shields.io/github/stars/sanchitbajaj02/palettegram?color=greendark)](https://github.com/Sanchitbajaj02/palettegram/stargazers)
 
-<!-- ![intro](https://github.com/Sanchitbajaj02/palettegram/assets/55249639/ffaf63eb-4e99-4add-8318-29b3ecb78dc8) -->
 
 ## 🏆 Featured in:
 
-| Event Logo                                                                                                                    | Event Name         |
-| ----------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| <img src=".github/assets/hacktoberfest-banner.png" width="200" height="auto" loading="lazy" alt="Welcome to Hacktoberfest" /> | Hacktoberfest 2023 |
+<table>
+    <tr>
+      <th>Event Logo</th>
+      <th>Event Name</th>
+      <th>Event Description</th>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Social Winter of Code 2024</td>
+      <td>Social Winter of Code is a 2 month-long open-source program envisioned by the Social. It aims to bring students into the world of open source development and see the power of unified problem-solving in real time.</td>
+    </tr>
+    <tr>
+      <td><img src=".github/assets/hacktoberfest-banner.png" width="200" height="auto" loading="lazy" alt="Welcome to Hacktoberfest" /></td>
+      <td>Hacktoberfest 2023</td>
+      <td>Hacktoberfest is a month-long October event welcoming all skill levels to join the open source community, contribute quality pull requests on GitHub, and earn cool swag.</td>
+    </tr>
+        
+</table>
 
-<!-- ![Welcome to hacktoberfest](.github/assets/hacktoberfest-banner.png) -->
 
 <br/>
 
@@ -110,11 +123,14 @@ Contributing to open-source software (OSS) projects can be a rewarding and fulfi
 
 - [Setting up Appwrite](docs/appwrite.md)
 
-<!-- ## 💪🏽 Contributors
+## ✨ Top Contributors
 
-Thank you so much all for spending your time to improve Threadify. Keep shining ⭐
+Without the tireless efforts and dedication of these exceptional developers, Palettegram would not have experienced such remarkable enhancements. 🚀 A heartfelt thank you for the time and energy you've invested – your contributions are truly invaluable! 🌟😄
 
-[![Contributors](https://contrib.rocks/image?repo=sanchitbajaj02/palettegram)](https://github.com/sanchitbajaj02/palettegram/graphs/contributors) -->
+[![Contributors](https://contrib.rocks/image?repo=sanchitbajaj02/palettegram)](https://github.com/sanchitbajaj02/palettegram/graphs/contributors)
+
+<!-- _View the list of all contributors [here](https://github.com/sanchitbajaj02/palettegram/graphs/contributors)._ -->
+
 
 ## 🙏🏽 Support
 
