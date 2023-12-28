@@ -1,11 +1,11 @@
 {
   "name": "palettegram",
   "description": "Palettegram is a social media application dedicated to professionals like graphic designers, UI/UX designers, Developers, etc. to leverage UI designs, design ideas, UX approaches and color palettes.",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "private": true,
   "homepage": ".",
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=18.0.x"
   },
   "scripts": {
     "format": "prettier --write src/",
@@ -21,11 +21,11 @@
     "@types/node": "20.4.10",
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
-    "appwrite": "^11.0.0",
+    "appwrite": "11.0.1",
     "autoprefixer": "10.4.14",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.13",
-    "next": "13.5.0",
+    "next": "13.4.13",
     "next-themes": "^0.2.1",
     "nookies": "^2.5.2",
     "postcss": "8.4.31",
