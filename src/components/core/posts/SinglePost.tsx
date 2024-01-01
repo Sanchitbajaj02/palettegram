@@ -7,6 +7,8 @@ import { removeBookmark, saveBookmark, createBookmarkEntry } from "@/backend/boo
 import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
 import { toastify } from "@/helper/toastify";
 
+type FormatOnType = 'seconds' | 'minutes' | 'hours' | 'days';
+
 export default function SinglePost({
   singlePost,
   onLikeClick,
@@ -23,30 +25,29 @@ export default function SinglePost({
   };
 
   function createdAtDateFormatter(postCreationTime:string){
-    const seconds = 1000;
-    const minutes = seconds * 60;
-    const hours = minutes * 60;
-    const days = hours * 24;
-    
-    const postCreatedTime = new Date(postCreationTime);
-    const currentTime = new Date();
-    const timeDiff = currentTime.valueOf() - postCreatedTime.valueOf();
+    const timeObj = {
+      seconds:1000,
+      minutes:1000 * 60,
+      hours:1000 * 60 * 60,
+      days:1000 * 60 * 60 * 24,
+      postCreatedTime:new Date(postCreationTime),
+      currentTime:new Date(),
+      calcTimeDiff(formatOn:FormatOnType){
+        const timeDiff = this.currentTime.valueOf() - this.postCreatedTime.valueOf();
+        return Math.round(timeDiff/this[formatOn])
+      }
+    }
 
-    const noOfSecondsPassed = Math.round(timeDiff / seconds);
-    const noOfMinutesPassed = Math.round(timeDiff/minutes);
-    const noOfHoursPassed = Math.round(timeDiff/hours);
-    const noOfDaysPassed = Math.round(timeDiff/days);
-
-    if(noOfSecondsPassed < 60){
-      return `${noOfSecondsPassed}sec`
-    }else if(noOfMinutesPassed < 60){
-      return `${noOfMinutesPassed}min`
-    }else if(noOfHoursPassed<=24){
-      return `${noOfHoursPassed}h`
-    }else if(noOfDaysPassed < 365){
-      return `${noOfDaysPassed}d`
+    if(timeObj.calcTimeDiff('seconds') < 60){
+      return `${timeObj.calcTimeDiff('seconds')}sec`
+    }else if(timeObj.calcTimeDiff('minutes') < 60){
+      return `${timeObj.calcTimeDiff('minutes')}min`
+    }else if(timeObj.calcTimeDiff('hours')<=24){
+      return `${timeObj.calcTimeDiff('hours')}h`
+    }else if(timeObj.calcTimeDiff('days') < 365){
+      return `${timeObj.calcTimeDiff('days')}d`
     }else{
-      return `${noOfDaysPassed / 365}y`
+      return `${timeObj.calcTimeDiff('days') / 365}y`
     }
 
   }
@@ -112,7 +113,7 @@ export default function SinglePost({
         </div>
         <div>
         <h5 className="font-medium text-md">{singlePost && singlePost?.accountId}</h5>
-        {(singlePost?.$createdAt && <p className="font-thin text-xs/[10px] text-slate-950 dark:text-slate-400">{`${createdAtDateFormatter(singlePost.$createdAt)} ago`}</p>) || null}
+        {singlePost?.$createdAt ? <p className="font-thin text-xs/[10px] text-slate-950 dark:text-slate-400">{`${createdAtDateFormatter(singlePost.$createdAt)} ago`}</p>:null}
         </div>
       </Link>
       <Link href={`/post/${singlePost && singlePost?.$id}`}>
