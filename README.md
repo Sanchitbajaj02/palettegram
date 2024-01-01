@@ -25,7 +25,7 @@
     <tr>
       <td></td>
       <td>Social Winter of Code 2024</td>
-      <td>Social Winter of Code is a 2 month-long open-source program envisioned by the Social. It aims to bring students into the world of open source development and see the power of unified problem-solving in real time.</td>
+      <td>Social Winter of Code is a 2 month-long open-source program envisioned by the Social. It aims to bring students into the world of open source development and see the power of unified problem-solving in real time. <a href="docs/swoc.md">Click here</a> to get the guidelines. </td>
     </tr>
     <tr>
       <td><img src=".github/assets/hacktoberfest-banner.png" width="200" height="auto" loading="lazy" alt="Welcome to Hacktoberfest" /></td>

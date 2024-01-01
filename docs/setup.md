@@ -1,10 +1,10 @@
-## 🤏 Pre-requisites
+# 🤏 Pre-requisites
 
 Before installation, please make sure you have already installed the following tools:
 
 - [Git](https://git-scm.com/downloads)
 
-- [NodeJs (16 or above)](https://nodejs.org/en/download/)
+- [NodeJs (18 or above)](https://nodejs.org/en/download/)
 
 - [Yarn](https://yarnpkg.com/)
 
@@ -54,10 +54,10 @@ yarn dev
 cd  palettegram
 ```
 
-- Fill the `.env` file with the environment variables.
+- Create a file `.env.local` and fill it with the environment variables.
 
 ```bash
-cp .env.example .env
+cp .env.example .env.local
 ```
 
 - Start the development server using the below command:
