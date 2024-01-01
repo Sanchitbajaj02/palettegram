@@ -1,6 +1,6 @@
 # Contribution to Palettegram
 
-Firstly, thank you for taking the time to contribute.
+First of all, thank you for taking the time to contribute 😊.
 
 We welcome contributions from anyone willing to improve this project or add new features.
 
@@ -9,7 +9,7 @@ Contribution guidelines are listed below. Please take the time to go through the
 ## Table of Contents
 
 - [Contributing to Palettegram 🪡](#contributing-to-Palettegram-)
-  - [Table of Contents](#table-of-contents)[Title](CONTRIBUTING.md)
+  - [Table of Contents](#table-of-contents)
   - [First time Contributor](#first-time-contributor)
   - [I Want To Contribute](#i-want-to-contribute)
     - [Fork the Project](#fork-the-project)
@@ -33,9 +33,6 @@ You can start with available list of [issues](https://github.com/Sanchitbajaj02/
 - Only start working on an issue if it has been assigned to you. This avoids multiple PRs for the same issue.
 - Every change in this project must have an associated issue. **Issue before PR**
 
-### Legal Notice
-
-> When contributing to this project, you must agree that you have authored 100% of the content, that you have the necessary rights to the content and that the content you contribute may be provided under the project license.
 
 To start contributing to this project, follow the steps below.
 
@@ -104,12 +101,12 @@ Make sure to mention which issue is solved with this Pull Request by mentioning 
 
 ### Review
 
-🎉🌟Congratulations! Sit and relax, you've made your contribution to the Palettegram project. Wait until the PR is reviewed and incorporate changes suggested by the reviewers. After which the PR can be successfully merged.
+Congratulations! 🎉🌟 Sit and relax, you've made your contribution to the Palettegram project. Wait until the PR is reviewed and incorporate changes suggested by the reviewers. After which the PR can be successfully merged.
 
 ## Other Ways to Contribute
 
 If you like the project, but just don't have time to contribute, that's fine. There are other easy ways to support the project and show your appreciation, which we would also be very happy about.
 
-- Star the project
-- Tweet about it
+- Star the project 
+- Tweet about it 
 - Mention this project to your peers
