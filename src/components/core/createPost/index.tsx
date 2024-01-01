@@ -7,8 +7,8 @@ import Image from "next/image";
 import { parseCookies } from "nookies";
 import { toastify } from "@/helper/toastify";
 import { useSelector, useDispatch } from "react-redux";
-import { addPost } from "@/redux/reducers/postsReducer";
-import { PostInstanceType } from "@/types/index.d";
+import { addPost} from "@/redux/reducers/postsReducer";
+import { PostInstanceType  } from "@/types/index.d";
 
 const CHAR_LIMIT = 500;
 
@@ -81,6 +81,7 @@ const CreatePost = () => {
 
     try {
       let imageURL: string = "";
+      console.log('clicked')
 
       if (imageStorage && imageStorage.file) {
         const getFileObject = await addNewImage(imageStorage.file);

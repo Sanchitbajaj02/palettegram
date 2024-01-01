@@ -104,7 +104,7 @@ const loginUser = async (userData: any) => {
 
     const response = await account.createEmailSession(userData?.email, userData?.password);
 
-    // console.log("Email session:", response);
+    console.log("Email session:", response);
 
     if (!response || !response["$id"]) {
       throw new Error("Login failed");

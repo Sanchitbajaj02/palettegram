@@ -3,7 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { ArrowLeftCircle } from "react-feather";
+import { Loader, ArrowLeftCircle } from "react-feather";
 
 // Components
 import { saveUser } from "@/redux/reducers/authReducer";
@@ -13,6 +13,7 @@ import { toastify } from "@/helper/toastify";
 import { loginUser } from "@/backend/auth.api";
 
 export default function LoginComponent() {
+  const [isLoading, setIsLoading] = useState(false)
   const dispatch = useDispatch();
   const authSelector = useSelector((state: any) => state.auth);
 
@@ -33,6 +34,8 @@ export default function LoginComponent() {
   async function submitHander(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
+    setIsLoading(true);
+
       if (data.email !== "" && data.password !== "") {
         const userCredentials = await loginUser(data);
 
@@ -44,12 +47,14 @@ export default function LoginComponent() {
           };
 
           dispatch(saveUser(localObject));
+          setIsLoading(false);
           toastify("Login Successful", "success");
 
           router.push("/feed");
         }
       }
     } catch (error: any) {
+      setIsLoading(false);
       console.log(error.message);
 
       toastify("Login failed! Please click on register to make account", "error");
@@ -138,7 +143,9 @@ export default function LoginComponent() {
                 type="submit"
                 className="w-full py-2 text-sm md:text-base rounded-full text-white bg-primary transition duration-300 ease hover:bg-secondary"
               >
-                Login
+                {
+                isLoading ? <Loader size={24} className="mx-auto animate-spin self-center"/> : <p>Login</p>
+                }
               </button>
             </div>
           </form>

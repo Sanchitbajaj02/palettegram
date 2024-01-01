@@ -14,11 +14,12 @@ const Feed = () => {
   const cookies = parseCookies();
 
   const userIdFromCookies:string = cookies["userId"];
-
+  console.log(userIdFromCookies)
   return (
     <>
       <main className="flex max-w-screen-lg mx-auto pt-8 content-center">
         <div className="flex-1 sticky flex flex-col items-center gap-8">
+          
           <Link
             href={`/user/${userIdFromCookies}`}
             className="w-12 h-12 rounded-full flex items-center justify-center shadow-md dark:shadow-gray-600 transition-all duration-300 text-black dark:text-white hover:text-primary-light border hover:border-primary-light"
