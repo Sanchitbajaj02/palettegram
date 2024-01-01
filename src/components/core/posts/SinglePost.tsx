@@ -22,6 +22,35 @@ export default function SinglePost({
     await navigator.clipboard.writeText(color);
   };
 
+  function createdAtDateFormatter(postCreationTime:string){
+    const seconds = 1000;
+    const minutes = seconds * 60;
+    const hours = minutes * 60;
+    const days = hours * 24;
+    
+    const postCreatedTime = new Date(postCreationTime);
+    const currentTime = new Date();
+    const timeDiff = currentTime.valueOf() - postCreatedTime.valueOf();
+
+    const noOfSecondsPassed = Math.round(timeDiff / seconds);
+    const noOfMinutesPassed = Math.round(timeDiff/minutes);
+    const noOfHoursPassed = Math.round(timeDiff/hours);
+    const noOfDaysPassed = Math.round(timeDiff/days);
+
+    if(noOfSecondsPassed < 60){
+      return `${noOfSecondsPassed}sec`
+    }else if(noOfMinutesPassed < 60){
+      return `${noOfMinutesPassed}min`
+    }else if(noOfHoursPassed<=24){
+      return `${noOfHoursPassed}h`
+    }else if(noOfDaysPassed < 365){
+      return `${noOfDaysPassed}d`
+    }else{
+      return `${noOfDaysPassed / 365}y`
+    }
+
+  }
+
   const handleUpdateBookmark = async (accountId: string, postId: string) => {
     if (userBookmarks.accountId === accountId) {
       if (
@@ -72,7 +101,6 @@ export default function SinglePost({
     }
   };
 
-
   return (
     <div className="p-3 rounded-md shadow dark:shadow-gray-600 mb-4">
       <Link
@@ -82,7 +110,10 @@ export default function SinglePost({
         <div className="w-12 h-12 rounded-full border flex items-center justify-center shadow">
           <Image src="/assets/user.png" alt="user" width={40} height={40} />
         </div>
-        <span className="font-medium text-md">{singlePost && singlePost?.accountId}</span>
+        <div>
+        <h5 className="font-medium text-md">{singlePost && singlePost?.accountId}</h5>
+        {(singlePost?.$createdAt && <p className="font-thin text-xs/[10px] text-slate-950 dark:text-slate-400">{`${createdAtDateFormatter(singlePost.$createdAt)} ago`}</p>) || null}
+        </div>
       </Link>
       <Link href={`/post/${singlePost && singlePost?.$id}`}>
         <p className="text-md mb-4">
@@ -160,7 +191,7 @@ export default function SinglePost({
             fill="true"
             className={`${
               userBookmarks &&
-              userBookmarks?.bookmark.length > 0 &&
+              userBookmarks?.bookmark?.length > 0 &&
               userBookmarks?.bookmark.includes(singlePost && singlePost?.$id)
                 ? "fill-primary"
                 : "fill-transparent"
