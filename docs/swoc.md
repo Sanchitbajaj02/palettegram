@@ -42,9 +42,9 @@ There is no limit on the number of issues you can work on, but I suggest working
 
 5. **How can I start with SWOC?**
 
-This is one of the most frequently asked questions, Assuming you have registered for SWOC and have completed all the prerequisites like joining the Quine platform, SOWC discord server etc. Please wait until the 1st of JAN 2024 as the event will start on that day. Till then you can select the project in which you want to contribute and that best suits you.
+This is one of the most frequently asked questions, Assuming you have registered for SWOC and have completed all the prerequisites like joining the Quine platform, SOWC discord server etc. Please wait until the 1st of January 2024 as the event will start on that day. Till then you can select the project in which you want to contribute and that best suits you.
 
-To participate in the event, please familiarize yourself with the project codebase. Advanced users can try setting up the project on their local machine. The official start date for the event is on the 1st of JAN 2024. At this point, you can begin addressing the issues listed in your selected projects. Keep in mind that the process for contributing to a project may vary depending on the project and its admin. I have outlined a step-by-step process for contributing to the Minglr Project. Therefore you can connect with the project admin to learn more about the project.
+To participate in the event, please familiarize yourself with the project codebase. Advanced users can try setting up the project on their local machine. The official start date for the event is on the 1st of January 2024. At this point, you can begin addressing the issues listed in your selected projects. Keep in mind that the process for contributing to a project may vary depending on the project and its admin. 
 
 6. **Can I contribute in more than one project?**
 
