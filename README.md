@@ -23,7 +23,7 @@
       <th>Event Description</th>
     </tr>
     <tr>
-      <td></td>
+      <td><img src=".github/assets/swoc-banner.png" width="200" height="auto" loading="lazy" alt="Welcome to Social Winter of S4" /></td>
       <td>Social Winter of Code 2024</td>
       <td>Social Winter of Code is a 2 month-long open-source program envisioned by the Social. It aims to bring students into the world of open source development and see the power of unified problem-solving in real time. <a href="docs/swoc.md">Click here</a> to get the guidelines. </td>
     </tr>
