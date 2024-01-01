@@ -14,7 +14,6 @@ const Feed = () => {
   const cookies = parseCookies();
 
   const userIdFromCookies:string = cookies["userId"];
-  console.log(userIdFromCookies)
   return (
     <>
       <main className="flex max-w-screen-lg mx-auto pt-8 content-center">
