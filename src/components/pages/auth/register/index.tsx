@@ -157,7 +157,7 @@ export default function RegisterComponent() {
                 disabled={registerStatus === "success" || registerStatus === "registering"}
               >
                 {
-                isLoading ? <Loader size={24} className="mx-auto animate-spin self-center"/> : <p>Register Now</p>
+                isLoading ? <Loader size={24} className="mx-auto animate-spin"/> : <p>Register Now</p>
                 }
               </button>
             </div>

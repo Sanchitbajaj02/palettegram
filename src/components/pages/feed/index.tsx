@@ -12,8 +12,8 @@ import Footer from "@/components/core/footer";
 
 const Feed = () => {
   const cookies = parseCookies();
-
   const userIdFromCookies:string = cookies["userId"];
+  
   return (
     <>
       <main className="flex max-w-screen-lg mx-auto pt-8 content-center">

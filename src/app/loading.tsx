@@ -1,6 +1,6 @@
 export default function Loader() {
   return (
-    <div className="h-screen w-full flex justify-center items-center">
+    <div className="h-full min-h-screen w-full flex justify-center items-center">
       <svg
         aria-hidden="true"
         className="inline w-10 h-10 animate-spin text-gray-300 dark:text-gray-600 fill-primary"
