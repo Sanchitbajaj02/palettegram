@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
-import { ArrowLeftCircle } from "react-feather";
+import { ArrowLeftCircle, Loader } from "react-feather";
 import { useRouter } from "next/navigation";
 
 // Components
@@ -15,7 +15,7 @@ import { registerUser } from "@/backend/auth.api";
 export default function RegisterComponent() {
   const dispatch = useDispatch();
   const router = useRouter();
-
+  const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState({
     fullName: "",
     email: "",
@@ -35,6 +35,7 @@ export default function RegisterComponent() {
     event.preventDefault();
 
     try {
+      setIsLoading(true);
       setRegisterStatus("registering");
       const resp = await registerUser(data);
 
@@ -47,8 +48,10 @@ export default function RegisterComponent() {
         }),
       );
       setRegisterStatus("success");
+      setIsLoading(false);
       toastify("Register Successful. Please check your email to verify", "success");
     } catch (error: any) {
+      setIsLoading(false);
       console.log(error);
       setRegisterStatus("failure");
       if (error.message.includes("password")) {
@@ -153,7 +156,9 @@ export default function RegisterComponent() {
                 className="w-full py-2 text-sm md:text-base rounded-full text-white bg-primary transition duration-300 ease hover:bg-secondary"
                 disabled={registerStatus === "success" || registerStatus === "registering"}
               >
-                Register Now
+                {
+                isLoading ? <Loader size={24} className="mx-auto animate-spin"/> : <p>Register Now</p>
+                }
               </button>
             </div>
           </form>
