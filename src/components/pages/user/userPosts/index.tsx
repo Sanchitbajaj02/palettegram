@@ -1,9 +1,10 @@
-import { Heart, MessageCircle } from "react-feather";
+import { PostInstanceType } from "@/types";
+import { Heart, MessageCircle} from "react-feather";
 import { useSelector } from "react-redux";
 
-export default function UserPosts({ userId }: { userId: any }) {
+export default function UserPosts({ userId }: { userId: string }) {
 
-  const userPosts = useSelector((store : any) => store.posts.posts).filter((post:any) => post.accountId === userId);
+  const userPosts = useSelector((store : any) => store.posts.posts).filter((post: PostInstanceType) => post.accountId === userId);
 
   return (
     <div className="mt-10">
@@ -12,7 +13,7 @@ export default function UserPosts({ userId }: { userId: any }) {
           userPosts?.map((post:any, index:number) => (
             <div className="p-4 rounded-md shadow dark:shadow-gray-600 z-10 w-full h-full" key={index}>
               <p className="mb-4">{post?.postTitle}</p>
-              <div key={index} className="relative flex justify-between items-center">
+              <div className="relative flex justify-between items-center">
                 <p className="flex items-center gap-2 font-bold">
                   <Heart size={24} />
                   {post?.likes.length}
