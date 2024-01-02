@@ -81,7 +81,6 @@ const CreatePost = () => {
 
     try {
       let imageURL: string = "";
-      console.log('clicked')
 
       if (imageStorage && imageStorage.file) {
         const getFileObject = await addNewImage(imageStorage.file);
