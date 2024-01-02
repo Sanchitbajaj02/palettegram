@@ -13,6 +13,14 @@ import { toastify } from "@/helper/toastify";
 import { registerUser } from "@/backend/auth.api";
 
 export default function RegisterComponent() {
+  function showPassword(): void {
+    var x = document.getElementById("password") as HTMLInputElement;
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
   const dispatch = useDispatch();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -139,6 +147,11 @@ export default function RegisterComponent() {
                 placeholder="Enter your password"
                 className="w-full rounded-md bg-white py-2 px-4 text-sm md:text-base font-medium text-secondary outline-none border border-white focus:border-secondary-light dark:border-secondary-light dark:focus:border-white"
               />
+              <div className="flex mt-1">
+                <input type="checkbox" id="showPassword" onClick={showPassword} className="m-1"/>
+              <label htmlFor="showPassword">Show Password</label>
+              </div>
+              
             </div>
 
             <div className="mb-6">
