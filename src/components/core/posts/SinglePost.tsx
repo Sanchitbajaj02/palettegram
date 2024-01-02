@@ -7,6 +7,8 @@ import { removeBookmark, saveBookmark, createBookmarkEntry } from "@/backend/boo
 import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
 import { toastify } from "@/helper/toastify";
 
+type FormatOnType = 'seconds' | 'minutes' | 'hours' | 'days';
+
 export default function SinglePost({
   singlePost,
   onLikeClick,
@@ -21,6 +23,34 @@ export default function SinglePost({
   const copyText = async (color: string) => {
     await navigator.clipboard.writeText(color);
   };
+
+  function createdAtDateFormatter(postCreationTime:string){
+    const timeObj = {
+      seconds:1000,
+      minutes:1000 * 60,
+      hours:1000 * 60 * 60,
+      days:1000 * 60 * 60 * 24,
+      postCreatedTime:new Date(postCreationTime),
+      currentTime:new Date(),
+      calcTimeDiff(formatOn:FormatOnType){
+        const timeDiff = this.currentTime.valueOf() - this.postCreatedTime.valueOf();
+        return Math.round(timeDiff/this[formatOn])
+      }
+    }
+
+    if(timeObj.calcTimeDiff('seconds') < 60){
+      return `${timeObj.calcTimeDiff('seconds')}sec`
+    }else if(timeObj.calcTimeDiff('minutes') < 60){
+      return `${timeObj.calcTimeDiff('minutes')}min`
+    }else if(timeObj.calcTimeDiff('hours')<=24){
+      return `${timeObj.calcTimeDiff('hours')}h`
+    }else if(timeObj.calcTimeDiff('days') < 365){
+      return `${timeObj.calcTimeDiff('days')}d`
+    }else{
+      return `${timeObj.calcTimeDiff('days') / 365}y`
+    }
+
+  }
 
   const handleUpdateBookmark = async (accountId: string, postId: string) => {
     if (userBookmarks.accountId === accountId) {
@@ -72,7 +102,6 @@ export default function SinglePost({
     }
   };
 
-
   return (
     <div className="p-3 rounded-md shadow dark:shadow-gray-600 mb-4">
       <Link
@@ -82,7 +111,10 @@ export default function SinglePost({
         <div className="w-12 h-12 rounded-full border flex items-center justify-center shadow">
           <Image src="/assets/user.png" alt="user" width={40} height={40} />
         </div>
-        <span className="font-medium text-md">{singlePost && singlePost?.accountId}</span>
+        <div>
+        <h5 className="font-medium text-md">{singlePost && singlePost?.accountId}</h5>
+        {singlePost?.$createdAt ? <p className="font-thin text-xs/[10px] text-slate-950 dark:text-slate-400">{`${createdAtDateFormatter(singlePost.$createdAt)} ago`}</p>:null}
+        </div>
       </Link>
       <Link href={`/post/${singlePost && singlePost?.$id}`}>
         <p className="text-md mb-4">
@@ -160,7 +192,7 @@ export default function SinglePost({
             fill="true"
             className={`${
               userBookmarks &&
-              userBookmarks?.bookmark.length > 0 &&
+              userBookmarks?.bookmark?.length > 0 &&
               userBookmarks?.bookmark.includes(singlePost && singlePost?.$id)
                 ? "fill-primary"
                 : "fill-transparent"
