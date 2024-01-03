@@ -13,7 +13,7 @@ import { toastify } from "@/helper/toastify";
 import { registerUser } from "@/backend/auth.api";
 
 // Icons
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Eye,EyeOff } from "react-feather";
 
 export default function RegisterComponent() {
   const [showPassword, setShowPassword] = useState(false);
@@ -149,15 +149,14 @@ export default function RegisterComponent() {
                     className="absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer"
                     onClick={(e) => {
                       setShowPassword(!showPassword);
-                      e.stopPropagation();
                       e.preventDefault();
                     }}
                   >
-                    <div className="bg-white rounded">
+                    <div className=" rounded">
                       {showPassword ? (
-                        <FaEye size={20} color="black" />
+                        <Eye size={20} color="black" />
                       ) : (
-                        <FaEyeSlash size={20} color="black" />
+                        <EyeOff size={20} color="black" />
                       )}
                     </div>
                   </button>
