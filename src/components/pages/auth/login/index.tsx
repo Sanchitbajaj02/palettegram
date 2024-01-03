@@ -16,7 +16,6 @@ import { loginUser } from "@/backend/auth.api";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function LoginComponent() {
-
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const authSelector = useSelector((state: any) => state.auth);
@@ -140,7 +139,13 @@ export default function LoginComponent() {
                       e.preventDefault();
                     }}
                   >
-                  {showPassword ? <FaEye size={20} /> : <FaEyeSlash size={20} /> }
+                    <div className="bg-white rounded">
+                      {showPassword ? (
+                        <FaEye size={20} color="black" />
+                      ) : (
+                        <FaEyeSlash size={20} color="black" />
+                      )}
+                    </div>
                   </button>
                 </div>
               </div>

@@ -135,29 +135,34 @@ export default function RegisterComponent() {
                 Password <span className="text-red-600">*</span>
               </label>
               <div className="relative">
-              <input
-                type={showPassword ? "text" : "password"}
-                name="password"
-                id="password"
-                required={true}
-                onChange={changeHandler}
-                placeholder="Enter your password"
-                className="w-full rounded-md bg-white py-2 px-4 text-sm md:text-base font-medium text-secondary outline-none border border-white focus:border-secondary-light dark:border-secondary-light dark:focus:border-white"
-              />
-              <div>
-                <button
-                  className="absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer"
-                  onClick={(e) => {
-                    setShowPassword(!showPassword);
-                    e.stopPropagation();
-                    e.preventDefault();
-                  }}
-                >
-                  {showPassword ? <FaEye size={20} /> : <FaEyeSlash size={20} />}
-                </button>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  id="password"
+                  required={true}
+                  onChange={changeHandler}
+                  placeholder="Enter your password"
+                  className="w-full rounded-md bg-white py-2 px-4 text-sm md:text-base font-medium text-secondary outline-none border border-white focus:border-secondary-light dark:border-secondary-light dark:focus:border-white"
+                />
+                <div>
+                  <button
+                    className="absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer"
+                    onClick={(e) => {
+                      setShowPassword(!showPassword);
+                      e.stopPropagation();
+                      e.preventDefault();
+                    }}
+                  >
+                    <div className="bg-white rounded">
+                      {showPassword ? (
+                        <FaEye size={20} color="black" />
+                      ) : (
+                        <FaEyeSlash size={20} color="black" />
+                      )}
+                    </div>
+                  </button>
+                </div>
               </div>
-              </div>
-              
             </div>
 
             <div className="mb-6">
