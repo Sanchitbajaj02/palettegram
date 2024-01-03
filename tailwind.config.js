@@ -10,6 +10,7 @@ module.exports = {
     extend: {
       colors: {
         primary: "#f02e65",
+        onhover: "#e00b41",
         "primary-light": "#ff729b",
         secondary: "#1c223a",
         "secondary-light": "#40404c",
