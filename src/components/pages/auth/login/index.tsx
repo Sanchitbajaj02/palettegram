@@ -12,16 +12,12 @@ import { toastify } from "@/helper/toastify";
 // API
 import { loginUser } from "@/backend/auth.api";
 
+// Icons
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 export default function LoginComponent() {
-  function showPassword(): void {
-    var x = document.getElementById("password") as HTMLInputElement;
-    if (x.type === "password") {
-      x.type = "text";
-    } else {
-      x.type = "password";
-    }
-  }
-  const [isLoading, setIsLoading] = useState(false)
+
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const authSelector = useSelector((state: any) => state.auth);
 
@@ -42,7 +38,7 @@ export default function LoginComponent() {
   async function submitHander(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
-    setIsLoading(true);
+      setIsLoading(true);
 
       if (data.email !== "" && data.password !== "") {
         const userCredentials = await loginUser(data);
@@ -76,6 +72,8 @@ export default function LoginComponent() {
   if (authSelector.error) {
     return <h1>Error</h1>;
   }
+
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <>
@@ -123,21 +121,30 @@ export default function LoginComponent() {
               >
                 Password <span className="text-red-600">*</span>
               </label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                required={true}
-                onChange={changeHandler}
-                placeholder="Enter your password"
-                className="w-full rounded-md bg-white py-2 px-4 text-sm md:text-base font-medium text-secondary outline-none border border-white focus:border-secondary-light dark:border-secondary-light dark:focus:border-white"
-              />
-              <div className="flex mt-1">
-                <input type="checkbox" id="showPassword" onClick={showPassword} className="m-1"/>
-              <label htmlFor="showPassword">Show Password</label>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  id="password"
+                  required={true}
+                  onChange={changeHandler}
+                  placeholder="Enter your password"
+                  className="w-full rounded-md bg-white py-2 px-4 text-sm md:text-base font-medium text-secondary outline-none border border-white focus:border-secondary-light dark:border-secondary-light dark:focus:border-white"
+                />
+                <div>
+                  <button
+                    className="absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer"
+                    onClick={(e) => {
+                      setShowPassword(!showPassword);
+                      e.stopPropagation();
+                      e.preventDefault();
+                    }}
+                  >
+                  {showPassword ? <FaEye size={20} /> : <FaEyeSlash size={20} /> }
+                  </button>
+                </div>
               </div>
             </div>
-            
 
             <div className="mb-4">
               <p className="text-sm text-secondary-light dark:text-gray-50">
@@ -156,9 +163,11 @@ export default function LoginComponent() {
                 type="submit"
                 className="w-full py-2 text-sm md:text-base rounded-full text-white bg-primary transition duration-300 ease hover:bg-secondary"
               >
-                {
-                isLoading ? <Loader size={24} className="mx-auto animate-spin self-center"/> : <p>Login</p>
-                }
+                {isLoading ? (
+                  <Loader size={24} className="mx-auto animate-spin self-center" />
+                ) : (
+                  <p>Login</p>
+                )}
               </button>
             </div>
           </form>
