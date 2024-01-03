@@ -1,11 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
+import { useState, useEffect} from "react";
 import { Download, Heart, MessageCircle, Share, Bookmark } from "react-feather";
 import { PostInstanceType } from "@/types/index.d";
 import { useSelector, useDispatch } from "react-redux";
 import { removeBookmark, saveBookmark, createBookmarkEntry } from "@/backend/bookmarks.api";
 import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
 import { toastify } from "@/helper/toastify";
+import { getCurrentUser } from "@/backend/auth.api";
 
 type FormatOnType = 'seconds' | 'minutes' | 'hours' | 'days';
 
@@ -19,6 +21,18 @@ export default function SinglePost({
   const dispatch = useDispatch();
   const authState = useSelector((state: any) => state.auth);
   const userBookmarks = useSelector((state: any) => state.bookmarks);
+  const [user,setUser] = useState({
+    email: "",
+    name: ""
+  })
+
+  useEffect(() => {
+    getCurrentUser()
+      .then((resp: any) => {
+        setUser(resp);
+      })
+      .catch(console.log);
+  }, []);
 
   const copyText = async (color: string) => {
     await navigator.clipboard.writeText(color);
@@ -112,7 +126,7 @@ export default function SinglePost({
           <Image src="/assets/user.png" alt="user" width={40} height={40} />
         </div>
         <div>
-        <h5 className="font-medium text-md">{singlePost && singlePost?.accountId}</h5>
+        <h5 className="font-medium text-md">{user.name}</h5>
         {singlePost?.$createdAt ? <p className="font-thin text-xs/[10px] text-slate-950 dark:text-slate-400">{`${createdAtDateFormatter(singlePost.$createdAt)} ago`}</p>:null}
         </div>
       </Link>
