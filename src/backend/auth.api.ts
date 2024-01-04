@@ -1,6 +1,6 @@
 "use client";
 
-import { account, db, ID, palettegramDB, usersCollection } from "./appwrite.config";
+import { account, db, ID, palettegramDB, usersCollection, baseURL } from "./appwrite.config";
 
 /**
  * @description Register the user into the database
@@ -117,6 +117,50 @@ const loginUser = async (userData: any) => {
   }
 };
 
+
+/**
+ * @description send a link to email for updating user's password
+ * @param {string} userData
+ * @returns {Object} response
+ */
+const forgotpassword = async (email: string) => {
+  try {
+    // console.log("login:", userData?.email, userData?.password);
+    if (!email) {
+      throw new Error("email is needed ");
+    }
+    const response = await account.createRecovery(email, `http://localhost:3000/updatepassword`);
+    return response;
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(error.message);
+  }
+};
+
+/**
+ * @description Update user's password
+ * @param {Object} userData
+ * @returns {Object} response
+ */
+const updatepassword = async (userData: any) => {
+  try {
+    if (!userData.password || !userData.confirmpassword) {
+      throw new Error("Both fields are necessary");
+    }
+    const response = await account.updateRecovery(userData.USER_ID, userData.SECRET, userData.password, userData.confirmpassword);
+    return response;
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(error.message);
+  }
+};
+
+
+
+
+
+
+
 /**
  * @description returns the state of current user
  * @returns {Object} Session
@@ -203,4 +247,4 @@ const getSingleUser = async (id: string) => {
   }
 };
 
-export { registerUser, verifyUser, loginUser, logoutUser, isLoggedIn, getSingleUser, getCurrentUser };
+export { registerUser, verifyUser, loginUser, forgotpassword, updatepassword, logoutUser, isLoggedIn, getSingleUser, getCurrentUser };
