@@ -6,8 +6,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { removeBookmark, saveBookmark, createBookmarkEntry } from "@/backend/bookmarks.api";
 import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
 import { toastify } from "@/helper/toastify";
+import { useState } from "react";
 
-type FormatOnType = 'seconds' | 'minutes' | 'hours' | 'days';
+type FormatOnType = "seconds" | "minutes" | "hours" | "days";
 
 export default function SinglePost({
   singlePost,
@@ -24,32 +25,31 @@ export default function SinglePost({
     await navigator.clipboard.writeText(color);
   };
 
-  function createdAtDateFormatter(postCreationTime:string){
+  function createdAtDateFormatter(postCreationTime: string) {
     const timeObj = {
-      seconds:1000,
-      minutes:1000 * 60,
-      hours:1000 * 60 * 60,
-      days:1000 * 60 * 60 * 24,
-      postCreatedTime:new Date(postCreationTime),
-      currentTime:new Date(),
-      calcTimeDiff(formatOn:FormatOnType){
+      seconds: 1000,
+      minutes: 1000 * 60,
+      hours: 1000 * 60 * 60,
+      days: 1000 * 60 * 60 * 24,
+      postCreatedTime: new Date(postCreationTime),
+      currentTime: new Date(),
+      calcTimeDiff(formatOn: FormatOnType) {
         const timeDiff = this.currentTime.valueOf() - this.postCreatedTime.valueOf();
-        return Math.round(timeDiff/this[formatOn])
-      }
-    }
+        return Math.round(timeDiff / this[formatOn]);
+      },
+    };
 
-    if(timeObj.calcTimeDiff('seconds') < 60){
-      return `${timeObj.calcTimeDiff('seconds')}sec`
-    }else if(timeObj.calcTimeDiff('minutes') < 60){
-      return `${timeObj.calcTimeDiff('minutes')}min`
-    }else if(timeObj.calcTimeDiff('hours')<=24){
-      return `${timeObj.calcTimeDiff('hours')}h`
-    }else if(timeObj.calcTimeDiff('days') < 365){
-      return `${timeObj.calcTimeDiff('days')}d`
-    }else{
-      return `${timeObj.calcTimeDiff('days') / 365}y`
+    if (timeObj.calcTimeDiff("seconds") < 60) {
+      return `${timeObj.calcTimeDiff("seconds")}sec`;
+    } else if (timeObj.calcTimeDiff("minutes") < 60) {
+      return `${timeObj.calcTimeDiff("minutes")}min`;
+    } else if (timeObj.calcTimeDiff("hours") <= 24) {
+      return `${timeObj.calcTimeDiff("hours")}h`;
+    } else if (timeObj.calcTimeDiff("days") < 365) {
+      return `${timeObj.calcTimeDiff("days")}d`;
+    } else {
+      return `${timeObj.calcTimeDiff("days") / 365}y`;
     }
-
   }
 
   const handleUpdateBookmark = async (accountId: string, postId: string) => {
@@ -102,6 +102,14 @@ export default function SinglePost({
     }
   };
 
+  const handleComment = () => {
+    setShowCommentBox(!showCommentBox);
+    console.log("comment");
+  };
+
+  const [comment_message, setComment_message] = useState("");
+  const [showCommentBox, setShowCommentBox] = useState(false);
+
   return (
     <div className="p-3 rounded-md shadow dark:shadow-gray-600 mb-4">
       <Link
@@ -112,8 +120,12 @@ export default function SinglePost({
           <Image src="/assets/user.png" alt="user" width={40} height={40} />
         </div>
         <div>
-        <h5 className="font-medium text-md">{singlePost && singlePost?.accountId}</h5>
-        {singlePost?.$createdAt ? <p className="font-thin text-xs/[10px] text-slate-950 dark:text-slate-400">{`${createdAtDateFormatter(singlePost.$createdAt)} ago`}</p>:null}
+          <h5 className="font-medium text-md">{singlePost && singlePost?.accountId}</h5>
+          {singlePost?.$createdAt ? (
+            <p className="font-thin text-xs/[10px] text-slate-950 dark:text-slate-400">{`${createdAtDateFormatter(
+              singlePost.$createdAt,
+            )} ago`}</p>
+          ) : null}
         </div>
       </Link>
       <Link href={`/post/${singlePost && singlePost?.$id}`}>
@@ -121,7 +133,7 @@ export default function SinglePost({
           {singlePost && singlePost?.postTitle ? singlePost?.postTitle : "No Title"}
         </p>
 
-        {singlePost && singlePost?.postImage && singlePost?.postImage[0].length > 0 ? (
+        {singlePost && singlePost?.postImage && singlePost?.postImage[0]?.length > 0 ? (
           <Image
             className="w-full mb-4"
             src={singlePost?.postImage[0]}
@@ -172,7 +184,10 @@ export default function SinglePost({
           </span>
         </article>
 
-        <article className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary">
+        <article
+          onClick={handleComment}
+          className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary"
+        >
           <MessageCircle size={22} />
           <span className="text-base">{singlePost?.comments && singlePost?.comments.length}</span>
         </article>
@@ -208,6 +223,26 @@ export default function SinglePost({
           <Download size={22} />
         </article>
       </div>
+      {showCommentBox ? (
+  <div>
+    <div className="flex flex-1">
+      <textarea
+        onChange={(event: any) => setComment_message(event.target.value)}
+        value={comment_message}
+        name="postTitle"
+        className="mt-2 dark:bg-secondary-light outline-none focus:ring rounded-lg p-3 text-black dark:text-white placholder:text-gray-400 text-lg w-full mb-2"
+        rows={2}
+        cols={50}
+        placeholder="Type your comment here"
+      />
+    </div>
+    <div className="flex flex-end">
+      <button className="transition-all duration-300 bg-primary hover:bg-primary-light text-white font-normal py-1 px-8 rounded-full">
+        {"Post"}
+      </button>
+    </div>
+  </div>
+) : null}
     </div>
   );
 }
