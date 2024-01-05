@@ -7,6 +7,7 @@ import { removeBookmark, saveBookmark, createBookmarkEntry } from "@/backend/boo
 import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
 import { toastify } from "@/helper/toastify";
 import { useState } from "react";
+import { addComment } from "@/backend/posts.api";
 
 type FormatOnType = "seconds" | "minutes" | "hours" | "days";
 
@@ -107,8 +108,20 @@ export default function SinglePost({
     console.log("comment");
   };
 
+  const uploadComment = async (id: string,comment_message: string) => {
+    console.log("pastcomments" + singlePost.comments);
+    const Comments = [...singlePost.comments, comment_message];
+    console.log("present comments" + Comments);
+    const comment = await addComment(id , Comments);
+    console.log(comment);
+  };
+
   const [comment_message, setComment_message] = useState("");
   const [showCommentBox, setShowCommentBox] = useState(false);
+
+  const handleTest = () => {
+    console.log(singlePost.comments);
+  };
 
   return (
     <div className="p-3 rounded-md shadow dark:shadow-gray-600 mb-4">
@@ -237,9 +250,10 @@ export default function SinglePost({
       />
     </div>
     <div className="flex flex-end">
-      <button className="transition-all duration-300 bg-primary hover:bg-primary-light text-white font-normal py-1 px-8 rounded-full">
+      <button onClick={() => {uploadComment(singlePost.$id ,comment_message)}} className="transition-all duration-300 bg-primary hover:bg-primary-light text-white font-normal py-1 px-8 rounded-full">
         {"Post"}
       </button>
+      <button onClick={handleTest}>test</button>
     </div>
   </div>
 ) : null}
