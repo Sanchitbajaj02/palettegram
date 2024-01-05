@@ -98,12 +98,12 @@ const Navbar = () => {
 
           <Link
             href={`/user/${userIdFromCookies}`}
-            className="mx-2 px-2 py-2 rounded-full bg-primary text-white"
+            className="mx-2 px-2 py-2 rounded-full  bg-primary text-white"
           >
-            <Settings size={22} className="transition-all duration-300 " />
+            <Settings size={22} className="transition-all duration-300  hover:bg-onhover hover:scale-105" />
           </Link>
 
-          <button className="mx-2 px-2 py-2 rounded-full bg-primary text-white" onClick={logout}>
+          <button className="mx-2 px-2 py-2 rounded-full bg-primary transition hover:bg-onhover hover:scale-105 text-white" onClick={logout}>
             <LogOut size={22} className="transition-all duration-300" />
           </button>
         </div>

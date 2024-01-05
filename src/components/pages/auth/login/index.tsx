@@ -17,6 +17,8 @@ import { Eye,EyeOff } from "react-feather";
 
 export default function LoginComponent() {
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
   const dispatch = useDispatch();
   const authSelector = useSelector((state: any) => state.auth);
 
@@ -72,7 +74,6 @@ export default function LoginComponent() {
     return <h1>Error</h1>;
   }
 
-  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <>
