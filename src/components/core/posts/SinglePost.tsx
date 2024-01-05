@@ -8,6 +8,7 @@ import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
 import { toastify } from "@/helper/toastify";
 import { useState } from "react";
 import { addComment } from "@/backend/posts.api";
+// import { addPost } from "@/redux/reducers/postsReducer";
 
 type FormatOnType = "seconds" | "minutes" | "hours" | "days";
 
@@ -111,7 +112,7 @@ export default function SinglePost({
   const uploadComment = async (id: string,comment_message: string) => {
     console.log("pastcomments" + singlePost.comments);
     const Comments = [...singlePost.comments, comment_message];
-    console.log("present comments" + Comments);
+    console.log("present comments" + singlePost.comments);
     const comment = await addComment(id , Comments);
     console.log(comment);
   };
