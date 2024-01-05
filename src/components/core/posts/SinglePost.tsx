@@ -109,12 +109,13 @@ export default function SinglePost({
     console.log("comment");
   };
 
+  const [commentCount, setCommentCount] = useState(singlePost?.comments?.length || 0);
+
   const uploadComment = async (id: string,comment_message: string) => {
-    console.log("pastcomments" + singlePost.comments);
-    const Comments = [...singlePost.comments, comment_message];
-    console.log("present comments" + singlePost.comments);
-    const comment = await addComment(id , Comments);
-    console.log(comment);
+    const previousComments = singlePost.comments;
+    const Comments = [...previousComments, comment_message];
+    const res = await addComment(id , Comments);
+    setCommentCount(res?.comments.length || singlePost?.comments?.length);
   };
 
   const [comment_message, setComment_message] = useState("");
@@ -203,7 +204,7 @@ export default function SinglePost({
           className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary"
         >
           <MessageCircle size={22} />
-          <span className="text-base">{singlePost?.comments && singlePost?.comments.length}</span>
+          <span className="text-base">{commentCount}</span>
         </article>
 
         <article
