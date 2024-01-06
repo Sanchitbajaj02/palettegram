@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Download, Heart, MessageCircle, Share, Bookmark } from "react-feather";
 import { PostInstanceType } from "@/types/index.d";
+import { parseCookies } from "nookies";
 import { useSelector, useDispatch } from "react-redux";
 import { removeBookmark, saveBookmark, createBookmarkEntry } from "@/backend/bookmarks.api";
 import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
@@ -10,7 +11,15 @@ import { useState } from "react";
 import { addComment } from "@/backend/posts.api";
 // import { addPost } from "@/redux/reducers/postsReducer";
 
-type FormatOnType = "seconds" | "minutes" | "hours" | "days";
+
+type FormatOnType = 'seconds' | 'minutes' | 'hours' | 'days';
+type UserBookMarkType = {
+  accountId:string
+  bookmark:string[] | undefined
+  error:boolean
+  loading:boolean
+}
+
 
 export default function SinglePost({
   singlePost,
@@ -21,8 +30,7 @@ export default function SinglePost({
 }) {
   const dispatch = useDispatch();
   const authState = useSelector((state: any) => state.auth);
-  const userBookmarks = useSelector((state: any) => state.bookmarks);
-
+  const userBookmarks:UserBookMarkType = useSelector((state: any) => state.bookmarks);
   const copyText = async (color: string) => {
     await navigator.clipboard.writeText(color);
   };
@@ -54,30 +62,46 @@ export default function SinglePost({
     }
   }
 
-  const handleUpdateBookmark = async (accountId: string, postId: string) => {
-    if (userBookmarks.accountId === accountId) {
-      if (
-        userBookmarks.bookmark.reduce(
-          (prev: any, current: any) => prev || current === postId,
-          false,
-        )
-      ) {
-        // console.log(accountId, "remove bookmark");
-        removeBookmark(accountId, postId)
-          .then((resp) => {
-            dispatch(
-              saveBookmarkToStore({
-                accountId: resp.accountId,
-                bookmark: resp.bookmark,
-              }),
-            );
-
-            toastify("Bookmark removed", "success");
-          })
-          .catch((err) => console.log(err));
+  const handleUpdateBookmark = async (postId: string | undefined) => {
+    if(postId){
+      const cookies = parseCookies();
+      const accountId:string = cookies["userId"];
+      if (Array.isArray(userBookmarks.bookmark)) {
+        if (
+          userBookmarks.bookmark.some(
+            (current: string) =>  current === postId,
+          )
+        ) {
+          // console.log(accountId, "remove bookmark");
+          removeBookmark(accountId, postId)
+            .then((resp) => {
+              dispatch(
+                saveBookmarkToStore({
+                  accountId: resp.accountId,
+                  bookmark: resp.bookmark,
+                }),
+              );
+  
+              toastify("Bookmark removed", "success");
+            })
+            .catch((err) => console.log(err));
+        } else {
+          // console.log(accountId, "save bookmark");
+          saveBookmark(accountId, postId)
+            .then((resp) => {
+              dispatch(
+                saveBookmarkToStore({
+                  accountId: resp.accountId,
+                  bookmark: resp.bookmark,
+                }),
+              );
+              toastify("Bookmark saved", "success");
+            })
+            .catch((err) => console.log(err));
+        }
       } else {
-        // console.log(accountId, "save bookmark");
-        saveBookmark(accountId, postId)
+        // console.log(accountId, "account not exist");
+        createBookmarkEntry(accountId, postId)
           .then((resp) => {
             dispatch(
               saveBookmarkToStore({
@@ -89,19 +113,8 @@ export default function SinglePost({
           })
           .catch((err) => console.log(err));
       }
-    } else {
-      // console.log(accountId, "account not exist");
-      createBookmarkEntry(accountId, postId)
-        .then((resp) => {
-          dispatch(
-            saveBookmarkToStore({
-              accountId: resp.accountId,
-              bookmark: resp.bookmark,
-            }),
-          );
-        })
-        .catch((err) => console.log(err));
     }
+   
   };
 
   const handleComment = () => {
@@ -208,11 +221,11 @@ export default function SinglePost({
         </article>
 
         <article
-          onClick={() => handleUpdateBookmark(singlePost?.accountId, singlePost?.$id!)}
+          onClick={() => handleUpdateBookmark(singlePost?.$id)}
           className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${
-            userBookmarks &&
+            userBookmarks && userBookmarks?.bookmark &&
             userBookmarks?.bookmark?.length > 0 &&
-            userBookmarks?.bookmark.includes(singlePost && singlePost?.$id)
+            userBookmarks?.bookmark.includes(singlePost && singlePost?.$id!)
               ? "text-primary hover:text-primary dark:hover:text-primary"
               : "text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
           }`}
@@ -221,9 +234,9 @@ export default function SinglePost({
             size={22}
             fill="true"
             className={`${
-              userBookmarks &&
-              userBookmarks?.bookmark?.length > 0 &&
-              userBookmarks?.bookmark.includes(singlePost && singlePost?.$id)
+              userBookmarks && userBookmarks?.bookmark &&
+              userBookmarks?.bookmark?.length > 0 && 
+              userBookmarks?.bookmark.includes(singlePost && singlePost?.$id!)
                 ? "fill-primary"
                 : "fill-transparent"
             }`}
