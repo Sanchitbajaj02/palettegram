@@ -7,10 +7,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { removeBookmark, saveBookmark, createBookmarkEntry } from "@/backend/bookmarks.api";
 import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
 import { toastify } from "@/helper/toastify";
-import { useState } from "react";
 import { addComment } from "@/backend/posts.api";
-// import { addPost } from "@/redux/reducers/postsReducer";
-
+import {getUserDetails} from '@/backend/auth.api'
+import {  useCallback, useEffect,useState } from "react";
+interface UserDetails {
+  fullName: string;
+}
 
 type FormatOnType = 'seconds' | 'minutes' | 'hours' | 'days';
 type UserBookMarkType = {
@@ -19,8 +21,6 @@ type UserBookMarkType = {
   error:boolean
   loading:boolean
 }
-
-
 export default function SinglePost({
   singlePost,
   onLikeClick,
@@ -28,6 +28,7 @@ export default function SinglePost({
   singlePost: PostInstanceType;
   onLikeClick?: any;
 }) {
+  const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
   const dispatch = useDispatch();
   const authState = useSelector((state: any) => state.auth);
   const userBookmarks:UserBookMarkType = useSelector((state: any) => state.bookmarks);
@@ -35,6 +36,20 @@ export default function SinglePost({
     await navigator.clipboard.writeText(color);
   };
 
+  const fetchUserDetails = useCallback(async () => {
+    try {
+      const detailsArray = await getUserDetails(singlePost.accountId);
+      const userDetails = detailsArray && detailsArray.length > 0 ? detailsArray[0] : null;
+      setUserDetails(userDetails);
+    } catch (error) {
+      console.error("Error fetching user details:", error);
+    }
+  }, [singlePost.accountId]);
+  
+  useEffect(() => {
+    fetchUserDetails();
+  }, [fetchUserDetails]);
+  
   function createdAtDateFormatter(postCreationTime: string) {
     const timeObj = {
       seconds: 1000,
@@ -148,7 +163,11 @@ export default function SinglePost({
           <Image src="/assets/user.png" alt="user" width={40} height={40} />
         </div>
         <div>
-          <h5 className="font-medium text-md">{singlePost && singlePost?.accountId}</h5>
+
+          {/* <h5 className="font-medium text-md">{singlePost && singlePost.accountId}</h5> */}
+          <h5 className="font-medium text-md">
+            {userDetails && userDetails.fullName}
+          </h5>
           {singlePost?.$createdAt ? (
             <p className="font-thin text-xs/[10px] text-slate-950 dark:text-slate-400">{`${createdAtDateFormatter(
               singlePost.$createdAt,
@@ -192,20 +211,18 @@ export default function SinglePost({
       <div className="flex justify-around">
         <article
           onClick={() => onLikeClick(singlePost)}
-          className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${
-            singlePost?.likes && singlePost?.likes.includes(authState?.userId)
+          className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${singlePost?.likes && singlePost?.likes.includes(authState?.userId)
               ? "text-primary hover:text-primary"
               : "text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
-          }`}
+            }`}
         >
           <Heart
             size={22}
             fill="true"
-            className={`${
-              singlePost?.likes && singlePost?.likes.includes(authState?.userId)
+            className={`${singlePost?.likes && singlePost?.likes.includes(authState?.userId)
                 ? "fill-primary"
                 : "fill-transparent"
-            }`}
+              }`}
           />
           <span className="text-base">
             {singlePost && singlePost?.likes && singlePost?.likes.length}
@@ -228,7 +245,7 @@ export default function SinglePost({
             userBookmarks?.bookmark.includes(singlePost && singlePost?.$id!)
               ? "text-primary hover:text-primary dark:hover:text-primary"
               : "text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
-          }`}
+            }`}
         >
           <Bookmark
             size={22}
@@ -239,7 +256,7 @@ export default function SinglePost({
               userBookmarks?.bookmark.includes(singlePost && singlePost?.$id!)
                 ? "fill-primary"
                 : "fill-transparent"
-            }`}
+              }`}
           />
         </article>
 
