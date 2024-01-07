@@ -2,16 +2,25 @@ import Link from "next/link";
 import Image from "next/image";
 import { Download, Heart, MessageCircle, Share, Bookmark } from "react-feather";
 import { PostInstanceType } from "@/types/index.d";
+import { parseCookies } from "nookies";
 import { useSelector, useDispatch } from "react-redux";
 import { removeBookmark, saveBookmark, createBookmarkEntry } from "@/backend/bookmarks.api";
 import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
 import { toastify } from "@/helper/toastify";
-import { useState } from "react";
 import { addComment } from "@/backend/posts.api";
-// import { addPost } from "@/redux/reducers/postsReducer";
+import { getUserDetails } from "@/backend/auth.api";
+import { useCallback, useEffect, useState } from "react";
+interface UserDetails {
+  fullName: string;
+}
 
 type FormatOnType = "seconds" | "minutes" | "hours" | "days";
-
+type UserBookMarkType = {
+  accountId: string;
+  bookmark: string[] | undefined;
+  error: boolean;
+  loading: boolean;
+};
 export default function SinglePost({
   singlePost,
   onLikeClick,
@@ -19,13 +28,29 @@ export default function SinglePost({
   singlePost: PostInstanceType;
   onLikeClick?: any;
 }) {
+  const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
+  const [comment_message, setComment_message] = useState("");
+  const [showCommentBox, setShowCommentBox] = useState(false);
+  const [commentCount, setCommentCount] = useState(singlePost?.comments?.length || 0);
+
   const dispatch = useDispatch();
+  
   const authState = useSelector((state: any) => state.auth);
-  const userBookmarks = useSelector((state: any) => state.bookmarks);
+  const userBookmarks: UserBookMarkType = useSelector((state: any) => state.bookmarks);
 
   const copyText = async (color: string) => {
     await navigator.clipboard.writeText(color);
   };
+
+  const fetchUserDetails = useCallback(async () => {
+    try {
+      const detailsArray = await getUserDetails(singlePost.accountId);
+      const userDetails = detailsArray && detailsArray.length > 0 ? detailsArray[0] : null;
+      setUserDetails(userDetails);
+    } catch (error) {
+      console.error("Error fetching user details:", error);
+    }
+  }, [singlePost.accountId]);
 
   function createdAtDateFormatter(postCreationTime: string) {
     const timeObj = {
@@ -54,30 +79,42 @@ export default function SinglePost({
     }
   }
 
-  const handleUpdateBookmark = async (accountId: string, postId: string) => {
-    if (userBookmarks.accountId === accountId) {
-      if (
-        userBookmarks.bookmark.reduce(
-          (prev: any, current: any) => prev || current === postId,
-          false,
-        )
-      ) {
-        // console.log(accountId, "remove bookmark");
-        removeBookmark(accountId, postId)
-          .then((resp) => {
-            dispatch(
-              saveBookmarkToStore({
-                accountId: resp.accountId,
-                bookmark: resp.bookmark,
-              }),
-            );
+  const handleUpdateBookmark = async (postId: string | undefined) => {
+    if (postId) {
+      const cookies = parseCookies();
+      const accountId: string = cookies["userId"];
+      if (Array.isArray(userBookmarks.bookmark)) {
+        if (userBookmarks.bookmark.some((current: string) => current === postId)) {
+          // console.log(accountId, "remove bookmark");
+          removeBookmark(accountId, postId)
+            .then((resp) => {
+              dispatch(
+                saveBookmarkToStore({
+                  accountId: resp.accountId,
+                  bookmark: resp.bookmark,
+                }),
+              );
 
-            toastify("Bookmark removed", "success");
-          })
-          .catch((err) => console.log(err));
+              toastify("Bookmark removed", "success");
+            })
+            .catch((err) => console.log(err));
+        } else {
+          // console.log(accountId, "save bookmark");
+          saveBookmark(accountId, postId)
+            .then((resp) => {
+              dispatch(
+                saveBookmarkToStore({
+                  accountId: resp.accountId,
+                  bookmark: resp.bookmark,
+                }),
+              );
+              toastify("Bookmark saved", "success");
+            })
+            .catch((err) => console.log(err));
+        }
       } else {
-        // console.log(accountId, "save bookmark");
-        saveBookmark(accountId, postId)
+        // console.log(accountId, "account not exist");
+        createBookmarkEntry(accountId, postId)
           .then((resp) => {
             dispatch(
               saveBookmarkToStore({
@@ -89,18 +126,6 @@ export default function SinglePost({
           })
           .catch((err) => console.log(err));
       }
-    } else {
-      // console.log(accountId, "account not exist");
-      createBookmarkEntry(accountId, postId)
-        .then((resp) => {
-          dispatch(
-            saveBookmarkToStore({
-              accountId: resp.accountId,
-              bookmark: resp.bookmark,
-            }),
-          );
-        })
-        .catch((err) => console.log(err));
     }
   };
 
@@ -109,21 +134,16 @@ export default function SinglePost({
     console.log("comment");
   };
 
-  const [commentCount, setCommentCount] = useState(singlePost?.comments?.length || 0);
-
-  const uploadComment = async (id: string,comment_message: string) => {
+  const uploadComment = async (id: string, comment_message: string) => {
     const previousComments = singlePost.comments;
     const Comments = [...previousComments, comment_message];
-    const res = await addComment(id , Comments);
+    const res = await addComment(id, Comments);
     setCommentCount(res?.comments.length || singlePost?.comments?.length);
   };
 
-  const [comment_message, setComment_message] = useState("");
-  const [showCommentBox, setShowCommentBox] = useState(false);
-
-  // const handleTest = () => {
-  //   console.log(singlePost.comments);
-  // };
+  useEffect(() => {
+    fetchUserDetails();
+  }, [fetchUserDetails]);
 
   return (
     <div className="p-3 rounded-md shadow dark:shadow-gray-600 mb-4">
@@ -135,7 +155,9 @@ export default function SinglePost({
           <Image src="/assets/user.png" alt="user" width={40} height={40} />
         </div>
         <div>
-          <h5 className="font-medium text-md">{singlePost && singlePost?.accountId}</h5>
+          <h5 className="font-medium text-base">
+            {userDetails ? userDetails.fullName : "Anonymous User"}
+          </h5>
           {singlePost?.$createdAt ? (
             <p className="font-thin text-xs/[10px] text-slate-950 dark:text-slate-400">{`${createdAtDateFormatter(
               singlePost.$createdAt,
@@ -208,11 +230,12 @@ export default function SinglePost({
         </article>
 
         <article
-          onClick={() => handleUpdateBookmark(singlePost?.accountId, singlePost?.$id!)}
+          onClick={() => handleUpdateBookmark(singlePost?.$id)}
           className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${
             userBookmarks &&
+            userBookmarks?.bookmark &&
             userBookmarks?.bookmark?.length > 0 &&
-            userBookmarks?.bookmark.includes(singlePost && singlePost?.$id)
+            userBookmarks?.bookmark.includes(singlePost && singlePost?.$id!)
               ? "text-primary hover:text-primary dark:hover:text-primary"
               : "text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
           }`}
@@ -222,8 +245,9 @@ export default function SinglePost({
             fill="true"
             className={`${
               userBookmarks &&
+              userBookmarks?.bookmark &&
               userBookmarks?.bookmark?.length > 0 &&
-              userBookmarks?.bookmark.includes(singlePost && singlePost?.$id)
+              userBookmarks?.bookmark.includes(singlePost && singlePost?.$id!)
                 ? "fill-primary"
                 : "fill-transparent"
             }`}
@@ -239,26 +263,31 @@ export default function SinglePost({
         </article>
       </div>
       {showCommentBox ? (
-  <div>
-    <div className="flex flex-1">
-      <textarea
-        onChange={(event: any) => setComment_message(event.target.value)}
-        value={comment_message}
-        name="postTitle"
-        className="mt-2 dark:bg-secondary-light outline-none focus:ring rounded-lg p-3 text-black dark:text-white placholder:text-gray-400 text-lg w-full mb-2"
-        rows={2}
-        cols={50}
-        placeholder="Type your comment here"
-      />
-    </div>
-    <div className="flex flex-end">
-      <button onClick={() => {uploadComment(singlePost.$id ,comment_message)}} className="transition-all duration-300 bg-primary hover:bg-primary-light text-white font-normal py-1 px-8 rounded-full">
-        {"Post"}
-      </button>
-      {/* <button onClick={handleTest}>test</button> */}
-    </div>
-  </div>
-) : null}
+        <div>
+          <div className="flex flex-1">
+            <textarea
+              onChange={(event: any) => setComment_message(event.target.value)}
+              value={comment_message}
+              name="postTitle"
+              className="mt-2 dark:bg-secondary-light outline-none focus:ring rounded-lg p-3 text-black dark:text-white placholder:text-gray-400 text-lg w-full mb-2"
+              rows={2}
+              cols={50}
+              placeholder="Type your comment here"
+            />
+          </div>
+          <div className="flex flex-end">
+            <button
+              onClick={() => {
+                uploadComment(singlePost.$id, comment_message);
+              }}
+              className="transition-all duration-300 bg-primary hover:bg-primary-light text-white font-normal py-1 px-8 rounded-full"
+            >
+              {"Post"}
+            </button>
+            {/* <button onClick={handleTest}>test</button> */}
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

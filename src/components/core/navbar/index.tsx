@@ -52,7 +52,7 @@ const Navbar = () => {
           dispatch(
             saveBookmarkToStore({
               accountId: userIdFromCookies,
-              bookmark: bookm?.documents[0].bookmark,
+              bookmark: bookm?.documents[0]?.bookmark,
             }),
           );
         })
@@ -91,19 +91,19 @@ const Navbar = () => {
         <div className="flex gap-2 flex-row items-center">
           <ThemeButton iconSize={22} />
           {pathname !== "/feed" && (
-            <Link href="/feed" className="mx-2 px-2 py-2 rounded-full bg-primary text-white">
-              <Home size={22} className="transition-all duration-300 " />
+            <Link href="/feed" className="mx-2 px-2 py-2 rounded-full bg-primary text-white hover:bg-primary-light hover:scale-105">
+              <Home size={22} className="transition-all duration-300   " />
             </Link>
           )}
 
           <Link
             href={`/user/${userIdFromCookies}`}
-            className="mx-2 px-2 py-2 rounded-full  bg-primary text-white  hover:bg-onhover hover:scale-105"
+            className="mx-2 px-2 py-2 rounded-full  bg-primary text-white  hover:bg-primary-light hover:scale-105"
           >
             <User size={22} className="transition-all duration-300 " />
           </Link>
 
-          <button className="mx-2 px-2 py-2 rounded-full bg-primary transition hover:bg-onhover hover:scale-105 text-white" onClick={logout}>
+          <button className="mx-2 px-2 py-2 rounded-full bg-primary transition hover:bg-primary-light hover:scale-105 text-white" onClick={logout}>
             <LogOut size={22} className="transition-all duration-300" />
           </button>
         </div>
