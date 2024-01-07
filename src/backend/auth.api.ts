@@ -118,6 +118,49 @@ const loginUser = async (userData: any) => {
 };
 
 /**
+ * @description send a link to user's email
+ * @param {string} userEmail
+ * @returns {Object} response
+ */
+const forgotpassword = async (userEmail: string) => {
+  try {
+    // console.log("login:", userData?.email, userData?.password);
+    if (!userEmail) {
+      throw new Error("email is empty");
+    }
+    const response = await account.createRecovery(userEmail, `${process.env.NEXT_PUBLIC_BASE_URL}/updatepassword`);
+    return response;
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(error.message);
+  }
+};
+
+/**
+ * @description update user's password
+ * @param {Object} userData
+ * @returns {Object} response
+ */
+
+
+const updatepassword = async (userData: any) => {
+  const { password, confirmpassword, USER_ID, SECRET } = userData;
+  try {
+    if (userData.password === '' || userData.confirmpassword === '' || userData.USER_ID === '' || userData.SECRET === " ") {
+      throw new Error("Request has failed");
+    }
+    const response = await account.updateRecovery(USER_ID, SECRET, password, confirmpassword);
+    return response;
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(error.message);
+  }
+};
+
+
+
+
+/**
  * @description returns the state of current user
  * @returns {Object} Session
  */
@@ -203,4 +246,4 @@ const getSingleUser = async (id: string) => {
   }
 };
 
-export { registerUser, verifyUser, loginUser, logoutUser, isLoggedIn, getSingleUser, getCurrentUser };
+export { registerUser, verifyUser, loginUser, logoutUser, isLoggedIn, getSingleUser, getCurrentUser, forgotpassword, updatepassword };
