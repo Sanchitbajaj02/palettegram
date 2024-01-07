@@ -8,11 +8,8 @@ import { removeBookmark, saveBookmark, createBookmarkEntry } from "@/backend/boo
 import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
 import { toastify } from "@/helper/toastify";
 import { addComment } from "@/backend/posts.api";
-// import { addPost } from "@/redux/reducers/postsReducer";
 import {getUserDetails} from '@/backend/auth.api'
 import {  useCallback, useEffect,useState } from "react";
-
-type FormatOnType = 'seconds' | 'minutes' | 'hours' | 'days';
 interface UserDetails {
   fullName: string;
 }
