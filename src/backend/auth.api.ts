@@ -1,6 +1,6 @@
 "use client";
 
-import { account, db, ID, palettegramDB, usersCollection } from "./appwrite.config";
+import { account, db, ID, palettegramDB, usersCollection,Query } from "./appwrite.config";
 
 /**
  * @description Register the user into the database
@@ -118,6 +118,49 @@ const loginUser = async (userData: any) => {
 };
 
 /**
+ * @description send a link to user's email
+ * @param {string} userEmail
+ * @returns {Object} response
+ */
+const forgotpassword = async (userEmail: string) => {
+  try {
+    // console.log("login:", userData?.email, userData?.password);
+    if (!userEmail) {
+      throw new Error("email is empty");
+    }
+    const response = await account.createRecovery(userEmail, `${process.env.NEXT_PUBLIC_BASE_URL}/updatepassword`);
+    return response;
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(error.message);
+  }
+};
+
+/**
+ * @description update user's password
+ * @param {Object} userData
+ * @returns {Object} response
+ */
+
+
+const updatepassword = async (userData: any) => {
+  const { password, confirmpassword, USER_ID, SECRET } = userData;
+  try {
+    if (userData.password === '' || userData.confirmpassword === '' || userData.USER_ID === '' || userData.SECRET === " ") {
+      throw new Error("Request has failed");
+    }
+    const response = await account.updateRecovery(USER_ID, SECRET, password, confirmpassword);
+    return response;
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(error.message);
+  }
+};
+
+
+
+
+/**
  * @description returns the state of current user
  * @returns {Object} Session
  */
@@ -147,7 +190,7 @@ const logoutUser = async () => {
 const saveDataToDatabase = async (session: any) => {
   try {
     let username = session.email.split("@")[0];
-
+    console.log(username);
     const resp = await db.createDocument(palettegramDB, usersCollection, ID.unique(), {
       email: session.email,
       fullName: session.name,
@@ -156,9 +199,6 @@ const saveDataToDatabase = async (session: any) => {
       accountId: session.$id,
       username: username,
     });
-
-    // console.log("DB log response:", resp);
-
     if (!resp) {
       throw new Error("Database not working");
     }
@@ -203,4 +243,25 @@ const getSingleUser = async (id: string) => {
   }
 };
 
-export { registerUser, verifyUser, loginUser, logoutUser, isLoggedIn, getSingleUser, getCurrentUser };
+const getUserDetails = async (accountId: string) => {
+  try {
+    if (!palettegramDB || !usersCollection || !accountId) {
+      throw new Error("Invalid input for getting user details");
+    }
+
+    const user = await db.listDocuments(palettegramDB, usersCollection, [
+      Query.equal('accountId', accountId),
+      Query.select(["accountId", "fullName"])
+    ]);
+
+    if(!user)
+    {
+      throw new Error("User not found");
+    }
+    return user.documents.map(doc => ({ accountId: doc.accountId, fullName: doc.fullName }));
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export { registerUser, verifyUser, loginUser, logoutUser, isLoggedIn, getSingleUser, getCurrentUser, forgotpassword, updatepassword,getUserDetails };
