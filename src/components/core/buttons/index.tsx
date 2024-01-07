@@ -21,7 +21,7 @@ function ButtonLong({ href, newTab = false, children, size }: Button) {
         href={href}
         target={newTab ? "_blank" : "_self"}
         rel="noopener noreferrer"
-        className={`${buttonSizes[size]} rounded-full text-white bg-primary  transition hover:bg-onhover hover:scale-105`}
+        className={`${buttonSizes[size]} rounded-full text-white bg-primary  transition hover:bg-primary-light hover:scale-105`}
       >
         {children}
       </Link>
