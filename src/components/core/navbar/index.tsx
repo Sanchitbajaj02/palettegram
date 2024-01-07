@@ -52,7 +52,7 @@ const Navbar = () => {
           dispatch(
             saveBookmarkToStore({
               accountId: userIdFromCookies,
-              bookmark: bookm?.documents[0].bookmark,
+              bookmark: bookm?.documents[0]?.bookmark,
             }),
           );
         })
