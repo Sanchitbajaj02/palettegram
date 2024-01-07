@@ -91,8 +91,8 @@ const Navbar = () => {
         <div className="flex gap-2 flex-row items-center">
           <ThemeButton iconSize={22} />
           {pathname !== "/feed" && (
-            <Link href="/feed" className="mx-2 px-2 py-2 rounded-full bg-primary text-white">
-              <Home size={22} className="transition-all duration-300 " />
+            <Link href="/feed" className="mx-2 px-2 py-2 rounded-full bg-primary text-white hover:bg-onhover hover:scale-105">
+              <Home size={22} className="transition-all duration-300   " />
             </Link>
           )}
 
