@@ -1,16 +1,18 @@
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect} from "react";
 import { Download, Heart, MessageCircle, Share, Bookmark } from "react-feather";
 import { PostInstanceType } from "@/types/index.d";
 import { useSelector, useDispatch } from "react-redux";
 import { removeBookmark, saveBookmark, createBookmarkEntry } from "@/backend/bookmarks.api";
 import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
 import { toastify } from "@/helper/toastify";
-import { getCurrentUser } from "@/backend/auth.api";
+import {getUserDetails} from '@/backend/auth.api'
+import {  useCallback, useEffect,useState } from "react";
 
 type FormatOnType = 'seconds' | 'minutes' | 'hours' | 'days';
-
+interface UserDetails {
+  fullName: string;
+}
 export default function SinglePost({
   singlePost,
   onLikeClick,
@@ -18,49 +20,51 @@ export default function SinglePost({
   singlePost: PostInstanceType;
   onLikeClick?: any;
 }) {
+  const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
   const dispatch = useDispatch();
   const authState = useSelector((state: any) => state.auth);
   const userBookmarks = useSelector((state: any) => state.bookmarks);
-  const [user,setUser] = useState({
-    email: "",
-    name: ""
-  })
-
-  useEffect(() => {
-    getCurrentUser()
-      .then((resp: any) => {
-        setUser(resp);
-      })
-      .catch(console.log);
-  }, []);
-
   const copyText = async (color: string) => {
     await navigator.clipboard.writeText(color);
   };
 
-  function createdAtDateFormatter(postCreationTime:string){
+  const fetchUserDetails = useCallback(async () => {
+    try {
+      const detailsArray = await getUserDetails(singlePost.accountId);
+      const userDetails = detailsArray && detailsArray.length > 0 ? detailsArray[0] : null;
+      setUserDetails(userDetails);
+    } catch (error) {
+      console.error("Error fetching user details:", error);
+    }
+  }, [singlePost.accountId]);
+  
+  useEffect(() => {
+    fetchUserDetails();
+  }, [fetchUserDetails]);
+  
+  function createdAtDateFormatter(postCreationTime: string) {
     const timeObj = {
-      seconds:1000,
-      minutes:1000 * 60,
-      hours:1000 * 60 * 60,
-      days:1000 * 60 * 60 * 24,
-      postCreatedTime:new Date(postCreationTime),
-      currentTime:new Date(),
-      calcTimeDiff(formatOn:FormatOnType){
+      seconds: 1000,
+      minutes: 1000 * 60,
+      hours: 1000 * 60 * 60,
+      days: 1000 * 60 * 60 * 24,
+      postCreatedTime: new Date(postCreationTime),
+      currentTime: new Date(),
+      calcTimeDiff(formatOn: FormatOnType) {
         const timeDiff = this.currentTime.valueOf() - this.postCreatedTime.valueOf();
-        return Math.round(timeDiff/this[formatOn])
+        return Math.round(timeDiff / this[formatOn])
       }
     }
-
-    if(timeObj.calcTimeDiff('seconds') < 60){
+    
+    if (timeObj.calcTimeDiff('seconds') < 60) {
       return `${timeObj.calcTimeDiff('seconds')}sec`
-    }else if(timeObj.calcTimeDiff('minutes') < 60){
+    } else if (timeObj.calcTimeDiff('minutes') < 60) {
       return `${timeObj.calcTimeDiff('minutes')}min`
-    }else if(timeObj.calcTimeDiff('hours')<=24){
+    } else if (timeObj.calcTimeDiff('hours') <= 24) {
       return `${timeObj.calcTimeDiff('hours')}h`
-    }else if(timeObj.calcTimeDiff('days') < 365){
+    } else if (timeObj.calcTimeDiff('days') < 365) {
       return `${timeObj.calcTimeDiff('days')}d`
-    }else{
+    } else {
       return `${timeObj.calcTimeDiff('days') / 365}y`
     }
 
@@ -126,8 +130,11 @@ export default function SinglePost({
           <Image src="/assets/user.png" alt="user" width={40} height={40} />
         </div>
         <div>
-        <h5 className="font-medium text-md">{user.name}</h5>
-        {singlePost?.$createdAt ? <p className="font-thin text-xs/[10px] text-slate-950 dark:text-slate-400">{`${createdAtDateFormatter(singlePost.$createdAt)} ago`}</p>:null}
+          {/* <h5 className="font-medium text-md">{singlePost && singlePost.accountId}</h5> */}
+          <h5 className="font-medium text-md">
+            {userDetails && userDetails.fullName}
+          </h5>
+          {singlePost?.$createdAt ? <p className="font-thin text-xs/[10px] text-slate-950 dark:text-slate-400">{`${createdAtDateFormatter(singlePost.$createdAt)} ago`}</p> : null}
         </div>
       </Link>
       <Link href={`/post/${singlePost && singlePost?.$id}`}>
@@ -166,20 +173,18 @@ export default function SinglePost({
       <div className="flex justify-around">
         <article
           onClick={() => onLikeClick(singlePost)}
-          className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${
-            singlePost?.likes && singlePost?.likes.includes(authState?.userId)
+          className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${singlePost?.likes && singlePost?.likes.includes(authState?.userId)
               ? "text-primary hover:text-primary"
               : "text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
-          }`}
+            }`}
         >
           <Heart
             size={22}
             fill="true"
-            className={`${
-              singlePost?.likes && singlePost?.likes.includes(authState?.userId)
+            className={`${singlePost?.likes && singlePost?.likes.includes(authState?.userId)
                 ? "fill-primary"
                 : "fill-transparent"
-            }`}
+              }`}
           />
           <span className="text-base">
             {singlePost && singlePost?.likes && singlePost?.likes.length}
@@ -193,24 +198,22 @@ export default function SinglePost({
 
         <article
           onClick={() => handleUpdateBookmark(singlePost?.accountId, singlePost?.$id!)}
-          className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${
-            userBookmarks &&
-            userBookmarks?.bookmark?.length > 0 &&
-            userBookmarks?.bookmark.includes(singlePost && singlePost?.$id)
+          className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${userBookmarks &&
+              userBookmarks?.bookmark?.length > 0 &&
+              userBookmarks?.bookmark.includes(singlePost && singlePost?.$id)
               ? "text-primary hover:text-primary dark:hover:text-primary"
               : "text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
-          }`}
+            }`}
         >
           <Bookmark
             size={22}
             fill="true"
-            className={`${
-              userBookmarks &&
-              userBookmarks?.bookmark?.length > 0 &&
-              userBookmarks?.bookmark.includes(singlePost && singlePost?.$id)
+            className={`${userBookmarks &&
+                userBookmarks?.bookmark?.length > 0 &&
+                userBookmarks?.bookmark.includes(singlePost && singlePost?.$id)
                 ? "fill-primary"
                 : "fill-transparent"
-            }`}
+              }`}
           />
         </article>
 
