@@ -8,19 +8,19 @@ import { removeBookmark, saveBookmark, createBookmarkEntry } from "@/backend/boo
 import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
 import { toastify } from "@/helper/toastify";
 import { addComment } from "@/backend/posts.api";
-import {getUserDetails} from '@/backend/auth.api'
-import {  useCallback, useEffect,useState } from "react";
+import { getUserDetails } from "@/backend/auth.api";
+import { useCallback, useEffect, useState } from "react";
 interface UserDetails {
   fullName: string;
 }
 
-type FormatOnType = 'seconds' | 'minutes' | 'hours' | 'days';
+type FormatOnType = "seconds" | "minutes" | "hours" | "days";
 type UserBookMarkType = {
-  accountId:string
-  bookmark:string[] | undefined
-  error:boolean
-  loading:boolean
-}
+  accountId: string;
+  bookmark: string[] | undefined;
+  error: boolean;
+  loading: boolean;
+};
 export default function SinglePost({
   singlePost,
   onLikeClick,
@@ -29,9 +29,15 @@ export default function SinglePost({
   onLikeClick?: any;
 }) {
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
+  const [comment_message, setComment_message] = useState("");
+  const [showCommentBox, setShowCommentBox] = useState(false);
+  const [commentCount, setCommentCount] = useState(singlePost?.comments?.length || 0);
+
   const dispatch = useDispatch();
+  
   const authState = useSelector((state: any) => state.auth);
-  const userBookmarks:UserBookMarkType = useSelector((state: any) => state.bookmarks);
+  const userBookmarks: UserBookMarkType = useSelector((state: any) => state.bookmarks);
+
   const copyText = async (color: string) => {
     await navigator.clipboard.writeText(color);
   };
@@ -45,11 +51,7 @@ export default function SinglePost({
       console.error("Error fetching user details:", error);
     }
   }, [singlePost.accountId]);
-  
-  useEffect(() => {
-    fetchUserDetails();
-  }, [fetchUserDetails]);
-  
+
   function createdAtDateFormatter(postCreationTime: string) {
     const timeObj = {
       seconds: 1000,
@@ -78,15 +80,11 @@ export default function SinglePost({
   }
 
   const handleUpdateBookmark = async (postId: string | undefined) => {
-    if(postId){
+    if (postId) {
       const cookies = parseCookies();
-      const accountId:string = cookies["userId"];
+      const accountId: string = cookies["userId"];
       if (Array.isArray(userBookmarks.bookmark)) {
-        if (
-          userBookmarks.bookmark.some(
-            (current: string) =>  current === postId,
-          )
-        ) {
+        if (userBookmarks.bookmark.some((current: string) => current === postId)) {
           // console.log(accountId, "remove bookmark");
           removeBookmark(accountId, postId)
             .then((resp) => {
@@ -96,7 +94,7 @@ export default function SinglePost({
                   bookmark: resp.bookmark,
                 }),
               );
-  
+
               toastify("Bookmark removed", "success");
             })
             .catch((err) => console.log(err));
@@ -129,7 +127,6 @@ export default function SinglePost({
           .catch((err) => console.log(err));
       }
     }
-   
   };
 
   const handleComment = () => {
@@ -137,21 +134,16 @@ export default function SinglePost({
     console.log("comment");
   };
 
-  const [commentCount, setCommentCount] = useState(singlePost?.comments?.length || 0);
-
-  const uploadComment = async (id: string,comment_message: string) => {
+  const uploadComment = async (id: string, comment_message: string) => {
     const previousComments = singlePost.comments;
     const Comments = [...previousComments, comment_message];
-    const res = await addComment(id , Comments);
+    const res = await addComment(id, Comments);
     setCommentCount(res?.comments.length || singlePost?.comments?.length);
   };
 
-  const [comment_message, setComment_message] = useState("");
-  const [showCommentBox, setShowCommentBox] = useState(false);
-
-  // const handleTest = () => {
-  //   console.log(singlePost.comments);
-  // };
+  useEffect(() => {
+    fetchUserDetails();
+  }, [fetchUserDetails]);
 
   return (
     <div className="p-3 rounded-md shadow dark:shadow-gray-600 mb-4">
@@ -163,10 +155,8 @@ export default function SinglePost({
           <Image src="/assets/user.png" alt="user" width={40} height={40} />
         </div>
         <div>
-
-          {/* <h5 className="font-medium text-md">{singlePost && singlePost.accountId}</h5> */}
-          <h5 className="font-medium text-md">
-            {userDetails && userDetails.fullName}
+          <h5 className="font-medium text-base">
+            {userDetails ? userDetails.fullName : "Anonymous User"}
           </h5>
           {singlePost?.$createdAt ? (
             <p className="font-thin text-xs/[10px] text-slate-950 dark:text-slate-400">{`${createdAtDateFormatter(
@@ -211,18 +201,20 @@ export default function SinglePost({
       <div className="flex justify-around">
         <article
           onClick={() => onLikeClick(singlePost)}
-          className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${singlePost?.likes && singlePost?.likes.includes(authState?.userId)
+          className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${
+            singlePost?.likes && singlePost?.likes.includes(authState?.userId)
               ? "text-primary hover:text-primary"
               : "text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
-            }`}
+          }`}
         >
           <Heart
             size={22}
             fill="true"
-            className={`${singlePost?.likes && singlePost?.likes.includes(authState?.userId)
+            className={`${
+              singlePost?.likes && singlePost?.likes.includes(authState?.userId)
                 ? "fill-primary"
                 : "fill-transparent"
-              }`}
+            }`}
           />
           <span className="text-base">
             {singlePost && singlePost?.likes && singlePost?.likes.length}
@@ -240,23 +232,25 @@ export default function SinglePost({
         <article
           onClick={() => handleUpdateBookmark(singlePost?.$id)}
           className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${
-            userBookmarks && userBookmarks?.bookmark &&
+            userBookmarks &&
+            userBookmarks?.bookmark &&
             userBookmarks?.bookmark?.length > 0 &&
             userBookmarks?.bookmark.includes(singlePost && singlePost?.$id!)
               ? "text-primary hover:text-primary dark:hover:text-primary"
               : "text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
-            }`}
+          }`}
         >
           <Bookmark
             size={22}
             fill="true"
             className={`${
-              userBookmarks && userBookmarks?.bookmark &&
-              userBookmarks?.bookmark?.length > 0 && 
+              userBookmarks &&
+              userBookmarks?.bookmark &&
+              userBookmarks?.bookmark?.length > 0 &&
               userBookmarks?.bookmark.includes(singlePost && singlePost?.$id!)
                 ? "fill-primary"
                 : "fill-transparent"
-              }`}
+            }`}
           />
         </article>
 
@@ -269,26 +263,31 @@ export default function SinglePost({
         </article>
       </div>
       {showCommentBox ? (
-  <div>
-    <div className="flex flex-1">
-      <textarea
-        onChange={(event: any) => setComment_message(event.target.value)}
-        value={comment_message}
-        name="postTitle"
-        className="mt-2 dark:bg-secondary-light outline-none focus:ring rounded-lg p-3 text-black dark:text-white placholder:text-gray-400 text-lg w-full mb-2"
-        rows={2}
-        cols={50}
-        placeholder="Type your comment here"
-      />
-    </div>
-    <div className="flex flex-end">
-      <button onClick={() => {uploadComment(singlePost.$id ,comment_message)}} className="transition-all duration-300 bg-primary hover:bg-primary-light text-white font-normal py-1 px-8 rounded-full">
-        {"Post"}
-      </button>
-      {/* <button onClick={handleTest}>test</button> */}
-    </div>
-  </div>
-) : null}
+        <div>
+          <div className="flex flex-1">
+            <textarea
+              onChange={(event: any) => setComment_message(event.target.value)}
+              value={comment_message}
+              name="postTitle"
+              className="mt-2 dark:bg-secondary-light outline-none focus:ring rounded-lg p-3 text-black dark:text-white placholder:text-gray-400 text-lg w-full mb-2"
+              rows={2}
+              cols={50}
+              placeholder="Type your comment here"
+            />
+          </div>
+          <div className="flex flex-end">
+            <button
+              onClick={() => {
+                uploadComment(singlePost.$id, comment_message);
+              }}
+              className="transition-all duration-300 bg-primary hover:bg-primary-light text-white font-normal py-1 px-8 rounded-full"
+            >
+              {"Post"}
+            </button>
+            {/* <button onClick={handleTest}>test</button> */}
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
