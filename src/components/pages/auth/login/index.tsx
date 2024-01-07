@@ -11,9 +11,11 @@ import { toastify } from "@/helper/toastify";
 
 // API
 import { loginUser } from "@/backend/auth.api";
+import { account } from "@/backend/appwrite.config";
 
 // Icons
-import { Eye,EyeOff } from "react-feather";
+import { Eye, EyeOff } from "react-feather";
+import { FcGoogle } from "react-icons/fc";
 
 export default function LoginComponent() {
   const [isLoading, setIsLoading] = useState(false);
@@ -73,7 +75,6 @@ export default function LoginComponent() {
   if (authSelector.error) {
     return <h1>Error</h1>;
   }
-
 
   return (
     <>
@@ -176,6 +177,24 @@ export default function LoginComponent() {
               </button>
             </div>
           </form>
+          <div>
+            <div className="flex flex-col justify-center items-center gap-2">
+            <p>OR</p>
+            <button
+                  className="px-4 py-2 flex flex-row text-sm md:text-base rounded border text-black bg-white transition duration-300 ease hover:bg-secondary hover:text-white items-center"
+                  onClick={() => {
+                    account.createOAuth2Session(
+                      "google",
+                      "http://localhost:3000/feed", // Success URL
+                      "http://localhost:3000", // Failure URL
+                    );
+                  }}
+                >
+                  <FcGoogle className="mr-2" />
+                  <span>Login with Google</span>
+                </button>
+            </div>
+          </div>
         </div>
       </section>
     </>
