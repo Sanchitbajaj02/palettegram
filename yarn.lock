@@ -538,7 +538,7 @@ anymatch@~3.1.2:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
-appwrite@11.0.1:
+appwrite@^11.0.1:
   version "11.0.1"
   resolved "https://registry.npmjs.org/appwrite/-/appwrite-11.0.1.tgz"
   integrity sha512-o8ag5sc/KwpwB5MGswI7DdvStMjz3PKYmN1RyfLwofk7lQUbHBkY/pMB6zgk21Y5bbQRX+Ca4MbbSOMV+VC1cQ==
@@ -2836,6 +2836,11 @@ pirates@^4.0.1:
   resolved "https://registry.npmjs.org/pirates/-/pirates-4.0.6.tgz"
   integrity sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==
 
+pnpm@^8.14.0:
+  version "8.14.0"
+  resolved "https://registry.npmjs.org/pnpm/-/pnpm-8.14.0.tgz"
+  integrity sha512-XUv5ezSfrxpRMYqhuoh+mdnDbiA9vLVZOKkf3dJFQkbLAHI9ZkL1TUY6D1KicB2t+N4AKjf8YTyc3JTtVnXdzg==
+
 postcss-import@^15.1.0:
   version "15.1.0"
   resolved "https://registry.npmjs.org/postcss-import/-/postcss-import-15.1.0.tgz"
@@ -3879,6 +3884,11 @@ yargs@^17.0.0:
     string-width "^4.2.3"
     y18n "^5.0.5"
     yargs-parser "^21.1.1"
+
+yarn@^1.22.21:
+  version "1.22.21"
+  resolved "https://registry.npmjs.org/yarn/-/yarn-1.22.21.tgz"
+  integrity sha512-ynXaJsADJ9JiZ84zU25XkPGOvVMmZ5b7tmTSpKURYwgELdjucAOydqIOrOfTxVYcNXe91xvLZwcRh68SR3liCg==
 
 yocto-queue@^0.1.0:
   version "0.1.0"

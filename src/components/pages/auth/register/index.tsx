@@ -142,6 +142,25 @@ export default function RegisterComponent() {
             </div>
 
             <div className="mb-6">
+              <label
+                htmlFor="confirmpassword"
+                aria-required="true"
+                className="mb-2 block text-sm font-medium text-secondary-light dark:text-gray-50"
+              >
+               Confirm Password <span className="text-red-600">*</span>
+              </label>
+              <input
+                type="password"
+                name="confirmpassword"
+                id="confirmpassword"
+                required={true}
+                onChange={changeHandler}
+                placeholder="Re-enter your password"
+                className="w-full rounded-md bg-white py-2 px-4 text-sm md:text-base font-medium text-secondary outline-none border border-white focus:border-secondary-light dark:border-secondary-light dark:focus:border-white"
+              />
+            </div>
+
+            <div className="mb-6">
               <p className="text-sm text-secondary-light dark:text-gray-50">
                 Already have an account?{" "}
                 <Link href="/login" className="text-primary hover:text-secondary hover:dark:text-primary-light">
