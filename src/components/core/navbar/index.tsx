@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
-import { Settings, LogOut, Home } from "react-feather";
+import { User, LogOut, Home } from "react-feather";
 import { useSelector, useDispatch } from "react-redux";
 import ThemeButton from "@/components/core/themeButton";
 
@@ -100,7 +100,7 @@ const Navbar = () => {
             href={`/user/${userIdFromCookies}`}
             className="mx-2 px-2 py-2 rounded-full  bg-primary text-white  hover:bg-primary-light hover:scale-105"
           >
-            <Settings size={22} className="transition-all duration-300 " />
+            <User size={22} className="transition-all duration-300 " />
           </Link>
 
           <button className="mx-2 px-2 py-2 rounded-full bg-primary transition hover:bg-primary-light hover:scale-105 text-white" onClick={logout}>
