@@ -15,7 +15,6 @@ import { account } from "@/backend/appwrite.config";
 
 // Icons
 import { Eye,EyeOff } from "react-feather";
-import { FcGoogle } from "react-icons/fc";
 
 export default function LoginComponent() {
   const [isLoading, setIsLoading] = useState(false);
@@ -191,7 +190,6 @@ export default function LoginComponent() {
                     );
                   }}
                 >
-                  <FcGoogle className="mr-2" />
                   <span>Login with Google</span>
                 </button>
             </div>
