@@ -203,4 +203,12 @@ const getSingleUser = async (id: string) => {
   }
 };
 
-export { registerUser, verifyUser, loginUser, logoutUser, isLoggedIn, getSingleUser, getCurrentUser };
+const loginWithGoogle = async () => {
+  account.createOAuth2Session(
+    "google",
+    "http://localhost:3000/feed", // Success URL
+    "http://localhost:3000", // Failure URL
+  );
+}
+
+export { registerUser, verifyUser, loginUser, logoutUser, isLoggedIn, getSingleUser, getCurrentUser,loginWithGoogle };
