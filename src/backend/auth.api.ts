@@ -243,7 +243,6 @@ const getSingleUser = async (id: string) => {
   }
 };
 
-<<<<<<< HEAD
 const loginWithGoogle = async () => {
   account.createOAuth2Session(
     "google",
@@ -252,8 +251,6 @@ const loginWithGoogle = async () => {
   );
 }
 
-export { registerUser, verifyUser, loginUser, logoutUser, isLoggedIn, getSingleUser, getCurrentUser,loginWithGoogle };
-=======
 const getUserDetails = async (accountId: string) => {
   try {
     if (!palettegramDB || !usersCollection || !accountId) {
@@ -275,5 +272,4 @@ const getUserDetails = async (accountId: string) => {
   }
 }
 
-export { registerUser, verifyUser, loginUser, logoutUser, isLoggedIn, getSingleUser, getCurrentUser, forgotpassword, updatepassword,getUserDetails };
->>>>>>> 7446472134b77623275591a528195c38b777ed63
+export { registerUser, verifyUser, loginUser, logoutUser, isLoggedIn, getSingleUser, getCurrentUser, forgotpassword, updatepassword,getUserDetails,loginWithGoogle };
