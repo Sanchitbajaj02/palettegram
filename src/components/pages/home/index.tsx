@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { GitHub, Settings } from "react-feather";
+import { GitHub, User } from "react-feather";
 import { isLoggedIn } from "@/backend/auth.api";
 import { saveUser } from "@/redux/reducers/authReducer";
 import { Menu, X } from "react-feather";
@@ -150,7 +150,7 @@ function HomePage() {
                     href={`/user/${userIdFromCookies}`}
                     className="mx-2 px-2 py-2 rounded-full bg-primary text-white"
                   >
-                    <Settings size={22} className="transition-all duration-300 " />
+                    <User size={22} className="transition-all duration-300 " />
                   </Link>
                 )}
               </div>
@@ -170,7 +170,7 @@ function HomePage() {
             </p>
 
             <div className="flex justify-center md:justify-start">
-              {state?.creds.userId && state?.creds.isVerified ? (
+              {state?.creds.userId && state?.creds.userId !== '' ? (
                 <ButtonLong href="/feed" size="big">
                   Checkout your feed
                 </ButtonLong>

@@ -151,7 +151,7 @@ export default function LoginComponent() {
               </div>
             </div>
 
-            <div className="mb-4">
+            <div className="flex justify-between mb-4">
               <p className="text-sm text-secondary-light dark:text-gray-50">
                 Do not have an account?{" "}
                 <Link
@@ -159,6 +159,14 @@ export default function LoginComponent() {
                   className="text-primary hover:text-secondary hover:dark:text-primary-light"
                 >
                   Register
+                </Link>
+              </p>
+              <p className="text-sm text-secondary-light dark:text-gray-50">
+                <Link
+                  href="/forgot"
+                  className="text-primary underline hover:text-secondary hover:dark:text-primary-light"
+                >
+                  Forgot Password ?
                 </Link>
               </p>
             </div>
