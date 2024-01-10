@@ -76,11 +76,11 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="w-full sticky top-0 backdrop-blur-sm bg-grey-100 bg-opacity-20 z-10 shadow-md py-2 dark:shadow-gray-600">
+    <nav className="w-full sticky top-0 backdrop-blur-sm bg-grey-100 bg-opacity-20 z-10 shadow-md py-2 px-4 dark:shadow-gray-600">
       <div className="max-w-screen-lg mx-auto flex items-center content-center justify-between  h-12">
         <Link href={userAuth.creds?.userId ? "/feed" : "/"}>
           <Image
-            className="navbar-brand fw-bold w-10 h-10 cursor pointer mx-4 "
+            className="navbar-brand fw-bold w-10 h-10 cursor pointer  "
             src={"/assets/logo.png"}
             alt="settings"
             width={100}
