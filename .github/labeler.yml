@@ -1,2 +1,5 @@
 wait for reviewers:
   - "**/*"
+
+SWOC S4:
+  - "**/*"

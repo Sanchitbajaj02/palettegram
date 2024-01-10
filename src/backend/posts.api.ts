@@ -149,6 +149,19 @@ const deleteImage = async (id: string) => {
   }
 };
 
+const addComment = async (id: string, comment: any) => {
+  try {
+    const res = await db.updateDocument(palettegramDB, postsCollection, id, {
+      comments: comment,
+    });
+    if (res) {
+      return res;
+    }
+  } catch (error: any) {
+    console.log(error);
+  }
+};
+
 export {
   savePostToDb,
   getAllPosts,
@@ -158,4 +171,5 @@ export {
   addNewImage,
   deleteImage,
   getImageUrl,
+  addComment,
 };

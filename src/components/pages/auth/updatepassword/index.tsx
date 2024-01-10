@@ -1,31 +1,30 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useDispatch, useSelector } from "react-redux";
-import { Loader, ArrowLeftCircle } from "react-feather";
+import { ArrowLeftCircle, Loader } from "react-feather";
+import { useRouter, useSearchParams } from "next/navigation";
 
 // Components
-import { saveUser } from "@/redux/reducers/authReducer";
 import { toastify } from "@/helper/toastify";
 
 // API
-import { loginUser } from "@/backend/auth.api";
+import { updatepassword } from "@/backend/auth.api";
 
 // Icons
 import { Eye, EyeOff } from "react-feather";
 
-export default function LoginComponent() {
-  const [isLoading, setIsLoading] = useState(false);
+export default function UpdatePasswordComponent() {
   const [showPassword, setShowPassword] = useState(false);
-
-  const dispatch = useDispatch();
-  const authSelector = useSelector((state: any) => state.auth);
-
+  const [updatingStatus, setUpdatingStatus] = useState("");
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const [isLoading, setIsLoading] = useState(false);
+
   const [data, setData] = useState({
-    email: "",
+    USER_ID: String(searchParams.get("userId")),
+    SECRET: String(searchParams.get("secret")),
     password: "",
+    confirmpassword: "",
   });
 
   function changeHandler(event: React.ChangeEvent<HTMLInputElement>) {
@@ -38,40 +37,25 @@ export default function LoginComponent() {
 
   async function submitHander(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
     try {
       setIsLoading(true);
-
-      if (data.email !== "" && data.password !== "") {
-        const userCredentials = await loginUser(data);
-
-        if (userCredentials && userCredentials?.providerUid === data.email) {
-          const localObject = {
-            userId: userCredentials?.userId,
-            email: userCredentials?.providerUid,
-            createdAt: userCredentials.$createdAt,
-          };
-
-          dispatch(saveUser(localObject));
-          setIsLoading(false);
-          toastify("Login Successful", "success");
-
-          router.push("/feed");
-        }
+      setUpdatingStatus("updating");
+      if (data.password === data.confirmpassword) {
+        const resp = await updatepassword(data);
+        router.push("/login");
+        setUpdatingStatus("success");
+        setIsLoading(false);
+        toastify("Updated Successful.", "success");
+      } else {
+        throw new Error("Please recheck password and update again");
       }
     } catch (error: any) {
       setIsLoading(false);
-      console.log(error.message);
-
-      toastify("Login failed! Please click on register to make account", "error");
+      console.log(error);
+      setUpdatingStatus("failure");
+      toastify("Request failed, Please recheck password and update again", "error");
     }
-  }
-
-  if (authSelector.loading) {
-    return <h1>Loading...</h1>;
-  }
-
-  if (authSelector.error) {
-    return <h1>Error</h1>;
   }
 
   return (
@@ -80,7 +64,7 @@ export default function LoginComponent() {
         <div className="card">
           <article className="mb-8">
             <ArrowLeftCircle
-              size={22}
+              size={20}
               onClick={() => router.back()}
               className="hover:cursor-pointer text-secondary dark:text-white"
             />
@@ -88,30 +72,11 @@ export default function LoginComponent() {
               Welcome to Palettegram
             </h1>
             <p className="text-base md:text-xl text-center font-normal text-secondary-light dark:text-gray-50">
-              Login to connect with the amazing community
+              Update Your Password
             </p>
           </article>
 
           <form method="POST" onSubmit={submitHander}>
-            <div className="mb-6">
-              <label
-                htmlFor="email"
-                aria-required="true"
-                className="mb-2 block text-sm font-medium text-secondary-light dark:text-gray-50"
-              >
-                Email Address <span className="text-red-600">*</span>
-              </label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                required={true}
-                onChange={changeHandler}
-                placeholder="Enter your email address"
-                className="w-full rounded-md bg-white py-2 px-4 text-sm md:text-base font-medium text-secondary outline-none border border-white focus:border-secondary-light dark:border-secondary-light dark:focus:border-white"
-              />
-            </div>
-
             <div className="mb-6">
               <label
                 htmlFor="password"
@@ -150,35 +115,38 @@ export default function LoginComponent() {
               </div>
             </div>
 
-            <div className="flex justify-between mb-4">
-              <p className="text-sm text-secondary-light dark:text-gray-50">
-                Do not have an account?{" "}
-                <Link
-                  href="/register"
-                  className="text-primary hover:text-secondary hover:dark:text-primary-light"
-                >
-                  Register
-                </Link>
-              </p>
-              <p className="text-sm text-secondary-light dark:text-gray-50">
-                <Link
-                  href="/forgot"
-                  className="text-primary underline hover:text-secondary hover:dark:text-primary-light"
-                >
-                  Forgot Password ?
-                </Link>
-              </p>
+            <div className="mb-6">
+              <label
+                htmlFor="password"
+                aria-required="true"
+                className="mb-2 block text-sm font-medium text-secondary-light dark:text-gray-50"
+              >
+                Password <span className="text-red-600">*</span>
+              </label>
+              <div className="relative">
+                <input
+                  type="password"
+                  name="confirmpassword"
+                  id="confirmpassword"
+                  required={true}
+                  onChange={changeHandler}
+                  placeholder="Enter your password"
+                  className="w-full rounded-md bg-white py-2 px-4 text-sm md:text-base font-medium text-secondary outline-none border border-white focus:border-secondary-light dark:border-secondary-light dark:focus:border-white"
+                />
+                <div></div>
+              </div>
             </div>
 
             <div className="mb-4">
               <button
                 type="submit"
                 className="w-full py-2 text-sm md:text-base rounded-full text-white bg-primary transition duration-300 ease hover:bg-secondary"
+                disabled={updatingStatus === "success" || updatingStatus === "updating"}
               >
                 {isLoading ? (
-                  <Loader size={24} className="mx-auto animate-spin self-center" />
+                  <Loader size={24} className="mx-auto animate-spin" />
                 ) : (
-                  <p>Login</p>
+                  <p>Update Now</p>
                 )}
               </button>
             </div>

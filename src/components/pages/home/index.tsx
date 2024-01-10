@@ -4,16 +4,19 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { GitHub } from "react-feather";
+import { GitHub, Settings } from "react-feather";
 import { isLoggedIn } from "@/backend/auth.api";
 import { saveUser } from "@/redux/reducers/authReducer";
 import { Menu, X } from "react-feather";
 import ThemeButton from "@/components/core/themeButton";
 import { ButtonLong } from "@/components/core/buttons";
+import { parseCookies } from "nookies";
 
 function HomePage() {
   const router = useRouter();
   const dispatch = useDispatch();
+  const cookies = parseCookies();
+  const userIdFromCookies: string = cookies["userId"];
 
   const state = useSelector((state: any) => state.auth);
 
@@ -141,6 +144,14 @@ function HomePage() {
                       Login
                     </Link>
                   </>
+                )}
+                {state?.creds.userId && state?.creds.isVerified && (
+                  <Link
+                    href={`/user/${userIdFromCookies}`}
+                    className="mx-2 px-2 py-2 rounded-full bg-primary text-white"
+                  >
+                    <Settings size={22} className="transition-all duration-300 " />
+                  </Link>
                 )}
               </div>
             </div>
