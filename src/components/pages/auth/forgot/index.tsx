@@ -16,7 +16,7 @@ export default function ForgotComponent() {
   const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
 
   function changeHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setEmail(event.target.value);
@@ -27,7 +27,7 @@ export default function ForgotComponent() {
     try {
       setIsLoading(true);
 
-      if (email !== '') {
+      if (email !== "") {
         const response = await forgotpassword(email);
         setIsLoading(false);
         toastify("Send Successful", "success");
@@ -40,9 +40,6 @@ export default function ForgotComponent() {
       toastify("failed! Please click on send again", "error");
     }
   }
-
-
-
 
   return (
     <>

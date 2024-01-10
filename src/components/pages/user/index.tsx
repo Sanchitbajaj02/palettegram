@@ -6,7 +6,7 @@ import { getCurrentUser } from "@/backend/auth.api";
 export default function User({ userId }: { userId: string }) {
   const [user, setUser] = useState({
     email: "",
-    name: ""
+    name: "",
   });
 
   useEffect(() => {

@@ -13,7 +13,7 @@ import { toastify } from "@/helper/toastify";
 import { registerUser } from "@/backend/auth.api";
 
 // Icons
-import { Eye,EyeOff } from "react-feather";
+import { Eye, EyeOff } from "react-feather";
 
 export default function RegisterComponent() {
   const [showPassword, setShowPassword] = useState(false);
@@ -24,6 +24,7 @@ export default function RegisterComponent() {
     fullName: "",
     email: "",
     password: "",
+    confirmpassword: "",
   });
   const [registerStatus, setRegisterStatus] = useState("initial");
 
@@ -55,16 +56,19 @@ export default function RegisterComponent() {
       setIsLoading(false);
       toastify("Register Successful. Please check your email to verify", "success");
     } catch (error: any) {
+      console.log(error.message + "message");
       setIsLoading(false);
       console.log(error);
       setRegisterStatus("failure");
+
       if (error.message.includes("password")) {
         toastify(
           "Oops! Your password should be at least 8 characters and avoid commonly used choices.",
           "info",
         );
-      } else {
-        toastify(error.message, "error");
+      }
+      if (error.message.includes("not matching")) {
+        toastify("Both the passwords are not matching", "info");
       }
     }
   }
@@ -162,6 +166,25 @@ export default function RegisterComponent() {
                   </button>
                 </div>
               </div>
+            </div>
+
+            <div className="mb-6">
+              <label
+                htmlFor="confirmpassword"
+                aria-required="true"
+                className="mb-2 block text-sm font-medium text-secondary-light dark:text-gray-50"
+              >
+                Confirm Password <span className="text-red-600">*</span>
+              </label>
+              <input
+                type="password"
+                name="confirmpassword"
+                id="confirmpassword"
+                required={true}
+                onChange={changeHandler}
+                placeholder="Re-enter your password"
+                className="w-full rounded-md bg-white py-2 px-4 text-sm md:text-base font-medium text-secondary outline-none border border-white focus:border-secondary-light dark:border-secondary-light dark:focus:border-white"
+              />
             </div>
 
             <div className="mb-6">

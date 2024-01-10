@@ -15,16 +15,16 @@ import { Eye, EyeOff } from "react-feather";
 
 export default function UpdatePasswordComponent() {
   const [showPassword, setShowPassword] = useState(false);
-  const [updatingStatus, setUpdatingStatus] = useState('');
+  const [updatingStatus, setUpdatingStatus] = useState("");
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
 
   const [data, setData] = useState({
-    USER_ID: String(searchParams.get('userId')),
-    SECRET: String(searchParams.get('secret')),
+    USER_ID: String(searchParams.get("userId")),
+    SECRET: String(searchParams.get("secret")),
     password: "",
-    confirmpassword: ""
+    confirmpassword: "",
   });
 
   function changeHandler(event: React.ChangeEvent<HTMLInputElement>) {
@@ -43,18 +43,18 @@ export default function UpdatePasswordComponent() {
       setUpdatingStatus("updating");
       if (data.password === data.confirmpassword) {
         const resp = await updatepassword(data);
-        router.push('/login')
+        router.push("/login");
         setUpdatingStatus("success");
         setIsLoading(false);
         toastify("Updated Successful.", "success");
       } else {
-        throw new Error('Please recheck password and update again')
+        throw new Error("Please recheck password and update again");
       }
     } catch (error: any) {
       setIsLoading(false);
       console.log(error);
       setUpdatingStatus("failure");
-      toastify("Request failed, Please recheck password and update again", "error")
+      toastify("Request failed, Please recheck password and update again", "error");
     }
   }
 
@@ -125,7 +125,7 @@ export default function UpdatePasswordComponent() {
               </label>
               <div className="relative">
                 <input
-                  type='password'
+                  type="password"
                   name="confirmpassword"
                   id="confirmpassword"
                   required={true}
@@ -133,9 +133,7 @@ export default function UpdatePasswordComponent() {
                   placeholder="Enter your password"
                   className="w-full rounded-md bg-white py-2 px-4 text-sm md:text-base font-medium text-secondary outline-none border border-white focus:border-secondary-light dark:border-secondary-light dark:focus:border-white"
                 />
-                <div>
-
-                </div>
+                <div></div>
               </div>
             </div>
 
