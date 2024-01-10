@@ -12,9 +12,11 @@ type FormatOnType = 'seconds' | 'minutes' | 'hours' | 'days';
 export default function SinglePost({
   singlePost,
   onLikeClick,
+  width
 }: {
   singlePost: PostInstanceType;
   onLikeClick?: any;
+  width? : string
 }) {
   const dispatch = useDispatch();
   const authState = useSelector((state: any) => state.auth);
@@ -103,7 +105,7 @@ export default function SinglePost({
   };
 
   return (
-    <div className="p-3 rounded-md shadow dark:shadow-gray-600 mb-4">
+    <div className={` ${width ? 'w-96 p-3 m-auto  rounded-md shadow dark:shadow-gray-600 mb-4 mt-40 ' : 'p-3  rounded-md shadow dark:shadow-gray-600 mb-4'} `}>
       <Link
         className="flex items-center gap-3 mb-3"
         href={`/user/${singlePost && singlePost?.accountId}`}
@@ -121,7 +123,7 @@ export default function SinglePost({
           {singlePost && singlePost?.postTitle ? singlePost?.postTitle : "No Title"}
         </p>
 
-        {singlePost && singlePost?.postImage && singlePost?.postImage[0].length > 0 ? (
+        {singlePost && singlePost?.postImage && singlePost?.postImage[0]?.length > 0 ? (
           <Image
             className="w-full mb-4"
             src={singlePost?.postImage[0]}
