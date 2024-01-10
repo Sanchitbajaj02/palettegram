@@ -34,7 +34,7 @@ export default function SinglePost({
   const [commentCount, setCommentCount] = useState(singlePost?.comments?.length || 0);
 
   const dispatch = useDispatch();
-  
+
   const authState = useSelector((state: any) => state.auth);
   const userBookmarks: UserBookMarkType = useSelector((state: any) => state.bookmarks);
 

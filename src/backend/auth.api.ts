@@ -1,6 +1,6 @@
 "use client";
 
-import { account, db, ID, palettegramDB, usersCollection,Query } from "./appwrite.config";
+import { account, db, ID, palettegramDB, usersCollection, Query } from "./appwrite.config";
 
 /**
  * @description Register the user into the database
@@ -10,7 +10,14 @@ import { account, db, ID, palettegramDB, usersCollection,Query } from "./appwrit
 const registerUser = async (userData: any) => {
   try {
     // console.log("register: ", userData.email, userData.password, userData.fullName);
+    if (userData.password != userData.confirmpassword) {
+      throw Error("not matching");
+    }
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; //it will check that password must contain atleast one digit ,atleast one alphabet , atleast one special character and must be of atleast length 8
 
+    if (!passwordRegex.test(userData.password)) {
+      throw Error("password is not strong");
+    }
     const authResponse = await account.create(
       ID.unique(),
       userData.email,
@@ -42,7 +49,7 @@ const registerUser = async (userData: any) => {
 
     return authResponse;
   } catch (error: any) {
-    console.log(error);
+    console.log(error + "Message");
     throw new Error(error.message);
   }
 };
@@ -128,7 +135,10 @@ const forgotpassword = async (userEmail: string) => {
     if (!userEmail) {
       throw new Error("email is empty");
     }
-    const response = await account.createRecovery(userEmail, `${process.env.NEXT_PUBLIC_BASE_URL}/updatepassword`);
+    const response = await account.createRecovery(
+      userEmail,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/updatepassword`,
+    );
     return response;
   } catch (error: any) {
     console.log(error);
@@ -142,11 +152,15 @@ const forgotpassword = async (userEmail: string) => {
  * @returns {Object} response
  */
 
-
 const updatepassword = async (userData: any) => {
   const { password, confirmpassword, USER_ID, SECRET } = userData;
   try {
-    if (userData.password === '' || userData.confirmpassword === '' || userData.USER_ID === '' || userData.SECRET === " ") {
+    if (
+      userData.password === "" ||
+      userData.confirmpassword === "" ||
+      userData.USER_ID === "" ||
+      userData.SECRET === " "
+    ) {
       throw new Error("Request has failed");
     }
     const response = await account.updateRecovery(USER_ID, SECRET, password, confirmpassword);
@@ -156,9 +170,6 @@ const updatepassword = async (userData: any) => {
     throw new Error(error.message);
   }
 };
-
-
-
 
 /**
  * @description returns the state of current user
@@ -243,6 +254,14 @@ const getSingleUser = async (id: string) => {
   }
 };
 
+const loginWithGoogle = async () => {
+  account.createOAuth2Session(
+    "google",
+    "http://localhost:3000/feed", // Success URL
+    "http://localhost:3000", // Failure URL
+  );
+};
+
 const getUserDetails = async (accountId: string) => {
   try {
     if (!palettegramDB || !usersCollection || !accountId) {
@@ -250,18 +269,29 @@ const getUserDetails = async (accountId: string) => {
     }
 
     const user = await db.listDocuments(palettegramDB, usersCollection, [
-      Query.equal('accountId', accountId),
-      Query.select(["accountId", "fullName"])
+      Query.equal("accountId", accountId),
+      Query.select(["accountId", "fullName"]),
     ]);
 
-    if(!user)
-    {
+    if (!user) {
       throw new Error("User not found");
     }
-    return user.documents.map(doc => ({ accountId: doc.accountId, fullName: doc.fullName }));
+    return user.documents.map((doc) => ({ accountId: doc.accountId, fullName: doc.fullName }));
   } catch (error) {
     console.error(error);
   }
-}
+};
 
-export { registerUser, verifyUser, loginUser, logoutUser, isLoggedIn, getSingleUser, getCurrentUser, forgotpassword, updatepassword,getUserDetails };
+export {
+  registerUser,
+  verifyUser,
+  loginUser,
+  logoutUser,
+  isLoggedIn,
+  getSingleUser,
+  getCurrentUser,
+  forgotpassword,
+  updatepassword,
+  getUserDetails,
+  loginWithGoogle,
+};

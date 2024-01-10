@@ -6,7 +6,6 @@ export default function Loader() {
         className="inline w-10 h-10 animate-spin text-gray-300 dark:text-gray-600 fill-primary"
         viewBox="0 0 100 101"
         fill="none"
-        
         xmlns="http://www.w3.org/2000/svg"
       >
         <path

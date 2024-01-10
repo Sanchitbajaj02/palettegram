@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
-import { Settings, LogOut, Home } from "react-feather";
+import { User, LogOut, Home } from "react-feather";
 import { useSelector, useDispatch } from "react-redux";
 import ThemeButton from "@/components/core/themeButton";
 
@@ -25,7 +25,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const cookies = parseCookies();
 
-  const userIdFromCookies:string = cookies["userId"];
+  const userIdFromCookies: string = cookies["userId"];
 
   const logout = async () => {
     await logoutUser();
@@ -91,7 +91,10 @@ const Navbar = () => {
         <div className="flex gap-2 flex-row items-center">
           <ThemeButton iconSize={22} />
           {pathname !== "/feed" && (
-            <Link href="/feed" className="mx-2 px-2 py-2 rounded-full bg-primary text-white hover:bg-primary-light hover:scale-105">
+            <Link
+              href="/feed"
+              className="mx-2 px-2 py-2 rounded-full bg-primary text-white hover:bg-primary-light hover:scale-105"
+            >
               <Home size={22} className="transition-all duration-300   " />
             </Link>
           )}
@@ -100,10 +103,13 @@ const Navbar = () => {
             href={`/user/${userIdFromCookies}`}
             className="mx-2 px-2 py-2 rounded-full  bg-primary text-white  hover:bg-primary-light hover:scale-105"
           >
-            <Settings size={22} className="transition-all duration-300 " />
+            <User size={22} className="transition-all duration-300 " />
           </Link>
 
-          <button className="mx-2 px-2 py-2 rounded-full bg-primary transition hover:bg-primary-light hover:scale-105 text-white" onClick={logout}>
+          <button
+            className="mx-2 px-2 py-2 rounded-full bg-primary transition hover:bg-primary-light hover:scale-105 text-white"
+            onClick={logout}
+          >
             <LogOut size={22} className="transition-all duration-300" />
           </button>
         </div>
