@@ -1,8 +1,6 @@
 "use client";
 import { Account, Client, Databases, Storage, ID, Query } from "appwrite";
-
 const appwriteClient = new Client();
-//https://cloud.appwrite.io/v1
 appwriteClient
   .setEndpoint("https://cloud.appwrite.io/v1")
   .setProject(String(process.env.NEXT_PUBLIC_PROJECT_ID));

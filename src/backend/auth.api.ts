@@ -10,7 +10,16 @@ import { account, db, ID, palettegramDB, usersCollection } from "./appwrite.conf
 const registerUser = async (userData: any) => {
   try {
     // console.log("register: ", userData.email, userData.password, userData.fullName);
+    if(userData.password!=userData.confirmpassword){
+ 
+      throw Error("not matching");
+      
+  }
+  const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;//it will check that password must contain atleast one digit ,atleast one alphabet , atleast one special character and must be of atleast length 8
 
+  if(!passwordRegex.test(userData.password)){
+    throw Error("password is not strong");
+  }
     const authResponse = await account.create(
       ID.unique(),
       userData.email,
@@ -42,7 +51,7 @@ const registerUser = async (userData: any) => {
 
     return authResponse;
   } catch (error: any) {
-    console.log(error);
+    console.log(error+"Message");
     throw new Error(error.message);
   }
 };

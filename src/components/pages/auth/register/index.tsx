@@ -20,6 +20,7 @@ export default function RegisterComponent() {
     fullName: "",
     email: "",
     password: "",
+    confirmpassword:""
   });
   const [registerStatus, setRegisterStatus] = useState("initial");
 
@@ -51,16 +52,19 @@ export default function RegisterComponent() {
       setIsLoading(false);
       toastify("Register Successful. Please check your email to verify", "success");
     } catch (error: any) {
+      console.log(error.message+"message");
       setIsLoading(false);
       console.log(error);
       setRegisterStatus("failure");
+     
       if (error.message.includes("password")) {
+       
         toastify(
           "Oops! Your password should be at least 8 characters and avoid commonly used choices.",
           "info",
         );
-      } else {
-        toastify(error.message, "error");
+      } if (error.message.includes("not matching")) {
+        toastify("Both the passwords are not matching","info");
       }
     }
   }
