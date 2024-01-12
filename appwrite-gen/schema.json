@@ -1,0 +1,175 @@
+{
+  "databases": [
+    {
+      "$id": "659ef509c0158613da40",
+      "name": "palettegram-db",
+      "$createdAt": "2024-01-12T19:29:09.350+00:00",
+      "$updatedAt": "2024-01-12T19:29:09.350+00:00",
+      "enabled": true
+    }
+  ],
+  "collections": [
+    {
+      "$id": "users",
+      "$createdAt": "2024-01-12T19:29:11.011+00:00",
+      "$updatedAt": "2024-01-12T19:29:11.011+00:00",
+      "$permissions": [],
+      "databaseId": "659ef509c0158613da40",
+      "name": "users",
+      "enabled": true,
+      "documentSecurity": false,
+      "attributes": [],
+      "indexes": []
+    },
+    {
+      "$id": "posts",
+      "$createdAt": "2024-01-12T19:29:12.460+00:00",
+      "$updatedAt": "2024-01-12T19:29:12.460+00:00",
+      "$permissions": [
+        "create(\"users\")",
+        "read(\"users\")",
+        "update(\"users\")",
+        "delete(\"users\")"
+      ],
+      "databaseId": "659ef509c0158613da40",
+      "name": "posts",
+      "enabled": true,
+      "documentSecurity": false,
+      "attributes": [
+        {
+          "key": "booltest",
+          "type": "boolean",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "default": null
+        },
+        {
+          "key": "enumtest",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "elements": ["a", "b", "c", "d", "e", "f", "g", "h"],
+          "format": "enum",
+          "default": "d"
+        },
+        {
+          "key": "urltest",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "format": "url",
+          "default": null
+        },
+        {
+          "key": "interesting-title",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": true,
+          "array": true,
+          "size": 32,
+          "default": null
+        },
+        {
+          "key": "iptest",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "format": "ip",
+          "default": null
+        },
+        {
+          "key": "inttest",
+          "type": "integer",
+          "status": "available",
+          "error": "",
+          "required": true,
+          "array": false,
+          "min": 0,
+          "max": 100,
+          "default": null
+        },
+        {
+          "key": "emailtest",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "format": "email",
+          "default": null
+        },
+        {
+          "key": "users",
+          "type": "relationship",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "relatedCollection": "users",
+          "relationType": "manyToOne",
+          "twoWay": false,
+          "twoWayKey": "posts",
+          "onDelete": "cascade",
+          "side": "parent"
+        },
+        {
+          "key": "floattest",
+          "type": "double",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "min": -10,
+          "max": 10,
+          "default": 0
+        }
+      ],
+      "indexes": []
+    }
+  ],
+  "documents": [
+    {
+      "booltest": true,
+      "enumtest": "c",
+      "urltest": "https://www.youtube.com/",
+      "interesting-title": ["asdfaf", "123", "sdf"],
+      "emailtest": "asdf@asdf.com",
+      "inttest": 12,
+      "floattest": 1.06,
+      "iptest": null,
+      "$id": "65a1938b21468e880710",
+      "$createdAt": "2024-01-12T19:31:23.137+00:00",
+      "$updatedAt": "2024-01-12T19:31:23.137+00:00",
+      "$permissions": [],
+      "users": null,
+      "$databaseId": "659ef509c0158613da40",
+      "$collectionId": "posts"
+    },
+    {
+      "booltest": false,
+      "enumtest": "a",
+      "urltest": "https://www.twitter.com/",
+      "interesting-title": ["sdf", "123", "asdfaf"],
+      "emailtest": "abc@df.com",
+      "inttest": 1,
+      "floattest": 6,
+      "iptest": null,
+      "$id": "customId",
+      "$createdAt": "2024-01-12T19:31:23.137+00:00",
+      "$updatedAt": "2024-01-12T19:31:23.137+00:00",
+      "$permissions": [],
+      "users": null,
+      "$databaseId": "659ef509c0158613da40",
+      "$collectionId": "posts"
+    }
+  ]
+}
