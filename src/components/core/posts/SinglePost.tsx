@@ -24,9 +24,11 @@ type UserBookMarkType = {
 export default function SinglePost({
   singlePost,
   onLikeClick,
+  width
 }: {
   singlePost: PostInstanceType;
   onLikeClick?: any;
+  width? : string
 }) {
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
   const [comment_message, setComment_message] = useState("");
@@ -146,7 +148,7 @@ export default function SinglePost({
   }, [fetchUserDetails]);
 
   return (
-    <div className="p-3 rounded-md shadow dark:shadow-gray-600 mb-4">
+    <div className={` ${width ? 'w-96 p-3 m-auto  rounded-md shadow dark:shadow-gray-600 mb-4 mt-40 ' : 'p-3  rounded-md shadow dark:shadow-gray-600 mb-4'} `}>
       <Link
         className="flex items-center gap-3 mb-3"
         href={`/user/${singlePost && singlePost?.accountId}`}
