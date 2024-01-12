@@ -11,12 +11,15 @@ import { toastify } from "@/helper/toastify";
 
 // API
 import { loginUser } from "@/backend/auth.api";
+import { loginWithGoogle } from "@/backend/auth.api";
 
 // Icons
-import { Eye,EyeOff } from "react-feather";
+import { Eye, EyeOff } from "react-feather";
 
 export default function LoginComponent() {
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
   const dispatch = useDispatch();
   const authSelector = useSelector((state: any) => state.auth);
 
@@ -71,8 +74,6 @@ export default function LoginComponent() {
   if (authSelector.error) {
     return <h1>Error</h1>;
   }
-
-  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <>
@@ -150,7 +151,7 @@ export default function LoginComponent() {
               </div>
             </div>
 
-            <div className="mb-4">
+            <div className="flex justify-between mb-4">
               <p className="text-sm text-secondary-light dark:text-gray-50">
                 Do not have an account?{" "}
                 <Link
@@ -158,6 +159,14 @@ export default function LoginComponent() {
                   className="text-primary hover:text-secondary hover:dark:text-primary-light"
                 >
                   Register
+                </Link>
+              </p>
+              <p className="text-sm text-secondary-light dark:text-gray-50">
+                <Link
+                  href="/forgot"
+                  className="text-primary underline hover:text-secondary hover:dark:text-primary-light"
+                >
+                  Forgot Password ?
                 </Link>
               </p>
             </div>
@@ -173,6 +182,20 @@ export default function LoginComponent() {
                   <p>Login</p>
                 )}
               </button>
+            </div>
+            <div>
+              <div className="flex flex-col justify-center items-center gap-2">
+                <p>OR</p>
+                <button
+                  className="px-4 py-2 flex flex-row text-sm md:text-base rounded border text-black bg-white transition duration-300 ease hover:bg-secondary hover:text-white items-center"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    loginWithGoogle();
+                  }}
+                >
+                  <span>Login with Google</span>
+                </button>
+              </div>
             </div>
           </form>
         </div>

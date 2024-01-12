@@ -1,7 +1,7 @@
 name: 🔖 Documentation update
 description: Improve Documentation
 title: "Docs: "
-labels: ["📄 docs update", "SWOC24"]
+labels: ["📄 docs update", "SWOC S4"]
 body:
   - type: textarea
     id: improve-docs

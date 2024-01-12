@@ -59,7 +59,6 @@ const saveBookmark = async (accountId: string, postId: string) => {
 
 const removeBookmark = async (accountId: string, postId: string) => {
   try {
-
     const getSavedBookmarkData = await getBookmarks(accountId);
 
     if (!getSavedBookmarkData) {
@@ -87,7 +86,6 @@ const removeBookmark = async (accountId: string, postId: string) => {
 
 const createBookmarkEntry = async (accountId: string, postId: string) => {
   try {
-
     const bookmarkDocs = await db.createDocument(palettegramDB, bookmarksCollection, ID.unique(), {
       accountId: accountId,
       bookmark: [postId],

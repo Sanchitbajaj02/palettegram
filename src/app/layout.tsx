@@ -62,9 +62,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick
-          pauseOnFocusLoss
+          pauseOnFocusLoss={false}
           draggable
-          pauseOnHover
+          pauseOnHover={false}
           theme="colored"
         />
 

@@ -41,7 +41,7 @@ export default function UserBookmark() {
         </div>
 
         <main className="my-8">
-          {userBookmarks && userBookmarks.bookmark.length > 0 ? (
+          {userBookmarks && userBookmarks?.bookmark && userBookmarks?.bookmark.length > 0 ? (
             userBookmarks.bookmark.map((ids: string, i: number) => {
               return (
                 <>
