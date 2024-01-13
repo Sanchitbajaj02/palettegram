@@ -1,15 +1,16 @@
-import { Databases, ID, Models } from "node-appwrite";
+import { Databases, Models, Storage } from "node-appwrite";
 import client from "./lib/client";
-import { readFileSync } from "fs";
 import { Schema } from "./lib/types";
+import { getSchemaFromFile } from "./lib/utils";
 
 const databases = new Databases(client);
+const storage = new Storage(client);
 
 const createDatabases = async (schema: Schema) => {
   for (const db of schema.databases) {
     try {
       await databases.delete(db.$id);
-      console.log(`Found and deleted database ${db.name} with ID ${db.$id}`);
+      console.log(`Deleted and recreating database ${db.name} with ID ${db.$id}...`);
     } catch {
       console.log(`Creating Database "${db.name}"...`);
     }
@@ -21,7 +22,9 @@ const createCollections = async (schema: Schema) => {
   for (const collection of schema.collections) {
     try {
       await databases.deleteCollection(collection.databaseId, collection.$id);
-      console.log(`Found and deleted collection ${collection.name} with ID ${collection.$id}`);
+      console.log(
+        `Deleted and recreating collection ${collection.name} with ID ${collection.$id}...`,
+      );
     } catch {
       console.log(`Creating Collection "${collection.name}"...`);
     }
@@ -160,35 +163,35 @@ const createAttributesOfCollection = async (
   }
 };
 
-const createDocuments = async (schema: Schema) => {
-  for (const document of schema.documents) {
-    const data: { [k: string]: any } = {};
-
-    for (const key of Object.keys(document)) {
-      if (key.charAt(0) != "$") {
-        data[key] = { ...document }[key];
-      }
+const createBuckets = async (schema: Schema) => {
+  for (const bucket of schema.buckets) {
+    try {
+      await storage.deleteBucket(bucket.$id);
+      console.log(`Deleted and recreating Bucket ${bucket.name}...`);
+    } catch {
+      console.log(`Creating Bucket ${bucket.name}...`);
     }
-
-    await databases.createDocument(
-      document.$databaseId,
-      document.$collectionId,
-      document.$id,
-      { ...data },
-      document.$permissions,
+    await storage.createBucket(
+      bucket.$id,
+      bucket.name,
+      bucket.$permissions,
+      bucket.fileSecurity,
+      bucket.enabled,
+      bucket.maximumFileSize,
+      bucket.allowedFileExtensions,
+      bucket.compression,
+      bucket.encryption,
+      bucket.antivirus,
     );
   }
 };
 
-const prepareDatabase = async () => {
-  const fileData = readFileSync("schema.json", { encoding: "utf-8" });
-  const schema: Schema = JSON.parse(fileData);
+const prepareSchema = async () => {
+  const schema = getSchemaFromFile();
 
   await createDatabases(schema);
   await createCollections(schema);
-  await createDocuments(schema);
+  await createBuckets(schema);
 };
 
-prepareDatabase();
-
-export { prepareDatabase };
+prepareSchema();
