@@ -167,7 +167,9 @@ const CreatePost = () => {
         <form className="p-4" method="post" onSubmit={handleSubmit}>
           <div className="mb-2">
             {/* <small className="text-slate-400">Character limit is upto {CHAR_LIMIT}</small> */}
-            <small className="text-slate-400">You have {CHAR_LIMIT -postTitle.length} characters left</small>
+            <small className="text-slate-400">
+              You have {CHAR_LIMIT - postTitle.length} characters left
+            </small>
 
             <textarea
               onChange={(event: any) => setPostTitle(event.target.value)}
