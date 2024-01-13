@@ -1,20 +1,20 @@
-import { Databases } from "node-appwrite";
+import { Databases, Storage } from "node-appwrite";
 import client from "./lib/client";
 import { Schema } from "./lib/types";
-import { writeFileSync } from "fs";
+import { readFileSync, writeFileSync } from "fs";
 
 const database = new Databases(client);
+const storage = new Storage(client);
 
 const getSchema = async () => {
-  const schema: Schema = { databases: [], collections: [], documents: [] };
+  const schema: Schema = { databases: [], collections: [], buckets: [] };
 
   schema.databases = (await database.list()).databases;
+  schema.buckets = (await storage.listBuckets()).buckets;
 
   for (const db of schema.databases) {
-    schema.collections = (await database.listCollections(db.$id)).collections;
-    for (const collection of schema.collections) {
-      schema.documents = (await database.listDocuments(db.$id, collection.$id)).documents;
-    }
+    const dbCollections = (await database.listCollections(db.$id)).collections;
+    schema.collections.push(...dbCollections);
   }
 
   return schema;
@@ -26,5 +26,3 @@ const writeSchemaToFile = async () => {
 };
 
 writeSchemaToFile();
-
-export { getSchema, writeSchemaToFile };

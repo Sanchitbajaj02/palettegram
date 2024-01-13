@@ -4,8 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "generate": "yarn ts-node ./src/generateSchema.ts",
-    "preparedb": "yarn ts-node ./src/prepareDatabase.ts"
+    "schema:generate": "yarn ts-node ./src/generateSchema.ts",
+    "schema:prepare": "yarn ts-node ./src/prepareSchema.ts",
+    "data:generate": "yarn ts-node ./src/generateData.ts",
+    "data:prepare": "yarn ts-node ./src/prepareData.ts"
   },
   "dependencies": {
     "dotenv": "^16.3.1",
