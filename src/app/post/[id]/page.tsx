@@ -1,9 +1,8 @@
-'use client'
+"use client";
 
-import SinglePost from '@/components/core/posts/SinglePost'
-import { useEffect, useState } from 'react';
+import SinglePost from "@/components/core/posts/SinglePost";
+import { useEffect, useState } from "react";
 import { getSinglePost } from "@/backend/posts.api";
-
 
 type Prop = {
   params: {
@@ -24,24 +23,23 @@ interface postType {
 }
 
 const PostDisplay = ({ params: { id } }: Prop) => {
-
-  const [post,setPost] = useState<postType>({
-    accountId : "",
-    postTitle : '',
-    postImage : [],
-    colors : [],
-    comments : [],
-    likes : [],
-    $collectionId : '',
-    $createdAt : '',
-    $id : ''
-  })
+  const [post, setPost] = useState<postType>({
+    accountId: "",
+    postTitle: "",
+    postImage: [],
+    colors: [],
+    comments: [],
+    likes: [],
+    $collectionId: "",
+    $createdAt: "",
+    $id: "",
+  });
 
   useEffect(() => {
     const getPost = async () => {
       try {
         const res = await getSinglePost(id);
-        if(res){
+        if (res) {
           setPost({
             accountId: res.accountId,
             postTitle: res.postTitle,
@@ -49,9 +47,9 @@ const PostDisplay = ({ params: { id } }: Prop) => {
             colors: res.colors || [],
             comments: res.comments || [],
             likes: res.likes,
-            $id: res.$id || '',
-            $collectionId: res.$collectionId || '',
-            $createdAt: res.$createdAt || '',
+            $id: res.$id || "",
+            $collectionId: res.$collectionId || "",
+            $createdAt: res.$createdAt || "",
           });
         }
         console.log(res);
@@ -61,14 +59,13 @@ const PostDisplay = ({ params: { id } }: Prop) => {
     };
 
     getPost();
-    
   }, [id]);
 
   return (
     <>
-       <SinglePost singlePost = {post} width = {'w-96'} />
+      <SinglePost singlePost={post} width={"w-96"} />
     </>
-  )
-}
+  );
+};
 
-export default PostDisplay
+export default PostDisplay;

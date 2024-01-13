@@ -6,7 +6,7 @@
 
 2. Connect with Project Admins and Mentors of the project and know more about project.
 
-3. Visit github repo of project and look for the open issues. You will see SWOC 2024 Tag with the hardness level of the issue choose accordingly.
+3. Visit github repo of project and look for the open issues. You will see **SWOC S4** Tag with the hardness level of the issue choose accordingly.
 
 4. Comment on issue if you want to work on it and get it assigned to yourself from Project Admins. make sure you work on a single issue at a single time don't occupy the issues unnecessarily if found strict actions will be taken. 
 
@@ -16,7 +16,7 @@
 
 7. If Projects Admins find all good they will accept your pull request and assign you the point depending on hardness of issue.
 
-8. Yes till here you have successfully done a open source contribution. repeat the procedure again and again and earn more points to get top on leaderboard and earn your swags.
+8. Till here you have successfully done a open source contribution. repeat the procedure again and again and earn more points to get top on leaderboard and earn your swags.
 
 9. If you have any Doubts/ Questions/ Suggestions please feel free to talk to the SWOC team. Please feel free to report any malpractices found in server.
 
@@ -42,7 +42,7 @@ There is no limit on the number of issues you can work on, but I suggest working
 
 5. **How can I start with SWOC?**
 
-This is one of the most frequently asked questions, Assuming you have registered for SWOC and have completed all the prerequisites like joining the Quine platform, SOWC discord server etc. Please wait until the 1st of January 2024 as the event will start on that day. Till then you can select the project in which you want to contribute and that best suits you.
+This is one of the most frequently asked questions, Assuming you have registered for SWOC and have completed all the prerequisites like joining the Quine platform, SWOC discord server etc. Please wait until the 1st of January 2024 as the event will start on that day. Till then you can select the project in which you want to contribute and that best suits you.
 
 To participate in the event, please familiarize yourself with the project codebase. Advanced users can try setting up the project on their local machine. The official start date for the event is on the 1st of January 2024. At this point, you can begin addressing the issues listed in your selected projects. Keep in mind that the process for contributing to a project may vary depending on the project and its admin. 
 
