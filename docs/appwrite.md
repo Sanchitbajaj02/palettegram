@@ -24,7 +24,7 @@
 7.  Setup your database with the command:
 
     ```sh
-    yarn appwrite:preparedb
+    yarn schema:prepare
     ```
 
     this should create a database with users, posts, etc. collections.
@@ -38,7 +38,7 @@
 2.  Generate the schema with the command:
 
     ```sh
-    yarn appwrite:generate
+    yarn schema:generate
     ```
 
     this should update `appwrite-gen/schema.json` with your changes.
