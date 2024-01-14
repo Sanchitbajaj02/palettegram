@@ -64,7 +64,7 @@ export default function UserPosts({ userId, userName }: UserPostsProps) {
                           height={40}
                           className="object-contain border p-0.5 rounded-full bg-slate-500"
                         />
-                        <div className="my-[2px] w-px h-full self-center text-neutral-200  dark:bg-neutral-500" />
+                        <div className="my-[2px] w-px h-full self-center bg-neutral-400 dark:bg-neutral-500 rounded-3xl" />
                       </div>
 
                       <section className=" flex h-auto w-full flex-col items-start">
