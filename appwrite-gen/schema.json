@@ -114,7 +114,24 @@
           "default": null
         }
       ],
-      "indexes": []
+      "indexes": [
+        {
+          "key": "idx_accountId",
+          "type": "fulltext",
+          "status": "available",
+          "error": "",
+          "attributes": ["accountId"],
+          "orders": ["ASC"]
+        },
+        {
+          "key": "idx_username",
+          "type": "fulltext",
+          "status": "available",
+          "error": "",
+          "attributes": ["username"],
+          "orders": ["ASC"]
+        }
+      ]
     },
     {
       "$id": "651d86daa59be4aad058",
@@ -201,7 +218,16 @@
           "default": true
         }
       ],
-      "indexes": []
+      "indexes": [
+        {
+          "key": "idx_accountId",
+          "type": "fulltext",
+          "status": "available",
+          "error": "",
+          "attributes": ["accountId"],
+          "orders": ["ASC"]
+        }
+      ]
     },
     {
       "$id": "6559b707984a4f046a08",
@@ -239,7 +265,16 @@
           "default": null
         }
       ],
-      "indexes": []
+      "indexes": [
+        {
+          "key": "idx_accountId",
+          "type": "fulltext",
+          "status": "available",
+          "error": "",
+          "attributes": ["accountId"],
+          "orders": ["ASC"]
+        }
+      ]
     }
   ],
   "buckets": [
