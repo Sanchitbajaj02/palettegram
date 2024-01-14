@@ -205,7 +205,6 @@ const saveDataToDatabase = async (session: any) => {
     const resp = await db.createDocument(palettegramDB, usersCollection, ID.unique(), {
       email: session.email,
       fullName: session.name,
-      createdAt: session.$createdAt,
       isVerified: session.emailVerification,
       accountId: session.$id,
       username: username,

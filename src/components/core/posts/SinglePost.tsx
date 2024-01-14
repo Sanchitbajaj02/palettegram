@@ -178,10 +178,10 @@ export default function SinglePost({
           {singlePost && singlePost?.postTitle ? singlePost?.postTitle : "No Title"}
         </p>
 
-        {singlePost && singlePost?.postImage && singlePost?.postImage[0]?.length > 0 ? (
+        {singlePost && singlePost?.postImages && singlePost?.postImages[0]?.length > 0 ? (
           <Image
             className="w-full mb-4"
-            src={singlePost?.postImage[0]}
+            src={singlePost?.postImages[0]}
             alt={singlePost && singlePost?.postTitle}
             width={400}
             height={200}

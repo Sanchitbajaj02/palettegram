@@ -78,10 +78,10 @@ export default function UserPosts({ userId, userName }: UserPostsProps) {
 
                         <p className="text-neutral-900 dark:text-neutral-200">{post?.postTitle}</p>
                         <div className="h-auto w-full relative mt-2">
-                          {post && post?.postImage && post?.postImage[0].length > 0 ? (
+                          {post && post?.postImages && post?.postImages[0].length > 0 ? (
                             <Image
                               className="w-full h-full mb-4 rounded-md"
-                              src={post?.postImage[0]}
+                              src={post?.postImages[0]}
                               alt=""
                               width={400}
                               height={200}

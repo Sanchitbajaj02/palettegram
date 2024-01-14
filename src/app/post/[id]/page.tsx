@@ -13,7 +13,7 @@ type Prop = {
 interface postType {
   accountId: string;
   postTitle: string;
-  postImage: string[];
+  postImages: string[];
   colors?: string[];
   comments?: string[];
   likes: string[];
@@ -26,7 +26,7 @@ const PostDisplay = ({ params: { id } }: Prop) => {
   const [post, setPost] = useState<postType>({
     accountId: "",
     postTitle: "",
-    postImage: [],
+    postImages: [],
     colors: [],
     comments: [],
     likes: [],
@@ -43,7 +43,7 @@ const PostDisplay = ({ params: { id } }: Prop) => {
           setPost({
             accountId: res.accountId,
             postTitle: res.postTitle,
-            postImage: res.postImage,
+            postImages: res.postImages,
             colors: res.colors || [],
             comments: res.comments || [],
             likes: res.likes,

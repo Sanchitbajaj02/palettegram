@@ -98,7 +98,7 @@ const CreatePost = () => {
       const finalDataToUpload: PostInstanceType = {
         accountId: userIdFromCookies,
         postTitle: postTitle,
-        postImage: imageArray.length > 0 ? imageArray : [],
+        postImages: imageArray.length > 0 ? imageArray : [],
         colors: [],
         comments: [],
         likes: [],

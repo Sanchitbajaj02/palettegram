@@ -1,7 +1,7 @@
 export type PostInstanceType = {
   accountId: string;
   postTitle: string;
-  postImage: string[];
+  postImages: string[];
   colors?: string[];
   comments?: string[];
   likes: string[];
