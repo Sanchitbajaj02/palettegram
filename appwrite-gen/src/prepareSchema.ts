@@ -1,10 +1,7 @@
 import { Databases, Models, Storage } from "node-appwrite";
-import client from "./lib/client";
+import {databases, storage} from "./lib/client";
 import { Schema } from "./lib/types";
 import { getSchemaFromFile } from "./lib/utils";
-
-const databases = new Databases(client);
-const storage = new Storage(client);
 
 const createDatabases = async (schema: Schema) => {
   for (const db of schema.databases) {
