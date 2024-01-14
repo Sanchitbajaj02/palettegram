@@ -1,0 +1,19 @@
+{
+  "name": "appwrite-gen",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "schema:generate": "yarn ts-node ./src/generateSchema.ts",
+    "schema:prepare": "yarn ts-node ./src/prepareSchema.ts"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "node-appwrite": "^11.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0"
+  }
+}

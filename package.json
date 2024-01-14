@@ -7,6 +7,9 @@
   "engines": {
     "node": ">=18.0.x"
   },
+  "workspaces": [
+    "appwrite-gen"
+  ],
   "scripts": {
     "format": "prettier --write src/",
     "dev": "next dev",
@@ -14,7 +17,11 @@
     "start": "next start",
     "lint": "next lint",
     "preinstall": "npx only-allow yarn",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "schema:generate": "yarn workspace appwrite-gen schema:generate",
+    "schema:prepare": "yarn workspace appwrite-gen schema:prepare",
+    "data:generate": "yarn workspace appwrite-gen data:generate",
+    "data:prepare": "yarn workspace appwrite-gen data:prepare"
   },
   "repository": {
     "type": "git",
