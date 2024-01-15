@@ -9,6 +9,7 @@ import { toastify } from "@/helper/toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { addPost } from "@/redux/reducers/postsReducer";
 import { PostInstanceType } from "@/types/index.d";
+import isCtrlEnter from "@/helper/isCtrlEnter";
 
 const CHAR_LIMIT = 500;
 
@@ -181,6 +182,9 @@ const CreatePost = () => {
               placeholder="What's happening?"
               maxLength={CHAR_LIMIT}
               required
+              onKeyDown={(e) => {
+                if (isCtrlEnter(e)) handleSubmit(e);
+              }}
             />
           </div>
 
