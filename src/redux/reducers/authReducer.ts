@@ -1,7 +1,7 @@
 "use client";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { setCookie } from "nookies";
+import { setCookie } from "cookies";
 import { userDetail } from "@/types/index.d";
 
 const initialState: userDetail = {
@@ -28,14 +28,24 @@ export const registerReducer = createSlice({
     },
     logUserOut: (state) => {
       state.loading = true;
-      setCookie(null, "userId", "");
-      state.error = false;
-      state.creds.userId = "";
-      state.creds.email = "";
-      state.creds.createdAt = "";
-      state.creds.isVerified = false;
-      state.loading = false;
-    },
+    
+      try {
+        // Clear user ID cookie
+        setCookie(null, "userId", "");
+    
+        // Reset state values
+        state.creds.userId = "";
+        state.creds.email = "";
+        state.creds.createdAt = "";
+        state.creds.isVerified = false;
+        state.error = false;
+      } catch (error) {
+        console.error("Error clearing user ID cookie:", error);
+        // Handle the error as needed
+      } finally {
+        state.loading = false;
+      }
+    },  
   },
 });
 
