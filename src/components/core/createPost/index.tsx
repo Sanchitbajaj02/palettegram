@@ -94,6 +94,7 @@ const CreatePost = () => {
 
       const userIdFromCookies: string = cookies["userId"];
       const imageArray = [imageURL];
+      //console.log(imageArray);
 
       const finalDataToUpload: PostInstanceType = {
         accountId: userIdFromCookies,
@@ -131,20 +132,26 @@ const CreatePost = () => {
    */
   const handleFileUpload = async (event: any) => {
     const reader = new FileReader();
+    const fileObj = event.target.files[0];
+    reader.readAsDataURL(fileObj);
 
-    reader.readAsDataURL(event.target.files[0]);
-
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setimageStorage((prev: any) => {
-          return {
-            ...prev,
-            preview: reader?.result,
-            file: event.target.files[0],
-          };
-        });
-      }
-    };
+    if(fileObj.size > 1000000){
+      toastify("Image size should be less than 1MB", "error");
+      return;
+    }
+    else{
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setimageStorage((prev: any) => {
+            return {
+              ...prev,
+              preview: reader?.result,
+              file: event.target.files[0],
+            };
+          });
+        }
+      };
+    }  
   };
 
   const colorPaletteSwitch = () => {
@@ -201,7 +208,7 @@ const CreatePost = () => {
                 style={{ display: "none" }}
                 type="file"
                 id="uploadImage"
-                accept="image/jpg, image/png, image/jpeg"
+                accept="image/jpg, image/png, image/jpeg, image/svg"
                 onChange={handleFileUpload}
               />
               <label
