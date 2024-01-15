@@ -120,16 +120,24 @@
           "type": "fulltext",
           "status": "available",
           "error": "",
-          "attributes": ["accountId"],
-          "orders": ["ASC"]
+          "attributes": [
+            "accountId"
+          ],
+          "orders": [
+            "ASC"
+          ]
         },
         {
           "key": "idx_username",
           "type": "fulltext",
           "status": "available",
           "error": "",
-          "attributes": ["username"],
-          "orders": ["ASC"]
+          "attributes": [
+            "username"
+          ],
+          "orders": [
+            "ASC"
+          ]
         }
       ]
     },
@@ -224,8 +232,12 @@
           "type": "fulltext",
           "status": "available",
           "error": "",
-          "attributes": ["accountId"],
-          "orders": ["ASC"]
+          "attributes": [
+            "accountId"
+          ],
+          "orders": [
+            "ASC"
+          ]
         }
       ]
     },
@@ -271,8 +283,12 @@
           "type": "fulltext",
           "status": "available",
           "error": "",
-          "attributes": ["accountId"],
-          "orders": ["ASC"]
+          "attributes": [
+            "accountId"
+          ],
+          "orders": [
+            "ASC"
+          ]
         }
       ]
     }
