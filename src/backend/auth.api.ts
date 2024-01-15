@@ -190,7 +190,15 @@ const getCurrentUser = async () => {
  * @returns {Object} returns session
  */
 const logoutUser = async () => {
-  return await account.deleteSession("current");
+  try {
+    // Use the deleteSession method without specifying a session ID
+    const deletedSession = await account.deleteSession();
+
+    return deletedSession;
+  } catch (error) {
+    console.log("Logout error:", error);
+    throw new Error("Logout failed");
+  }
 };
 
 /**
