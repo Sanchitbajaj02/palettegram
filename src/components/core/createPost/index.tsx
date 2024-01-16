@@ -107,20 +107,21 @@ const CreatePost = () => {
 
       const savetoDb = await savePostToDb(finalDataToUpload);
 
-      if (savetoDb) {
-        dispatch(addPost(finalDataToUpload));
+      if (!savetoDb) {
+        throw new Error();
       }
-
       // console.log(savetoDb);
-
+      dispatch(addPost(finalDataToUpload));
       toastify("Post uploaded successfully", "success", false);
 
-      // state resetters
       setPostTitle("");
       setimageStorage({
         preview: null,
         file: null,
       });
+
+
+      // state resetters
     } catch (error) {
       console.log(error);
     }
