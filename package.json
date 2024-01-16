@@ -1,12 +1,15 @@
 {
   "name": "palettegram",
   "description": "Palettegram is a social media application dedicated to professionals like graphic designers, UI/UX designers, Developers, etc. to leverage UI designs, design ideas, UX approaches and color palettes.",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "private": true,
   "homepage": ".",
   "engines": {
     "node": ">=18.0.x"
   },
+  "workspaces": [
+    "appwrite-gen"
+  ],
   "scripts": {
     "format": "prettier --write src/",
     "dev": "next dev",
@@ -14,7 +17,11 @@
     "start": "next start",
     "lint": "next lint",
     "preinstall": "npx only-allow yarn",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "schema:generate": "yarn workspace appwrite-gen schema:generate",
+    "schema:prepare": "yarn workspace appwrite-gen schema:prepare",
+    "data:generate": "yarn workspace appwrite-gen data:generate",
+    "data:prepare": "yarn workspace appwrite-gen data:prepare"
   },
   "repository": {
     "type": "git",

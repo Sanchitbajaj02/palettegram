@@ -170,7 +170,7 @@ function HomePage() {
             </p>
 
             <div className="flex justify-center md:justify-start">
-              {state?.creds.userId && state?.creds.userId !== '' ? (
+              {state?.creds.userId && state?.creds.userId !== "" ? (
                 <ButtonLong href="/feed" size="big">
                   Checkout your feed
                 </ButtonLong>

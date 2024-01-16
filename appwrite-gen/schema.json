@@ -1,0 +1,312 @@
+{
+  "databases": [
+    {
+      "$id": "651d85ea69357206cfe5",
+      "name": "PalettegramDB",
+      "$createdAt": "2024-01-14T18:10:45.937+00:00",
+      "$updatedAt": "2024-01-14T18:10:45.937+00:00",
+      "enabled": true
+    }
+  ],
+  "collections": [
+    {
+      "$id": "651d85ff826413d8f258",
+      "$createdAt": "2024-01-14T18:10:47.177+00:00",
+      "$updatedAt": "2024-01-14T18:10:47.177+00:00",
+      "$permissions": [
+        "create(\"users\")",
+        "read(\"users\")",
+        "update(\"users\")",
+        "delete(\"users\")"
+      ],
+      "databaseId": "651d85ea69357206cfe5",
+      "name": "users",
+      "enabled": true,
+      "documentSecurity": false,
+      "attributes": [
+        {
+          "key": "accountId",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": true,
+          "array": false,
+          "size": 100,
+          "default": null
+        },
+        {
+          "key": "email",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": true,
+          "array": false,
+          "format": "email",
+          "default": null
+        },
+        {
+          "key": "fullName",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": true,
+          "array": false,
+          "size": 100,
+          "default": null
+        },
+        {
+          "key": "username",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "size": 255,
+          "default": null
+        },
+        {
+          "key": "isVerified",
+          "type": "boolean",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "default": false
+        },
+        {
+          "key": "avatarURL",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "size": 1000,
+          "default": null
+        },
+        {
+          "key": "bannerURL",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "size": 1000,
+          "default": null
+        },
+        {
+          "key": "about",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "size": 100,
+          "default": null
+        },
+        {
+          "key": "userLink",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "size": 1000,
+          "default": null
+        }
+      ],
+      "indexes": [
+        {
+          "key": "idx_accountId",
+          "type": "fulltext",
+          "status": "available",
+          "error": "",
+          "attributes": [
+            "accountId"
+          ],
+          "orders": [
+            "ASC"
+          ]
+        },
+        {
+          "key": "idx_username",
+          "type": "fulltext",
+          "status": "available",
+          "error": "",
+          "attributes": [
+            "username"
+          ],
+          "orders": [
+            "ASC"
+          ]
+        }
+      ]
+    },
+    {
+      "$id": "651d86daa59be4aad058",
+      "$createdAt": "2024-01-14T18:10:54.134+00:00",
+      "$updatedAt": "2024-01-14T18:10:54.134+00:00",
+      "$permissions": [
+        "create(\"users\")",
+        "read(\"users\")",
+        "update(\"users\")",
+        "delete(\"users\")"
+      ],
+      "databaseId": "651d85ea69357206cfe5",
+      "name": "posts",
+      "enabled": true,
+      "documentSecurity": false,
+      "attributes": [
+        {
+          "key": "accountId",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": true,
+          "array": false,
+          "size": 100,
+          "default": null
+        },
+        {
+          "key": "postTitle",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": true,
+          "array": false,
+          "size": 500,
+          "default": null
+        },
+        {
+          "key": "postImages",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": true,
+          "size": 1000,
+          "default": null
+        },
+        {
+          "key": "colors",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": true,
+          "size": 10,
+          "default": null
+        },
+        {
+          "key": "likes",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": true,
+          "size": 30,
+          "default": null
+        },
+        {
+          "key": "comments",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": true,
+          "size": 500,
+          "default": null
+        },
+        {
+          "key": "isActive",
+          "type": "boolean",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "default": true
+        }
+      ],
+      "indexes": [
+        {
+          "key": "idx_accountId",
+          "type": "fulltext",
+          "status": "available",
+          "error": "",
+          "attributes": [
+            "accountId"
+          ],
+          "orders": [
+            "ASC"
+          ]
+        }
+      ]
+    },
+    {
+      "$id": "6559b707984a4f046a08",
+      "$createdAt": "2024-01-14T18:10:59.881+00:00",
+      "$updatedAt": "2024-01-14T18:10:59.881+00:00",
+      "$permissions": [
+        "create(\"users\")",
+        "read(\"users\")",
+        "update(\"users\")",
+        "delete(\"users\")"
+      ],
+      "databaseId": "651d85ea69357206cfe5",
+      "name": "bookmarks",
+      "enabled": true,
+      "documentSecurity": false,
+      "attributes": [
+        {
+          "key": "accountId",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": true,
+          "array": false,
+          "size": 100,
+          "default": null
+        },
+        {
+          "key": "bookmark",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": true,
+          "size": 100,
+          "default": null
+        }
+      ],
+      "indexes": [
+        {
+          "key": "idx_accountId",
+          "type": "fulltext",
+          "status": "available",
+          "error": "",
+          "attributes": [
+            "accountId"
+          ],
+          "orders": [
+            "ASC"
+          ]
+        }
+      ]
+    }
+  ],
+  "buckets": [
+    {
+      "$id": "65a27126f17d920bff46",
+      "$createdAt": "2024-01-14T18:11:02.459+00:00",
+      "$updatedAt": "2024-01-14T18:11:02.459+00:00",
+      "$permissions": [],
+      "fileSecurity": false,
+      "name": "bucky",
+      "enabled": true,
+      "maximumFileSize": 5242880,
+      "allowedFileExtensions": [],
+      "compression": "none",
+      "encryption": true,
+      "antivirus": true
+    }
+  ]
+}

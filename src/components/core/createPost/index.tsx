@@ -99,7 +99,7 @@ const CreatePost = () => {
       const finalDataToUpload: PostInstanceType = {
         accountId: userIdFromCookies,
         postTitle: postTitle,
-        postImage: imageArray.length > 0 ? imageArray : [],
+        postImages: imageArray.length > 0 ? imageArray : [],
         colors: [],
         comments: [],
         likes: [],
@@ -107,20 +107,21 @@ const CreatePost = () => {
 
       const savetoDb = await savePostToDb(finalDataToUpload);
 
-      if (savetoDb) {
-        dispatch(addPost(finalDataToUpload));
+      if (!savetoDb) {
+        throw new Error();
       }
-
       // console.log(savetoDb);
-
+      dispatch(addPost(finalDataToUpload));
       toastify("Post uploaded successfully", "success", false);
 
-      // state resetters
       setPostTitle("");
       setimageStorage({
         preview: null,
         file: null,
       });
+
+
+      // state resetters
     } catch (error) {
       console.log(error);
     }
@@ -173,7 +174,10 @@ const CreatePost = () => {
       <section className="border border-gray-500 rounded-md shadow-sm mb-4">
         <form className="p-4" method="post" onSubmit={handleSubmit}>
           <div className="mb-2">
-            <small className="text-slate-400">Character limit is upto {CHAR_LIMIT}</small>
+            {/* <small className="text-slate-400">Character limit is upto {CHAR_LIMIT}</small> */}
+            <small className="text-slate-400">
+              You have {CHAR_LIMIT - postTitle.length} characters left
+            </small>
 
             <textarea
               onChange={(event: any) => setPostTitle(event.target.value)}

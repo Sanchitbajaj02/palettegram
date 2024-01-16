@@ -24,9 +24,11 @@ type UserBookMarkType = {
 export default function SinglePost({
   singlePost,
   onLikeClick,
+  width,
 }: {
   singlePost: PostInstanceType;
   onLikeClick?: any;
+  width?: string;
 }) {
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
   const [comment_message, setComment_message] = useState("");
@@ -34,7 +36,7 @@ export default function SinglePost({
   const [commentCount, setCommentCount] = useState(singlePost?.comments?.length || 0);
 
   const dispatch = useDispatch();
-  
+
   const authState = useSelector((state: any) => state.auth);
   const userBookmarks: UserBookMarkType = useSelector((state: any) => state.bookmarks);
 
@@ -146,7 +148,13 @@ export default function SinglePost({
   }, [fetchUserDetails]);
 
   return (
-    <div className="p-3 rounded-md shadow dark:shadow-gray-600 mb-4">
+    <div
+      className={` ${
+        width
+          ? "w-96 p-3 m-auto  rounded-md shadow dark:shadow-gray-600 mb-4 mt-40 "
+          : "p-3  rounded-md shadow dark:shadow-gray-600 mb-4"
+      } `}
+    >
       <Link
         className="flex items-center gap-3 mb-3"
         href={`/user/${singlePost && singlePost?.accountId}`}
@@ -170,10 +178,10 @@ export default function SinglePost({
           {singlePost && singlePost?.postTitle ? singlePost?.postTitle : "No Title"}
         </p>
 
-        {singlePost && singlePost?.postImage && singlePost?.postImage[0]?.length > 0 ? (
+        {singlePost && singlePost?.postImages && singlePost?.postImages[0]?.length > 0 ? (
           <Image
             className="w-full mb-4"
-            src={singlePost?.postImage[0]}
+            src={singlePost?.postImages[0]}
             alt={singlePost && singlePost?.postTitle}
             width={400}
             height={200}

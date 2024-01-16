@@ -13,7 +13,6 @@
 [![Forks](https://img.shields.io/github/forks/sanchitbajaj02/palettegram?color=greendark)](https://github.com/Sanchitbajaj02/palettegram/network/members)
 [![Stars](https://img.shields.io/github/stars/sanchitbajaj02/palettegram?color=greendark)](https://github.com/Sanchitbajaj02/palettegram/stargazers)
 
-
 ## 🏆 Featured in:
 
 <table>
@@ -21,6 +20,12 @@
       <th>Event Logo</th>
       <th>Event Name</th>
       <th>Event Description</th>
+    </tr>
+    <tr>
+      <td><img src=".github/assets/iwoc-banner.png" width="200" height="auto" loading="lazy" alt="Welcome to Social Winter of S4" /></td>
+      <td>Innogeeks Winter of Code 2024</td>
+      <td>Innogeeks Winter of Code is a month-long open-source program envisioned by the Innogeeks. It is an online initiative that introduces new
+contributors to open-source software development. <a href="docs/iwoc.md">Click here</a> to get the guidelines. </td>
     </tr>
     <tr>
       <td><img src=".github/assets/swoc-banner.png" width="200" height="auto" loading="lazy" alt="Welcome to Social Winter of S4" /></td>
@@ -35,8 +40,6 @@
         
 </table>
 
-
-<br/>
 
 ## 🤔 Why open source
 
@@ -130,7 +133,6 @@ Without the tireless efforts and dedication of these exceptional developers, Pal
 [![Contributors](https://contrib.rocks/image?repo=sanchitbajaj02/palettegram)](https://github.com/sanchitbajaj02/palettegram/graphs/contributors)
 
 <!-- _View the list of all contributors [here](https://github.com/sanchitbajaj02/palettegram/graphs/contributors)._ -->
-
 
 ## 🙏🏽 Support
 
