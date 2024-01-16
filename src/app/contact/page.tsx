@@ -7,9 +7,11 @@ import { FormEvent, useState } from "react";
 const contact = () => {
   const [message, setmessage] = useState("");
   const [email, setemail] = useState("");
+  const [ispending, setpending] = useState(false);
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
+      setpending(true);
       const res = await fetch("/api/send", {
         method: "POST",
         body: JSON.stringify({
@@ -21,12 +23,12 @@ const contact = () => {
         },
       });
       if (res.status === 200) {
-        console.log("Done");
         toastify("message sent successfully", "success");
+        setpending(false);
       }
     } catch (error) {
-      console.log(error);
       toastify("Please try again later", "error");
+      setpending(false);
     }
   };
 
@@ -43,9 +45,9 @@ const contact = () => {
           <input
             required
             max={200}
-            type="text"
+            type="email"
             placeholder="Your Email"
-            className=" p-4 w-[60vh] h-10 rounded-2xl text-white "
+            className=" p-4 w-[60vh] h-10 rounded-2xl  dark:text-white text-black border-2"
             onChange={(e) => {
               setemail(e.target.value);
             }}
@@ -53,18 +55,28 @@ const contact = () => {
           <textarea
             required
             placeholder="Message"
-            className=" h-52  p-4 rounded-2xl w-[60vh] mt-8"
+            className=" h-52  p-4 rounded-2xl w-[60vh] mt-8 border-2 border-black  dark:text-white text-black"
             onChange={(e) => {
               setmessage(e.target.value);
             }}
           />
-          <button
-            className="px-10 py-2 text-base w-[30vh]  mt-8
-            rounded-full text-white bg-primary  transition hover:bg-primary-light hover:scale-105"
-            type="submit"
-          >
-            Submit
-          </button>
+          {ispending ? (
+            <button
+              className="px-10 py-2 text-base w-[30vh]  mt-8
+           rounded-full text-white bg-primary  transition hover:bg-primary-light hover:scale-105 flex items-center justify-center "
+              disabled
+            >
+              <div className=" h-5 w-5 animate-spin rounded-full border-b-2 border-white dark:border-black"></div>
+            </button>
+          ) : (
+            <button
+              className="px-10 py-2 text-base w-[30vh]  mt-8
+           rounded-full text-white bg-primary  transition hover:bg-primary-light hover:scale-105"
+              type="submit"
+            >
+              Submit
+            </button>
+          )}
         </form>
       </div>
 
