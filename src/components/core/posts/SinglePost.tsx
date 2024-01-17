@@ -10,6 +10,7 @@ import { toastify } from "@/helper/toastify";
 import { addComment } from "@/backend/posts.api";
 import { getUserDetails } from "@/backend/auth.api";
 import { useCallback, useEffect, useState } from "react";
+import isCtrlEnter from "@/helper/isCtrlEnter";
 interface UserDetails {
   fullName: string;
 }
@@ -281,6 +282,9 @@ export default function SinglePost({
               rows={2}
               cols={50}
               placeholder="Type your comment here"
+              onKeyDown={(e) => {
+                if (isCtrlEnter(e)) uploadComment(singlePost.$id, comment_message);
+              }}
             />
           </div>
           <div className="flex flex-end">
