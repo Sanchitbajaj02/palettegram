@@ -36,7 +36,7 @@ export default function TrendingFeed() {
         <Link href="/" className="text-xs text-slate-500 hover:text-primary-light">
           Accessibility
         </Link>
-        <Link href="/" className="text-xs text-slate-500 hover:text-primary-light">
+        <Link href="/contact" className="text-xs text-slate-500 hover:text-primary-light">
           Help Center
         </Link>
         <Link href="/" className="text-xs text-slate-500 hover:text-primary-light">
