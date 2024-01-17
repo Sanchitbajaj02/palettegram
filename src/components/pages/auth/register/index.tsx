@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
 import { ArrowLeftCircle, Loader } from "react-feather";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 // Components
 import { saveUser } from "@/redux/reducers/authReducer";
@@ -55,6 +55,7 @@ export default function RegisterComponent() {
       setRegisterStatus("success");
       setIsLoading(false);
       toastify("Register Successful. Please check your email to verify", "success");
+      router.push("/feed");
     } catch (error: any) {
       console.log(error.message + "message");
       setIsLoading(false);
