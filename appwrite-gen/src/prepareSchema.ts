@@ -202,9 +202,9 @@ const createBuckets = async (schema: Schema) => {
 const prepareSchema = async () => {
   const schema = getSchemaFromFile();
 
-  // await createDatabases(schema);
+  await createDatabases(schema);
   await createCollections(schema);
-  // await createBuckets(schema);
+  await createBuckets(schema);
 };
 
 prepareSchema();
