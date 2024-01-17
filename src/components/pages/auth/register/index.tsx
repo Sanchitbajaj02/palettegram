@@ -55,7 +55,7 @@ export default function RegisterComponent() {
       setRegisterStatus("success");
       setIsLoading(false);
       toastify("Register Successful. Please check your email to verify", "success");
-      router.replace("/feed");
+      router.replace("/login");
     } catch (error: any) {
       console.log(error.message + "message");
       setIsLoading(false);
