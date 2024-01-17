@@ -35,7 +35,7 @@ cd  palettegram
 **Note:** make sure to install yarn as the project will not work properly with npm or pnpm. 
 
 ```bash
-yarn  install --freeze-lockfile
+yarn  install --frozen-lockfile
 ```
 
 - Setup the environment variables by referring `.env.example` file.
