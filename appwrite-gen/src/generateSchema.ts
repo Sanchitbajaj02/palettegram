@@ -1,7 +1,6 @@
-import { Databases, Storage } from "node-appwrite";
 import { databases, storage } from "./lib/client";
 import { Schema } from "./lib/types";
-import { readFileSync, writeFileSync } from "fs";
+import { writeFileSync } from "fs";
 
 const getSchema = async () => {
   const schema: Schema = { databases: [], collections: [], buckets: [] };

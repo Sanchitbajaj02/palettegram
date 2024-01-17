@@ -1,5 +1,5 @@
 import { Databases, Models, Storage } from "node-appwrite";
-import {databases, storage} from "./lib/client";
+import { databases, storage } from "./lib/client";
 import { Schema } from "./lib/types";
 import { getSchemaFromFile } from "./lib/utils";
 
@@ -35,6 +35,22 @@ const createCollections = async (schema: Schema) => {
       collection.enabled,
     );
     await createAttributesOfCollection(collection);
+
+    await createIndexes(collection);
+  }
+};
+
+const createIndexes = async (collection: Models.Collection) => {
+  console.log(`Creating indexes of ${collection.name}`);
+  for (const index of collection.indexes) {
+    await databases.createIndex(
+      collection.databaseId,
+      collection.$id,
+      index.key,
+      index.type,
+      index.attributes,
+      index.orders,
+    );
   }
 };
 
