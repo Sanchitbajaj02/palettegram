@@ -1,3 +1,5 @@
+import { Url } from "next/dist/shared/lib/router/router";
+
 export type PostInstanceType = {
   accountId: string;
   postTitle: string;
@@ -37,3 +39,21 @@ export type BookmarkInitType = {
   error: boolean;
   loading: boolean;
 };
+
+export type UserFromDB = {
+  documents: [
+    {
+      accountId: string,
+      username: string,
+      fullName: string,
+      email: string,
+      isVerified: boolean,
+      about: string | null,
+      userLink: Url | null,
+      avatarURL: Url | null,
+      bannerURL: Url | null
+      createdAt: Date,
+      updatedAt: Date
+    }
+  ]
+}

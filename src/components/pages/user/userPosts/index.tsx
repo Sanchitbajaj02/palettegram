@@ -1,14 +1,16 @@
 import Loader from "@/app/loading";
 import { PostInstanceType } from "@/types";
 import Image from "next/image";
-import { Suspense, useState } from "react";
+import Link from "next/link";
+import { Suspense } from "react";
 import { Bookmark, Download, Heart, MessageCircle, Share } from "react-feather";
 import { useSelector } from "react-redux";
 
 type FormatOnType = "seconds" | "minutes" | "hours" | "days";
+
 interface UserPostsProps {
   userId: string;
-  userName: string;
+  userName: string | undefined;
 }
 
 export default function UserPosts({ userId, userName }: UserPostsProps) {
@@ -57,20 +59,24 @@ export default function UserPosts({ userId, userName }: UserPostsProps) {
                   >
                     <section className="flex w-full h-full justify-start items-start gap-3 ">
                       <div className="h-full flex flex-col">
-                        <Image
-                          src="/assets/user.png"
-                          alt="user"
-                          width={40}
-                          height={40}
-                          className="object-contain border p-0.5 rounded-full bg-slate-500"
-                        />
+                        <Link href={`/user/${post?.accountId}`}>
+                          <Image
+                            src="/assets/user.png"
+                            alt="user"
+                            width={40}
+                            height={40}
+                            className="object-contain border p-0.5 rounded-full bg-slate-500"
+                          />
+                        </Link>
+
                         <div className="my-[2px] w-px h-full self-center bg-neutral-400 dark:bg-neutral-500 rounded-3xl" />
                       </div>
 
                       <section className=" flex h-auto w-full flex-col items-start">
                         <div className="flex gap-1 text-lg items-baseline">
+                        <Link href={`/user/${post?.accountId}`}>
                           <p className=" font-semibold">{userName}</p>
-
+                        </Link>
                           <p className="text-base text-neutral-600 dark:text-neutral-400 pl-1">
                             &#183; {`${createdAtDateFormatter(post?.$createdAt)} ago`}
                           </p>
