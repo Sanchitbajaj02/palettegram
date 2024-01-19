@@ -1,9 +1,12 @@
 import Loader from "@/app/loading";
+import { removePost } from "@/backend/posts.api";
+import { toastify } from "@/helper/toastify";
+import { removeUserPost } from "@/redux/reducers/postsReducer";
 import { PostInstanceType } from "@/types";
 import Image from "next/image";
 import { Suspense, useState } from "react";
-import { Bookmark, Download, Heart, MessageCircle, Share } from "react-feather";
-import { useSelector } from "react-redux";
+import { Bookmark, Download, Heart, MessageCircle, Share, Trash2 } from "react-feather";
+import { useDispatch, useSelector } from "react-redux";
 
 type FormatOnType = "seconds" | "minutes" | "hours" | "days";
 interface UserPostsProps {
@@ -13,8 +16,27 @@ interface UserPostsProps {
 
 export default function UserPosts({ userId, userName }: UserPostsProps) {
   const userPosts = useSelector((store: any) => store.posts.posts).filter(
-    (post: PostInstanceType) => post.accountId === userId,
+    (post: PostInstanceType) => post.accountId === userId && post.isActive === true
   );
+  console.log(userPosts);
+
+
+  const dispatch = useDispatch();
+
+  async function deleteHandler(id: string) {
+    console.log(id)
+    try {
+      const response = await removePost(id);
+      if (response) {
+        console.log(response);
+        dispatch(removeUserPost(response.$id));
+        toastify("Post deleted sucessfully", "success");
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
 
   function createdAtDateFormatter(postCreationTime: string) {
     const timeObj = {
@@ -42,7 +64,6 @@ export default function UserPosts({ userId, userName }: UserPostsProps) {
       return `${timeObj.calcTimeDiff("days") / 365}y`;
     }
   }
-  console.log(userPosts);
   return (
     <>
       <main className="w-full h-full">
@@ -68,12 +89,15 @@ export default function UserPosts({ userId, userName }: UserPostsProps) {
                       </div>
 
                       <section className=" flex h-auto w-full flex-col items-start">
-                        <div className="flex gap-1 text-lg items-baseline">
-                          <p className=" font-semibold">{userName}</p>
+                        <div className="flex justify-between text-lg  w-full mb-2">
+                          <div>
+                            <p className=" font-semibold">{userName}</p>
 
-                          <p className="text-base text-neutral-600 dark:text-neutral-400 pl-1">
-                            &#183; {`${createdAtDateFormatter(post?.$createdAt)} ago`}
-                          </p>
+                            <p className="text-[13px] text-neutral-600 dark:text-neutral-400 ">
+                              {`${createdAtDateFormatter(post?.$createdAt)} ago`}
+                            </p>
+                          </div>
+                          <Trash2 onClick={() => deleteHandler(post.$id)} size={24} cursor={'pointer'} />
                         </div>
 
                         <p className="text-neutral-900 dark:text-neutral-200">{post?.postTitle}</p>

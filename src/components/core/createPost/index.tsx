@@ -102,6 +102,7 @@ const CreatePost = () => {
         postTitle: postTitle,
         postImages: imageArray.length > 0 ? imageArray : [],
         colors: [],
+        isActive: true,
         comments: [],
         likes: [],
       };
@@ -137,11 +138,11 @@ const CreatePost = () => {
     const fileObj = event.target.files[0];
     reader.readAsDataURL(fileObj);
 
-    if(fileObj.size > 1000000){
+    if (fileObj.size > 1000000) {
       toastify("Image size should be less than 1MB", "error");
       return;
     }
-    else{
+    else {
       reader.onload = () => {
         if (reader.readyState === 2) {
           setimageStorage((prev: any) => {
@@ -153,7 +154,7 @@ const CreatePost = () => {
           });
         }
       };
-    }  
+    }
   };
 
   const colorPaletteSwitch = () => {

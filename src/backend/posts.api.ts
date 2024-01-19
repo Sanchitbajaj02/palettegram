@@ -79,6 +79,21 @@ const getAllUserPosts = async (userId: string) => {
   }
 };
 
+
+const removePost = async (id: string) => {
+  try {
+    const resp = await db.updateDocument(palettegramDB, postsCollection, id, {
+      isActive: false,
+    });
+    if (resp) {
+      return resp;
+    }
+  } catch (error: any) {
+    console.log(error);
+  }
+};
+
+
 /**
  * @description like tweet api
  * @param tweet
@@ -172,4 +187,5 @@ export {
   deleteImage,
   getImageUrl,
   addComment,
+  removePost
 };
