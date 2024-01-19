@@ -49,9 +49,9 @@ export type UserFromDB = {
       email: string,
       isVerified: boolean,
       about: string | null,
-      userLink: Url | null,
-      avatarURL: Url | null,
-      bannerURL: Url | null
+      userLink: string | null,
+      avatarURL: string | null,
+      bannerURL: string | null
       createdAt: Date,
       updatedAt: Date
     }

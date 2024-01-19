@@ -74,16 +74,6 @@
           "default": false
         },
         {
-          "key": "about",
-          "type": "string",
-          "status": "available",
-          "error": "",
-          "required": false,
-          "array": false,
-          "size": 100,
-          "default": null
-        },
-        {
           "key": "avatarURL",
           "type": "string",
           "status": "available",
@@ -111,6 +101,16 @@
           "required": false,
           "array": false,
           "format": "url",
+          "default": null
+        },
+        {
+          "key": "about",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "size": 250,
           "default": null
         }
       ],

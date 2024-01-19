@@ -88,7 +88,7 @@ export default function User({ userId }: { userId: string }) {
 
           <div className="h-px w-full mt-6 bg-neutral-500 rounded-2xl" />
           
-          <UserPosts userName={user && user?.documents[0].fullName} userId={userId} />
+          <UserPosts userName={user! && user?.documents[0].fullName!} userId={userId} />
         </section>
           <div className="flex-[2] hidden md:block rounded-md">
             <TrendingFeed />

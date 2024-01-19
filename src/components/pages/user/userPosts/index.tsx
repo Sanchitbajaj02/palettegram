@@ -10,7 +10,7 @@ type FormatOnType = "seconds" | "minutes" | "hours" | "days";
 
 interface UserPostsProps {
   userId: string;
-  userName: string | undefined;
+  userName: string;
 }
 
 export default function UserPosts({ userId, userName }: UserPostsProps) {
