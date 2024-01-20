@@ -19,9 +19,7 @@
     "preinstall": "npx only-allow yarn",
     "prepare": "husky install",
     "schema:generate": "yarn workspace appwrite-gen schema:generate",
-    "schema:prepare": "yarn workspace appwrite-gen schema:prepare",
-    "data:generate": "yarn workspace appwrite-gen data:generate",
-    "data:prepare": "yarn workspace appwrite-gen data:prepare"
+    "schema:prepare": "yarn workspace appwrite-gen schema:prepare"
   },
   "repository": {
     "type": "git",
@@ -60,8 +58,8 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
-    "@commitlint/cli": "^18.4.3",
-    "@commitlint/config-conventional": "^18.4.3",
+    "@commitlint/cli": "^18.4.4",
+    "@commitlint/config-conventional": "^18.4.4",
     "encoding": "^0.1.13",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
