@@ -8,7 +8,7 @@ export default function Contact() {
   const [message, setmessage] = useState("");
   const [email, setemail] = useState("");
   const [ispending, setpending] = useState(false);
-  
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {

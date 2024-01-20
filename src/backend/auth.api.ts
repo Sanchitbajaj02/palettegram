@@ -178,11 +178,9 @@ const updatepassword = async (userData: any) => {
 const getCurrentUser = async () => {
   try {
     return account.get();
-  } catch (error) {
-    console.log("get current user error:", error);
+  } catch (error: any) {
+    throw new Error(error.message);
   }
-
-  return null;
 };
 
 /**
@@ -218,22 +216,6 @@ const saveDataToDatabase = async (session: any) => {
     console.log(error.message);
     throw new Error(error.message);
   }
-};
-
-/**
- * **Work**: Returns the status of the user
- * @returns {boolean} loggedin response
- */
-const isLoggedIn = async (): Promise<any> => {
-  try {
-    const loggedIn = await getCurrentUser();
-
-    return loggedIn;
-  } catch (error) {
-    console.log(error);
-  }
-
-  return false;
 };
 
 /**
@@ -286,7 +268,6 @@ export {
   verifyUser,
   loginUser,
   logoutUser,
-  isLoggedIn,
   getSingleUser,
   getCurrentUser,
   forgotpassword,

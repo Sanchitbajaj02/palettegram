@@ -16,15 +16,14 @@ interface UserPostsProps {
 
 export default function UserPosts({ userId, userName }: UserPostsProps) {
   const userPosts = useSelector((store: any) => store.posts.posts).filter(
-    (post: PostInstanceType) => post.accountId === userId && post.isActive === true
+    (post: PostInstanceType) => post.accountId === userId && post.isActive === true,
   );
   console.log(userPosts);
-
 
   const dispatch = useDispatch();
 
   async function deleteHandler(id: string) {
-    console.log(id)
+    console.log(id);
     try {
       const response = await removePost(id);
       if (response) {
@@ -33,10 +32,9 @@ export default function UserPosts({ userId, userName }: UserPostsProps) {
         toastify("Post deleted sucessfully", "success");
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
-
 
   function createdAtDateFormatter(postCreationTime: string) {
     const timeObj = {
@@ -97,7 +95,11 @@ export default function UserPosts({ userId, userName }: UserPostsProps) {
                               {`${createdAtDateFormatter(post?.$createdAt)} ago`}
                             </p>
                           </div>
-                          <Trash2 onClick={() => deleteHandler(post.$id)} size={24} cursor={'pointer'} />
+                          <Trash2
+                            onClick={() => deleteHandler(post.$id)}
+                            size={24}
+                            cursor={"pointer"}
+                          />
                         </div>
 
                         <p className="text-neutral-900 dark:text-neutral-200">{post?.postTitle}</p>

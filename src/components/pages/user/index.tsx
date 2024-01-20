@@ -88,13 +88,13 @@ export default function User({ userId }: { userId: string }) {
           </section>
 
           <div className="h-px w-full mt-6 bg-neutral-400" />
-          
+
           <UserPosts userName={user.name} userId={userId} />
         </section>
 
-          <div className="flex-[2] hidden md:block rounded-md">
+        <div className="flex-[2] hidden md:block rounded-md">
           <TrendingFeed />
-          </div>
+        </div>
       </main>
       <Footer />
     </>

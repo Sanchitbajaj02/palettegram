@@ -5,7 +5,7 @@ export type PostInstanceType = {
   colors?: string[];
   comments?: string[];
   likes: string[];
-  isActive: boolean
+  isActive: boolean;
   $id?: string;
   $collectionId?: string;
   $createdAt?: string;

@@ -4,21 +4,20 @@ import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
 import Image from "next/image";
 import { GitHub, User } from "react-feather";
-import { isLoggedIn } from "@/backend/auth.api";
+import { getCurrentUser } from "@/backend/auth.api";
 import { saveUser } from "@/redux/reducers/authReducer";
 import { Menu, X } from "react-feather";
 import ThemeButton from "@/components/core/themeButton";
 import { ButtonLong } from "@/components/core/buttons";
 import { parseCookies } from "nookies";
+import { toastify } from "@/helper/toastify";
 
-function HomePage() {
+function HomePage({ starCount }: { starCount: number }) {
   const dispatch = useDispatch();
   const cookies = parseCookies();
-  const userIdFromCookies: string = cookies["accountId"];
+  const accountIdFromCookies: string = cookies["accountId"];
 
   const state = useSelector((state: any) => state.auth);
-
-  const [stars, setStars] = useState(0);
 
   const [isMenuOpen, setMenuOpen] = useState(false);
 
@@ -27,29 +26,27 @@ function HomePage() {
   };
 
   useEffect(() => {
-    fetch("https://api.github.com/repos/sanchitbajaj02/palettegram")
-      .then((res) => res.json())
-      .then((res) => {
-        setStars(res.stargazers_count);
-      });
+    if (accountIdFromCookies) {
+      getCurrentUser()
+        .then((resp) => {
+          if (resp) {
+            const payload = {
+              userId: resp["$id"],
+              email: resp["email"],
+              isVerified: resp["emailVerification"],
+              createdAt: resp["$createdAt"],
+            };
 
-    isLoggedIn()
-      .then((resp) => {
-        // console.log(resp);
+            dispatch(saveUser(payload));
+          }
+        })
+        .catch((err) => {
+          console.log(err);
 
-        if (resp) {
-          const payload = {
-            userId: resp["$id"],
-            email: resp["email"],
-            isVerified: resp["emailVerification"],
-            createdAt: resp["$createdAt"],
-          };
-
-          dispatch(saveUser(payload));
-        }
-      })
-      .catch(console.log);
-  }, [dispatch]);
+          toastify(err.message, "error");
+        });
+    }
+  }, [dispatch, accountIdFromCookies]);
 
   return (
     <>
@@ -83,7 +80,7 @@ function HomePage() {
 
             <ButtonLong href="https://github.com/Sanchitbajaj02/palettegram" newTab size="normal">
               <span className="flex items-center">
-                <GitHub size={20} className="mr-2" /> {stars} Stars
+                <GitHub size={20} className="mr-2" /> {starCount} Stars
               </span>
             </ButtonLong>
 
@@ -123,7 +120,7 @@ function HomePage() {
                   rel="noopener noreferrer"
                   className="flex items-center text-sm text-center mx-2 px-6 py-2 rounded-full bg-primary text-white"
                 >
-                  <GitHub size={20} className="mr-4" /> {stars} Stars
+                  <GitHub size={20} className="mr-4" /> {starCount} Stars
                 </Link>
 
                 {!state?.creds.userId && !state?.creds.isVerified && (
@@ -145,7 +142,7 @@ function HomePage() {
                 )}
                 {state?.creds.userId && state?.creds.isVerified && (
                   <Link
-                    href={`/user/${userIdFromCookies}`}
+                    href={`/user/${accountIdFromCookies}`}
                     className="mx-2 px-2 py-2 rounded-full bg-primary text-white"
                   >
                     <User size={22} className="transition-all duration-300 " />
