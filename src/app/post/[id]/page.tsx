@@ -3,6 +3,7 @@
 import SinglePost from "@/components/core/posts/SinglePost";
 import { useEffect, useState } from "react";
 import { getSinglePost } from "@/backend/posts.api";
+import { PostInstanceType } from "@/types";
 
 type Prop = {
   params: {
@@ -10,20 +11,8 @@ type Prop = {
   };
 };
 
-interface postType {
-  accountId: string;
-  postTitle: string;
-  postImages: string[];
-  colors?: string[];
-  comments?: string[];
-  likes: string[];
-  $id?: string;
-  $collectionId?: string;
-  $createdAt?: string;
-}
-
 const PostDisplay = ({ params: { id } }: Prop) => {
-  const [post, setPost] = useState<postType>({
+  const [post, setPost] = useState<PostInstanceType>({
     accountId: "",
     postTitle: "",
     postImages: [],
@@ -33,6 +22,7 @@ const PostDisplay = ({ params: { id } }: Prop) => {
     $collectionId: "",
     $createdAt: "",
     $id: "",
+    isActive: false,
   });
 
   useEffect(() => {
@@ -50,6 +40,7 @@ const PostDisplay = ({ params: { id } }: Prop) => {
             $id: res.$id || "",
             $collectionId: res.$collectionId || "",
             $createdAt: res.$createdAt || "",
+            isActive: res.isActive,
           });
         }
         console.log(res);

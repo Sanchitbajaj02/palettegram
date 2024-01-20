@@ -243,7 +243,7 @@ const isLoggedIn = async (): Promise<any> => {
  */
 const getSingleUser = async (id: string) => {
   try {
-    const tweets = await db.getDocument(palettegramDB, usersCollection, id);
+    const tweets = await db.listDocuments(palettegramDB, usersCollection,[Query.search('accountId', id)]);
     if (!tweets) {
       throw new Error();
     }

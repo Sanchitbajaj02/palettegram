@@ -3,16 +3,16 @@
     {
       "$id": "651d85ea69357206cfe5",
       "name": "PalettegramDB",
-      "$createdAt": "2024-01-14T18:10:45.937+00:00",
-      "$updatedAt": "2024-01-14T18:10:45.937+00:00",
+      "$createdAt": "2024-01-18T05:44:09.544+00:00",
+      "$updatedAt": "2024-01-18T05:44:09.544+00:00",
       "enabled": true
     }
   ],
   "collections": [
     {
       "$id": "651d85ff826413d8f258",
-      "$createdAt": "2024-01-14T18:10:47.177+00:00",
-      "$updatedAt": "2024-01-14T18:10:47.177+00:00",
+      "$createdAt": "2024-01-18T05:44:10.382+00:00",
+      "$updatedAt": "2024-01-18T05:44:10.382+00:00",
       "$permissions": [
         "create(\"users\")",
         "read(\"users\")",
@@ -80,27 +80,7 @@
           "error": "",
           "required": false,
           "array": false,
-          "size": 1000,
-          "default": null
-        },
-        {
-          "key": "bannerURL",
-          "type": "string",
-          "status": "available",
-          "error": "",
-          "required": false,
-          "array": false,
-          "size": 1000,
-          "default": null
-        },
-        {
-          "key": "about",
-          "type": "string",
-          "status": "available",
-          "error": "",
-          "required": false,
-          "array": false,
-          "size": 100,
+          "format": "url",
           "default": null
         },
         {
@@ -110,7 +90,27 @@
           "error": "",
           "required": false,
           "array": false,
-          "size": 1000,
+          "format": "url",
+          "default": null
+        },
+        {
+          "key": "bannerURL",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "format": "url",
+          "default": null
+        },
+        {
+          "key": "about",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "size": 250,
           "default": null
         }
       ],
@@ -120,31 +120,23 @@
           "type": "fulltext",
           "status": "available",
           "error": "",
-          "attributes": [
-            "accountId"
-          ],
-          "orders": [
-            "ASC"
-          ]
+          "attributes": ["accountId"],
+          "orders": ["ASC"]
         },
         {
           "key": "idx_username",
           "type": "fulltext",
           "status": "available",
           "error": "",
-          "attributes": [
-            "username"
-          ],
-          "orders": [
-            "ASC"
-          ]
+          "attributes": ["username"],
+          "orders": ["ASC"]
         }
       ]
     },
     {
       "$id": "651d86daa59be4aad058",
-      "$createdAt": "2024-01-14T18:10:54.134+00:00",
-      "$updatedAt": "2024-01-14T18:10:54.134+00:00",
+      "$createdAt": "2024-01-18T05:44:13.908+00:00",
+      "$updatedAt": "2024-01-18T05:44:13.908+00:00",
       "$permissions": [
         "create(\"users\")",
         "read(\"users\")",
@@ -232,19 +224,15 @@
           "type": "fulltext",
           "status": "available",
           "error": "",
-          "attributes": [
-            "accountId"
-          ],
-          "orders": [
-            "ASC"
-          ]
+          "attributes": ["accountId"],
+          "orders": ["ASC"]
         }
       ]
     },
     {
       "$id": "6559b707984a4f046a08",
-      "$createdAt": "2024-01-14T18:10:59.881+00:00",
-      "$updatedAt": "2024-01-14T18:10:59.881+00:00",
+      "$createdAt": "2024-01-18T05:44:16.480+00:00",
+      "$updatedAt": "2024-01-18T05:44:16.480+00:00",
       "$permissions": [
         "create(\"users\")",
         "read(\"users\")",
@@ -283,12 +271,8 @@
           "type": "fulltext",
           "status": "available",
           "error": "",
-          "attributes": [
-            "accountId"
-          ],
-          "orders": [
-            "ASC"
-          ]
+          "attributes": ["accountId"],
+          "orders": ["ASC"]
         }
       ]
     }
@@ -296,8 +280,8 @@
   "buckets": [
     {
       "$id": "65a27126f17d920bff46",
-      "$createdAt": "2024-01-14T18:11:02.459+00:00",
-      "$updatedAt": "2024-01-14T18:11:02.459+00:00",
+      "$createdAt": "2024-01-18T05:44:17.851+00:00",
+      "$updatedAt": "2024-01-18T05:44:17.851+00:00",
       "$permissions": [],
       "fileSecurity": false,
       "name": "bucky",

@@ -1,3 +1,5 @@
+import { Url } from "next/dist/shared/lib/router/router";
+
 export type PostInstanceType = {
   accountId: string;
   postTitle: string;
@@ -5,7 +7,7 @@ export type PostInstanceType = {
   colors?: string[];
   comments?: string[];
   likes: string[];
-  isActive: boolean
+  isActive: boolean;
   $id?: string;
   $collectionId?: string;
   $createdAt?: string;
@@ -37,4 +39,22 @@ export type BookmarkInitType = {
   data: Bookmark[];
   error: boolean;
   loading: boolean;
+};
+
+export type UserFromDB = {
+  documents: [
+    {
+      accountId: string;
+      username: string;
+      fullName: string;
+      email: string;
+      isVerified: boolean;
+      about: string | null;
+      userLink: string | null;
+      avatarURL: string | null;
+      bannerURL: string | null;
+      createdAt: Date;
+      updatedAt: Date;
+    },
+  ];
 };
