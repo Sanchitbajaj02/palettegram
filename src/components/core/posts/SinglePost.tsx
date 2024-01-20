@@ -137,19 +137,17 @@ export default function SinglePost({
     console.log("comment");
   };
 
-  const uploadComment = async (id: string, comment_message: string) => {
+  const uploadComment = async (id: string | undefined, comment_message: string) => {
     const previousComments = singlePost.comments;
     try {
-
-      if (previousComments === undefined) return;
+      if (previousComments === undefined || !id) return;
       const Comments = [...previousComments, comment_message];
       const res = await addComment(id, Comments);
       setCommentCount(res?.comments.length || singlePost?.comments?.length);
-      toastify('Comment added successfully', "success")
+      toastify("Comment added successfully", "success");
     } catch (error) {
       console.log(error);
-      toastify('Comment cannot be added', 'error')
-
+      toastify("Comment cannot be added", "error");
     }
   };
 
@@ -159,10 +157,11 @@ export default function SinglePost({
 
   return (
     <div
-      className={` ${width
+      className={` ${
+        width
           ? "w-96 p-3 m-auto  rounded-md shadow dark:shadow-gray-600 mb-4 mt-40 "
           : "p-3  rounded-md shadow dark:shadow-gray-600 mb-4"
-        } `}
+      } `}
     >
       <Link
         className="flex items-center gap-3 mb-3"
@@ -218,18 +217,20 @@ export default function SinglePost({
       <div className="flex justify-around">
         <article
           onClick={() => onLikeClick(singlePost)}
-          className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${singlePost?.likes && singlePost?.likes.includes(authState?.userId)
+          className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${
+            singlePost?.likes && singlePost?.likes.includes(authState?.userId)
               ? "text-primary hover:text-primary"
               : "text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
-            }`}
+          }`}
         >
           <Heart
             size={22}
             fill="true"
-            className={`${singlePost?.likes && singlePost?.likes.includes(authState?.userId)
+            className={`${
+              singlePost?.likes && singlePost?.likes.includes(authState?.userId)
                 ? "fill-primary"
                 : "fill-transparent"
-              }`}
+            }`}
           />
           <span className="text-base">
             {singlePost && singlePost?.likes && singlePost?.likes.length}
@@ -246,24 +247,26 @@ export default function SinglePost({
 
         <article
           onClick={() => handleUpdateBookmark(singlePost?.$id)}
-          className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${userBookmarks &&
-              userBookmarks?.bookmark &&
-              userBookmarks?.bookmark?.length > 0 &&
-              userBookmarks?.bookmark.includes(singlePost && singlePost?.$id!)
+          className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${
+            userBookmarks &&
+            userBookmarks?.bookmark &&
+            userBookmarks?.bookmark?.length > 0 &&
+            userBookmarks?.bookmark.includes(singlePost && singlePost?.$id!)
               ? "text-primary hover:text-primary dark:hover:text-primary"
               : "text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
-            }`}
+          }`}
         >
           <Bookmark
             size={22}
             fill="true"
-            className={`${userBookmarks &&
-                userBookmarks?.bookmark &&
-                userBookmarks?.bookmark?.length > 0 &&
-                userBookmarks?.bookmark.includes(singlePost && singlePost?.$id!)
+            className={`${
+              userBookmarks &&
+              userBookmarks?.bookmark &&
+              userBookmarks?.bookmark?.length > 0 &&
+              userBookmarks?.bookmark.includes(singlePost && singlePost?.$id!)
                 ? "fill-primary"
                 : "fill-transparent"
-              }`}
+            }`}
           />
         </article>
 
@@ -287,14 +290,14 @@ export default function SinglePost({
               cols={50}
               placeholder="Type your comment here"
               onKeyDown={(e) => {
-                if (isCtrlEnter(e)) uploadComment(singlePost.$id, comment_message);
+                if (isCtrlEnter(e)) uploadComment(singlePost && singlePost?.$id, comment_message);
               }}
             />
           </div>
           <div className="flex flex-end">
             <button
               onClick={() => {
-                uploadComment(singlePost.$id, comment_message);
+                uploadComment(singlePost && singlePost?.$id, comment_message);
               }}
               className="transition-all duration-300 bg-primary hover:bg-primary-light text-white font-normal py-1 px-8 rounded-full"
             >
