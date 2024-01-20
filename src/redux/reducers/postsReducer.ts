@@ -2,6 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { PostInstanceType, PostInitStateType } from "@/types/index.d";
+import { ACTION } from "next/dist/client/components/app-router-headers";
 
 const initialState: PostInitStateType = {
   posts: [],
@@ -54,9 +55,15 @@ export const postsReducer = createSlice({
 
       state.loading = false;
     },
+    removeUserPost: (state, action: PayloadAction<string>) => {
+      state.loading = true
+      state.posts = state.posts.filter((post: PostInstanceType) => post.$id != action.payload)
+      state.error = false;
+      state.loading = false;
+    }
   },
 });
 
-export const { getPosts, addPost, addLikesToAPost } = postsReducer.actions;
+export const { getPosts, addPost, addLikesToAPost, removeUserPost } = postsReducer.actions;
 
 export default postsReducer.reducer;
