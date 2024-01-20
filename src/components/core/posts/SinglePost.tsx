@@ -137,10 +137,10 @@ export default function SinglePost({
     console.log("comment");
   };
 
-  const uploadComment = async (id: string, comment_message: string) => {
+  const uploadComment = async (id: string | undefined, comment_message: string) => {
     const previousComments = singlePost.comments;
     try {
-      if (previousComments === undefined) return;
+      if (previousComments === undefined || !id) return;
       const Comments = [...previousComments, comment_message];
       const res = await addComment(id, Comments);
       setCommentCount(res?.comments.length || singlePost?.comments?.length);
@@ -290,14 +290,14 @@ export default function SinglePost({
               cols={50}
               placeholder="Type your comment here"
               onKeyDown={(e) => {
-                if (isCtrlEnter(e)) uploadComment(singlePost.$id, comment_message);
+                if (isCtrlEnter(e)) uploadComment(singlePost && singlePost?.$id, comment_message);
               }}
             />
           </div>
           <div className="flex flex-end">
             <button
               onClick={() => {
-                uploadComment(singlePost.$id, comment_message);
+                uploadComment(singlePost && singlePost?.$id, comment_message);
               }}
               className="transition-all duration-300 bg-primary hover:bg-primary-light text-white font-normal py-1 px-8 rounded-full"
             >

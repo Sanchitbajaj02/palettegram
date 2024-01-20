@@ -1,21 +1,20 @@
 "use client";
 import { useEffect, useState } from "react";
-import UserPosts from "./userPosts";
-import { getCurrentUser } from "@/backend/auth.api";
+import { Briefcase, Link2, Mail, MapPin, Smile } from "react-feather";
+import Image from "next/image";
 import Link from "next/link";
-import { Bookmark, Briefcase, Link2, Mail, MapPin, ShoppingBag, Smile, Users } from "react-feather";
+
+import { UserFromDB } from "@/types";
+import { getSingleUser } from "@/backend/auth.api";
+
 import TrendingFeed from "@/components/core/trendingFeed";
 import Footer from "@/components/core/footer";
-import Image from "next/image";
+import UserPosts from "./userPosts";
 
 export default function User({ userId }: { userId: string }) {
-  const [user, setUser] = useState({
-    email: "",
-    name: "",
-  });
-
+  const [user, setUser] = useState<UserFromDB>();
   useEffect(() => {
-    getCurrentUser()
+    getSingleUser(userId)
       .then((resp: any) => {
         setUser(resp);
       })
@@ -44,11 +43,7 @@ export default function User({ userId }: { userId: string }) {
                 className=" border-4 border-white dark:border-slate-800 rounded-full object-contain "
               />
               <div className="h-fit flex gap-4">
-                <Mail
-                  // size={40}
-                  className="h-7 w-7 sm:h-9 sm:w-9  border-2 p-1 rounded-full text-neutral-700 dark:text-neutral-400 border-neutral-700 dark:border-neutral-400"
-                />
-
+                <Mail className="h-7 w-7 sm:h-9 sm:w-9  border-2 p-1 rounded-full text-neutral-700 dark:text-neutral-400 border-neutral-700 dark:border-neutral-400" />
                 <button className="text-white text-sm sm:text-xl bg-primary rounded-3xl px-6 py-1">
                   follow
                 </button>
@@ -57,10 +52,10 @@ export default function User({ userId }: { userId: string }) {
             <div className="">
               <div className="py-2">
                 <h1 className="text-2xl font-bold text-black dark:text-white">
-                  {user && user?.name}
+                  {user && user?.documents[0].fullName}
                 </h1>
                 <h1 className="text-sm text-neutral-900 dark:text-neutral-200">
-                  {user && user?.email}
+                  {user && user?.documents[0].email}
                 </h1>
               </div>
 
@@ -77,21 +72,22 @@ export default function User({ userId }: { userId: string }) {
                 </aside>
                 <aside className="flex items-center gap-1">
                   <Link2 size={12} />
-                  <p>htps://www.google.com</p>
+                  <Link href={"/#link"} className="hover:underline">
+                    https://www.google.com
+                  </Link>
                 </aside>
                 <aside className="flex items-center gap-1">
                   <Smile size={12} />
-                  <p>{"Born 1 Jan 2001"}</p>
+                  <p>Joined on {"8 jan 2012"}</p>
                 </aside>
               </div>
             </div>
           </section>
 
-          <div className="h-px w-full mt-6 bg-neutral-400" />
+          <div className="h-px w-full mt-6 bg-neutral-500 rounded-2xl" />
 
-          <UserPosts userName={user.name} userId={userId} />
+          <UserPosts userName={user! && user?.documents[0].fullName!} userId={userId} />
         </section>
-
         <div className="flex-[2] hidden md:block rounded-md">
           <TrendingFeed />
         </div>
