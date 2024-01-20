@@ -43,9 +43,7 @@ export default function User({ userId }: { userId: string }) {
                 className=" border-4 border-white dark:border-slate-800 rounded-full object-contain "
               />
               <div className="h-fit flex gap-4">
-                <Mail
-                  className="h-7 w-7 sm:h-9 sm:w-9  border-2 p-1 rounded-full text-neutral-700 dark:text-neutral-400 border-neutral-700 dark:border-neutral-400"
-                />
+                <Mail className="h-7 w-7 sm:h-9 sm:w-9  border-2 p-1 rounded-full text-neutral-700 dark:text-neutral-400 border-neutral-700 dark:border-neutral-400" />
                 <button className="text-white text-sm sm:text-xl bg-primary rounded-3xl px-6 py-1">
                   follow
                 </button>
@@ -74,7 +72,7 @@ export default function User({ userId }: { userId: string }) {
                 </aside>
                 <aside className="flex items-center gap-1">
                   <Link2 size={12} />
-                  <Link href={'/#link'} className="hover:underline">
+                  <Link href={"/#link"} className="hover:underline">
                     https://www.google.com
                   </Link>
                 </aside>
@@ -87,12 +85,12 @@ export default function User({ userId }: { userId: string }) {
           </section>
 
           <div className="h-px w-full mt-6 bg-neutral-500 rounded-2xl" />
-          
+
           <UserPosts userName={user! && user?.documents[0].fullName!} userId={userId} />
         </section>
-          <div className="flex-[2] hidden md:block rounded-md">
-            <TrendingFeed />
-          </div>
+        <div className="flex-[2] hidden md:block rounded-md">
+          <TrendingFeed />
+        </div>
       </main>
       <Footer />
     </>

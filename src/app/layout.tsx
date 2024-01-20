@@ -1,16 +1,10 @@
 import "@/styles/globals.css";
-import { Inter, Poppins } from "next/font/google";
+import { Poppins } from "next/font/google";
 import { Metadata } from "next";
 import ReduxProvider from "@/redux/ReduxProvider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Providers } from "./providers";
-
-// const interFont = Inter({
-//   subsets: ["latin"],
-//   weight: ["400", "500", "600", "700", "800", "900"],
-//   variable: "--font-inter",
-// });
 
 const poppinsFont = Poppins({
   subsets: ["latin"],
@@ -20,7 +14,7 @@ const poppinsFont = Poppins({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://palettegram.vercel.app"),
-  title: "Palettegram - social media for professionals",
+  title: "Palettegram - Social Media for Professionals",
   description:
     "Palettegram is a social media application dedicated to professionals like graphic designers, UI/UX designers, Developers, etc. to leverage UI designs, design ideas, UX approaches and color palettes.",
 
@@ -35,8 +29,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://palettegram.vercel.app",
-    siteName: "Palettegram - social media for professionals",
-    title: "Palettegram - social media for professionals",
+    siteName: "Palettegram - Social Media for Professionals",
+    title: "Palettegram - Social Media for Professionals",
     description:
       "Palettegram is a social media application dedicated to professionals like graphic designers, UI/UX designers, Developers, etc. to leverage UI designs, design ideas, UX approaches and color palettes.",
     images: [
@@ -67,7 +61,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           pauseOnHover={false}
           theme="colored"
         />
-
         <Providers>
           <ReduxProvider>{children}</ReduxProvider>
         </Providers>

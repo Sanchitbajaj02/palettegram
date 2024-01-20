@@ -12,7 +12,7 @@ import Footer from "@/components/core/footer";
 
 const Feed = () => {
   const cookies = parseCookies();
-  const userIdFromCookies: string = cookies["userId"];
+  const userIdFromCookies: string = cookies["accountId"];
 
   return (
     <>

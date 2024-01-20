@@ -85,7 +85,7 @@ export default function SinglePost({
   const handleUpdateBookmark = async (postId: string | undefined) => {
     if (postId) {
       const cookies = parseCookies();
-      const accountId: string = cookies["userId"];
+      const accountId: string = cookies["accountId"];
       if (Array.isArray(userBookmarks.bookmark)) {
         if (userBookmarks.bookmark.some((current: string) => current === postId)) {
           // console.log(accountId, "remove bookmark");

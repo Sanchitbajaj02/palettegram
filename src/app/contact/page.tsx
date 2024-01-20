@@ -4,10 +4,11 @@ import Navbar from "@/components/core/navbar";
 import { toastify } from "@/helper/toastify";
 import { FormEvent, useState } from "react";
 
-const contact = () => {
+export default function Contact() {
   const [message, setmessage] = useState("");
   const [email, setemail] = useState("");
   const [ispending, setpending] = useState(false);
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
@@ -85,6 +86,4 @@ const contact = () => {
       </div>
     </>
   );
-};
-
-export default contact;
+}

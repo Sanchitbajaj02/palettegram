@@ -7,12 +7,11 @@ export async function POST(request: any) {
   const daata = await request.json();
   const { email, message } = daata;
 
-  
   try {
     const data = await resend.emails.send({
       from: "Palettegram <onboarding@resend.dev>",
-      to:`${process.env.CONTACT_EMAIL_ID}`,
-      subject:"Contact Form",
+      to: `${process.env.CONTACT_EMAIL_ID}`,
+      subject: "Contact Form",
       text: message as string,
       reply_to: email,
     });

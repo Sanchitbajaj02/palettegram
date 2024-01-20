@@ -56,11 +56,11 @@ export const postsReducer = createSlice({
       state.loading = false;
     },
     removeUserPost: (state, action: PayloadAction<string>) => {
-      state.loading = true
-      state.posts = state.posts.filter((post: PostInstanceType) => post.$id != action.payload)
+      state.loading = true;
+      state.posts = state.posts.filter((post: PostInstanceType) => post.$id != action.payload);
       state.error = false;
       state.loading = false;
-    }
+    },
   },
 });
 

@@ -178,11 +178,9 @@ const updatepassword = async (userData: any) => {
 const getCurrentUser = async () => {
   try {
     return account.get();
-  } catch (error) {
-    console.log("get current user error:", error);
+  } catch (error: any) {
+    throw new Error(error.message);
   }
-
-  return null;
 };
 
 /**
@@ -221,29 +219,15 @@ const saveDataToDatabase = async (session: any) => {
 };
 
 /**
- * **Work**: Returns the status of the user
- * @returns {boolean} loggedin response
- */
-const isLoggedIn = async (): Promise<any> => {
-  try {
-    const loggedIn = await getCurrentUser();
-
-    return loggedIn;
-  } catch (error) {
-    console.log(error);
-  }
-
-  return false;
-};
-
-/**
  * @description get single user data based on account id
  * @param id
  * @returns
  */
 const getSingleUser = async (id: string) => {
   try {
-    const tweets = await db.listDocuments(palettegramDB, usersCollection,[Query.search('accountId', id)]);
+    const tweets = await db.listDocuments(palettegramDB, usersCollection, [
+      Query.search("accountId", id),
+    ]);
     if (!tweets) {
       throw new Error();
     }
@@ -286,7 +270,6 @@ export {
   verifyUser,
   loginUser,
   logoutUser,
-  isLoggedIn,
   getSingleUser,
   getCurrentUser,
   forgotpassword,
