@@ -225,7 +225,9 @@ const saveDataToDatabase = async (session: any) => {
  */
 const getSingleUser = async (id: string) => {
   try {
-    const tweets = await db.listDocuments(palettegramDB, usersCollection,[Query.search('accountId', id)]);
+    const tweets = await db.listDocuments(palettegramDB, usersCollection, [
+      Query.search("accountId", id),
+    ]);
     if (!tweets) {
       throw new Error();
     }
