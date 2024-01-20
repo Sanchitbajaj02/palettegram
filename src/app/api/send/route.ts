@@ -1,23 +1,43 @@
+import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
+
+import Template from "../../../components/pages/EmailTemplate/index";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function POST(request: any) {
-  // Getting data from the form
-  const daata = await request.json();
-  const { email, message } = daata;
-
+export async function POST(request: NextRequest) {
   try {
+    const { email, subject, message } = await request.json();
+
+    if (!email || !subject || !message) {
+      return NextResponse.json(
+        {
+          message: "Data missing",
+        },
+        {
+          status: 400,
+        },
+      );
+    }
+
     const data = await resend.emails.send({
-      from: "Palettegram <onboarding@resend.dev>",
-      to: `${process.env.CONTACT_EMAIL_ID}`,
-      subject: "Contact Form",
-      text: message as string,
-      reply_to: email,
+      from: "Support <onboarding@resend.dev>",
+      to: [process.env.CONTACT_EMAIL_ID!],
+      subject: `Palettegram Support | ${subject}`,
+      react: Template({ email, message }),
     });
 
-    return Response.json(data);
+    return NextResponse.json(data, {
+      status: 200,
+    });
   } catch (error) {
-    return Response.json({ error });
+    console.log(error);
+
+    return NextResponse.json(
+      { error },
+      {
+        status: 400,
+      },
+    );
   }
 }
