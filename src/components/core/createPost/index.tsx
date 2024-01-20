@@ -78,7 +78,7 @@ const CreatePost = () => {
 
     // console.log(postTitle);
     // console.log(imageStorage);
-    // console.log(cookies["userId"]);
+    // console.log(cookies["accountId"]);
 
     try {
       let imageURL: string = "";
@@ -93,7 +93,7 @@ const CreatePost = () => {
         imageURL = getImageUrl(getFileObject["$id"])!;
       }
 
-      const userIdFromCookies: string = cookies["userId"];
+      const userIdFromCookies: string = cookies["accountId"];
       const imageArray = [imageURL];
       //console.log(imageArray);
 
@@ -122,7 +122,6 @@ const CreatePost = () => {
         file: null,
       });
 
-
       // state resetters
     } catch (error) {
       console.log(error);
@@ -141,8 +140,7 @@ const CreatePost = () => {
     if (fileObj.size > 1000000) {
       toastify("Image size should be less than 1MB", "error");
       return;
-    }
-    else {
+    } else {
       reader.onload = () => {
         if (reader.readyState === 2) {
           setimageStorage((prev: any) => {

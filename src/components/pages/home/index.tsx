@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { GitHub, User } from "react-feather";
@@ -13,10 +12,9 @@ import { ButtonLong } from "@/components/core/buttons";
 import { parseCookies } from "nookies";
 
 function HomePage() {
-  const router = useRouter();
   const dispatch = useDispatch();
   const cookies = parseCookies();
-  const userIdFromCookies: string = cookies["userId"];
+  const userIdFromCookies: string = cookies["accountId"];
 
   const state = useSelector((state: any) => state.auth);
 

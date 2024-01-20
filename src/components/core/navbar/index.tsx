@@ -25,7 +25,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const cookies = parseCookies();
 
-  const userIdFromCookies: string = cookies["userId"];
+  const userIdFromCookies: string = cookies["accountId"];
 
   const logout = async () => {
     await logoutUser();
