@@ -52,10 +52,10 @@ export default function User({ userId }: { userId: string }) {
             <div className="">
               <div className="py-2">
                 <h1 className="text-2xl font-bold text-black dark:text-white">
-                  {user && user?.documents[0].fullName}
+                  {user && user?.documents[0]?.fullName}
                 </h1>
                 <h1 className="text-sm text-neutral-900 dark:text-neutral-200">
-                  {user && user?.documents[0].email}
+                  {user && user?.documents[0]?.email}
                 </h1>
               </div>
 
@@ -86,7 +86,7 @@ export default function User({ userId }: { userId: string }) {
 
           <div className="h-px w-full mt-6 bg-neutral-500 rounded-2xl" />
 
-          <UserPosts userName={user! && user?.documents[0].fullName!} userId={userId} />
+          <UserPosts userName={user! && user?.documents[0]?.fullName!} userId={userId} />
         </section>
         <div className="flex-[2] hidden md:block rounded-md">
           <TrendingFeed />

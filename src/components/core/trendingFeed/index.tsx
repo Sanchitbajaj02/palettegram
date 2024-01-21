@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { trendingPosts } from "@/backend/trendingPosts.dummy";
+import { motion } from "framer-motion";
 
 export default function TrendingFeed() {
   return (
@@ -15,16 +16,53 @@ export default function TrendingFeed() {
                 className="block max-w-md shadow border-b border-gray-600 mb-3 p-2"
                 key={index}
               >
-                <div className="flex flex-row gap-3 items-center mb-2">
+                <motion.div
+                  initial={{ opacity: 0, x: 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.3,
+                    type: "spring",
+                    stiffness: 110,
+                    delay: (index % 4) * 0.3 + 0.5,
+                  }}
+                  className="flex flex-row gap-3 items-center mb-2"
+                >
                   <Image src="/assets/user.png" alt="user" width={36} height={36} />
                   <p className="text-black dark:text-white font-normal text-base">
                     {element.username}
                   </p>
-                </div>
+                </motion.div>
 
-                <p className="mb-2">{element.caption}</p>
+                <motion.p
+                  initial={{ opacity: 0, x: 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.3,
+                    type: "spring",
+                    stiffness: 110,
+                    delay: (index % 4) * 0.4 + 0.6,
+                  }}
+                  className="mb-2"
+                >
+                  {element.caption}
+                </motion.p>
 
-                <p className="text-sm text-secondary-light dark:text-primary-light">Read more...</p>
+                <motion.p
+                  initial={{ opacity: 0, x: 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.3,
+                    type: "spring",
+                    stiffness: 110,
+                    delay: (index % 4) * 0.6 + 0.8,
+                  }}
+                  className="text-sm text-secondary-light dark:text-primary-light"
+                >
+                  Read more...
+                </motion.p>
               </Link>
             );
           })}
