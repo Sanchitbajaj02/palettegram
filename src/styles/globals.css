@@ -44,3 +44,25 @@ body {
     box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
   }
 }
+
+/* floating animated image */
+@keyframes floating {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(0, 8px);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.floating-image {
+  animation-name: floating;
+  animation-duration: 3s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}

@@ -22,13 +22,13 @@ export const registerReducer = createSlice({
     saveUser: (state, action: PayloadAction<any>) => {
       state.loading = true;
       state.creds = action.payload;
-      setCookie(null, "userId", action.payload.userId);
+      setCookie(null, "accountId", action.payload.userId);
       state.error = false;
       state.loading = false;
     },
     logUserOut: (state) => {
       state.loading = true;
-      setCookie(null, "userId", "");
+      setCookie(null, "accountId", "");
       state.error = false;
       state.creds.userId = "";
       state.creds.email = "";
