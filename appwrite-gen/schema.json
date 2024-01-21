@@ -273,8 +273,107 @@
           "error": "",
           "attributes": ["accountId"],
           "orders": ["ASC"]
+        },
+        {
+          "key": "idx_bookmark",
+          "type": "fulltext",
+          "status": "available",
+          "error": "",
+          "attributes": ["bookmark"],
+          "orders": ["ASC"]
         }
       ]
+    },
+    {
+      "$id": "65acb78f522ef1f69f60",
+      "$createdAt": "2024-01-14T18:10:47.177+00:00",
+      "$updatedAt": "2024-01-14T18:10:47.177+00:00",
+      "$permissions": [
+        "create(\"users\")",
+        "read(\"users\")",
+        "update(\"users\")",
+        "delete(\"users\")"
+      ],
+      "databaseId": "651d85ea69357206cfe5",
+      "name": "likes",
+      "enabled": true,
+      "documentSecurity": false,
+      "attributes": [
+        {
+          "key": "postId",
+          "type": "relationship",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "relatedCollection": "651d86daa59be4aad058",
+          "relationType": "oneToOne",
+          "twoWay": false,
+          "twoWayKey": "65acb78f522ef1f69f60",
+          "onDelete": "cascade",
+          "side": "parent"
+        },
+        {
+          "key": "likeCount",
+          "type": "integer",
+          "status": "available",
+          "error": "",
+          "required": true,
+          "array": false,
+          "min": 0,
+          "max": 20000,
+          "default": null
+        }
+      ],
+      "indexes": []
+    },
+    {
+      "$id": "65acb888874a695c8012",
+      "$createdAt": "2024-01-14T18:10:54.134+00:00",
+      "$updatedAt": "2024-01-14T18:10:54.134+00:00",
+      "$permissions": [
+        "create(\"users\")",
+        "read(\"users\")",
+        "update(\"users\")",
+        "delete(\"users\")"
+      ],
+      "databaseId": "651d85ea69357206cfe5",
+      "name": "contacts",
+      "enabled": true,
+      "documentSecurity": false,
+      "attributes": [
+        {
+          "key": "subject",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": true,
+          "array": false,
+          "size": 100,
+          "default": null
+        },
+        {
+          "key": "message",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": true,
+          "array": false,
+          "size": 1000,
+          "default": null
+        },
+        {
+          "key": "email",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": true,
+          "array": false,
+          "format": "email",
+          "default": null
+        }
+      ],
+      "indexes": []
     }
   ],
   "buckets": [
