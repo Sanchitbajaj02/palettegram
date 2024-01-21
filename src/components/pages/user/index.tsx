@@ -35,13 +35,13 @@ export default function User({ userId }: { userId: string }) {
           </div>
           <section className="-mt-20 px-3">
             <div className="flex justify-between items-end ">
-              <Image
-                src="/assets/user.png"
-                alt="user"
-                width={125}
-                height={125}
-                className=" border-4 border-white dark:border-slate-800 rounded-full object-contain "
-              />
+            <Image
+    src={user && user?.documents[0].avatarURL}
+    alt="user"
+    width={125}
+    height={125}
+    className="border-4 border-white dark:border-slate-800 rounded-full object-contain "
+  />
               <div className="h-fit flex gap-4">
                 <Mail className="h-7 w-7 sm:h-9 sm:w-9  border-2 p-1 rounded-full text-neutral-700 dark:text-neutral-400 border-neutral-700 dark:border-neutral-400" />
                 <button className="text-white text-sm sm:text-xl bg-primary rounded-3xl px-6 py-1">

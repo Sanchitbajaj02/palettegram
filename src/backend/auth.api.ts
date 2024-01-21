@@ -1,6 +1,7 @@
 "use client";
 
 import { account, db, ID, palettegramDB, usersCollection, Query } from "./appwrite.config";
+import { generateAvatar } from './avatarGenerator';
 
 /**
  * @description Register the user into the database
@@ -18,6 +19,7 @@ const registerUser = async (userData: any) => {
     if (!passwordRegex.test(userData.password)) {
       throw Error("password is not strong");
     }
+    const avatar = generateAvatar(userData.fullName);
     const authResponse = await account.create(
       ID.unique(),
       userData.email,
@@ -200,12 +202,14 @@ const saveDataToDatabase = async (session: any) => {
   try {
     let username = session.email.split("@")[0];
     console.log(username);
+    const avatar = generateAvatar(session.name);
     const resp = await db.createDocument(palettegramDB, usersCollection, ID.unique(), {
       email: session.email,
       fullName: session.name,
       isVerified: session.emailVerification,
       accountId: session.$id,
       username: username,
+      avatarURL: avatar, 
     });
     if (!resp) {
       throw new Error("Database not working");
