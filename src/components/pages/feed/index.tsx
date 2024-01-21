@@ -1,5 +1,5 @@
 "use client";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
 import { User, Bookmark } from "react-feather";
 import { parseCookies } from "nookies";
@@ -10,10 +10,28 @@ import Posts from "@/components/core/posts";
 import TrendingFeed from "@/components/core/trendingFeed";
 import Footer from "@/components/core/footer";
 import { motion } from "framer-motion";
+import { getCurrentUser } from "@/backend/auth.api";
+import { useRouter } from "next/navigation";
 
 const Feed = () => {
+  const router = useRouter()
+  const [user, setUser] = useState({
+    emailVerification: undefined
+  });
   const cookies = parseCookies();
   const userIdFromCookies: string = cookies["accountId"];
+
+  useEffect(() => {
+    getCurrentUser()
+      .then((resp: any) => {
+        setUser(resp);
+      })
+      .catch(console.log);
+  }, []);
+  console.log(user.emailVerification)
+  if(user.emailVerification === false){
+    router.push('/verify')
+  }
 
   return (
     <>
