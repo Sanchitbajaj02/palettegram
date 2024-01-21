@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import Link from "next/link";
 import { ArrowLeftCircle, Loader } from "react-feather";
 import { useRouter } from "next/navigation";
-
+import { motion } from "framer-motion";
 // Components
 import { saveUser } from "@/redux/reducers/authReducer";
 import { toastify } from "@/helper/toastify";
@@ -76,7 +76,13 @@ export default function RegisterComponent() {
 
   return (
     <>
-      <section className="max-w-screen-sm mx-auto h-screen flex justify-center items-center">
+      <motion.section
+        initial={{ opacity: 0, y: -350 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.1, type: "spring", stiffness: 110 }}
+        className="max-w-screen-sm mx-auto h-screen flex justify-center items-center"
+      >
         <div className="card">
           <article className="mb-8">
             <ArrowLeftCircle
@@ -84,16 +90,34 @@ export default function RegisterComponent() {
               onClick={() => router.back()}
               className="hover:cursor-pointer text-secondary dark:text-white"
             />
-            <h1 className="text-xl md:text-3xl mb-2 text-center font-bold text-secondary dark:text-white">
+            <motion.h1
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.1, type: "spring", stiffness: 110, delay: 0.5 }}
+              className="text-xl md:text-3xl mb-2 text-center font-bold text-secondary dark:text-white"
+            >
               Welcome to Palettegram
-            </h1>
-            <p className="text-base md:text-xl text-center font-normal text-secondary-light dark:text-gray-50">
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.1, type: "spring", stiffness: 110, delay: 0.7 }}
+              className="text-base md:text-xl text-center font-normal text-secondary-light dark:text-gray-50"
+            >
               Register and be a part of the amazing community
-            </p>
+            </motion.p>
           </article>
 
           <form method="POST" onSubmit={submitHander}>
-            <div className="mb-6">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.1, type: "spring", stiffness: 110, delay: 0.9 }}
+              className="mb-6"
+            >
               <label
                 htmlFor="fullName"
                 aria-required="true"
@@ -110,9 +134,15 @@ export default function RegisterComponent() {
                 placeholder="Enter your full name"
                 className="w-full rounded-md bg-white py-2 px-4 text-sm md:text-base font-medium text-secondary outline-none border border-white focus:border-secondary-light dark:border-secondary-light dark:focus:border-white"
               />
-            </div>
+            </motion.div>
 
-            <div className="mb-6">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.1, type: "spring", stiffness: 110, delay: 1.1 }}
+              className="mb-6"
+            >
               <label
                 htmlFor="email"
                 aria-required="true"
@@ -129,9 +159,15 @@ export default function RegisterComponent() {
                 placeholder="Enter your email address"
                 className="w-full rounded-md bg-white py-2 px-4 text-sm md:text-base font-medium text-secondary outline-none border border-white focus:border-secondary-light dark:border-secondary-light dark:focus:border-white"
               />
-            </div>
+            </motion.div>
 
-            <div className="mb-6">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.1, type: "spring", stiffness: 110, delay: 1.3 }}
+              className="mb-6"
+            >
               <label
                 htmlFor="password"
                 aria-required="true"
@@ -167,9 +203,15 @@ export default function RegisterComponent() {
                   </button>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="mb-6">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.1, type: "spring", stiffness: 110, delay: 1.5 }}
+              className="mb-6"
+            >
               <label
                 htmlFor="confirmpassword"
                 aria-required="true"
@@ -186,9 +228,15 @@ export default function RegisterComponent() {
                 placeholder="Re-enter your password"
                 className="w-full rounded-md bg-white py-2 px-4 text-sm md:text-base font-medium text-secondary outline-none border border-white focus:border-secondary-light dark:border-secondary-light dark:focus:border-white"
               />
-            </div>
+            </motion.div>
 
-            <div className="mb-6">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.1, type: "spring", stiffness: 110, delay: 1.7 }}
+              className="mb-6"
+            >
               <p className="text-sm text-secondary-light dark:text-gray-50">
                 Already have an account?{" "}
                 <Link
@@ -198,9 +246,15 @@ export default function RegisterComponent() {
                   Login
                 </Link>
               </p>
-            </div>
+            </motion.div>
 
-            <div className="mb-4">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.1, type: "spring", stiffness: 110, delay: 1.9 }}
+              className="mb-4"
+            >
               <button
                 type="submit"
                 className="w-full py-2 text-sm md:text-base rounded-full text-white bg-primary transition duration-300 ease hover:bg-secondary"
@@ -212,10 +266,10 @@ export default function RegisterComponent() {
                   <p>Register Now</p>
                 )}
               </button>
-            </div>
+            </motion.div>
           </form>
         </div>
-      </section>
+      </motion.section>
     </>
   );
 }

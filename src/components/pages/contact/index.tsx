@@ -46,61 +46,93 @@ export default function Contact() {
   };
 
   return (
-    <>
+    <div className="overflow-hidden">
       <Navbar />
+      <section className="max-w-screen-sm mx-auto h-70vh mt-4 flex justify-center items-center">
+        <div className="card">
+          <article className="mb-3">
+            <h1 className="text-xl md:text-3xl mb-2 text-center font-bold text-secondary dark:text-white">
+              Contact Us
+            </h1>
+          </article>
 
-      <div className="flex items-center justify-center flex-col">
-        <h1 className="font-bold text-3xl mt-5"> Contact Us</h1>
-        <form
-          className="mt-10 mb-10 flex flex-col items-center justify-center"
-          onSubmit={handleSubmit}
-        >
-          <input
-            required
-            type="email"
-            name="email"
-            placeholder="Your Email"
-            className=" p-4 w-[60vh] h-10 rounded-2xl  dark:text-white text-black border-2"
-            onChange={updateHandler}
-          />
-          <input
-            required
-            type="text"
-            name="subject"
-            placeholder="Your the subject"
-            className=" p-4 w-[60vh] h-10 rounded-2xl  dark:text-white text-black border-2"
-            onChange={updateHandler}
-          />
-          <textarea
-            required
-            placeholder="Message"
-            name="message"
-            className=" h-52  p-4 rounded-2xl w-[60vh] mt-8 border-2 border-black  dark:text-white text-black"
-            onChange={updateHandler}
-          />
-          {ispending ? (
-            <button
-              className="px-10 py-2 text-base w-[30vh]  mt-8
-           rounded-full text-white bg-primary  transition hover:bg-primary-light hover:scale-105 flex items-center justify-center "
-              disabled
-            >
-              <div className=" h-5 w-5 animate-spin rounded-full border-b-2 border-white dark:border-black"></div>
-            </button>
-          ) : (
-            <button
-              className="px-10 py-2 text-base w-[30vh]  mt-8
-           rounded-full text-white bg-primary  transition hover:bg-primary-light hover:scale-105"
-              type="submit"
-            >
-              Submit
-            </button>
-          )}
-        </form>
-      </div>
+          <form method="POST" onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label
+                htmlFor="email"
+                aria-required="true"
+                className="mb-2 block text-sm font-medium text-secondary-light dark:text-gray-50"
+              >
+                Your Email <span className="text-red-600">*</span>
+              </label>
+              <input
+                required
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Your Email"
+                className="w-full rounded-md bg-white py-2 px-4 text-sm md:text-base font-medium text-secondary outline-none border border-white focus:border-secondary-light dark:border-secondary-light dark:focus:border-white"
+                onChange={updateHandler}
+              />
+            </div>
+
+            <div className="mb-3">
+              <label
+                htmlFor="subject"
+                aria-required="true"
+                className="mb-2 block text-sm font-medium text-secondary-light dark:text-gray-50"
+              >
+                Your Subject <span className="text-red-600">*</span>
+              </label>
+              <input
+                required
+                type="text"
+                name="subject"
+                id="subject"
+                placeholder="Your Subject"
+                className="w-full rounded-md bg-white py-2 px-4 text-sm md:text-base font-medium text-secondary outline-none border border-white focus:border-secondary-light dark:border-secondary-light dark:focus:border-white"
+                onChange={updateHandler}
+              />
+            </div>
+
+            <div className="mb-4">
+              <label
+                htmlFor="message"
+                aria-required="true"
+                className="mb-2 block text-sm font-medium text-secondary-light dark:text-gray-50"
+              >
+                Your Message <span className="text-red-600">*</span>
+              </label>
+              <textarea
+                required
+                placeholder="Message"
+                name="message"
+                id="message"
+                className="w-full h-32 rounded-md bg-white py-2 px-4 text-sm md:text-base font-medium text-secondary outline-none border border-white focus:border-secondary-light dark:border-secondary-light dark:focus:border-white"
+                onChange={updateHandler}
+              />
+            </div>
+
+            <div className="mb-0">
+              <button
+                type="submit"
+                className="w-full py-2 text-sm md:text-base rounded-full text-white bg-primary transition duration-300 ease hover:bg-secondary"
+                disabled={ispending}
+              >
+                {ispending ? (
+                  <div className=" h-5 w-5 animate-spin rounded-full border-b-2 border-white dark:border-black"></div>
+                ) : (
+                  <p>Submit</p>
+                )}
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
 
       <div className=" bottom-0 fixed w-full">
         <Footer />
       </div>
-    </>
+    </div>
   );
 }

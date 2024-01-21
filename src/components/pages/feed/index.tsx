@@ -9,6 +9,7 @@ import CreatePost from "@/components/core/createPost";
 import Posts from "@/components/core/posts";
 import TrendingFeed from "@/components/core/trendingFeed";
 import Footer from "@/components/core/footer";
+import { motion } from "framer-motion";
 
 const Feed = () => {
   const cookies = parseCookies();
@@ -17,20 +18,27 @@ const Feed = () => {
   return (
     <>
       <main className="flex sm:flex-row flex-col max-w-screen-lg mx-auto pt-8 content-center px-4  ">
-        <div className=" flex-1 sticky flex sm:flex-col items-center gap-8 sm:space-y-20 ">
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.3, type: "spring", stiffness: 110, delay: 0.3 }}
+          className=" flex-1 sticky flex sm:flex-col items-center gap-8 sm:space-y-20 "
+        >
           <Link
             href={`/user/${userIdFromCookies}`}
             className="w-12 h-12 sm:fixed rounded-full flex items-center justify-center shadow-md dark:shadow-gray-600 transition-all duration-300 text-black dark:text-white hover:text-primary-light border hover:border-primary-light"
           >
             <User size={20} />
           </Link>
+
           <Link
             href="/user/bookmarks"
             className="w-12 h-12 sm:fixed rounded-full flex items-center justify-center shadow-md dark:shadow-gray-600 transition-all duration-300 text-black dark:text-white hover:text-primary-light border hover:border-primary-light"
           >
             <Bookmark size={20} />
           </Link>
-        </div>
+        </motion.div>
         <div className="flex-[5] mt-4 sm:mt-0">
           <CreatePost />
           <Suspense fallback={<Loader />}>
