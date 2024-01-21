@@ -92,14 +92,14 @@ export default function RegisterComponent() {
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.3, type: "spring", stiffness: 110, delay: 0.5 }}
+          transition={{ duration: 0.1, type: "spring", stiffness: 110, delay: 0.5 }}
           className="text-xl md:text-3xl mb-2 text-center font-bold text-secondary dark:text-white">
               Welcome to Palettegram
             </motion.h1>
             <motion.p initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.3, type: "spring", stiffness: 110, delay: 0.7 }}className="text-base md:text-xl text-center font-normal text-secondary-light dark:text-gray-50">
+          transition={{ duration: 0.1, type: "spring", stiffness: 110, delay: 0.7 }}className="text-base md:text-xl text-center font-normal text-secondary-light dark:text-gray-50">
               Register and be a part of the amazing community
             </motion.p>
           </article>
@@ -108,7 +108,7 @@ export default function RegisterComponent() {
             <motion.div initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.3, type: "spring", stiffness: 110, delay: 0.9 }}className="mb-6">
+          transition={{ duration: 0.1, type: "spring", stiffness: 110, delay: 0.9 }}className="mb-6">
               <label
                 htmlFor="fullName"
                 aria-required="true"
@@ -130,7 +130,7 @@ export default function RegisterComponent() {
             <motion.div initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.3, type: "spring", stiffness: 110, delay: 1.1 }}className="mb-6">
+          transition={{ duration: 0.1, type: "spring", stiffness: 110, delay: 1.1 }}className="mb-6">
               <label
                 htmlFor="email"
                 aria-required="true"
@@ -152,7 +152,7 @@ export default function RegisterComponent() {
             <motion.div initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.3, type: "spring", stiffness: 110, delay: 1.3 }}className="mb-6">
+          transition={{ duration: 0.1, type: "spring", stiffness: 110, delay: 1.3 }}className="mb-6">
               <label
                 htmlFor="password"
                 aria-required="true"
@@ -193,7 +193,7 @@ export default function RegisterComponent() {
             <motion.div initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.3, type: "spring", stiffness: 110, delay: 1.5 }}className="mb-6">
+          transition={{ duration: 0.1, type: "spring", stiffness: 110, delay: 1.5 }}className="mb-6">
               <label
                 htmlFor="confirmpassword"
                 aria-required="true"
@@ -215,7 +215,7 @@ export default function RegisterComponent() {
             <motion.div initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.3, type: "spring", stiffness: 110, delay: 1.7 }}className="mb-6">
+          transition={{ duration: 0.1, type: "spring", stiffness: 110, delay: 1.7 }}className="mb-6">
               <p className="text-sm text-secondary-light dark:text-gray-50">
                 Already have an account?{" "}
                 <Link
@@ -230,7 +230,7 @@ export default function RegisterComponent() {
             <motion.div initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.3, type: "spring", stiffness: 110, delay: 1.9 }}className="mb-4">
+          transition={{ duration: 0.1, type: "spring", stiffness: 110, delay: 1.9 }}className="mb-4">
               <button
                 type="submit"
                 className="w-full py-2 text-sm md:text-base rounded-full text-white bg-primary transition duration-300 ease hover:bg-secondary"
