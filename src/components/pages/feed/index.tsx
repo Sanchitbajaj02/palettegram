@@ -28,7 +28,6 @@ const Feed = () => {
       })
       .catch(console.log);
   }, []);
-  console.log(user.emailVerification)
   if(user.emailVerification === false){
     router.push('/verify')
   }
