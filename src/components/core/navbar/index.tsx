@@ -107,7 +107,7 @@ const Navbar = () => {
               >
                 <User size={22} className="transition-all duration-300 " />
               </Link>
-          
+
               <button
                 className="mx-2 px-2 py-2 rounded-full bg-primary transition hover:bg-primary-light hover:scale-105 text-white"
                 onClick={logout}

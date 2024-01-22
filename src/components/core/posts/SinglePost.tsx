@@ -284,11 +284,11 @@ export default function SinglePost({
         </article>
 
         <article
-            onClick={sharePost}
-            className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary"
-          >
-            <Share size={22} />
-          </article>
+          onClick={sharePost}
+          className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary"
+        >
+          <Share size={22} />
+        </article>
 
         <article className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary">
           <Download size={22} />

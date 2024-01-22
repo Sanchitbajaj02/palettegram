@@ -11,7 +11,6 @@ function getSinglePostData(bookmarkId: string, posts: PostInstanceType[]) {
 }
 
 export default function UserBookmark() {
-  const dispatch = useDispatch();
   const router = useRouter();
 
   const userBookmarks = useSelector((state: any) => state.bookmarks);
