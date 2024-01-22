@@ -10,19 +10,14 @@ import { toastify } from "@/helper/toastify";
 import { addComment } from "@/backend/posts.api";
 import { getUserDetails } from "@/backend/auth.api";
 import { useCallback, useEffect, useState } from "react";
+import { UserBookMarkType, FormatOnType } from "@/types/index";
+
 import isCtrlEnter from "@/helper/isCtrlEnter";
 
 interface UserDetails {
   fullName: string;
 }
 
-type FormatOnType = "seconds" | "minutes" | "hours" | "days";
-type UserBookMarkType = {
-  accountId: string;
-  bookmark: string[] | undefined;
-  error: boolean;
-  loading: boolean;
-};
 export default function SinglePost({
   singlePost,
   onLikeClick,
@@ -178,7 +173,7 @@ export default function SinglePost({
       className={` ${
         width
           ? "w-96 p-3 m-auto  rounded-md shadow dark:shadow-gray-600 mb-4 mt-40 "
-          : "p-3  rounded-md shadow dark:shadow-gray-600 mb-4"
+          : "p-3 rounded-md shadow dark:shadow-gray-600 mb-4"
       } `}
     >
       <Link
