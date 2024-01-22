@@ -58,3 +58,11 @@ export type UserFromDB = {
     },
   ];
 };
+
+export type FormatOnType = "seconds" | "minutes" | "hours" | "days";
+export type UserBookMarkType = {
+  accountId: string;
+  bookmark: string[] | undefined;
+  error: boolean;
+  loading: boolean;
+};

@@ -10,19 +10,14 @@ import { toastify } from "@/helper/toastify";
 import { addComment } from "@/backend/posts.api";
 import { getUserDetails } from "@/backend/auth.api";
 import { useCallback, useEffect, useState } from "react";
+import { UserBookMarkType, FormatOnType } from "@/types/index";
+
 import isCtrlEnter from "@/helper/isCtrlEnter";
 
 interface UserDetails {
   fullName: string;
 }
 
-type FormatOnType = "seconds" | "minutes" | "hours" | "days";
-type UserBookMarkType = {
-  accountId: string;
-  bookmark: string[] | undefined;
-  error: boolean;
-  loading: boolean;
-};
 export default function SinglePost({
   singlePost,
   onLikeClick,
@@ -178,7 +173,7 @@ export default function SinglePost({
       className={` ${
         width
           ? "w-96 p-3 m-auto  rounded-md shadow dark:shadow-gray-600 mb-4 mt-40 "
-          : "p-3  rounded-md shadow dark:shadow-gray-600 mb-4"
+          : "p-3 rounded-md shadow dark:shadow-gray-600 mb-4"
       } `}
     >
       <Link
@@ -289,11 +284,11 @@ export default function SinglePost({
         </article>
 
         <article
-            onClick={sharePost}
-            className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary"
-          >
-            <Share size={22} />
-          </article>
+          onClick={sharePost}
+          className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary"
+        >
+          <Share size={22} />
+        </article>
 
         <article className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary">
           <Download size={22} />
