@@ -11,6 +11,7 @@ import { addComment } from "@/backend/posts.api";
 import { getUserDetails } from "@/backend/auth.api";
 import { useCallback, useEffect, useState } from "react";
 import isCtrlEnter from "@/helper/isCtrlEnter";
+
 interface UserDetails {
   fullName: string;
 }
@@ -54,6 +55,23 @@ export default function SinglePost({
       console.error("Error fetching user details:", error);
     }
   }, [singlePost.accountId]);
+
+  const sharePost = async () => {
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: singlePost?.postTitle,
+          text: singlePost?.postTitle,
+          url: `${window.location.origin}/post/${singlePost?.$id}`,
+        });
+      } else {
+        // Fallback for browsers that do not support Web Share API
+        alert("Web Share API not supported in this browser.");
+      }
+    } catch (error) {
+      console.error("Error sharing post:", error);
+    }
+  };
 
   function createdAtDateFormatter(postCreationTime: string) {
     const timeObj = {
@@ -270,9 +288,12 @@ export default function SinglePost({
           />
         </article>
 
-        <article className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary">
-          <Share size={22} />
-        </article>
+        <article
+            onClick={sharePost}
+            className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary"
+          >
+            <Share size={22} />
+          </article>
 
         <article className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary">
           <Download size={22} />
