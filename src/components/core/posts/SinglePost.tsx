@@ -29,8 +29,6 @@ export default function SinglePost({
   width?: string;
 }) {
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
-  // const [comment_message, setComment_message] = useState("");
-  const [showCommentBox, setShowCommentBox] = useState(false);
   const [commentCount, setCommentCount] = useState(singlePost?.comments?.length || 0);
 
   const dispatch = useDispatch();
@@ -145,25 +143,6 @@ export default function SinglePost({
       }
     }
   };
-
-  // const handleComment = () => {
-  //   setShowCommentBox(!showCommentBox);
-  //   console.log("comment");
-  // };
-
-  // const uploadComment = async (id: string | undefined, comment_message: string) => {
-  //   const previousComments = singlePost.comments;
-  //   try {
-  //     if (previousComments === undefined || !id) return;
-  //     const Comments = [...previousComments, comment_message];
-  //     const res = await addComment(id, Comments);
-  //     setCommentCount(res?.comments.length || singlePost?.comments?.length);
-  //     toastify("Comment added successfully", "success");
-  //   } catch (error) {
-  //     console.log(error);
-  //     toastify("Comment cannot be added", "error");
-  //   }
-  // };
 
   useEffect(() => {
     fetchUserDetails();
@@ -294,36 +273,6 @@ export default function SinglePost({
           <Download size={22} />
         </article>
       </div>
-      {showCommentBox &&
-        // <div>
-        //   <div className="flex flex-1">
-        //     <textarea
-        //       onChange={(event: any) => setComment_message(event.target.value)}
-        //       value={comment_message}
-        //       name="postTitle"
-        //       className="mt-2 dark:bg-secondary-light outline-none focus:ring rounded-lg p-3 text-black dark:text-white placholder:text-gray-400 text-lg w-full mb-2"
-        //       rows={2}
-        //       cols={50}
-        //       placeholder="Type your comment here"
-        //       onKeyDown={(e) => {
-        //         if (isCtrlEnter(e)) uploadComment(singlePost && singlePost?.$id, comment_message);
-        //       }}
-        //     />
-        //   </div>
-        //   <div className="flex flex-end">
-        //     <button
-        //       onClick={() => {
-        //         uploadComment(singlePost && singlePost?.$id, comment_message);
-        //       }}
-        //       className="transition-all duration-300 bg-primary hover:bg-primary-light text-white font-normal py-1 px-8 rounded-full"
-        //     >
-        //       {"Post"}
-        //     </button>
-        //     {/* <button onClick={handleTest}>test</button> */}
-        //   </div>
-        // </div>
-        <></>
-      }
     </div>
   );
 }
