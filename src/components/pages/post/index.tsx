@@ -31,7 +31,6 @@ export default function PostById({ singlePostInfo }: { singlePostInfo: PostInsta
       setCommentCount(res?.comments.length || singlePostInfo?.comments?.length);
       toastify("Comment added successfully", "success");
       singlePostInfo.comments?.push(comment_message)
-      console.log(singlePostInfo)
       setComment_message("");
       setLoading(false)
     } catch (error) {
