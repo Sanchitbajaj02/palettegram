@@ -49,6 +49,7 @@ export default function RegisterComponent() {
           userId: resp["$id"],
           email: resp.email,
           fullName: resp.name,
+          isVerified: resp.emailVerification,
           createdAt: resp["$createdAt"],
         }),
       );

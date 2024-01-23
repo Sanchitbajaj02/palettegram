@@ -9,7 +9,7 @@ const initialState: userDetail = {
     userId: "",
     email: "",
     createdAt: "",
-    isVerified: false,
+    isVerified: 'false',
   },
   error: false,
   loading: false,
@@ -23,6 +23,7 @@ export const registerReducer = createSlice({
       state.loading = true;
       state.creds = action.payload;
       setCookie(null, "accountId", action.payload.userId);
+      setCookie(null, "isVerified", action.payload.isVerified);
       state.error = false;
       state.loading = false;
     },
@@ -33,7 +34,7 @@ export const registerReducer = createSlice({
       state.creds.userId = "";
       state.creds.email = "";
       state.creds.createdAt = "";
-      state.creds.isVerified = false;
+      state.creds.isVerified = 'false';
       state.loading = false;
     },
   },
