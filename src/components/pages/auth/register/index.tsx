@@ -49,13 +49,14 @@ export default function RegisterComponent() {
           userId: resp["$id"],
           email: resp.email,
           fullName: resp.name,
+          isVerified: resp.emailVerification,
           createdAt: resp["$createdAt"],
         }),
       );
       setRegisterStatus("success");
       setIsLoading(false);
       toastify("Register Successful. Please check your email to verify", "success");
-      router.replace("/login");
+      router.push('/verify')
     } catch (error: any) {
       console.log(error.message + "message");
       setIsLoading(false);
