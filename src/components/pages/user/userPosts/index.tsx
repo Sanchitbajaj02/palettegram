@@ -8,6 +8,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { Bookmark, Download, Heart, MessageCircle, Share, Trash2 } from "react-feather";
 import { useSelector, useDispatch } from "react-redux";
+import { parseCookies } from "nookies";
 
 type FormatOnType = "seconds" | "minutes" | "hours" | "days";
 
@@ -17,12 +18,13 @@ interface UserPostsProps {
 }
 
 export default function UserPosts({ userId, userName }: UserPostsProps) {
-  const userPosts = useSelector((store: any) => store.posts.posts).filter(
+  let userPosts = useSelector((store: any) => store.posts.posts).filter(
     (post: PostInstanceType) => post.accountId === userId && post.isActive === true,
-  );
-  console.log(userPosts);
+  ).reverse();
 
   const dispatch = useDispatch();
+  const cookie = parseCookies();
+  const currentUserId: string = cookie['accountId']
 
   async function deleteHandler(id: string) {
     console.log(id);
@@ -95,17 +97,20 @@ export default function UserPosts({ userId, userName }: UserPostsProps) {
                         <div className="flex justify-between text-lg  w-full mb-2">
                           <Link href={`/user/${post?.accountId}`}>
                             <p className=" font-semibold">{userName}</p>
+                            <p className="text-[13px] text-neutral-600 dark:text-neutral-400 ">
+                              {`${createdAtDateFormatter(post?.$createdAt)} ago`}
+                            </p>
                           </Link>
 
-                          <p className="text-[13px] text-neutral-600 dark:text-neutral-400 ">
-                            {`${createdAtDateFormatter(post?.$createdAt)} ago`}
-                          </p>
+                          {
+                            post?.accountId === currentUserId && (
+                              <Trash2
+                                onClick={() => deleteHandler(post.$id)}
+                                size={24}
+                                cursor={"pointer"}
+                              />)
+                          }
                         </div>
-                        <Trash2
-                          onClick={() => deleteHandler(post.$id)}
-                          size={24}
-                          cursor={"pointer"}
-                        />
 
                         <p className="text-neutral-900 dark:text-neutral-200">{post?.postTitle}</p>
                         <div className="h-auto w-full relative mt-2">

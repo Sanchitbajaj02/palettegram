@@ -1,8 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Briefcase, Link2, Mail, MapPin, Smile } from "react-feather";
+import { Briefcase, Link2, Mail, MapPin, Smile, ArrowLeft } from "react-feather";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { UserFromDB } from "@/types";
 import { getSingleUser } from "@/backend/auth.api";
@@ -14,6 +15,9 @@ import { ButtonLong } from "@/components/core/buttons";
 
 export default function User({ userId }: { userId: string }) {
   const [user, setUser] = useState<UserFromDB>();
+
+  const router = useRouter();
+
   useEffect(() => {
     getSingleUser(userId)
       .then((resp: any) => {
@@ -24,8 +28,18 @@ export default function User({ userId }: { userId: string }) {
 
   return (
     <>
-      <main className="flex sm:flex-row flex-col max-w-6xl mx-auto pt-4 content-center  ">
+      <main className="flex sm:flex-row flex-col max-w-screen-lg mx-auto pt-4 content-center  ">
         <section className="flex-[5] h-full mt-4 sm:mt-0 px-4">
+          <div className="my-4 flex gap-2 items-center">
+            <ArrowLeft
+              size={20}
+              onClick={() => {
+                router.back();
+              }}
+              className="hover:cursor-pointer hover:text-primary-light transition-all duration-300"
+            />
+            <h1 className="text-black dark:text-white text-base font-semibold">Go Back</h1>
+          </div>
           <div className="h-52 w-full relative -z-[1]">
             <Image
               src="/assets/pinkCover.jpg"

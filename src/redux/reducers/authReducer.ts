@@ -1,7 +1,7 @@
 "use client";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { setCookie } from "nookies";
+import { setCookie, destroyCookie } from "nookies";
 import { userDetail } from "@/types/index.d";
 
 const initialState: userDetail = {
@@ -29,7 +29,7 @@ export const registerReducer = createSlice({
     },
     logUserOut: (state) => {
       state.loading = true;
-      setCookie(null, "accountId", "");
+      destroyCookie(undefined, 'accountId')
       state.error = false;
       state.creds.userId = "";
       state.creds.email = "";

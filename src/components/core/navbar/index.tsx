@@ -99,19 +99,23 @@ const Navbar = () => {
             </Link>
           )}
 
-          <Link
-            href={`/user/${userIdFromCookies}`}
-            className="mx-2 px-2 py-2 rounded-full  bg-primary text-white  hover:bg-primary-light hover:scale-105"
-          >
-            <User size={22} className="transition-all duration-300 " />
-          </Link>
+          {userAuth.creds?.userId && (
+            <>
+              <Link
+                href={`/user/${userIdFromCookies}`}
+                className="mx-2 px-2 py-2 rounded-full  bg-primary text-white  hover:bg-primary-light hover:scale-105"
+              >
+                <User size={22} className="transition-all duration-300 " />
+              </Link>
 
-          <button
-            className="mx-2 px-2 py-2 rounded-full bg-primary transition hover:bg-primary-light hover:scale-105 text-white"
-            onClick={logout}
-          >
-            <LogOut size={22} className="transition-all duration-300" />
-          </button>
+              <button
+                className="mx-2 px-2 py-2 rounded-full bg-primary transition hover:bg-primary-light hover:scale-105 text-white"
+                onClick={logout}
+              >
+                <LogOut size={22} className="transition-all duration-300" />
+              </button>
+            </>
+          )}
         </div>
       </div>
     </nav>
