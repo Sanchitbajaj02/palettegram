@@ -18,13 +18,13 @@ interface UserPostsProps {
 }
 
 export default function UserPosts({ userId, userName }: UserPostsProps) {
-  let userPosts = useSelector((store: any) => store.posts.posts).filter(
-    (post: PostInstanceType) => post.accountId === userId && post.isActive === true,
-  ).reverse();
+  let userPosts = useSelector((store: any) => store.posts.posts)
+    .filter((post: PostInstanceType) => post.accountId === userId && post.isActive === true)
+    .reverse();
 
   const dispatch = useDispatch();
   const cookie = parseCookies();
-  const currentUserId: string = cookie['accountId']
+  const currentUserId: string = cookie["accountId"];
 
   async function deleteHandler(id: string) {
     console.log(id);
@@ -55,9 +55,9 @@ export default function UserPosts({ userId, userName }: UserPostsProps) {
     };
 
     if (timeObj.calcTimeDiff("seconds") < 60) {
-      return `${timeObj.calcTimeDiff("seconds")}sec`;
+      return `${timeObj.calcTimeDiff("seconds")}s`;
     } else if (timeObj.calcTimeDiff("minutes") < 60) {
-      return `${timeObj.calcTimeDiff("minutes")}min`;
+      return `${timeObj.calcTimeDiff("minutes")}m`;
     } else if (timeObj.calcTimeDiff("hours") <= 24) {
       return `${timeObj.calcTimeDiff("hours")}h`;
     } else if (timeObj.calcTimeDiff("days") < 365) {
@@ -102,14 +102,13 @@ export default function UserPosts({ userId, userName }: UserPostsProps) {
                             </p>
                           </Link>
 
-                          {
-                            post?.accountId === currentUserId && (
-                              <Trash2
-                                onClick={() => deleteHandler(post.$id)}
-                                size={24}
-                                cursor={"pointer"}
-                              />)
-                          }
+                          {post?.accountId === currentUserId && (
+                            <Trash2
+                              onClick={() => deleteHandler(post.$id)}
+                              size={24}
+                              cursor={"pointer"}
+                            />
+                          )}
                         </div>
 
                         <p className="text-neutral-900 dark:text-neutral-200">{post?.postTitle}</p>
