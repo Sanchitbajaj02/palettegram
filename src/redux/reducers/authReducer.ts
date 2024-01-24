@@ -9,7 +9,7 @@ const initialState: userDetail = {
     userId: "",
     email: "",
     createdAt: "",
-    isVerified: 'false',
+    isVerified: false,
   },
   error: false,
   loading: false,
@@ -29,12 +29,12 @@ export const registerReducer = createSlice({
     },
     logUserOut: (state) => {
       state.loading = true;
-      destroyCookie(undefined, 'accountId')
+      destroyCookie(undefined, "accountId");
       state.error = false;
       state.creds.userId = "";
       state.creds.email = "";
       state.creds.createdAt = "";
-      state.creds.isVerified = 'false';
+      state.creds.isVerified = false;
       state.loading = false;
     },
   },

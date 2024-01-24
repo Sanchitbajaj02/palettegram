@@ -24,7 +24,7 @@ export type userDetail = {
     userId: string;
     email: string;
     createdAt: string;
-    isVerified: string;
+    isVerified: boolean;
   };
   error: boolean;
   loading: boolean;
