@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { toastify } from "@/helper/toastify";
 import { ButtonLong } from "@/components/core/buttons";
 import Loader from "@/app/loading";
+import { setCookie } from "nookies";
 
 interface Verification {
   userId: string;
@@ -20,6 +21,7 @@ export default function VerificationComponent({ userId, secret }: Verification) 
       .then((resp) => {
         if (resp.status) {
           setVerified(resp.status);
+          setCookie(null,'isVerified', 'true')
         }
       })
       .catch((err) => {

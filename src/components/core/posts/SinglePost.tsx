@@ -82,9 +82,9 @@ export default function SinglePost({
     };
 
     if (timeObj.calcTimeDiff("seconds") < 60) {
-      return `${timeObj.calcTimeDiff("seconds")}sec`;
+      return `${timeObj.calcTimeDiff("seconds")}s`;
     } else if (timeObj.calcTimeDiff("minutes") < 60) {
-      return `${timeObj.calcTimeDiff("minutes")}min`;
+      return `${timeObj.calcTimeDiff("minutes")}m`;
     } else if (timeObj.calcTimeDiff("hours") <= 24) {
       return `${timeObj.calcTimeDiff("hours")}h`;
     } else if (timeObj.calcTimeDiff("days") < 365) {
