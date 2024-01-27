@@ -61,7 +61,7 @@ const PostDisplay = ({ params: { id } }: Prop) => {
       <Suspense fallback={<Loader />}>
         <PostById singlePostInfo={post} />
       </Suspense>
-      <Footer isFixed />
+      <Footer />
     </>
   );
 };
