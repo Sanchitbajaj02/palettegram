@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { redirect } from 'next/navigation'
 import Image from "next/image";
 import { Download, Heart, MessageCircle, Share, Bookmark } from "react-feather";
 import { PostInstanceType } from "@/types/index.d";
@@ -28,8 +29,6 @@ export default function SinglePost({
   width?: string;
 }) {
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
-  const [comment_message, setComment_message] = useState("");
-  const [showCommentBox, setShowCommentBox] = useState(false);
   const [commentCount, setCommentCount] = useState(singlePost?.comments?.length || 0);
 
   const dispatch = useDispatch();
@@ -145,36 +144,16 @@ export default function SinglePost({
     }
   };
 
-  const handleComment = () => {
-    setShowCommentBox(!showCommentBox);
-    console.log("comment");
-  };
-
-  const uploadComment = async (id: string | undefined, comment_message: string) => {
-    const previousComments = singlePost.comments;
-    try {
-      if (previousComments === undefined || !id) return;
-      const Comments = [...previousComments, comment_message];
-      const res = await addComment(id, Comments);
-      setCommentCount(res?.comments.length || singlePost?.comments?.length);
-      toastify("Comment added successfully", "success");
-    } catch (error) {
-      console.log(error);
-      toastify("Comment cannot be added", "error");
-    }
-  };
-
   useEffect(() => {
     fetchUserDetails();
   }, [fetchUserDetails]);
 
   return (
     <div
-      className={` ${
-        width
-          ? "w-96 p-3 m-auto  rounded-md shadow dark:shadow-gray-600 mb-4 mt-40 "
-          : "p-3 rounded-md shadow dark:shadow-gray-600 mb-4"
-      } `}
+      className={` ${width
+        ? "w-96 p-3 m-auto  rounded-md shadow dark:shadow-gray-600 mb-4 mt-40 "
+        : "p-3 rounded-md shadow dark:shadow-gray-600 mb-4"
+        } `}
     >
       <Link
         className="flex items-center gap-3 mb-3"
@@ -230,56 +209,56 @@ export default function SinglePost({
       <div className="flex justify-around">
         <article
           onClick={() => onLikeClick(singlePost)}
-          className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${
-            singlePost?.likes && singlePost?.likes.includes(authState?.userId)
-              ? "text-primary hover:text-primary"
-              : "text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
-          }`}
+          className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${singlePost?.likes && singlePost?.likes.includes(authState?.userId)
+            ? "text-primary hover:text-primary"
+            : "text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
+            }`}
         >
           <Heart
             size={22}
             fill="true"
-            className={`${
-              singlePost?.likes && singlePost?.likes.includes(authState?.userId)
-                ? "fill-primary"
-                : "fill-transparent"
-            }`}
+            className={`${singlePost?.likes && singlePost?.likes.includes(authState?.userId)
+              ? "fill-primary"
+              : "fill-transparent"
+              }`}
           />
           <span className="text-base">
             {singlePost && singlePost?.likes && singlePost?.likes.length}
           </span>
         </article>
 
-        <article
-          onClick={handleComment}
+        <Link
+          href={`/post/${singlePost && singlePost?.$id}`}
           className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary"
         >
           <MessageCircle size={22} />
-          <span className="text-base">{commentCount}</span>
-        </article>
+          {commentCount ? (
+            <span className="text-base">{commentCount}</span>
+          ) : (
+            <span className="text-base">{singlePost.comments?.length} </span>
+          )}
+        </Link>
 
         <article
           onClick={() => handleUpdateBookmark(singlePost?.$id)}
-          className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${
-            userBookmarks &&
+          className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${userBookmarks &&
             userBookmarks?.bookmark &&
             userBookmarks?.bookmark?.length > 0 &&
             userBookmarks?.bookmark.includes(singlePost && singlePost?.$id!)
-              ? "text-primary hover:text-primary dark:hover:text-primary"
-              : "text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
-          }`}
+            ? "text-primary hover:text-primary dark:hover:text-primary"
+            : "text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
+            }`}
         >
           <Bookmark
             size={22}
             fill="true"
-            className={`${
-              userBookmarks &&
+            className={`${userBookmarks &&
               userBookmarks?.bookmark &&
               userBookmarks?.bookmark?.length > 0 &&
               userBookmarks?.bookmark.includes(singlePost && singlePost?.$id!)
-                ? "fill-primary"
-                : "fill-transparent"
-            }`}
+              ? "fill-primary"
+              : "fill-transparent"
+              }`}
           />
         </article>
 
@@ -294,35 +273,6 @@ export default function SinglePost({
           <Download size={22} />
         </article>
       </div>
-      {showCommentBox ? (
-        <div>
-          <div className="flex flex-1">
-            <textarea
-              onChange={(event: any) => setComment_message(event.target.value)}
-              value={comment_message}
-              name="postTitle"
-              className="mt-2 dark:bg-secondary-light outline-none focus:ring rounded-lg p-3 text-black dark:text-white placholder:text-gray-400 text-lg w-full mb-2"
-              rows={2}
-              cols={50}
-              placeholder="Type your comment here"
-              onKeyDown={(e) => {
-                if (isCtrlEnter(e)) uploadComment(singlePost && singlePost?.$id, comment_message);
-              }}
-            />
-          </div>
-          <div className="flex flex-end">
-            <button
-              onClick={() => {
-                uploadComment(singlePost && singlePost?.$id, comment_message);
-              }}
-              className="transition-all duration-300 bg-primary hover:bg-primary-light text-white font-normal py-1 px-8 rounded-full"
-            >
-              {"Post"}
-            </button>
-            {/* <button onClick={handleTest}>test</button> */}
-          </div>
-        </div>
-      ) : null}
     </div>
   );
 }
