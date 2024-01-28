@@ -52,7 +52,6 @@ export default function Posts() {
       (a: any, b: any) => new Date(b["$createdAt"]).getTime() - new Date(a["$createdAt"]).getTime(),
     );
     copyPosts = copyPosts.filter((post: PostInstanceType) => post.isActive === true);
-    console.log(copyPosts);
   }
 
   if (postState.loading) {

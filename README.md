@@ -6,12 +6,25 @@
 
 ## ⚡ Project Status
 
-[![Contributers](https://img.shields.io/github/contributors/sanchitbajaj02/palettegram?color=greendark)](https://github.com/Sanchitbajaj02/palettegram/graphs/contributors)
-[![license MIT](https://img.shields.io/github/license/sanchitbajaj02/palettegram?color=greendark)](https://github.com/Sanchitbajaj02/palettegram/blob/master/LICENSE)
-[![Issues](https://img.shields.io/github/issues/sanchitbajaj02/palettegram?color=greendark)](https://github.com/Sanchitbajaj02/palettegram/issues)
-[![Pull Requests](https://img.shields.io/github/issues-pr/sanchitbajaj02/palettegram?color=greendark)](https://github.com/Sanchitbajaj02/palettegram/issues)
-[![Forks](https://img.shields.io/github/forks/sanchitbajaj02/palettegram?color=greendark)](https://github.com/Sanchitbajaj02/palettegram/network/members)
-[![Stars](https://img.shields.io/github/stars/sanchitbajaj02/palettegram?color=greendark)](https://github.com/Sanchitbajaj02/palettegram/stargazers)
+<div align="center">
+
+![GitHub contributors](https://img.shields.io/github/contributors/sanchitbajaj02/palettegram?style=for-the-badge&color=%23f02e65)
+![license MIT](https://img.shields.io/github/license/sanchitbajaj02/palettegram?style=for-the-badge&color=%23f02e65)
+![Stargazers](https://img.shields.io/github/stars/sanchitbajaj02/palettegram?style=for-the-badge&color=%23f02e65)
+![Forks](https://img.shields.io/github/forks/sanchitbajaj02/palettegram?style=for-the-badge&color=%23f02e65)
+
+![GitHub Open issues](https://img.shields.io/github/issues/sanchitbajaj02/palettegram?style=for-the-badge&color=%23f02e65)
+![GitHub Closed issues](https://img.shields.io/github/issues-closed/sanchitbajaj02/palettegram?style=for-the-badge&color=%23f02e65)
+![GitHub PR Open](https://img.shields.io/github/issues-pr/sanchitbajaj02/palettegram?style=for-the-badge&color=%23f02e65)
+![GitHub PR closed](https://img.shields.io/github/issues-pr-closed/sanchitbajaj02/palettegram?style=for-the-badge&color=%23f02e65)
+
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/sanchitbajaj02/palettegram?style=for-the-badge&color=%23f02e65)
+![GitHub top language](https://img.shields.io/github/languages/top/sanchitbajaj02/palettegram?style=for-the-badge&color=%23f02e65)
+![GitHub Release](https://img.shields.io/github/v/release/sanchitbajaj02/palettegram?style=for-the-badge&color=%23f02e65)
+
+[![Discord Community](https://img.shields.io/badge/Join-Discord_Community-%23f02e65.svg?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/TAW9vC2Hu7)
+
+</div>
 
 ## 🏆 Featured in:
 
@@ -40,7 +53,6 @@ contributors to open-source software development. <a href="docs/iwoc.md">Click h
         
 </table>
 
-
 ## 🤔 Why open source
 
 Contributing in open source increases your opportunities to work with different projects and mentors, getting to know various insights and ideas. It is a platform where contributors grow together with a construvtive and a positive attitude.
@@ -48,10 +60,6 @@ Contributing in open source increases your opportunities to work with different 
 This repository also provides one such platforms where contributers come over and put their ideas of new games and make our website as interactive as much they can!
 
 <h5 align="center"><i>If you like the project, please <a href="https://github.com/Sanchitbajaj02/palettegram/stargazers">★</a> this repository to show your support! 🤩</i></h5>
-
-## 🤝 Join Community
-
-[![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/TAW9vC2Hu7)
 
 ## 💻 Tech Stack
 
