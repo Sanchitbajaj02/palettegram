@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addPost } from "@/redux/reducers/postsReducer";
 import { PostInstanceType } from "@/types/index.d";
 import isCtrlEnter from "@/helper/isCtrlEnter";
+import { motion } from "framer-motion";
 
 const CHAR_LIMIT = 500;
 
@@ -171,7 +172,11 @@ const CreatePost = () => {
 
   return (
     <>
-      <div
+      <motion.section
+        initial={{ opacity: 0, y: -350 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.1, type: "spring", stiffness: 110 }}
         className="border border-gray-500 rounded-md shadow-sm mb-4"
       >
         <form className="p-4" method="post" onSubmit={handleSubmit}>
@@ -245,7 +250,7 @@ const CreatePost = () => {
             </article>
           </div>
         </form>
-      </div>
+      </motion.section >
     </>
   );
 };

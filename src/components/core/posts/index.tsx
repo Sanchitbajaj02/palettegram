@@ -8,7 +8,7 @@ import { addLikesToAPost } from "@/redux/reducers/postsReducer";
 
 import { PostInstanceType } from "@/types/index.d";
 
-import PostSkeleton from "@/app/postSkeleton";
+import PostSkeleton from "../../pages/feed/loading"
 
 // Api
 // import { getAllPosts, likeTweet } from "@/backend/posts.api";
