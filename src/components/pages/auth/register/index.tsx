@@ -46,6 +46,8 @@ export default function RegisterComponent() {
       setRegisterStatus("registering");
 
       const passwordRegex: RegExp = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@_])[A-Za-z\d@_]{6,16}$/;
+      const nameRegex: RegExp = /^[A-Za-z][A-Za-z]{7,24}$/;
+      //user name should contain minimum of 2 letters and maximum 25 letters.
 
       if (data.password !== data.confirmpassword) {
         throw new Error("Password and Confirm Password does not match");
@@ -63,6 +65,12 @@ export default function RegisterComponent() {
         );
       }
 
+      if (!nameRegex.test(data.fullName)) {
+        throw new Error("Oops!, Name should contain only alphabets!");
+      }
+      if (data.fullName == " ") {
+        throw new Error("Oops !User name is empty");
+      }
       const resp = await registerUser(data);
 
       dispatch(
