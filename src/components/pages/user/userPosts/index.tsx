@@ -31,7 +31,6 @@ export default function UserPosts({ userId, userName }: UserPostsProps) {
     try {
       const response = await removePost(id);
       if (response) {
-        console.log(response);
         dispatch(removeUserPost(response.$id));
         toastify("Post deleted sucessfully", "success");
       }
