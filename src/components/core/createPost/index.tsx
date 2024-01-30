@@ -1,5 +1,5 @@
 /* eslint-disable quotes */
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Command, Image as NewImageFeather } from "react-feather";
 import { addNewImage, savePostToDb, getImageUrl } from "@/backend/posts.api";
 import Colorpicker from "@/components/core/colorPicker";
@@ -11,15 +11,19 @@ import { addPost } from "@/redux/reducers/postsReducer";
 import { PostInstanceType } from "@/types/index.d";
 import isCtrlEnter from "@/helper/isCtrlEnter";
 import { motion } from "framer-motion";
+import Tiptap from "@/components/Editor/Tiptap";
 
 const CHAR_LIMIT = 500;
 
 const CreatePost = () => {
   const postSelector = useSelector((state: any) => state.posts);
   const dispatch = useDispatch();
+  const submitRef = useRef() as React.MutableRefObject<HTMLButtonElement>;
 
   // State to manage text field
-  const [postTitle, setPostTitle] = useState("");
+  const [editorState, setEditorState] = useState("");
+
+  // const [postTitle, setPostTitle] = useState("");
 
   // store image data
   const [imageStorage, setimageStorage] = useState<any>({
@@ -100,7 +104,7 @@ const CreatePost = () => {
 
       const finalDataToUpload: PostInstanceType = {
         accountId: userIdFromCookies,
-        postTitle: postTitle,
+        postTitle: editorState,
         postImages: imageArray.length > 0 ? imageArray : [],
         colors: [],
         isActive: true,
@@ -117,7 +121,8 @@ const CreatePost = () => {
       dispatch(addPost(finalDataToUpload));
       toastify("Post uploaded successfully", "success", false);
 
-      setPostTitle("");
+      // setPostTitle("");
+      setEditorState("");
       setimageStorage({
         preview: null,
         file: null,
@@ -128,7 +133,6 @@ const CreatePost = () => {
       console.log(error);
     }
   };
-
   /**
    * @work handles the file and convert it into base64 string
    * @param event
@@ -170,6 +174,19 @@ const CreatePost = () => {
     }
   };
 
+  const handleKeyPress = useCallback((event: KeyboardEvent) => {
+    if (event.ctrlKey && event.key === "Enter") {
+      submitRef.current.click();
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyPress);
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [handleKeyPress]);
+
   return (
     <>
       <motion.section
@@ -177,31 +194,16 @@ const CreatePost = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.1, type: "spring", stiffness: 110 }}
-        className="border border-gray-500 rounded-md shadow-sm mb-4"
+        className="border border-gray-500 rounded-md shadow-sm mb-4 p-2"
       >
-        <form className="p-4" method="post" onSubmit={handleSubmit}>
-          <div className="mb-2">
-            {/* <small className="text-slate-400">Character limit is upto {CHAR_LIMIT}</small> */}
-            <small className="text-slate-400">
-              You have {CHAR_LIMIT - postTitle.length} characters left
-            </small>
-
-            <textarea
-              onChange={(event: any) => setPostTitle(event.target.value)}
-              value={postTitle}
-              name="postTitle"
-              className="dark:bg-secondary-light outline-none focus:ring rounded-lg p-3 text-black dark:text-white placholder:text-gray-400 text-lg w-full mb-2"
-              rows={4}
-              cols={50}
-              placeholder="What's happening?"
-              maxLength={CHAR_LIMIT}
-              required
-              onKeyDown={(e) => {
-                if (isCtrlEnter(e)) handleSubmit(e);
-              }}
-            />
-          </div>
-
+        <small className="text-slate-400 p-1">
+          You have {CHAR_LIMIT - editorState.replaceAll(/<[^>]*>/g, "").length} characters left
+        </small>
+        <Tiptap
+          editorState={editorState === "" ? "" : editorState}
+          setEditorState={setEditorState}
+        />
+        <form method="post" onSubmit={handleSubmit}>
           {togglePalette ? <Colorpicker colors={colors} setColors={setColors} /> : null}
 
           <article>
@@ -242,6 +244,7 @@ const CreatePost = () => {
 
             <article>
               <button
+                ref={submitRef}
                 type="submit"
                 className="transition-all duration-300 bg-primary hover:bg-primary-light text-white font-normal py-1 px-8 rounded-full"
               >
@@ -250,7 +253,7 @@ const CreatePost = () => {
             </article>
           </div>
         </form>
-      </motion.section >
+      </motion.section>
     </>
   );
 };
