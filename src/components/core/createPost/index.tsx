@@ -251,7 +251,7 @@ const CreatePost = () => {
             </article>
           </div>
         </form>
-      </motion.section>
+      </motion.section >
     </>
   );
 };

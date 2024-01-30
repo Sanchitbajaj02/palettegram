@@ -8,6 +8,8 @@ import { addLikesToAPost } from "@/redux/reducers/postsReducer";
 
 import { PostInstanceType } from "@/types/index.d";
 
+import PostSkeleton from "../../pages/feed/loading"
+
 // Api
 // import { getAllPosts, likeTweet } from "@/backend/posts.api";
 // import { getBookmarks } from "@/backend/bookmarks.api";
@@ -50,11 +52,10 @@ export default function Posts() {
       (a: any, b: any) => new Date(b["$createdAt"]).getTime() - new Date(a["$createdAt"]).getTime(),
     );
     copyPosts = copyPosts.filter((post: PostInstanceType) => post.isActive === true);
-    console.log(copyPosts);
   }
 
   if (postState.loading) {
-    return <h1 className="text-white text-2xl text-center">Loading...</h1>;
+    return <h1 className="text-white text-2xl text-center"><PostSkeleton /></h1>;
   }
 
   if (postState.error) {
@@ -63,6 +64,7 @@ export default function Posts() {
 
   return (
     <>
+      {!copyPosts && <PostSkeleton />}
       {copyPosts &&
         copyPosts.length > 0 &&
         copyPosts.map((post: PostInstanceType, index: number) => (
