@@ -11,7 +11,7 @@ import { addPost } from "@/redux/reducers/postsReducer";
 import { PostInstanceType } from "@/types/index.d";
 import isCtrlEnter from "@/helper/isCtrlEnter";
 import { motion } from "framer-motion";
-import Tiptap from "@/components/Editor/Tiptap";
+import Markdown from "@/components/Editor/Markdown";
 
 const CHAR_LIMIT = 500;
 
@@ -199,7 +199,7 @@ const CreatePost = () => {
         <small className="text-slate-400 p-1">
           You have {CHAR_LIMIT - editorState.replaceAll(/<[^>]*>/g, "").length} characters left
         </small>
-        <Tiptap
+        <Markdown
           editorState={editorState === "" ? "" : editorState}
           setEditorState={setEditorState}
         />

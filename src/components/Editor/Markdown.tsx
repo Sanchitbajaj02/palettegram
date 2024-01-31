@@ -12,7 +12,7 @@ interface EditorProps {
   editorState: string;
   setEditorState: (params: string) => void;
 }
-export default ({ editorState, setEditorState }: EditorProps) => {
+const Markdown = ({ editorState, setEditorState }: EditorProps) => {
   const editor = useEditor({
     extensions: [StarterKit],
     content: editorState,
@@ -135,3 +135,4 @@ export default ({ editorState, setEditorState }: EditorProps) => {
     </>
   );
 };
+export default Markdown;
