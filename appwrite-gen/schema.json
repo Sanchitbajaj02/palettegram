@@ -184,8 +184,7 @@
           "status": "available",
           "error": "",
           "required": false,
-          "array": true,
-          "size": 10,
+          "size": 500,
           "default": null
         },
         {

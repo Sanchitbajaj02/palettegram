@@ -11,7 +11,7 @@ import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
 import { toastify } from "@/helper/toastify";
 import { addComment } from "@/backend/posts.api";
 import { getUserDetails } from "@/backend/auth.api";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState,MouseEvent } from "react";
 import { UserBookMarkType, FormatOnType } from "@/types/index";
 import isCtrlEnter from "@/helper/isCtrlEnter";
 
@@ -148,6 +148,36 @@ export default function SinglePost({
     fetchUserDetails();
   }, [fetchUserDetails]);
 
+  const handleClick = (e:MouseEvent<HTMLDivElement | HTMLSpanElement>)=>{
+    const element = e.target as HTMLDivElement | HTMLSpanElement;
+    const spanElement = element.querySelector('span');
+    let currentSelectedElement:HTMLSpanElement | HTMLDivElement | null = null;
+    if(spanElement){
+      currentSelectedElement = spanElement;
+    }else{
+      currentSelectedElement = element;
+    }
+    if(currentSelectedElement && currentSelectedElement.textContent){
+      const prevValue = currentSelectedElement.textContent;
+      navigator.clipboard.writeText(currentSelectedElement.textContent).then(()=>{
+        if(currentSelectedElement){
+          currentSelectedElement.textContent = 'Copied';
+          currentSelectedElement.classList.remove('bg-slate-950/[0.4]');
+          currentSelectedElement.classList.add('bg-black');
+          setTimeout(()=>{
+            if(currentSelectedElement){
+              currentSelectedElement.textContent = prevValue;
+              currentSelectedElement.classList.remove('bg-black');
+              currentSelectedElement.classList.add('bg-slate-950/[0.4]');
+            }
+        },1000);
+      }
+      }).catch(console.log)
+    }
+    
+  }
+  const colors = singlePost?.colors && typeof singlePost?.colors ==='string' && JSON.parse(singlePost.colors)
+
   return (
     <div
       className={` ${
@@ -194,9 +224,9 @@ export default function SinglePost({
         ) : null}
       </Link>
 
-      {singlePost?.colors && singlePost?.colors.length > 0 ? (
+      {colors && Object.keys(colors).length>0? (
         <div className="my-2 flex flex-row justify-between items-center w-full">
-          {singlePost?.colors.map((color: string, index: number) => {
+          {/* {JSON.parse(singlePost.colors).map((color: string, index: number) => {
             return (
               <div
                 key={index}
@@ -207,7 +237,37 @@ export default function SinglePost({
                 }}
               ></div>
             );
-          })}
+          })} */}
+          <div className="w-full  h-[200px] bg-tranparent mx-auto flex mb-3.5 gap-1">
+            <div
+            className="cursor-pointer w-full flex justify-center items-center group" 
+            style={{backgroundColor:typeof colors.color01 === 'string' && colors.color01 || ''}}
+            onClick={handleClick}
+            >
+              <span className="bg-slate-950/[0.4] text-xs px-0.5 opacity-0 transition ease-out duration-300 group-hover:opacity-100 group-hover:ease-in group-hover:scale-110" onClick={handleClick}>{colors.color01}</span>
+            </div>
+            <div
+            className="cursor-pointer w-full flex justify-center items-center group " 
+            style={{backgroundColor:typeof colors.color02 === 'string' && colors.color02 || ''}}
+            onClick={handleClick}
+            >
+              <span className="bg-slate-950/[0.4] text-xs px-0.5 opacity-0 transition ease-out duration-300 group-hover:opacity-100 group-hover:ease-in group-hover:scale-110">{colors.color02}</span>
+            </div>
+            <div
+            className="cursor-pointer w-full flex justify-center items-center group gap-2" 
+            style={{backgroundColor:typeof colors.color03 === 'string' && colors.color03 || ''}}
+            onClick={handleClick}
+            >
+              <span className="bg-slate-950/[0.4] text-xs px-0.5 opacity-0 transition ease-out duration-300 group-hover:opacity-100 group-hover:ease-in group-hover:scale-110">{colors.color03}</span>
+            </div>
+            <div
+            className="cursor-pointer w-full flex justify-center items-center group" 
+            style={{backgroundColor:typeof colors.color04 === 'string' && colors.color04 || ''}}
+            onClick={handleClick}
+            >
+              <span className="bg-slate-950/[0.4] text-xs px-0.5 opacity-0 transition ease-out duration-300 group-hover:opacity-100 group-hover:ease-in group-hover:scale-110">{colors.color04}</span>
+            </div>
+          </div>
         </div>
       ) : null}
 

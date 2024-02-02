@@ -33,13 +33,15 @@ const CreatePost = () => {
 
   // color palette toggle switch
   const [togglePalette, setTogglePalette] = useState(false);
+  // To check Paletted touched or not
+  const [isPaletteTouched, setPaletteTouched] = useState(false);
 
   // colors grid
   const [colors, setColors] = useState({
-    color01: "",
-    color02: "",
-    color03: "",
-    color04: "",
+    color01: "#a5a2a2",
+    color02: "#c2c2c2",
+    color03: "#9c9c9c",
+    color04: "#666665",
   });
 
   // get cookies from the browser
@@ -77,10 +79,21 @@ const CreatePost = () => {
   //     })
   //     .catch((err) => console.log(err));
   // };
-
+  // const colorPaletteSwitch = () => {
+  //   if (togglePalette) {
+  //     setTogglePalette(false);
+  //     setColors({
+  //       color01: "#a5a2a2",
+  //       color02: "#c2c2c2",
+  //       color03: "#9c9c9c",
+  //       color04: "#666665",
+  //     });
+  //   } else {
+  //     setTogglePalette(true);
+  //   }
+  // };
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-
     // console.log(postTitle);
     // console.log(imageStorage);
     // console.log(cookies["accountId"]);
@@ -106,7 +119,7 @@ const CreatePost = () => {
         accountId: userIdFromCookies,
         postTitle: editorState,
         postImages: imageArray.length > 0 ? imageArray : [],
-        colors: [],
+        colors: (togglePalette && isPaletteTouched && JSON.stringify({ ...colors })) || null,
         isActive: true,
         comments: [],
         likes: [],
@@ -127,6 +140,9 @@ const CreatePost = () => {
         preview: null,
         file: null,
       });
+      if (togglePalette) {
+        colorPaletteSwitch();
+      }
 
       // state resetters
     } catch (error) {
@@ -203,21 +219,31 @@ const CreatePost = () => {
           editorState={editorState === "" ? "" : editorState}
           setEditorState={setEditorState}
         />
-        <form method="post" onSubmit={handleSubmit}>
-          {togglePalette ? <Colorpicker colors={colors} setColors={setColors} /> : null}
 
-          <article>
-            {imageStorage && imageStorage.preview && (
-              <Image
-                src={imageStorage.preview}
-                alt="user image"
-                loading="lazy"
-                width={600}
-                height={200}
-              />
-            )}
-          </article>
-
+        <form className="p-4" method="post" onSubmit={handleSubmit}>
+          <div className="mb-2">
+            {/* <small className="text-slate-400">Character limit is upto {CHAR_LIMIT}</small> */}
+          </div>
+          {togglePalette ? (
+            <Colorpicker
+              colors={colors}
+              setColors={setColors}
+              setTouched={setPaletteTouched}
+              isPalleteTouched={isPaletteTouched}
+            />
+          ) : (
+            <article>
+              {imageStorage && imageStorage.preview && (
+                <Image
+                  src={imageStorage.preview}
+                  alt="user image"
+                  loading="lazy"
+                  width={600}
+                  height={200}
+                />
+              )}
+            </article>
+          )}
           <div className="flex flex-row justify-between items-center">
             <article className="flex flex-row gap-2">
               <input
@@ -236,6 +262,7 @@ const CreatePost = () => {
 
               <button
                 onClick={colorPaletteSwitch}
+                type="button"
                 className="transition-all duration-300 p-2 hover:bg-secondary-light hover:text-white rounded-full"
               >
                 <Command size={22} />
