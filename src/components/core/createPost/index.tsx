@@ -221,9 +221,12 @@ const CreatePost = () => {
         />
 
         <form className="p-4" method="post" onSubmit={handleSubmit}>
+<<<<<<< Updated upstream
           <div className="mb-2">
             {/* <small className="text-slate-400">Character limit is upto {CHAR_LIMIT}</small> */}
           </div>
+=======
+>>>>>>> Stashed changes
           {togglePalette ? (
             <Colorpicker
               colors={colors}
