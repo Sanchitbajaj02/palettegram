@@ -73,3 +73,7 @@ body {
   background: black;
   color: #fff;
 }
+p:empty::before {
+  content: "";
+  display: inline-block;
+}

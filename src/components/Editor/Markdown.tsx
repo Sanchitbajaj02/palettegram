@@ -1,20 +1,35 @@
 "use client";
+import React, { useEffect } from "react";
 import { BubbleMenu, EditorContent, FloatingMenu, useEditor } from "@tiptap/react";
-import parse from "html-react-parser";
-import { Heading1, Heading2, Heading3, List, ListOrdered } from "lucide-react";
+import { HardBreak } from "@tiptap/extension-hard-break";
 import StarterKit from "@tiptap/starter-kit";
-import { BoldIcon, Code, CodeSquare, Italic, StrikethroughIcon } from "lucide-react";
-import React, { useEffect, useState } from "react";
 import EditorMenubar from "./EditorMenuBar";
 import { Codepen } from "react-feather";
+import {
+  BoldIcon,
+  Italic,
+  Code,
+  Heading1,
+  Heading2,
+  List,
+  ListOrdered,
+  StrikethroughIcon,
+} from "lucide-react";
 
 interface EditorProps {
   editorState: string;
   setEditorState: (params: string) => void;
 }
 const Markdown = ({ editorState, setEditorState }: EditorProps) => {
+  const CustomHardBreak = HardBreak.extend({
+    addKeyboardShortcuts() {
+      return {
+        "Mod-Enter": () => true,
+      };
+    },
+  });
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [StarterKit, CustomHardBreak],
     content: editorState,
     onUpdate: ({ editor }) => {
       setEditorState(editor.getHTML());
@@ -26,54 +41,89 @@ const Markdown = ({ editorState, setEditorState }: EditorProps) => {
     }
   }, [editorState]);
 
+  const BubbleMenuFunctions = [
+    {
+      title: "bold",
+      onFunction: () => editor?.chain().focus().toggleBold().run(),
+      icon: <BoldIcon size={16} className="font-bold " />,
+    },
+    {
+      title: "italic",
+      onFunction: () => editor?.chain().focus().toggleItalic().run(),
+      icon: <Italic size={16} className="font-bold " />,
+    },
+    {
+      title: "strike",
+      onFunction: () => editor?.chain().focus().toggleStrike().run(),
+      icon: <StrikethroughIcon size={18} className="font-bold " />,
+    },
+    {
+      title: "code",
+      onFunction: () => editor?.chain().focus().toggleCode().run(),
+      icon: <Code size={18} className="font-bold " />,
+    },
+    {
+      title: "codeBlck",
+      onFunction: () => editor?.chain().focus().toggleCodeBlock().run(),
+      icon: <Codepen size={16} className="font-bold " />,
+    },
+  ];
+
+  const FloatingMenuFunctions = [
+    {
+      title: `heading`,
+      attribute: { level: 1 },
+      onFunction: () => editor?.chain().focus().toggleHeading({ level: 1 }).run(),
+      icon: <Heading1 className="w-4 h-4" />,
+    },
+    {
+      title: `heading`,
+      attribute: { level: 2 },
+      onFunction: () => editor?.chain().focus().toggleHeading({ level: 2 }).run(),
+      icon: <Heading2 className="w-4 h-4" />,
+    },
+    {
+      title: `codeBlock`,
+      attribute: { level: 1 },
+      onFunction: () => editor?.chain().focus().toggleCodeBlock().run(),
+      icon: <Codepen className="w-4 h-4" />,
+    },
+    {
+      title: `bulletList`,
+      onFunction: () => editor?.chain().focus().toggleBulletList().run(),
+      icon: <List className="w-4 h-4" />,
+    },
+    {
+      title: `orderedList`,
+      onFunction: () => editor?.chain().focus().toggleOrderedList().run(),
+      icon: <ListOrdered className="w-4 h-4" />,
+    },
+  ];
+
   return (
     <>
       <main className="dark:bg-secondary-light outline-none focus:ring rounded-lg p-3 text-white dark:text-white placholder:text-gray-400 text-lg w-full mb-2 max-w-full ">
         {editor && (
           <BubbleMenu className="bubble-menu" tippyOptions={{ duration: 100 }} editor={editor}>
             <div className="flex gap-1 bg-white px-4 py-1 text-black rounded-sm">
-              <button
-                onClick={() => editor.chain().focus().toggleBold().run()}
-                className={
-                  editor.isActive("bold") ? "is-active rounded-sm p-0.5" : " rounded-sm p-0.5"
-                }
-              >
-                <BoldIcon size={16} className="font-bold " />
-              </button>
-              <button
-                onClick={() => editor.chain().focus().toggleItalic().run()}
-                className={
-                  editor.isActive("italic") ? "is-active rounded-sm p-0.5" : " rounded-sm p-0.5"
-                }
-              >
-                <Italic size={18} className="font-bold " />
-              </button>
-              <button
-                onClick={() => editor.chain().focus().toggleStrike().run()}
-                className={
-                  editor.isActive("strike") ? "is-active rounded-sm p-0.5" : " rounded-sm p-0.5"
-                }
-              >
-                <StrikethroughIcon size={18} className="font-bold " />
-              </button>
-
-              <button
-                onClick={() => editor.chain().focus().toggleCode().run()}
-                className={
-                  editor.isActive("strike") ? "is-active rounded-sm p-0.5" : "rounded-sm p-0.5"
-                }
-              >
-                <Code size={18} className="font-bold " />
-              </button>
-
-              <button
-                onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-                className={
-                  editor.isActive("codeBlock") ? "is-active rounded-sm p-0.5" : "rounded-sm p-0.5"
-                }
-              >
-                <CodeSquare size={18} className="font-bold " />
-              </button>
+              {BubbleMenuFunctions.length > 0 &&
+                BubbleMenuFunctions.map((func) => (
+                  <button
+                    key={func.title}
+                    role="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      func.onFunction();
+                    }}
+                    className={
+                      editor.isActive(func.title)
+                        ? "is-active rounded-sm p-0.5"
+                        : " rounded-sm p-0.5"
+                    }
+                  >
+                    {func.icon}
+                  </button>
+                ))}
             </div>
           </BubbleMenu>
         )}
@@ -81,53 +131,27 @@ const Markdown = ({ editorState, setEditorState }: EditorProps) => {
         {editor && (
           <FloatingMenu className="floating-menu" tippyOptions={{ duration: 100 }} editor={editor}>
             <div className="flex gap-1 bg-white px-4 py-1 text-black rounded-sm">
-              <button
-                onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-                className={
-                  editor.isActive("heading", { level: 1 })
-                    ? "is-active rounded-sm p-0.5"
-                    : "rounded-sm p-0.5"
-                }
-              >
-                <Heading1 className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-                className={
-                  editor.isActive("heading", { level: 2 })
-                    ? "is-active rounded-sm p-0.5"
-                    : "rounded-sm p-0.5"
-                }
-              >
-                <Heading2 className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-                className={
-                  editor.isActive("bulletList") ? "is-active rounded-sm p-0.5" : " rounded-sm p-0.5"
-                }
-              >
-                <Codepen className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => editor.chain().focus().toggleBulletList().run()}
-                className={
-                  editor.isActive("bulletList") ? "is-active rounded-sm p-0.5" : " rounded-sm p-0.5"
-                }
-              >
-                <List className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => editor.chain().focus().toggleOrderedList().run()}
-                className={
-                  editor.isActive("bulletList") ? "is-active rounded-sm p-0.5" : " rounded-sm p-0.5"
-                }
-              >
-                <ListOrdered className="w-4 h-4" />
-              </button>
+              {FloatingMenuFunctions.length > 0 &&
+                FloatingMenuFunctions.map((func) => (
+                  <button
+                    role="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      func.onFunction();
+                    }}
+                    className={
+                      editor.isActive(func.title, func.attribute)
+                        ? "is-active rounded-sm p-0.5"
+                        : "rounded-sm p-0.5"
+                    }
+                  >
+                    {func.icon}
+                  </button>
+                ))}
             </div>
           </FloatingMenu>
         )}
+
         {editor && <EditorMenubar editor={editor} />}
 
         <EditorContent className="prose dark:prose-invert mt-4" editor={editor} />

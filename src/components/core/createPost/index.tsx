@@ -47,56 +47,8 @@ const CreatePost = () => {
   // get cookies from the browser
   const cookies = parseCookies();
 
-  // const handleFileChange = (event: any) => {
-  //   const fileObj = event.target.files && event.target.files[0];
-  //   if (!fileObj) {
-  //     return;
-  //   }
-  //   addNewImage(fileObj)
-  //     .then((res) => {
-  //       setPostImages((prev) => {
-  //         return {
-  //           ...prev,
-  //           image01: `https://cloud.appwrite.io/v1/storage/buckets/${process.env.REACT_APP_BUCKET_ID}/files/${res?.$id}/view?project=64685bc4ecb8d4ee9f38&mode=admin`,
-  //         };
-  //       });
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-
-  // const handleClickDelete = (id: string) => {
-  //   deleteImage(id)
-  //     .then((res) => {
-  //       setPostImages((prev) => {
-  //         return {
-  //           ...prev,
-  //           image01: "",
-  //           image02: "",
-  //           image03: "",
-  //           image04: "",
-  //         };
-  //       });
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-  // const colorPaletteSwitch = () => {
-  //   if (togglePalette) {
-  //     setTogglePalette(false);
-  //     setColors({
-  //       color01: "#a5a2a2",
-  //       color02: "#c2c2c2",
-  //       color03: "#9c9c9c",
-  //       color04: "#666665",
-  //     });
-  //   } else {
-  //     setTogglePalette(true);
-  //   }
-  // };
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    // console.log(postTitle);
-    // console.log(imageStorage);
-    // console.log(cookies["accountId"]);
 
     try {
       let imageURL: string = "";
@@ -190,18 +142,18 @@ const CreatePost = () => {
     }
   };
 
-  const handleKeyPress = useCallback((event: KeyboardEvent) => {
-    if (event.ctrlKey && event.key === "Enter") {
-      submitRef.current.click();
-    }
-  }, []);
+  // const handleKeyPress = useCallback((event: KeyboardEvent) => {
+  //   if (event.ctrlKey && event.key === "Enter") {
+  //     submitRef.current.click();
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    document.addEventListener("keydown", handleKeyPress);
-    return () => {
-      document.removeEventListener("keydown", handleKeyPress);
-    };
-  }, [handleKeyPress]);
+  // useEffect(() => {
+  //   document.addEventListener("keydown", handleKeyPress);
+  //   return () => {
+  //     document.removeEventListener("keydown", handleKeyPress);
+  //   };
+  // }, [handleKeyPress]);
 
   return (
     <>
@@ -215,12 +167,17 @@ const CreatePost = () => {
         <small className="text-slate-400 p-1">
           You have {CHAR_LIMIT - editorState.replaceAll(/<[^>]*>/g, "").length} characters left
         </small>
-        <Markdown
-          editorState={editorState === "" ? "" : editorState}
-          setEditorState={setEditorState}
-        />
 
         <form className="p-4" method="post" onSubmit={handleSubmit}>
+          <div
+            tabIndex={0}
+            className=""
+            onKeyDown={(e) => {
+              isCtrlEnter(e) ? handleSubmit(e) : null;
+            }}
+          >
+            <Markdown editorState={editorState} setEditorState={setEditorState} />
+          </div>
           {togglePalette ? (
             <Colorpicker
               colors={colors}
@@ -282,73 +239,3 @@ const CreatePost = () => {
   );
 };
 export default CreatePost;
-
-/*
-<form onSubmit={handleSubmit} className="px-4 py-2 shadow-lg mb-4">
-      <div className="flex">
-        <div className="flex-1 ">
-          <small className="text-slate-400">Character limit is upto 1000</small>
-          <textarea
-            onChange={onChangeInput}
-            value={postTitle}
-            name="postTitle"
-            className="bg-transparent outline-none border focus:ring rounded-lg p-3 text-black placholder:text-gray-400 text-lg w-full mb-2"
-            rows={3}
-            cols={50}
-            placeholder="What's happening?"
-            maxLength={1000}
-            required
-          ></textarea>
-
-          {togglePalette ? <Colorpicker colors={colors} setColors={setColors} /> : null}
-        </div>
-      </div>
-      {postImages?.image01?.length > 0 ? (
-        <Image
-          className="w-full"
-          src={postImages?.image01}
-          alt="post"
-          onClick={() => handleClickDelete(postImages?.image01.slice(72, 92))}
-        />
-      ) : null}
-
-      <div className="flex items-center justify-between">
-        <div className="flex gap-2">
-          <div className="flex items-center gap-3 group ">
-            <input
-              style={{ display: "none" }}
-              ref={inputRef}
-              type="file"
-              accept="image/*"
-              onChange={handleFileChange}
-            />
-            <span
-              className="p-2 rounded-full group-hover:bg-blue-800 group-hover:text-blue-300 flex justify-center items-center"
-              onClick={handleClick}
-            >
-              <NewImageFeather />
-            </span>
-          </div>
-
-          <div className="flex items-center gap-3 group ">
-            <span
-              onClick={() => setTogglePalette(!togglePalette)}
-              className="p-2 rounded-full group-hover:bg-blue-800 group-hover:text-blue-300 flex justify-center items-center"
-            >
-              <Command />
-            </span>
-          </div>
-        </div>
-
-        <div className="">
-          <button
-            type="submit"
-            className="primary hover:primary-light text-white font-bold py-2 px-8 rounded-full"
-          >
-            Post
-          </button>
-        </div>
-      </div>
-    </form>
-
-*/
