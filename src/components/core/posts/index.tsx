@@ -8,7 +8,7 @@ import { addLikesToAPost } from "@/redux/reducers/postsReducer";
 
 import { PostInstanceType } from "@/types/index.d";
 
-import PostSkeleton from "../../pages/feed/loading"
+import PostSkeleton from "../../pages/feed/loading";
 
 // Api
 // import { getAllPosts, likeTweet } from "@/backend/posts.api";
@@ -55,7 +55,11 @@ export default function Posts() {
   }
 
   if (postState.loading) {
-    return <h1 className="text-white text-2xl text-center"><PostSkeleton /></h1>;
+    return (
+      <h1 className="text-white text-2xl text-center">
+        <PostSkeleton />
+      </h1>
+    );
   }
 
   if (postState.error) {

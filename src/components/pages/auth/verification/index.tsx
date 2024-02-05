@@ -21,7 +21,7 @@ export default function VerificationComponent({ userId, secret }: Verification) 
       .then((resp) => {
         if (resp.status) {
           setVerified(resp.status);
-          setCookie(null,'isVerified', 'true')
+          setCookie(null, "isVerified", "true");
         }
       })
       .catch((err) => {

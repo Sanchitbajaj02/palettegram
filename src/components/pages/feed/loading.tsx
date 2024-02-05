@@ -3,8 +3,6 @@ export default function PostSkeleton({ width }: { width?: string }) {
     <>
       <div className=" shadow dark:shadow-gray-600 mb-4 rounded-md">
         <div className="flex animate-pulse p-3">
-
-
           <div className="flex-shrink-0">
             <span className="w-12 h-12 block bg-gray-200 rounded-full dark:bg-gray-700"></span>
           </div>
@@ -21,8 +19,6 @@ export default function PostSkeleton({ width }: { width?: string }) {
       </div>
       <div className=" shadow dark:shadow-gray-600 mb-4 rounded-md">
         <div className="flex animate-pulse p-3">
-
-
           <div className="flex-shrink-0">
             <span className="w-12 h-12 block bg-gray-200 rounded-full dark:bg-gray-700"></span>
           </div>
@@ -39,8 +35,6 @@ export default function PostSkeleton({ width }: { width?: string }) {
       </div>
       <div className=" shadow dark:shadow-gray-600 mb-4 rounded-md">
         <div className="flex animate-pulse p-3">
-
-
           <div className="flex-shrink-0">
             <span className="w-12 h-12 block bg-gray-200 rounded-full dark:bg-gray-700"></span>
           </div>
@@ -56,5 +50,5 @@ export default function PostSkeleton({ width }: { width?: string }) {
         </div>
       </div>
     </>
-  )
+  );
 }

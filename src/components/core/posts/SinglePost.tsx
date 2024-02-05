@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { redirect } from 'next/navigation'
+import parse from "html-react-parser";
+import { redirect } from "next/navigation";
 import Image from "next/image";
 import { Download, Heart, MessageCircle, Share, Bookmark } from "react-feather";
 import { PostInstanceType } from "@/types/index.d";
@@ -10,9 +11,8 @@ import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
 import { toastify } from "@/helper/toastify";
 import { addComment } from "@/backend/posts.api";
 import { getUserDetails } from "@/backend/auth.api";
-import { useCallback, useEffect, useState,MouseEvent } from "react";
+import { useCallback, useEffect, useState, MouseEvent } from "react";
 import { UserBookMarkType, FormatOnType } from "@/types/index";
-
 import isCtrlEnter from "@/helper/isCtrlEnter";
 
 interface UserDetails {
@@ -148,42 +148,46 @@ export default function SinglePost({
     fetchUserDetails();
   }, [fetchUserDetails]);
 
-  const handleClick = (e:MouseEvent<HTMLDivElement | HTMLSpanElement>)=>{
+  const handleClick = (e: MouseEvent<HTMLDivElement | HTMLSpanElement>) => {
     const element = e.target as HTMLDivElement | HTMLSpanElement;
-    const spanElement = element.querySelector('span');
-    let currentSelectedElement:HTMLSpanElement | HTMLDivElement | null = null;
-    if(spanElement){
+    const spanElement = element.querySelector("span");
+    let currentSelectedElement: HTMLSpanElement | HTMLDivElement | null = null;
+    if (spanElement) {
       currentSelectedElement = spanElement;
-    }else{
+    } else {
       currentSelectedElement = element;
     }
-    if(currentSelectedElement && currentSelectedElement.textContent){
+    if (currentSelectedElement && currentSelectedElement.textContent) {
       const prevValue = currentSelectedElement.textContent;
-      navigator.clipboard.writeText(currentSelectedElement.textContent).then(()=>{
-        if(currentSelectedElement){
-          currentSelectedElement.textContent = 'Copied';
-          currentSelectedElement.classList.remove('bg-slate-950/[0.4]');
-          currentSelectedElement.classList.add('bg-black');
-          setTimeout(()=>{
-            if(currentSelectedElement){
-              currentSelectedElement.textContent = prevValue;
-              currentSelectedElement.classList.remove('bg-black');
-              currentSelectedElement.classList.add('bg-slate-950/[0.4]');
-            }
-        },1000);
-      }
-      }).catch(console.log)
+      navigator.clipboard
+        .writeText(currentSelectedElement.textContent)
+        .then(() => {
+          if (currentSelectedElement) {
+            currentSelectedElement.textContent = "Copied";
+            currentSelectedElement.classList.remove("bg-slate-950/[0.4]");
+            currentSelectedElement.classList.add("bg-black");
+            setTimeout(() => {
+              if (currentSelectedElement) {
+                currentSelectedElement.textContent = prevValue;
+                currentSelectedElement.classList.remove("bg-black");
+                currentSelectedElement.classList.add("bg-slate-950/[0.4]");
+              }
+            }, 1000);
+          }
+        })
+        .catch(console.log);
     }
-    
-  }
-  const colors = singlePost?.colors && typeof singlePost?.colors ==='string' && JSON.parse(singlePost.colors)
+  };
+  const colors =
+    singlePost?.colors && typeof singlePost?.colors === "string" && JSON.parse(singlePost.colors);
 
   return (
     <div
-      className={` ${width
-        ? "w-96 p-3 m-auto  rounded-md shadow dark:shadow-gray-600 mb-4 mt-40 "
-        : "p-3 rounded-md shadow dark:shadow-gray-600 mb-4"
-        } `}
+      className={` ${
+        width
+          ? "w-96 p-3 m-auto  rounded-md shadow dark:shadow-gray-600 mb-4 mt-40 "
+          : "p-3 rounded-md shadow dark:shadow-gray-600 mb-4"
+      } `}
     >
       <Link
         className="flex items-center gap-3 mb-3"
@@ -204,9 +208,13 @@ export default function SinglePost({
         </div>
       </Link>
       <Link href={`/post/${singlePost && singlePost?.$id}`}>
-        <p className="text-md mb-4">
-          {singlePost && singlePost?.postTitle ? singlePost?.postTitle : "No Title"}
-        </p>
+        <div className="text-md mb-4">
+          {singlePost && singlePost?.postTitle ? (
+            <div className="prose dark:prose-invert">{parse(singlePost?.postTitle)}</div>
+          ) : (
+            "No Title"
+          )}
+        </div>
 
         {singlePost && singlePost?.postImages && singlePost?.postImages[0]?.length > 0 ? (
           <Image
@@ -219,7 +227,7 @@ export default function SinglePost({
         ) : null}
       </Link>
 
-      {colors && Object.keys(colors).length>0? (
+      {colors && Object.keys(colors).length > 0 ? (
         <div className="my-2 flex flex-row justify-between items-center w-full">
           {/* {JSON.parse(singlePost.colors).map((color: string, index: number) => {
             return (
@@ -235,32 +243,51 @@ export default function SinglePost({
           })} */}
           <div className="w-full  h-[200px] bg-tranparent mx-auto flex mb-3.5 gap-1">
             <div
-            className="cursor-pointer w-full flex justify-center items-center group" 
-            style={{backgroundColor:typeof colors.color01 === 'string' && colors.color01 || ''}}
-            onClick={handleClick}
+              className="cursor-pointer w-full flex justify-center items-center group"
+              style={{
+                backgroundColor: (typeof colors.color01 === "string" && colors.color01) || "",
+              }}
+              onClick={handleClick}
             >
-              <span className="bg-slate-950/[0.4] text-xs px-0.5 opacity-0 transition ease-out duration-300 group-hover:opacity-100 group-hover:ease-in group-hover:scale-110" onClick={handleClick}>{colors.color01}</span>
+              <span
+                className="bg-slate-950/[0.4] text-xs px-0.5 opacity-0 transition ease-out duration-300 group-hover:opacity-100 group-hover:ease-in group-hover:scale-110"
+                onClick={handleClick}
+              >
+                {colors.color01}
+              </span>
             </div>
             <div
-            className="cursor-pointer w-full flex justify-center items-center group " 
-            style={{backgroundColor:typeof colors.color02 === 'string' && colors.color02 || ''}}
-            onClick={handleClick}
+              className="cursor-pointer w-full flex justify-center items-center group "
+              style={{
+                backgroundColor: (typeof colors.color02 === "string" && colors.color02) || "",
+              }}
+              onClick={handleClick}
             >
-              <span className="bg-slate-950/[0.4] text-xs px-0.5 opacity-0 transition ease-out duration-300 group-hover:opacity-100 group-hover:ease-in group-hover:scale-110">{colors.color02}</span>
+              <span className="bg-slate-950/[0.4] text-xs px-0.5 opacity-0 transition ease-out duration-300 group-hover:opacity-100 group-hover:ease-in group-hover:scale-110">
+                {colors.color02}
+              </span>
             </div>
             <div
-            className="cursor-pointer w-full flex justify-center items-center group gap-2" 
-            style={{backgroundColor:typeof colors.color03 === 'string' && colors.color03 || ''}}
-            onClick={handleClick}
+              className="cursor-pointer w-full flex justify-center items-center group gap-2"
+              style={{
+                backgroundColor: (typeof colors.color03 === "string" && colors.color03) || "",
+              }}
+              onClick={handleClick}
             >
-              <span className="bg-slate-950/[0.4] text-xs px-0.5 opacity-0 transition ease-out duration-300 group-hover:opacity-100 group-hover:ease-in group-hover:scale-110">{colors.color03}</span>
+              <span className="bg-slate-950/[0.4] text-xs px-0.5 opacity-0 transition ease-out duration-300 group-hover:opacity-100 group-hover:ease-in group-hover:scale-110">
+                {colors.color03}
+              </span>
             </div>
             <div
-            className="cursor-pointer w-full flex justify-center items-center group" 
-            style={{backgroundColor:typeof colors.color04 === 'string' && colors.color04 || ''}}
-            onClick={handleClick}
+              className="cursor-pointer w-full flex justify-center items-center group"
+              style={{
+                backgroundColor: (typeof colors.color04 === "string" && colors.color04) || "",
+              }}
+              onClick={handleClick}
             >
-              <span className="bg-slate-950/[0.4] text-xs px-0.5 opacity-0 transition ease-out duration-300 group-hover:opacity-100 group-hover:ease-in group-hover:scale-110">{colors.color04}</span>
+              <span className="bg-slate-950/[0.4] text-xs px-0.5 opacity-0 transition ease-out duration-300 group-hover:opacity-100 group-hover:ease-in group-hover:scale-110">
+                {colors.color04}
+              </span>
             </div>
           </div>
         </div>
@@ -269,18 +296,20 @@ export default function SinglePost({
       <div className="flex justify-around">
         <article
           onClick={() => onLikeClick(singlePost)}
-          className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${singlePost?.likes && singlePost?.likes.includes(authState?.userId)
-            ? "text-primary hover:text-primary"
-            : "text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
-            }`}
+          className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${
+            singlePost?.likes && singlePost?.likes.includes(authState?.userId)
+              ? "text-primary hover:text-primary"
+              : "text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
+          }`}
         >
           <Heart
             size={22}
             fill="true"
-            className={`${singlePost?.likes && singlePost?.likes.includes(authState?.userId)
-              ? "fill-primary"
-              : "fill-transparent"
-              }`}
+            className={`${
+              singlePost?.likes && singlePost?.likes.includes(authState?.userId)
+                ? "fill-primary"
+                : "fill-transparent"
+            }`}
           />
           <span className="text-base">
             {singlePost && singlePost?.likes && singlePost?.likes.length}
@@ -301,24 +330,26 @@ export default function SinglePost({
 
         <article
           onClick={() => handleUpdateBookmark(singlePost?.$id)}
-          className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${userBookmarks &&
+          className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${
+            userBookmarks &&
             userBookmarks?.bookmark &&
             userBookmarks?.bookmark?.length > 0 &&
             userBookmarks?.bookmark.includes(singlePost && singlePost?.$id!)
-            ? "text-primary hover:text-primary dark:hover:text-primary"
-            : "text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
-            }`}
+              ? "text-primary hover:text-primary dark:hover:text-primary"
+              : "text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
+          }`}
         >
           <Bookmark
             size={22}
             fill="true"
-            className={`${userBookmarks &&
+            className={`${
+              userBookmarks &&
               userBookmarks?.bookmark &&
               userBookmarks?.bookmark?.length > 0 &&
               userBookmarks?.bookmark.includes(singlePost && singlePost?.$id!)
-              ? "fill-primary"
-              : "fill-transparent"
-              }`}
+                ? "fill-primary"
+                : "fill-transparent"
+            }`}
           />
         </article>
 
