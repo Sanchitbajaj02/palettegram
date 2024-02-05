@@ -1,5 +1,6 @@
 import Loader from "@/app/loading";
 import { removePost } from "@/backend/posts.api";
+import parse from "html-react-parser";
 import { toastify } from "@/helper/toastify";
 import { removeUserPost } from "@/redux/reducers/postsReducer";
 import { PostInstanceType } from "@/types";
@@ -110,7 +111,9 @@ export default function UserPosts({ userId, userName }: UserPostsProps) {
                           )}
                         </div>
 
-                        <p className="text-neutral-900 dark:text-neutral-200">{post?.postTitle}</p>
+                        <p className="text-neutral-900 dark:text-neutral-200">
+                          {parse(post?.postTitle)}
+                        </p>
                         <div className="h-auto w-full relative mt-2">
                           {post && post?.postImages && post?.postImages[0].length > 0 ? (
                             <Image

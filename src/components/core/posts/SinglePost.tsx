@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { redirect } from 'next/navigation'
+import parse from "html-react-parser";
+import { redirect } from "next/navigation";
 import Image from "next/image";
 import { Download, Heart, MessageCircle, Share, Bookmark } from "react-feather";
 import { PostInstanceType } from "@/types/index.d";
@@ -12,7 +13,6 @@ import { addComment } from "@/backend/posts.api";
 import { getUserDetails } from "@/backend/auth.api";
 import { useCallback, useEffect, useState,MouseEvent } from "react";
 import { UserBookMarkType, FormatOnType } from "@/types/index";
-
 import isCtrlEnter from "@/helper/isCtrlEnter";
 
 interface UserDetails {
@@ -180,10 +180,11 @@ export default function SinglePost({
 
   return (
     <div
-      className={` ${width
-        ? "w-96 p-3 m-auto  rounded-md shadow dark:shadow-gray-600 mb-4 mt-40 "
-        : "p-3 rounded-md shadow dark:shadow-gray-600 mb-4"
-        } `}
+      className={` ${
+        width
+          ? "w-96 p-3 m-auto  rounded-md shadow dark:shadow-gray-600 mb-4 mt-40 "
+          : "p-3 rounded-md shadow dark:shadow-gray-600 mb-4"
+      } `}
     >
       <Link
         className="flex items-center gap-3 mb-3"
@@ -204,9 +205,13 @@ export default function SinglePost({
         </div>
       </Link>
       <Link href={`/post/${singlePost && singlePost?.$id}`}>
-        <p className="text-md mb-4">
-          {singlePost && singlePost?.postTitle ? singlePost?.postTitle : "No Title"}
-        </p>
+        <div className="text-md mb-4">
+          {singlePost && singlePost?.postTitle ? (
+            <div className="prose dark:prose-invert">{parse(singlePost?.postTitle)}</div>
+          ) : (
+            "No Title"
+          )}
+        </div>
 
         {singlePost && singlePost?.postImages && singlePost?.postImages[0]?.length > 0 ? (
           <Image
@@ -269,18 +274,20 @@ export default function SinglePost({
       <div className="flex justify-around">
         <article
           onClick={() => onLikeClick(singlePost)}
-          className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${singlePost?.likes && singlePost?.likes.includes(authState?.userId)
-            ? "text-primary hover:text-primary"
-            : "text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
-            }`}
+          className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${
+            singlePost?.likes && singlePost?.likes.includes(authState?.userId)
+              ? "text-primary hover:text-primary"
+              : "text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
+          }`}
         >
           <Heart
             size={22}
             fill="true"
-            className={`${singlePost?.likes && singlePost?.likes.includes(authState?.userId)
-              ? "fill-primary"
-              : "fill-transparent"
-              }`}
+            className={`${
+              singlePost?.likes && singlePost?.likes.includes(authState?.userId)
+                ? "fill-primary"
+                : "fill-transparent"
+            }`}
           />
           <span className="text-base">
             {singlePost && singlePost?.likes && singlePost?.likes.length}
@@ -301,24 +308,26 @@ export default function SinglePost({
 
         <article
           onClick={() => handleUpdateBookmark(singlePost?.$id)}
-          className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${userBookmarks &&
+          className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${
+            userBookmarks &&
             userBookmarks?.bookmark &&
             userBookmarks?.bookmark?.length > 0 &&
             userBookmarks?.bookmark.includes(singlePost && singlePost?.$id!)
-            ? "text-primary hover:text-primary dark:hover:text-primary"
-            : "text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
-            }`}
+              ? "text-primary hover:text-primary dark:hover:text-primary"
+              : "text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
+          }`}
         >
           <Bookmark
             size={22}
             fill="true"
-            className={`${userBookmarks &&
+            className={`${
+              userBookmarks &&
               userBookmarks?.bookmark &&
               userBookmarks?.bookmark?.length > 0 &&
               userBookmarks?.bookmark.includes(singlePost && singlePost?.$id!)
-              ? "fill-primary"
-              : "fill-transparent"
-              }`}
+                ? "fill-primary"
+                : "fill-transparent"
+            }`}
           />
         </article>
 

@@ -5,7 +5,9 @@ import { KeyboardEvent } from "react";
  * @param e Keydown event
  * @returns true if Ctrl + Enter (on windows) or Cmd + Enter (on mac) is pressed
  */
-export default function isCtrlEnter(e: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) {
+export default function isCtrlEnter(
+  e: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement> | KeyboardEvent<HTMLDivElement>,
+) {
   if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
     return true;
   }
