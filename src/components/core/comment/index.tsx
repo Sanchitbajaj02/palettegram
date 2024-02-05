@@ -1,9 +1,9 @@
-import { ThumbsUp, ThumbsDown, Repeat } from "react-feather"
-import Image from "next/image"
+import { ThumbsUp, ThumbsDown, Repeat } from "react-feather";
+import Image from "next/image";
 
 type propType = {
-  comment: string
-}
+  comment: string;
+};
 
 export default function Comment(props: propType) {
   return (
@@ -27,9 +27,7 @@ export default function Comment(props: propType) {
         <p className="text-md mb-4">{props.comment}</p>
       </a>
       <div className="flex justify-around">
-        <article
-          className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary"
-        >
+        <article className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary">
           <ThumbsUp size={22} />
         </article>
 
@@ -38,11 +36,9 @@ export default function Comment(props: propType) {
         </article>
 
         <article className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary">
-          <Repeat size={22} orientation={'vertical'} />
+          <Repeat size={22} orientation={"vertical"} />
         </article>
-
-
       </div>
     </div>
-  )
+  );
 }
