@@ -6,18 +6,21 @@ export function middleware(request: NextRequest) {
   const isPublicRoutes =
     pathname === "/login" || pathname === "/register" || pathname === "/verify/:path*";
   const isPrivateRoutes =
-    pathname === "/feed" || pathname === "/post" || pathname === "/post/:path*" || pathname === "/user/:path*";
+    pathname === "/feed" ||
+    pathname === "/post" ||
+    pathname === "/post/:path*" ||
+    pathname === "/user/:path*";
 
   let isTokenAvailable: string = request.cookies.get("accountId")?.value || "";
   let isUserVerified: string = request.cookies.get("isVerified")?.value || "";
-  console.log(isTokenAvailable)
-  console.log(isUserVerified)
+  console.log(isTokenAvailable);
+  console.log(isUserVerified);
 
   if (isPublicRoutes && isTokenAvailable) {
     return NextResponse.redirect(new URL("/", request.nextUrl));
   }
 
-  if (isPrivateRoutes && isUserVerified === 'false') {
+  if (isPrivateRoutes && isUserVerified === "false") {
     return NextResponse.redirect(new URL("/login", request.nextUrl));
   }
 

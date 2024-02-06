@@ -14,9 +14,9 @@ import { getCurrentUser } from "@/backend/auth.api";
 import { useRouter } from "next/navigation";
 
 const Feed = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [user, setUser] = useState({
-    emailVerification: undefined
+    emailVerification: undefined,
   });
   const cookies = parseCookies();
   const userIdFromCookies: string = cookies["accountId"];
@@ -28,8 +28,8 @@ const Feed = () => {
       })
       .catch(console.log);
   }, []);
-  if(user.emailVerification === false){
-    router.push('/verify')
+  if (user.emailVerification === false) {
+    router.push("/verify");
   }
 
   return (

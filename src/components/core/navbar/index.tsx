@@ -9,11 +9,11 @@ import ThemeButton from "@/components/core/themeButton";
 
 import { parseCookies } from "nookies";
 
-import { logoutUser } from "@/backend/auth.api";
+import { logoutUser, getCurrentUser } from "@/backend/auth.api";
 import { getAllPosts } from "@/backend/posts.api";
 import { getBookmarks } from "@/backend/bookmarks.api";
 
-import { logUserOut } from "@/redux/reducers/authReducer";
+import { logUserOut, saveUser } from "@/redux/reducers/authReducer";
 import { getPosts } from "@/redux/reducers/postsReducer";
 import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
 
@@ -36,6 +36,13 @@ const Navbar = () => {
   };
 
   useEffect(() => {
+    getCurrentUser()
+      .then((currUser) => {
+        console.log(currUser);
+        dispatch(saveUser(currUser));
+      })
+      .catch((err) => console.log(err));
+
     const timeoutId = setTimeout(() => {
       getAllPosts()
         .then((posts) => {

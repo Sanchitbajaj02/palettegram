@@ -3,8 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { PostInstanceType, PostInitStateType } from "@/types/index.d";
 
-
-
 const initialState: PostInitStateType = {
   posts: [],
   error: false,

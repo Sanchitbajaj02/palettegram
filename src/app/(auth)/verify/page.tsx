@@ -1,5 +1,6 @@
 "use client";
-import React from "react";
+import { Suspense } from "react";
+import Loader from "@/app/loading";
 import VerificationComponent from "@/components/pages/auth/verification";
 import Footer from "@/components/core/footer";
 import Image from "next/image";
@@ -14,27 +15,29 @@ export default function VerifyPage({ searchParams }: VerifyProps) {
   if (userId === undefined && secret === undefined) {
     return (
       <>
-        <div className="h-screen w-full overflow-hidden">
-          <section className="h-fit w-full max-w-2xl mx-auto mt-40 rounded-3xl p-6 flex flex-col justify-center items-center gap-8 bg-white/20 backdrop-blur-md ">
-            <div className="flex flex-col gap-3 items-center">
-              <Image src={"/assets/logo.png"} alt="logo" height={60} width={60} />
-              <h3 className="text-center font-semibold text-xl">
-                Please check your inbox and{" "}
+        <section className="max-w-screen-md mx-auto h-screen flex justify-center items-center">
+          <div className="card">
+            <div className="flex flex-col gap-4 items-center ">
+              <Image src={"/assets/logo.png"} alt="logo" height={80} width={80} />
+              <h1 className="text-xl md:text-2xl mb-4 text-center font-bold text-secondary dark:text-white">
+                Please check your inbox/spam and{" "}
                 <span className="text-primary-light">verify your account</span>.
-              </h3>
+              </h1>
+              <ButtonLong href="https://mail.google.com/mail/" size="normal" newTab>
+                Open your email
+              </ButtonLong>
             </div>
-            <ButtonLong href="https://mail.google.com/mail/" size="small">
-              Open Mail
-            </ButtonLong>
-          </section>
-        </div>
+          </div>
+        </section>
         <Footer isFixed />
       </>
     );
   }
   return (
     <>
-      <VerificationComponent userId={String(userId)} secret={String(secret)} />
+      <Suspense fallback={<Loader />}>
+        <VerificationComponent userId={String(userId)} secret={String(secret)} />
+      </Suspense>
       <Footer isFixed />
     </>
   );

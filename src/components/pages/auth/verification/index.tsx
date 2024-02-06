@@ -6,6 +6,7 @@ import { toastify } from "@/helper/toastify";
 import { ButtonLong } from "@/components/core/buttons";
 import Loader from "@/app/loading";
 import { setCookie } from "nookies";
+import Image from "next/image";
 
 interface Verification {
   userId: string;
@@ -21,7 +22,7 @@ export default function VerificationComponent({ userId, secret }: Verification) 
       .then((resp) => {
         if (resp.status) {
           setVerified(resp.status);
-          setCookie(null,'isVerified', 'true')
+          setCookie(null, "isVerified", "true");
         }
       })
       .catch((err) => {
@@ -33,17 +34,15 @@ export default function VerificationComponent({ userId, secret }: Verification) 
 
   return (
     <>
-      <section className="max-w-screen-sm mx-auto h-screen flex justify-center items-center">
+      <section className="max-w-screen-md mx-auto h-screen flex justify-center items-center">
         <div className="card">
-          <h1 className="text-xl md:text-3xl mb-8 text-center font-bold text-secondary dark:text-white">
-            You are verified 👏
-          </h1>
-          {/* <p className="text-base md:text-xl text-center font-normal text-secondary-light dark:text-gray-50">
-            Register and be a part of the amazing community
-          </p> */}
-          <div className="text-center">
+          <div className="flex flex-col gap-4 items-center ">
+            <Image src={"/assets/logo.png"} alt="logo" height={80} width={80} />
+            <h1 className="text-xl md:text-2xl mb-4 text-center font-bold text-secondary dark:text-white">
+              Congratulation!! You are verified 👏
+            </h1>
             {isVerified ? (
-              <ButtonLong href="/feed" size="big">
+              <ButtonLong href="/feed" size="normal">
                 Click to join community
               </ButtonLong>
             ) : (
