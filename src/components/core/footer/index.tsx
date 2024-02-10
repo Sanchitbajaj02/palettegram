@@ -4,7 +4,11 @@ import Image from "next/image";
 
 export default function Footer({ isFixed }: { isFixed?: boolean }) {
   return (
-    <section className={`mt-12 text-center text-secondary-light dark:text-primary-light ${!!isFixed ? "bottom-0 fixed w-full" : ""} `}>
+    <section
+      className={`mt-12 text-center text-secondary-light dark:text-primary-light ${
+        !!isFixed ? "bottom-0 fixed w-full" : ""
+      } `}
+    >
       <div className="flex flex-col items-center md:flex-row border-t border-white w-11/12 min-w-75 m-auto py-10 ">
         <div className="flex items-center flex-1 pt-2 pb-9">
           <Link href="/">
@@ -47,7 +51,7 @@ export default function Footer({ isFixed }: { isFixed?: boolean }) {
             </Link>
           </div>
         </div>
-      </div>  
+      </div>
       <p className="py-2 text-[13px]">
         Copyright &copy; {new Date().getFullYear()} Palettegram | All Rights Reserved.
       </p>
