@@ -46,7 +46,7 @@ const PostDisplay = ({ params: { id } }: Prop) => {
             isActive: res.isActive,
           });
         }
-        console.log(res);
+        console.log("display", res);
       } catch (error: any) {
         console.log("error while fetching single post ", error.message);
       }
