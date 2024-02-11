@@ -10,7 +10,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { addPost } from "@/redux/reducers/postsReducer";
 import { PostInstanceType } from "@/types/index.d";
 import isCtrlEnter from "@/helper/isCtrlEnter";
-import { motion } from "framer-motion";
 import Markdown from "@/components/Editor/Markdown";
 
 const CHAR_LIMIT = 500;
@@ -157,13 +156,7 @@ const CreatePost = () => {
 
   return (
     <>
-      <motion.section
-        initial={{ opacity: 0, y: -350 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.1, type: "spring", stiffness: 110 }}
-        className="border border-gray-500 rounded-md shadow-sm mb-4 p-2"
-      >
+      <section className="border border-gray-500 rounded-md shadow-sm mb-4 p-2">
         <small className="text-slate-400 p-1">
           You have {CHAR_LIMIT - editorState.replaceAll(/<[^>]*>/g, "").length} characters left
         </small>
@@ -234,7 +227,7 @@ const CreatePost = () => {
             </article>
           </div>
         </form>
-      </motion.section>
+      </section>
     </>
   );
 };

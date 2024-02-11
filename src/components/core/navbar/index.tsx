@@ -38,8 +38,14 @@ const Navbar = () => {
   useEffect(() => {
     getCurrentUser()
       .then((currUser) => {
-        console.log(currUser);
-        dispatch(saveUser(currUser));
+        const payload = {
+          accountId: currUser.$id,
+          email: currUser.email,
+          isVerified: currUser.emailVerification,
+          createdAt: currUser.$createdAt,
+        };
+
+        dispatch(saveUser(payload));
       })
       .catch((err) => console.log(err));
 
@@ -106,7 +112,7 @@ const Navbar = () => {
             </Link>
           )}
 
-          {userAuth.creds?.userId && (
+          {userAuth.creds?.accountId && (
             <>
               <Link
                 href={`/user/${userIdFromCookies}`}

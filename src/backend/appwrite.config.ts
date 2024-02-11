@@ -11,11 +11,22 @@ const storage = new Storage(appwriteClient);
 
 // appwrite keys
 const palettegramDB = String(process.env.NEXT_PUBLIC_DATABASE_ID);
-const usersCollection = String(process.env.NEXT_PUBLIC_USER_COLLECTION);
+const usersCollection = String(process.env.NEXT_PUBLIC_USERS_COLLECTION);
 const postsCollection = String(process.env.NEXT_PUBLIC_POSTS_COLLECTION);
 const bookmarksCollection = String(process.env.NEXT_PUBLIC_BOOKMARKS_COLLECTION);
+const likesCollection = String(process.env.NEXT_PUBLIC_LIKES_COLLECTION);
+const contactsCollection = String(process.env.NEXT_PUBLIC_CONTACTS_COLLECTION);
+
 const bucketStorage = String(process.env.NEXT_PUBLIC_BUCKET_ID);
 
 export { appwriteClient, account, db, storage, ID, Query };
 
-export { palettegramDB, usersCollection, postsCollection, bookmarksCollection, bucketStorage };
+export {
+  palettegramDB,
+  usersCollection,
+  postsCollection,
+  likesCollection,
+  contactsCollection,
+  bookmarksCollection,
+  bucketStorage,
+};
