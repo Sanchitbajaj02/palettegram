@@ -39,7 +39,7 @@ const Markdown = ({ editorState, setEditorState }: EditorProps) => {
     if (editorState === null || editorState === "") {
       editor?.commands.setContent("");
     }
-  }, [editorState]);
+  }, [editorState, editor?.commands]);
 
   const BubbleMenuFunctions = [
     {
@@ -134,6 +134,7 @@ const Markdown = ({ editorState, setEditorState }: EditorProps) => {
               {FloatingMenuFunctions.length > 0 &&
                 FloatingMenuFunctions.map((func) => (
                   <button
+                    key={func.title}
                     role="button"
                     onClick={(e) => {
                       e.preventDefault();
