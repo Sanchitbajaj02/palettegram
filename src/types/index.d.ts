@@ -21,7 +21,7 @@ export type PostInitStateType = {
 
 export type userDetail = {
   creds: {
-    userId: string;
+    accountId: string;
     email: string;
     createdAt: string;
     isVerified: boolean;
