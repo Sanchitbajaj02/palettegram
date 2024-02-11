@@ -44,8 +44,12 @@ export default function RegisterComponent() {
     try {
       setIsLoading(true);
       setRegisterStatus("registering");
-
+      const nameRegex: RegExp = /^[\sa-zA-Z]+$/;
       const passwordRegex: RegExp = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@_])[A-Za-z\d@_]{6,16}$/;
+
+      if (!nameRegex.test(data.fullName)) {
+        throw new Error("Name should not contain any number or special character");
+      }
 
       if (data.password !== data.confirmpassword) {
         throw new Error("Password and Confirm Password does not match");
@@ -59,7 +63,7 @@ export default function RegisterComponent() {
 
       if (!passwordRegex.test(data.password)) {
         throw new Error(
-          "Oops!, Password must contain a character, a number and a special charcter",
+          "Oops!, Password must contain a character, a number and a special character",
         );
       }
 
