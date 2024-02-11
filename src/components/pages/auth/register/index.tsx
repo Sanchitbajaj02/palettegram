@@ -77,7 +77,7 @@ export default function RegisterComponent() {
       toastify("Register Successful. Please check your email to verify", "success");
       router.push("/verify");
     } catch (error: any) {
-      setIsLoading(true);
+      setIsLoading(false);
 
       toastify(error.message, "info");
     }

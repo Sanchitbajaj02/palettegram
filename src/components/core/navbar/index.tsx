@@ -37,7 +37,9 @@ const Navbar = () => {
 
   useEffect(() => {
     getCurrentUser()
-      .then((currUser) => {
+      .then((currUser: any) => {
+        console.log("currUser: ", currUser);
+
         const payload = {
           accountId: currUser.$id,
           email: currUser.email,

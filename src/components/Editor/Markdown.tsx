@@ -107,9 +107,9 @@ const Markdown = ({ editorState, setEditorState }: EditorProps) => {
           <BubbleMenu className="bubble-menu" tippyOptions={{ duration: 100 }} editor={editor}>
             <div className="flex gap-1 bg-white px-4 py-1 text-black rounded-sm">
               {BubbleMenuFunctions.length > 0 &&
-                BubbleMenuFunctions.map((func) => (
+                BubbleMenuFunctions.map((func: any, index: number) => (
                   <button
-                    key={func.title}
+                    key={index}
                     role="button"
                     onClick={(e) => {
                       e.preventDefault();
@@ -132,9 +132,9 @@ const Markdown = ({ editorState, setEditorState }: EditorProps) => {
           <FloatingMenu className="floating-menu" tippyOptions={{ duration: 100 }} editor={editor}>
             <div className="flex gap-1 bg-white px-4 py-1 text-black rounded-sm">
               {FloatingMenuFunctions.length > 0 &&
-                FloatingMenuFunctions.map((func) => (
+                FloatingMenuFunctions.map((func: any, index: number) => (
                   <button
-                    key={func.title}
+                    key={index}
                     role="button"
                     onClick={(e) => {
                       e.preventDefault();

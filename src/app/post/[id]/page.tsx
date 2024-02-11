@@ -19,7 +19,7 @@ const PostDisplay = ({ params: { id } }: Prop) => {
     accountId: "",
     postTitle: "",
     postImages: [],
-    colors: [],
+    colors: "",
     comments: [],
     likes: [],
     $collectionId: "",
