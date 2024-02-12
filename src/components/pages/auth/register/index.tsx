@@ -25,7 +25,6 @@ export default function RegisterComponent() {
     password: "",
     confirmpassword: "",
   });
-  const [registerStatus, setRegisterStatus] = useState("initial");
 
   const router = useRouter();
   const dispatch = useDispatch();
@@ -44,6 +43,7 @@ export default function RegisterComponent() {
     try {
       setIsLoading(true);
       setRegisterStatus("registering");
+      
       const nameRegex: RegExp = /^[\sa-zA-Z]+$/;
       const passwordRegex: RegExp = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@_])[A-Za-z\d@_]{6,16}$/;
 
@@ -69,22 +69,22 @@ export default function RegisterComponent() {
 
       const resp = await registerUser(data);
 
-      dispatch(
-        saveUser({
-          userId: resp["$id"],
-          email: resp.email,
-          fullName: resp.name,
-          isVerified: resp.emailVerification,
-          createdAt: resp["$createdAt"],
-        }),
-      );
-      setRegisterStatus("success");
+      const payload = {
+        accountId: resp.$id,
+        email: resp.email,
+        fullName: resp.name,
+        isVerified: resp.emailVerification,
+        createdAt: resp.$createdAt,
+      };
+
+      dispatch(saveUser(payload));
+
       setIsLoading(false);
       toastify("Register Successful. Please check your email to verify", "success");
       router.push("/verify");
     } catch (error: any) {
-      setIsLoading(false);
-      setRegisterStatus("failure");
+      setIsLoading(true);
+
       toastify(error.message, "info");
     }
   }
@@ -280,7 +280,7 @@ export default function RegisterComponent() {
               <button
                 type="submit"
                 className="w-full py-2 text-sm md:text-base rounded-full text-white bg-primary transition duration-300 ease hover:bg-secondary"
-                disabled={registerStatus === "success" || registerStatus === "registering"}
+                disabled={isLoading}
               >
                 {isLoading ? (
                   <Loader size={24} className="mx-auto animate-spin" />

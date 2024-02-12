@@ -79,7 +79,7 @@ export default function LoginComponent() {
   return (
     <>
       <motion.section
-        initial={{ opacity: 0, y: -350 }}
+        initial={{ opacity: 0, y: -200 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.1, type: "spring", stiffness: 110 }}
@@ -203,7 +203,7 @@ export default function LoginComponent() {
                   href="/forgot"
                   className="text-primary underline hover:text-secondary hover:dark:text-primary-light"
                 >
-                  Forgot Password ?
+                  Forgot Password?
                 </Link>
               </p>
             </motion.div>
