@@ -15,6 +15,9 @@ import { registerUser } from "@/backend/auth.api";
 // Icons
 import { Eye, EyeOff } from "react-feather";
 
+const nameRegex: RegExp = /^[\sa-zA-Z]+$/;
+const passwordRegex: RegExp = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@_])[A-Za-z\d@_]{6,16}$/;
+
 export default function RegisterComponent() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -43,7 +46,9 @@ export default function RegisterComponent() {
     try {
       setIsLoading(true);
 
-      const passwordRegex: RegExp = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@_])[A-Za-z\d@_]{6,16}$/;
+      if (!nameRegex.test(data.fullName)) {
+        throw new Error("Name should not contain any number or special character");
+      }
 
       if (data.password !== data.confirmpassword) {
         throw new Error("Password and Confirm Password does not match");
@@ -57,7 +62,7 @@ export default function RegisterComponent() {
 
       if (!passwordRegex.test(data.password)) {
         throw new Error(
-          "Oops!, Password must contain a character, a number and a special charcter",
+          "Oops!, Password must contain a character, a number and a special character",
         );
       }
 
