@@ -2,8 +2,10 @@ import "@/styles/globals.css";
 import { Poppins } from "next/font/google";
 import { Metadata } from "next";
 import ReduxProvider from "@/redux/ReduxProvider";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import { ToastContainer } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
+import { Toaster } from "sonner";
+
 import { Providers } from "./providers";
 
 const poppinsFont = Poppins({
@@ -50,16 +52,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body
         className={`${poppinsFont.className} scrollbar-thin scrollbar-thumb-primary scrollbar-track-secondary-light scrollbar-track-rounded-full bg-white dark:bg-secondary`}
       >
-        <ToastContainer
+        <Toaster
           position="top-right"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          pauseOnFocusLoss={false}
-          draggable
-          pauseOnHover={false}
-          theme="colored"
+          duration={3000}
+          closeButton={true}
+          richColors
+          expand
+          theme="light"
         />
         <Providers>
           <ReduxProvider>{children}</ReduxProvider>
