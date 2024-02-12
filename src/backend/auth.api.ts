@@ -1,13 +1,20 @@
 "use client";
+import { verificationResponseType } from "@/types/auth";
 
 import { account, db, ID, palettegramDB, usersCollection, Query } from "./appwrite.config";
+import { generateAvatar } from "@/helper/avatarGenerator";
 
 /**
- * @description Register the user into the database
+ * @abstract Register the user into the database
  * @param {Object} userData
- * @returns {Object} authResponse
+ * @returns authResponse
  */
-const registerUser = async (userData: any) => {
+const registerUser = async (userData: {
+  email: string;
+  fullName: string;
+  password: string;
+  confirmpassword: string;
+}) => {
   try {
     const authResponse = await account.create(
       ID.unique(),
@@ -16,26 +23,22 @@ const registerUser = async (userData: any) => {
       userData.fullName,
     );
 
-    // console.log("Auth Response:", authResponse);
-
     if (!authResponse || Object.keys(authResponse).length <= 0) {
-      throw Error("User registration failed");
+      throw new Error("User registration failed");
     }
 
     const session = await loginUser(userData);
 
     if (!session) {
-      throw Error("Session failed");
+      throw new Error("Session failed");
     }
 
     const createVerify = await account.createVerification(
       `${process.env.NEXT_PUBLIC_BASE_URL}/verify`,
     );
 
-    // console.log("Verify Object:", createVerify);
-
-    if (!createVerify && !createVerify["$id"]) {
-      throw Error("Error sending verification email");
+    if (!createVerify) {
+      throw new Error("Error sending verification email");
     }
 
     return authResponse;
@@ -46,24 +49,18 @@ const registerUser = async (userData: any) => {
 };
 
 /**
- * @description verifys the user based on the userId and secret sent to the user's email
+ * @abstract verifys the user based on the userId and secret sent to the user's email
  * @param {String} userId
  * @param {String} secret
- * @returns {Object} response status
+ * @returns response status
  */
-const verifyUser = async (userId: string, secret: string) => {
-  type Resp = {
-    status: boolean;
-    data: any;
-  };
-  let response: Resp = {
+const verifyUser = async (accountId: string, secret: string) => {
+  let response: verificationResponseType = {
     status: false,
     data: null,
   };
   try {
-    const verifyResponse = await account.updateVerification(userId, secret);
-
-    // console.log("Verify response:", verifyResponse);
+    const verifyResponse = await account.updateVerification(accountId, secret);
 
     if (!verifyResponse) {
       throw new Error("User not verified");
@@ -75,6 +72,8 @@ const verifyUser = async (userId: string, secret: string) => {
     }
 
     const dbData = await saveDataToDatabase(session);
+
+    console.log("db data at save time:", dbData);
 
     response = {
       status: true,
@@ -89,7 +88,7 @@ const verifyUser = async (userId: string, secret: string) => {
 };
 
 /**
- * @description log in the user based on emailId and password
+ * @abstract log in the user based on emailId and password
  * @param {Object} userData
  * @returns {Object} response
  */
@@ -116,7 +115,7 @@ const loginUser = async (userData: any) => {
 };
 
 /**
- * @description send a link to user's email
+ * @abstract send a link to user's email
  * @param {string} userEmail
  * @returns {Object} response
  */
@@ -138,7 +137,7 @@ const forgotpassword = async (userEmail: string) => {
 };
 
 /**
- * @description update user's password
+ * @abstract update user's password
  * @param {Object} userData
  * @returns {Object} response
  */
@@ -163,8 +162,8 @@ const updatepassword = async (userData: any) => {
 };
 
 /**
- * @description returns the state of current user
- * @returns {Object} Session
+ * @abstract returns the state of current user
+ * @returns Session
  */
 const getCurrentUser = async () => {
   try {
@@ -175,7 +174,7 @@ const getCurrentUser = async () => {
 };
 
 /**
- * @description logs out the user by clearing current session
+ * @abstract logs out the user by clearing current session
  * @returns {Object} returns session
  */
 const logoutUser = async () => {
@@ -183,7 +182,7 @@ const logoutUser = async () => {
 };
 
 /**
- * @description Save Data into Appwrite Database
+ * @abstract Save Data into Appwrite Database
  * @param {Object} session
  * @returns {Object} dbResponse
  */
@@ -210,7 +209,7 @@ const saveDataToDatabase = async (session: any) => {
 };
 
 /**
- * @description get single user data based on account id
+ * @abstract get single user data based on account id
  * @param id
  * @returns
  */

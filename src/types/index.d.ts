@@ -1,5 +1,3 @@
-import { Url } from "next/dist/shared/lib/router/router";
-
 export type PostInstanceType = {
   accountId: string;
   postTitle: string;
@@ -15,17 +13,6 @@ export type PostInstanceType = {
 
 export type PostInitStateType = {
   posts: PostInstanceType[];
-  error: boolean;
-  loading: boolean;
-};
-
-export type userDetail = {
-  creds: {
-    accountId: string;
-    email: string;
-    createdAt: string;
-    isVerified: boolean;
-  };
   error: boolean;
   loading: boolean;
 };

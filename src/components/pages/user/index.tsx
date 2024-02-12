@@ -5,23 +5,25 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import { UserFromDB } from "@/types";
 import { getSingleUser } from "@/backend/auth.api";
 
 import TrendingFeed from "@/components/core/trendingFeed";
 import Footer from "@/components/core/footer";
 import UserPosts from "./userPosts";
 import { ButtonLong } from "@/components/core/buttons";
+import { userCollectionDB } from "@/types/auth";
 
 export default function User({ userId }: { userId: string }) {
-  const [user, setUser] = useState<UserFromDB>();
+  const [user, setUser] = useState<userCollectionDB[]>([]);
 
   const router = useRouter();
 
   useEffect(() => {
     getSingleUser(userId)
       .then((resp: any) => {
-        setUser(resp);
+        if (resp.documents) {
+          setUser(resp.documents);
+        }
       })
       .catch(console.log);
   }, [userId]);
@@ -68,10 +70,10 @@ export default function User({ userId }: { userId: string }) {
             <article className="mt-2 space-y-4">
               <div className="space-y-1">
                 <h1 className="text-xl font-semibold text-black dark:text-white">
-                  {user && user?.documents[0]?.fullName}{" "}
+                  {user && user[0]?.fullName}{" "}
                 </h1>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                  @{user && user?.documents[0]?.username}
+                  @{user && user[0]?.username}
                 </p>
               </div>
 
@@ -104,7 +106,7 @@ export default function User({ userId }: { userId: string }) {
 
           <div className="h-px w-full mt-6 bg-neutral-500 rounded-2xl" />
 
-          <UserPosts userName={user! && user?.documents[0]?.fullName!} userId={userId} />
+          <UserPosts userName={user! && user[0]?.fullName!} userId={userId} />
         </section>
         <div className="flex-[2] hidden md:block rounded-md">
           <TrendingFeed />

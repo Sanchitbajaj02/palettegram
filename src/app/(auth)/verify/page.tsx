@@ -36,7 +36,7 @@ export default function VerifyPage({ searchParams }: VerifyProps) {
   return (
     <>
       <Suspense fallback={<Loader />}>
-        <VerificationComponent userId={String(userId)} secret={String(secret)} />
+        <VerificationComponent accountId={String(userId)} secret={String(secret)} />
       </Suspense>
       <Footer isFixed />
     </>

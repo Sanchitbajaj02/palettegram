@@ -2,9 +2,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { setCookie, destroyCookie } from "nookies";
-import { userDetail } from "@/types/index.d";
+import { authDetails } from "@/types/auth.d";
 
-const initialState: userDetail = {
+const initialState: authDetails = {
   creds: {
     accountId: "",
     email: "",
