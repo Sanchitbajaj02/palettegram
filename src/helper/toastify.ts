@@ -15,20 +15,22 @@ type ToastTypes = 'success' | 'info' | 'warning' | 'error';
  * @returns
  */
 
-
-
 export function toastify(text: string, statusType: ToastTypes) {
-  if (statusType == 'success') {
-    return toast.success(text)
+  switch (statusType) {
+    case 'success':
+      return toast.success(text)
+      break;
+    case 'info':
+      return toast.info(text)
+      break;
+    case 'error':
+      return toast.success(text)
+      break;
+    case 'warning':
+      return toast.success(text)
+      break;
+    default:
+      return toast.message(text)
+      break;
   }
-  if (statusType == 'info') {
-    return toast.info(text)
-  }
-  if (statusType == 'error') {
-    return toast.error(text)
-  }
-  // return toast(text, {
-  //   type: statusType,
-  //   isLoading: loadingStatus,
-  // });
 }
