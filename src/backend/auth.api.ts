@@ -216,13 +216,15 @@ const saveDataToDatabase = async (session: any) => {
  */
 const getSingleUser = async (id: string) => {
   try {
-    const tweets = await db.listDocuments(palettegramDB, usersCollection, [
+
+    const resp = await db.listDocuments(palettegramDB, usersCollection, [
       Query.search("accountId", id),
     ]);
-    if (!tweets) {
+
+    if (!resp) {
       throw new Error();
     }
-    return tweets;
+    return resp;
   } catch (error: any) {
     console.log(error);
   }

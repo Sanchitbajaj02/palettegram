@@ -13,18 +13,18 @@ import Footer from "@/components/core/footer";
 import UserPosts from "./userPosts";
 import { ButtonLong } from "@/components/core/buttons";
 
-export default function User({ userId }: { userId: string }) {
+export default function User({ accountId }: { accountId: string }) {
   const [user, setUser] = useState<UserFromDB>();
 
   const router = useRouter();
 
   useEffect(() => {
-    getSingleUser(userId)
+    getSingleUser(accountId)
       .then((resp: any) => {
         setUser(resp);
       })
       .catch(console.log);
-  }, [userId]);
+  }, [accountId]);
 
   return (
     <>
@@ -104,7 +104,7 @@ export default function User({ userId }: { userId: string }) {
 
           <div className="h-px w-full mt-6 bg-neutral-500 rounded-2xl" />
 
-          <UserPosts userName={user! && user?.documents[0]?.fullName!} userId={userId} />
+          <UserPosts userName={user! && user?.documents[0]?.fullName!} userId={accountId} />
         </section>
         <div className="flex-[2] hidden md:block rounded-md">
           <TrendingFeed />
