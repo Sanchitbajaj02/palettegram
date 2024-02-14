@@ -16,6 +16,8 @@ const registerUser = async (userData: {
   confirmpassword: string;
 }) => {
   try {
+    let username = userData.email.split("@")[0];
+
     const authResponse = await account.create(
       ID.unique(),
       userData.email,
@@ -41,7 +43,12 @@ const registerUser = async (userData: {
       throw new Error("Error sending verification email");
     }
 
-    return authResponse;
+    const authResp = await account.updatePrefs({
+      username: username,
+    });
+    console.log("authresp:", authResp);
+
+    return authResp;
   } catch (error: any) {
     console.log(error + "Message");
     throw new Error(error.message);
@@ -188,14 +195,13 @@ const logoutUser = async () => {
  */
 const saveDataToDatabase = async (session: any) => {
   try {
-    let username = session.email.split("@")[0];
-    console.log(username);
+    console.log("session", session);
     const resp = await db.createDocument(palettegramDB, usersCollection, ID.unique(), {
       email: session.email,
       fullName: session.name,
       isVerified: session.emailVerification,
       accountId: session.$id,
-      username: username,
+      username: session.prefs.username,
     });
     if (!resp) {
       throw new Error("Database not working");

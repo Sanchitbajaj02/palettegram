@@ -4,18 +4,18 @@ export type verificationResponseType = {
 };
 
 export type userCollectionDB = {
+  $id: string;
+  accountId: string;
   email: string;
   fullName: string;
-  isVerified: boolean;
-  accountId: string;
   username: string;
-  $id: string;
-  $createdAt: Date;
-  $updatedAt: Date;
+  isVerified: boolean;
   avatarURL?: string;
   bannerURL?: string;
   about?: string;
   userLink?: string;
+  $createdAt: Date;
+  $updatedAt: Date;
 };
 
 export type authDetails = {
