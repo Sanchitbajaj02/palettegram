@@ -3,16 +3,16 @@
     {
       "$id": "651d85ea69357206cfe5",
       "name": "PalettegramDB",
-      "$createdAt": "2024-01-14T18:10:45.937+00:00",
-      "$updatedAt": "2024-01-14T18:10:45.937+00:00",
+      "$createdAt": "2024-01-30T08:55:24.011+00:00",
+      "$updatedAt": "2024-01-30T08:55:24.011+00:00",
       "enabled": true
     }
   ],
   "collections": [
     {
       "$id": "651d85ff826413d8f258",
-      "$createdAt": "2024-01-14T18:10:47.177+00:00",
-      "$updatedAt": "2024-01-14T18:10:47.177+00:00",
+      "$createdAt": "2024-01-30T08:55:24.772+00:00",
+      "$updatedAt": "2024-01-30T08:55:24.772+00:00",
       "$permissions": [
         "create(\"users\")",
         "read(\"users\")",
@@ -100,7 +100,7 @@
           "error": "",
           "required": false,
           "array": false,
-          "size": 100,
+          "size": 200,
           "default": null
         },
         {
@@ -111,6 +111,26 @@
           "required": false,
           "array": false,
           "size": 1000,
+          "default": null
+        },
+        {
+          "key": "location",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "size": 100,
+          "default": null
+        },
+        {
+          "key": "profession",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "size": 10,
           "default": null
         }
       ],
@@ -135,8 +155,8 @@
     },
     {
       "$id": "651d86daa59be4aad058",
-      "$createdAt": "2024-01-14T18:10:54.134+00:00",
-      "$updatedAt": "2024-01-14T18:10:54.134+00:00",
+      "$createdAt": "2024-01-30T08:55:29.435+00:00",
+      "$updatedAt": "2024-01-30T08:55:29.435+00:00",
       "$permissions": [
         "create(\"users\")",
         "read(\"users\")",
@@ -184,7 +204,8 @@
           "status": "available",
           "error": "",
           "required": false,
-          "size": 500,
+          "array": true,
+          "size": 10,
           "default": null
         },
         {
@@ -230,8 +251,8 @@
     },
     {
       "$id": "6559b707984a4f046a08",
-      "$createdAt": "2024-01-14T18:10:59.881+00:00",
-      "$updatedAt": "2024-01-14T18:10:59.881+00:00",
+      "$createdAt": "2024-01-30T08:55:33.146+00:00",
+      "$updatedAt": "2024-01-30T08:55:33.146+00:00",
       "$permissions": [
         "create(\"users\")",
         "read(\"users\")",
@@ -285,8 +306,8 @@
     },
     {
       "$id": "65acb78f522ef1f69f60",
-      "$createdAt": "2024-01-14T18:10:47.177+00:00",
-      "$updatedAt": "2024-01-14T18:10:47.177+00:00",
+      "$createdAt": "2024-01-30T08:55:35.310+00:00",
+      "$updatedAt": "2024-01-30T08:55:35.310+00:00",
       "$permissions": [
         "create(\"users\")",
         "read(\"users\")",
@@ -328,8 +349,8 @@
     },
     {
       "$id": "65acb888874a695c8012",
-      "$createdAt": "2024-01-14T18:10:54.134+00:00",
-      "$updatedAt": "2024-01-14T18:10:54.134+00:00",
+      "$createdAt": "2024-01-30T08:55:36.526+00:00",
+      "$updatedAt": "2024-01-30T08:55:36.526+00:00",
       "$permissions": [
         "create(\"users\")",
         "read(\"users\")",
@@ -378,14 +399,38 @@
   "buckets": [
     {
       "$id": "65a27126f17d920bff46",
-      "$createdAt": "2024-01-14T18:11:02.459+00:00",
-      "$updatedAt": "2024-01-14T18:11:02.459+00:00",
-      "$permissions": [],
+      "$createdAt": "2024-01-30T08:55:38.510+00:00",
+      "$updatedAt": "2024-02-06T03:40:12.783+00:00",
+      "$permissions": [
+        "create(\"users\")",
+        "read(\"users\")",
+        "update(\"users\")",
+        "delete(\"users\")"
+      ],
       "fileSecurity": false,
       "name": "bucky",
       "enabled": true,
       "maximumFileSize": 5242880,
       "allowedFileExtensions": [],
+      "compression": "none",
+      "encryption": true,
+      "antivirus": true
+    },
+    {
+      "$id": "65cce67fb6df72883fba",
+      "$createdAt": "2024-02-14T16:12:47.750+00:00",
+      "$updatedAt": "2024-02-14T16:14:06.619+00:00",
+      "$permissions": [
+        "create(\"users\")",
+        "read(\"users\")",
+        "update(\"users\")",
+        "delete(\"users\")"
+      ],
+      "fileSecurity": false,
+      "name": "userBucket",
+      "enabled": true,
+      "maximumFileSize": 50000000,
+      "allowedFileExtensions": ["jpg", "png", "svg"],
       "compression": "none",
       "encryption": true,
       "antivirus": true

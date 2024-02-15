@@ -6,7 +6,7 @@ import {
   palettegramDB,
   usersCollection,
   postsCollection,
-  bucketStorage,
+  postBucketStorage,
 } from "./appwrite.config";
 
 /**
@@ -117,7 +117,7 @@ const likeTweet = async (tweet: any) => {
  */
 const addNewImage = async (image: any) => {
   try {
-    const resImage = await storage.createFile(bucketStorage, ID.unique(), image);
+    const resImage = await storage.createFile(postBucketStorage, ID.unique(), image);
     if (!resImage) {
       throw new Error("File not found");
     }
@@ -138,7 +138,7 @@ const getImageUrl = (imageId: string) => {
       throw new Error("Image can not be uploaded");
     }
 
-    const url = `https://cloud.appwrite.io/v1/storage/buckets/${bucketStorage}/files/${imageId}/view?project=${process.env.NEXT_PUBLIC_PROJECT_ID}`;
+    const url = `https://cloud.appwrite.io/v1/storage/buckets/${postBucketStorage}/files/${imageId}/view?project=${process.env.NEXT_PUBLIC_PROJECT_ID}`;
 
     return url;
   } catch (error) {
@@ -153,7 +153,7 @@ const getImageUrl = (imageId: string) => {
  */
 const deleteImage = async (id: string) => {
   try {
-    const resImage = await storage.deleteFile(bucketStorage, id);
+    const resImage = await storage.deleteFile(postBucketStorage, id);
     if (resImage) {
       return resImage;
     }

@@ -41,23 +41,7 @@ export type BookmarkInitType = {
   loading: boolean;
 };
 
-export type UserFromDB = {
-  documents: [
-    {
-      accountId: string;
-      username: string;
-      fullName: string;
-      email: string;
-      isVerified: boolean;
-      about: string | null;
-      userLink: string | null;
-      avatarURL: string | null;
-      bannerURL: string | null;
-      createdAt: Date;
-      updatedAt: Date;
-    },
-  ];
-};
+
 
 export type FormatOnType = "seconds" | "minutes" | "hours" | "days";
 export type UserBookMarkType = {

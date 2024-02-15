@@ -17,7 +17,8 @@ const bookmarksCollection = String(process.env.NEXT_PUBLIC_BOOKMARKS_COLLECTION)
 const likesCollection = String(process.env.NEXT_PUBLIC_LIKES_COLLECTION);
 const contactsCollection = String(process.env.NEXT_PUBLIC_CONTACTS_COLLECTION);
 
-const bucketStorage = String(process.env.NEXT_PUBLIC_BUCKET_ID);
+const postBucketStorage = String(process.env.NEXT_PUBLIC_POST_BUCKET_ID);
+const userBucketStorage = String(process.env.NEXT_PUBLIC_USER_BUCKET_ID);
 
 export { appwriteClient, account, db, storage, ID, Query };
 
@@ -28,5 +29,6 @@ export {
   likesCollection,
   contactsCollection,
   bookmarksCollection,
-  bucketStorage,
+  postBucketStorage,
+  userBucketStorage
 };

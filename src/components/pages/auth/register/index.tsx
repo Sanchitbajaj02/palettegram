@@ -42,8 +42,8 @@ export default function RegisterComponent() {
 
     try {
       setIsLoading(true);
-      setRegisterStatus("registering");
-      
+      /*       setRegisterStatus("registering");
+       */
       const nameRegex: RegExp = /^[\sa-zA-Z]+$/;
       const passwordRegex: RegExp = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@_])[A-Za-z\d@_]{6,16}$/;
 
@@ -83,7 +83,7 @@ export default function RegisterComponent() {
       toastify("Register Successful. Please check your email to verify", "success");
       router.push("/verify");
     } catch (error: any) {
-      setIsLoading(true);
+      setIsLoading(false);
 
       toastify(error.message, "info");
     }

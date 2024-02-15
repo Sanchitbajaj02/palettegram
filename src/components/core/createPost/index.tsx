@@ -51,7 +51,7 @@ const CreatePost = () => {
 
     try {
       let imageURL: string = "";
-
+      // console.log(imageStorage.file);
       if (imageStorage && imageStorage.file) {
         const getFileObject = await addNewImage(imageStorage.file);
 
@@ -83,7 +83,7 @@ const CreatePost = () => {
       }
       // console.log(savetoDb);
       dispatch(addPost(finalDataToUpload));
-      toastify("Post uploaded successfully", "success", false);
+      toastify("Post uploaded successfully", "success");
 
       // setPostTitle("");
       setEditorState("");

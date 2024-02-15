@@ -20,8 +20,6 @@ const removePostIdFromBookmarks = function (bookmarks: string[], postId: string)
 
 const getBookmarks = async (accountId: string) => {
   try {
-    console.log("from getBookmark" + accountId);
-
     const getSavedBookmarkData = await db.listDocuments(palettegramDB, bookmarksCollection, [
       Query.equal("accountId", accountId),
     ]);
