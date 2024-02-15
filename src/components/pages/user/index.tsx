@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { parseCookies } from "nookies";
 
-import { getSingleUser, getUserDetails } from "@/backend/auth.api";
+import { getSingleUser } from "@/backend/auth.api";
 
 import TrendingFeed from "@/components/core/trendingFeed";
 import Footer from "@/components/core/footer";
@@ -37,7 +37,7 @@ export default function User({ accountId }: { accountId: string }) {
   const getUserDetail = async (userId: string) => {
     try {
       const resp: any = await getSingleUser(userId);
-      if (!resp) throw new Error("Enable to get user-details, retry!");
+      if (!resp) throw new Error("Unable  to get user-details, retry!");
       setUser(resp.documents[0]);
       currenUserID === userId ? setEdit(true) : setEdit(false);
     } catch (error: any) {
