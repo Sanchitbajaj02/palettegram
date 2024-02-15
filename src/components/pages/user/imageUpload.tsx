@@ -10,9 +10,9 @@ import { Models } from "appwrite";
 type propsType = {
   imgSize:
     | {
-        initialImg: string;
+        intialImageUrl: string;
         title: string;
-        bannerImg: boolean;
+        isbannerImage: boolean;
       }
     | undefined;
   setHovered: React.Dispatch<React.SetStateAction<boolean>>;
@@ -30,11 +30,11 @@ export default function ImageUpload({ imgSize, setHovered, setUser, user }: prop
   const [isLoading, setIsLoading] = useState<Boolean>(false);
   const cookie = parseCookies();
   const currenUserId = cookie["accountId"];
+  const imageSizeLimit = 1024;
 
   const handleFileUpload = async (event: any) => {
-    // console.log(event.target.files);
-    const fsize = Math.round(event.target.files[0].size / 1024);
-    if (fsize > 1024) {
+    const fsize = Math.round(event.target.files[0].size / imageSizeLimit);
+    if (fsize > imageSizeLimit) {
       toastify("Image size cannot be more that 1MB", "error");
       setImage({
         file: null,
@@ -50,21 +50,16 @@ export default function ImageUpload({ imgSize, setHovered, setUser, user }: prop
   };
 
   const handleSubmit = async () => {
-    console.log(image);
-
     try {
       let imageUrl = "";
       const fileObject = await saveImage(image?.file!);
-      console.log(fileObject);
-      if (!fileObject) throw new Error();
+      if (!fileObject) throw new Error("Failed to load image, retry!");
       imageUrl = getUserImageUrl(fileObject["$id"])!;
-      console.log(imageUrl);
-      const resp = await updateImageURL(currenUserId, imageUrl, imgSize?.bannerImg!);
+      const resp = await updateImageURL(currenUserId, imageUrl, imgSize?.isbannerImage!);
       if (!resp) {
         toastify("Problem with uploading the image", "error");
         return;
       }
-      console.log(resp);
       setUser(resp);
       toastify("Image Uploaded sucessfully", "success");
       setHovered(false);
@@ -97,10 +92,10 @@ export default function ImageUpload({ imgSize, setHovered, setUser, user }: prop
               >
                 Preview
               </label>
-              {imgSize?.bannerImg ? (
+              {imgSize?.isbannerImage ? (
                 <div className="h-52 w-full relative ">
                   <img
-                    src={image?.file ? image?.preview! : imgSize?.initialImg}
+                    src={image?.file ? image?.preview! : imgSize?.intialImageUrl}
                     alt="userbanner"
                     className="object-center object-cover w-full h-48 rounded-md"
                   />
@@ -108,7 +103,7 @@ export default function ImageUpload({ imgSize, setHovered, setUser, user }: prop
               ) : (
                 <div className=" h-32 w-full  relative ">
                   <img
-                    src={image?.file ? image?.preview! : imgSize?.initialImg!}
+                    src={image?.file ? image?.preview! : imgSize?.intialImageUrl!}
                     alt="userProfile"
                     className="w-[135px] h-[135px] object-center object-cover mx-auto rounded-full -z-10 "
                   />

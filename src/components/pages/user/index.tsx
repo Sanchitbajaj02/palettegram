@@ -1,17 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import {
-  Briefcase,
-  Link2,
-  Mail,
-  MapPin,
-  Smile,
-  ArrowLeft,
-  Edit2,
-  Edit,
-  Edit3,
-  Calendar,
-} from "react-feather";
+import { Briefcase, Link2, Mail, MapPin, ArrowLeft, Edit, Edit3, Calendar } from "react-feather";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { parseCookies } from "nookies";
@@ -28,8 +17,8 @@ import UpdateCard from "./updateCard";
 import { Models } from "appwrite";
 
 type sizeType = {
-  bannerImg: boolean;
-  initialImg: string;
+  isbannerImage: boolean;
+  intialImageUrl: string;
   title: string;
 };
 
@@ -48,13 +37,11 @@ export default function User({ accountId }: { accountId: string }) {
   const getUserDetail = async (userId: string) => {
     try {
       const resp: any = await getSingleUser(userId);
-      if (resp) {
-        //        console.log(resp.documents[0]);
-        setUser(resp.documents[0]);
-        currenUserID === userId ? setEdit(true) : setEdit(false);
-      }
-    } catch (error) {
-      console.log(error);
+      if (!resp) throw new Error("Enable to get user-details, retry!");
+      setUser(resp.documents[0]);
+      currenUserID === userId ? setEdit(true) : setEdit(false);
+    } catch (error: any) {
+      console.log(error.message);
     }
   };
 
@@ -67,10 +54,10 @@ export default function User({ accountId }: { accountId: string }) {
     getUserDetail(accountId);
   }, [accountId]);
 
-  const handlePhotoClick = ({ bannerImg, title, initialImg }: sizeType) => {
+  const handlePhotoClick = ({ isbannerImage, title, intialImageUrl }: sizeType) => {
     setSize({
-      bannerImg: bannerImg,
-      initialImg: initialImg,
+      isbannerImage: isbannerImage,
+      intialImageUrl: intialImageUrl,
       title: title,
     });
     setHovered(true);
@@ -107,9 +94,9 @@ export default function User({ accountId }: { accountId: string }) {
               <Edit3
                 onClick={() =>
                   handlePhotoClick({
-                    bannerImg: true,
+                    isbannerImage: true,
                     title: "Cover Photo",
-                    initialImg: user?.bannerURL ? user?.bannerURL! : "/assets/pinkCover.jpg",
+                    intialImageUrl: user?.bannerURL ?? "/assets/pinkCover.jpg",
                   })
                 }
                 color="black"
@@ -122,14 +109,14 @@ export default function User({ accountId }: { accountId: string }) {
             <div className="flex justify-between items-end">
               <div className=" relative inline-block">
                 <img
-                  src={(user && user?.avatarURL!) || "/assets/user.png"}
+                  src={user?.avatarURL ?? "/assets/user.png"}
                   alt="user"
                   onClick={() => {
                     edit &&
                       handlePhotoClick({
-                        bannerImg: false,
+                        isbannerImage: false,
                         title: "Profile Photo",
-                        initialImg: user?.avatarURL ? user?.avatarURL! : "/assets/user.png",
+                        intialImageUrl: user?.avatarURL ? user?.avatarURL! : "/assets/user.png",
                       });
                   }}
                   className=" w-[135px] h-[135px] relative inline-block border-4 border-white dark:border-slate-800 rounded-full object-cover cursor-pointer"

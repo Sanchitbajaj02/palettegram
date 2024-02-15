@@ -190,7 +190,6 @@ const logoutUser = async () => {
 const saveDataToDatabase = async (session: any) => {
   try {
     let username = session.email.split("@")[0];
-    //console.log(username);  
     const resp = await db.createDocument(palettegramDB, usersCollection, ID.unique(), {
       email: session.email,
       fullName: session.name,
