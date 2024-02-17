@@ -48,10 +48,12 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${poppinsFont.className} scrollbar-thin scrollbar-thumb-primary scrollbar-track-secondary-light scrollbar-track-rounded-full bg-white dark:bg-secondary`}
-      >
+    <html
+      lang="en"
+      className={`${poppinsFont.className} scrollbar-thin scrollbar-thumb-primary scrollbar-track-secondary-light scrollbar-track-rounded-full`}
+      suppressHydrationWarning
+    >
+      <body className={`${poppinsFont.className}  bg-white dark:bg-secondary`}>
         <Toaster
           position="top-right"
           duration={3000}
