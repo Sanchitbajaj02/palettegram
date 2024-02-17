@@ -9,11 +9,11 @@ import ThemeButton from "@/components/core/themeButton";
 
 import { parseCookies } from "nookies";
 
-import { logoutUser } from "@/backend/auth.api";
+import { logoutUser, getCurrentUser } from "@/backend/auth.api";
 import { getAllPosts } from "@/backend/posts.api";
 import { getBookmarks } from "@/backend/bookmarks.api";
 
-import { logUserOut } from "@/redux/reducers/authReducer";
+import { logUserOut, saveUser } from "@/redux/reducers/authReducer";
 import { getPosts } from "@/redux/reducers/postsReducer";
 import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
 
@@ -36,6 +36,19 @@ const Navbar = () => {
   };
 
   useEffect(() => {
+    getCurrentUser()
+      .then((currUser) => {
+        const payload = {
+          accountId: currUser.$id,
+          email: currUser.email,
+          isVerified: currUser.emailVerification,
+          createdAt: currUser.$createdAt,
+        };
+
+        dispatch(saveUser(payload));
+      })
+      .catch((err) => console.log(err));
+
     const timeoutId = setTimeout(() => {
       getAllPosts()
         .then((posts) => {
@@ -99,19 +112,23 @@ const Navbar = () => {
             </Link>
           )}
 
-          <Link
-            href={`/user/${userIdFromCookies}`}
-            className="mx-2 px-2 py-2 rounded-full  bg-primary text-white  hover:bg-primary-light hover:scale-105"
-          >
-            <User size={22} className="transition-all duration-300 " />
-          </Link>
+          {userAuth.creds?.accountId && (
+            <>
+              <Link
+                href={`/user/${userIdFromCookies}`}
+                className="mx-2 px-2 py-2 rounded-full  bg-primary text-white  hover:bg-primary-light hover:scale-105"
+              >
+                <User size={22} className="transition-all duration-300 " />
+              </Link>
 
-          <button
-            className="mx-2 px-2 py-2 rounded-full bg-primary transition hover:bg-primary-light hover:scale-105 text-white"
-            onClick={logout}
-          >
-            <LogOut size={22} className="transition-all duration-300" />
-          </button>
+              <button
+                className="mx-2 px-2 py-2 rounded-full bg-primary transition hover:bg-primary-light hover:scale-105 text-white"
+                onClick={logout}
+              >
+                <LogOut size={22} className="transition-all duration-300" />
+              </button>
+            </>
+          )}
         </div>
       </div>
     </nav>

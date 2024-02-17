@@ -1,4 +1,6 @@
 import Link from "next/link";
+import parse from "html-react-parser";
+import { redirect } from "next/navigation";
 import Image from "next/image";
 import { Download, Heart, MessageCircle, Share, Bookmark } from "react-feather";
 import { PostInstanceType } from "@/types/index.d";
@@ -9,19 +11,14 @@ import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
 import { toastify } from "@/helper/toastify";
 import { addComment } from "@/backend/posts.api";
 import { getUserDetails } from "@/backend/auth.api";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, MouseEvent } from "react";
+import { UserBookMarkType, FormatOnType } from "@/types/index";
 import isCtrlEnter from "@/helper/isCtrlEnter";
+
 interface UserDetails {
   fullName: string;
 }
 
-type FormatOnType = "seconds" | "minutes" | "hours" | "days";
-type UserBookMarkType = {
-  accountId: string;
-  bookmark: string[] | undefined;
-  error: boolean;
-  loading: boolean;
-};
 export default function SinglePost({
   singlePost,
   onLikeClick,
@@ -32,8 +29,6 @@ export default function SinglePost({
   width?: string;
 }) {
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
-  const [comment_message, setComment_message] = useState("");
-  const [showCommentBox, setShowCommentBox] = useState(false);
   const [commentCount, setCommentCount] = useState(singlePost?.comments?.length || 0);
 
   const dispatch = useDispatch();
@@ -55,6 +50,23 @@ export default function SinglePost({
     }
   }, [singlePost.accountId]);
 
+  const sharePost = async () => {
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: singlePost?.postTitle,
+          text: singlePost?.postTitle,
+          url: `${window.location.origin}/post/${singlePost?.$id}`,
+        });
+      } else {
+        // Fallback for browsers that do not support Web Share API
+        alert("Web Share API not supported in this browser.");
+      }
+    } catch (error) {
+      console.error("Error sharing post:", error);
+    }
+  };
+
   function createdAtDateFormatter(postCreationTime: string) {
     const timeObj = {
       seconds: 1000,
@@ -70,9 +82,9 @@ export default function SinglePost({
     };
 
     if (timeObj.calcTimeDiff("seconds") < 60) {
-      return `${timeObj.calcTimeDiff("seconds")}sec`;
+      return `${timeObj.calcTimeDiff("seconds")}s`;
     } else if (timeObj.calcTimeDiff("minutes") < 60) {
-      return `${timeObj.calcTimeDiff("minutes")}min`;
+      return `${timeObj.calcTimeDiff("minutes")}m`;
     } else if (timeObj.calcTimeDiff("hours") <= 24) {
       return `${timeObj.calcTimeDiff("hours")}h`;
     } else if (timeObj.calcTimeDiff("days") < 365) {
@@ -132,35 +144,49 @@ export default function SinglePost({
     }
   };
 
-  const handleComment = () => {
-    setShowCommentBox(!showCommentBox);
-    console.log("comment");
-  };
-
-  const uploadComment = async (id: string | undefined, comment_message: string) => {
-    const previousComments = singlePost.comments;
-    try {
-      if (previousComments === undefined || !id) return;
-      const Comments = [...previousComments, comment_message];
-      const res = await addComment(id, Comments);
-      setCommentCount(res?.comments.length || singlePost?.comments?.length);
-      toastify("Comment added successfully", "success");
-    } catch (error) {
-      console.log(error);
-      toastify("Comment cannot be added", "error");
-    }
-  };
-
   useEffect(() => {
     fetchUserDetails();
   }, [fetchUserDetails]);
+
+  const handleClick = (e: MouseEvent<HTMLDivElement | HTMLSpanElement>) => {
+    const element = e.target as HTMLDivElement | HTMLSpanElement;
+    const spanElement = element.querySelector("span");
+    let currentSelectedElement: HTMLSpanElement | HTMLDivElement | null = null;
+    if (spanElement) {
+      currentSelectedElement = spanElement;
+    } else {
+      currentSelectedElement = element;
+    }
+    if (currentSelectedElement && currentSelectedElement.textContent) {
+      const prevValue = currentSelectedElement.textContent;
+      navigator.clipboard
+        .writeText(currentSelectedElement.textContent)
+        .then(() => {
+          if (currentSelectedElement) {
+            currentSelectedElement.textContent = "Copied";
+            currentSelectedElement.classList.remove("bg-slate-950/[0.4]");
+            currentSelectedElement.classList.add("bg-black");
+            setTimeout(() => {
+              if (currentSelectedElement) {
+                currentSelectedElement.textContent = prevValue;
+                currentSelectedElement.classList.remove("bg-black");
+                currentSelectedElement.classList.add("bg-slate-950/[0.4]");
+              }
+            }, 1000);
+          }
+        })
+        .catch(console.log);
+    }
+  };
+  const colors =
+    singlePost?.colors && typeof singlePost?.colors === "string" && JSON.parse(singlePost.colors);
 
   return (
     <div
       className={` ${
         width
           ? "w-96 p-3 m-auto  rounded-md shadow dark:shadow-gray-600 mb-4 mt-40 "
-          : "p-3  rounded-md shadow dark:shadow-gray-600 mb-4"
+          : "p-3 rounded-md shadow dark:shadow-gray-600 mb-4"
       } `}
     >
       <Link
@@ -182,9 +208,13 @@ export default function SinglePost({
         </div>
       </Link>
       <Link href={`/post/${singlePost && singlePost?.$id}`}>
-        <p className="text-md mb-4">
-          {singlePost && singlePost?.postTitle ? singlePost?.postTitle : "No Title"}
-        </p>
+        <div className="text-md mb-4">
+          {singlePost && singlePost?.postTitle ? (
+            <div className="prose dark:prose-invert">{parse(singlePost?.postTitle)}</div>
+          ) : (
+            "No Title"
+          )}
+        </div>
 
         {singlePost && singlePost?.postImages && singlePost?.postImages[0]?.length > 0 ? (
           <Image
@@ -197,9 +227,9 @@ export default function SinglePost({
         ) : null}
       </Link>
 
-      {singlePost?.colors && singlePost?.colors.length > 0 ? (
+      {colors && Object.keys(colors).length > 0 ? (
         <div className="my-2 flex flex-row justify-between items-center w-full">
-          {singlePost?.colors.map((color: string, index: number) => {
+          {/* {JSON.parse(singlePost.colors).map((color: string, index: number) => {
             return (
               <div
                 key={index}
@@ -210,7 +240,56 @@ export default function SinglePost({
                 }}
               ></div>
             );
-          })}
+          })} */}
+          <div className="w-full  h-[200px] bg-tranparent mx-auto flex mb-3.5 gap-1">
+            <div
+              className="cursor-pointer w-full flex justify-center items-center group"
+              style={{
+                backgroundColor: (typeof colors.color01 === "string" && colors.color01) || "",
+              }}
+              onClick={handleClick}
+            >
+              <span
+                className="bg-slate-950/[0.4] text-xs px-0.5 opacity-0 transition ease-out duration-300 group-hover:opacity-100 group-hover:ease-in group-hover:scale-110"
+                onClick={handleClick}
+              >
+                {colors.color01}
+              </span>
+            </div>
+            <div
+              className="cursor-pointer w-full flex justify-center items-center group "
+              style={{
+                backgroundColor: (typeof colors.color02 === "string" && colors.color02) || "",
+              }}
+              onClick={handleClick}
+            >
+              <span className="bg-slate-950/[0.4] text-xs px-0.5 opacity-0 transition ease-out duration-300 group-hover:opacity-100 group-hover:ease-in group-hover:scale-110">
+                {colors.color02}
+              </span>
+            </div>
+            <div
+              className="cursor-pointer w-full flex justify-center items-center group gap-2"
+              style={{
+                backgroundColor: (typeof colors.color03 === "string" && colors.color03) || "",
+              }}
+              onClick={handleClick}
+            >
+              <span className="bg-slate-950/[0.4] text-xs px-0.5 opacity-0 transition ease-out duration-300 group-hover:opacity-100 group-hover:ease-in group-hover:scale-110">
+                {colors.color03}
+              </span>
+            </div>
+            <div
+              className="cursor-pointer w-full flex justify-center items-center group"
+              style={{
+                backgroundColor: (typeof colors.color04 === "string" && colors.color04) || "",
+              }}
+              onClick={handleClick}
+            >
+              <span className="bg-slate-950/[0.4] text-xs px-0.5 opacity-0 transition ease-out duration-300 group-hover:opacity-100 group-hover:ease-in group-hover:scale-110">
+                {colors.color04}
+              </span>
+            </div>
+          </div>
         </div>
       ) : null}
 
@@ -237,13 +316,17 @@ export default function SinglePost({
           </span>
         </article>
 
-        <article
-          onClick={handleComment}
+        <Link
+          href={`/post/${singlePost && singlePost?.$id}`}
           className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary"
         >
           <MessageCircle size={22} />
-          <span className="text-base">{commentCount}</span>
-        </article>
+          {commentCount ? (
+            <span className="text-base">{commentCount}</span>
+          ) : (
+            <span className="text-base">{singlePost.comments?.length} </span>
+          )}
+        </Link>
 
         <article
           onClick={() => handleUpdateBookmark(singlePost?.$id)}
@@ -270,7 +353,10 @@ export default function SinglePost({
           />
         </article>
 
-        <article className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary">
+        <article
+          onClick={sharePost}
+          className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary"
+        >
           <Share size={22} />
         </article>
 
@@ -278,35 +364,6 @@ export default function SinglePost({
           <Download size={22} />
         </article>
       </div>
-      {showCommentBox ? (
-        <div>
-          <div className="flex flex-1">
-            <textarea
-              onChange={(event: any) => setComment_message(event.target.value)}
-              value={comment_message}
-              name="postTitle"
-              className="mt-2 dark:bg-secondary-light outline-none focus:ring rounded-lg p-3 text-black dark:text-white placholder:text-gray-400 text-lg w-full mb-2"
-              rows={2}
-              cols={50}
-              placeholder="Type your comment here"
-              onKeyDown={(e) => {
-                if (isCtrlEnter(e)) uploadComment(singlePost && singlePost?.$id, comment_message);
-              }}
-            />
-          </div>
-          <div className="flex flex-end">
-            <button
-              onClick={() => {
-                uploadComment(singlePost && singlePost?.$id, comment_message);
-              }}
-              className="transition-all duration-300 bg-primary hover:bg-primary-light text-white font-normal py-1 px-8 rounded-full"
-            >
-              {"Post"}
-            </button>
-            {/* <button onClick={handleTest}>test</button> */}
-          </div>
-        </div>
-      ) : null}
     </div>
   );
 }

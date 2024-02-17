@@ -2,17 +2,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { PostInstanceType, PostInitStateType } from "@/types/index.d";
-import { ACTION } from "next/dist/client/components/app-router-headers";
 
 const initialState: PostInitStateType = {
   posts: [],
   error: false,
-  loading: false,
+  loading: true,
 };
 
 export const postsReducer = createSlice({
   name: "posts",
   initialState: initialState,
+
   reducers: {
     getPosts: (state, action: PayloadAction<any>) => {
       state.loading = true;

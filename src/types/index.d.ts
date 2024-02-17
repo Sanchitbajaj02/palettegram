@@ -4,7 +4,7 @@ export type PostInstanceType = {
   accountId: string;
   postTitle: string;
   postImages: string[];
-  colors?: string[];
+  colors?: string | null;
   comments?: string[];
   likes: string[];
   isActive: boolean;
@@ -21,7 +21,7 @@ export type PostInitStateType = {
 
 export type userDetail = {
   creds: {
-    userId: string;
+    accountId: string;
     email: string;
     createdAt: string;
     isVerified: boolean;
@@ -58,4 +58,12 @@ export type UserFromDB = {
       updatedAt: Date;
     },
   ];
+};
+
+export type FormatOnType = "seconds" | "minutes" | "hours" | "days";
+export type UserBookMarkType = {
+  accountId: string;
+  bookmark: string[] | undefined;
+  error: boolean;
+  loading: boolean;
 };

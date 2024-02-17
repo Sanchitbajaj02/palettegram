@@ -1,12 +1,12 @@
 "use client";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { setCookie } from "nookies";
+import { setCookie, destroyCookie } from "nookies";
 import { userDetail } from "@/types/index.d";
 
 const initialState: userDetail = {
   creds: {
-    userId: "",
+    accountId: "",
     email: "",
     createdAt: "",
     isVerified: false,
@@ -23,15 +23,17 @@ export const registerReducer = createSlice({
     saveUser: (state, action: PayloadAction<any>) => {
       state.loading = true;
       state.creds = action.payload;
-      setCookie(null, "accountId", action.payload.userId);
+      setCookie(null, "accountId", action.payload.accountId);
+      setCookie(null, "isVerified", String(action.payload.isVerified));
       state.error = false;
       state.loading = false;
     },
     logUserOut: (state) => {
+      state.error = true;
       state.loading = true;
-      setCookie(null, "accountId", "");
-      state.error = false;
-      state.creds.userId = "";
+      destroyCookie(null, "accountId");
+      destroyCookie(null, "isVerified");
+      state.creds.accountId = "";
       state.creds.email = "";
       state.creds.createdAt = "";
       state.creds.isVerified = false;

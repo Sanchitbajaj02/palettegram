@@ -17,8 +17,7 @@ import { Eye, EyeOff } from "react-feather";
 
 export default function RegisterComponent() {
   const [showPassword, setShowPassword] = useState(false);
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState({
     fullName: "",
@@ -26,7 +25,9 @@ export default function RegisterComponent() {
     password: "",
     confirmpassword: "",
   });
-  const [registerStatus, setRegisterStatus] = useState("initial");
+
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   function changeHandler(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
@@ -42,35 +43,49 @@ export default function RegisterComponent() {
     try {
       setIsLoading(true);
       setRegisterStatus("registering");
-      const resp = await registerUser(data);
+      
+      const nameRegex: RegExp = /^[\sa-zA-Z]+$/;
+      const passwordRegex: RegExp = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@_])[A-Za-z\d@_]{6,16}$/;
 
-      dispatch(
-        saveUser({
-          userId: resp["$id"],
-          email: resp.email,
-          fullName: resp.name,
-          createdAt: resp["$createdAt"],
-        }),
-      );
-      setRegisterStatus("success");
-      setIsLoading(false);
-      toastify("Register Successful. Please check your email to verify", "success");
-      router.replace("/login");
-    } catch (error: any) {
-      console.log(error.message + "message");
-      setIsLoading(false);
-      console.log(error);
-      setRegisterStatus("failure");
+      if (!nameRegex.test(data.fullName)) {
+        throw new Error("Name should not contain any number or special character");
+      }
 
-      if (error.message.includes("password")) {
-        toastify(
-          "Oops! Your password should be at least 8 characters and avoid commonly used choices.",
-          "info",
+      if (data.password !== data.confirmpassword) {
+        throw new Error("Password and Confirm Password does not match");
+      }
+
+      if (data.password.length < 6 || data.password.length > 16) {
+        throw new Error(
+          "Your password should be in range of 6 to 16 characters and avoid commonly used choices.",
         );
       }
-      if (error.message.includes("not matching")) {
-        toastify("Both the passwords are not matching", "info");
+
+      if (!passwordRegex.test(data.password)) {
+        throw new Error(
+          "Oops!, Password must contain a character, a number and a special character",
+        );
       }
+
+      const resp = await registerUser(data);
+
+      const payload = {
+        accountId: resp.$id,
+        email: resp.email,
+        fullName: resp.name,
+        isVerified: resp.emailVerification,
+        createdAt: resp.$createdAt,
+      };
+
+      dispatch(saveUser(payload));
+
+      setIsLoading(false);
+      toastify("Register Successful. Please check your email to verify", "success");
+      router.push("/verify");
+    } catch (error: any) {
+      setIsLoading(true);
+
+      toastify(error.message, "info");
     }
   }
 
@@ -185,23 +200,17 @@ export default function RegisterComponent() {
                   placeholder="Enter your password"
                   className="w-full rounded-md bg-white py-2 px-4 text-sm md:text-base font-medium text-secondary outline-none border border-white focus:border-secondary-light dark:border-secondary-light dark:focus:border-white"
                 />
-                <div>
-                  <button
-                    className="absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer"
-                    onClick={(e) => {
-                      setShowPassword(!showPassword);
-                      e.preventDefault();
-                    }}
-                  >
-                    <div className=" rounded">
-                      {showPassword ? (
-                        <Eye size={20} color="black" />
-                      ) : (
-                        <EyeOff size={20} color="black" />
-                      )}
-                    </div>
-                  </button>
-                </div>
+                <button
+                  type="button"
+                  className="absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? (
+                    <Eye size={20} color="black" />
+                  ) : (
+                    <EyeOff size={20} color="black" />
+                  )}
+                </button>
               </div>
             </motion.div>
 
@@ -219,15 +228,28 @@ export default function RegisterComponent() {
               >
                 Confirm Password <span className="text-red-600">*</span>
               </label>
-              <input
-                type="password"
-                name="confirmpassword"
-                id="confirmpassword"
-                required={true}
-                onChange={changeHandler}
-                placeholder="Re-enter your password"
-                className="w-full rounded-md bg-white py-2 px-4 text-sm md:text-base font-medium text-secondary outline-none border border-white focus:border-secondary-light dark:border-secondary-light dark:focus:border-white"
-              />
+              <div className="relative">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  name="confirmpassword"
+                  id="confirmpassword"
+                  required={true}
+                  onChange={changeHandler}
+                  placeholder="Re-enter your password"
+                  className="w-full rounded-md bg-white py-2 px-4 text-sm md:text-base font-medium text-secondary outline-none border border-white focus:border-secondary-light dark:border-secondary-light dark:focus:border-white"
+                />
+                <button
+                  type="button"
+                  className="absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                >
+                  {showConfirmPassword ? (
+                    <Eye size={20} color="black" />
+                  ) : (
+                    <EyeOff size={20} color="black" />
+                  )}
+                </button>
+              </div>
             </motion.div>
 
             <motion.div
@@ -258,7 +280,7 @@ export default function RegisterComponent() {
               <button
                 type="submit"
                 className="w-full py-2 text-sm md:text-base rounded-full text-white bg-primary transition duration-300 ease hover:bg-secondary"
-                disabled={registerStatus === "success" || registerStatus === "registering"}
+                disabled={isLoading}
               >
                 {isLoading ? (
                   <Loader size={24} className="mx-auto animate-spin" />

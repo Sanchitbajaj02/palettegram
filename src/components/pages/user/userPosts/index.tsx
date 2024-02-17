@@ -1,5 +1,6 @@
 import Loader from "@/app/loading";
 import { removePost } from "@/backend/posts.api";
+import parse from "html-react-parser";
 import { toastify } from "@/helper/toastify";
 import { removeUserPost } from "@/redux/reducers/postsReducer";
 import { PostInstanceType } from "@/types";
@@ -8,6 +9,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { Bookmark, Download, Heart, MessageCircle, Share, Trash2 } from "react-feather";
 import { useSelector, useDispatch } from "react-redux";
+import { parseCookies } from "nookies";
 
 type FormatOnType = "seconds" | "minutes" | "hours" | "days";
 
@@ -17,19 +19,19 @@ interface UserPostsProps {
 }
 
 export default function UserPosts({ userId, userName }: UserPostsProps) {
-  const userPosts = useSelector((store: any) => store.posts.posts).filter(
-    (post: PostInstanceType) => post.accountId === userId && post.isActive === true,
-  );
-  console.log(userPosts);
+  let userPosts = useSelector((store: any) => store.posts.posts)
+    .filter((post: PostInstanceType) => post.accountId === userId && post.isActive === true)
+    .reverse();
 
   const dispatch = useDispatch();
+  const cookie = parseCookies();
+  const currentUserId: string = cookie["accountId"];
 
   async function deleteHandler(id: string) {
     console.log(id);
     try {
       const response = await removePost(id);
       if (response) {
-        console.log(response);
         dispatch(removeUserPost(response.$id));
         toastify("Post deleted sucessfully", "success");
       }
@@ -53,9 +55,9 @@ export default function UserPosts({ userId, userName }: UserPostsProps) {
     };
 
     if (timeObj.calcTimeDiff("seconds") < 60) {
-      return `${timeObj.calcTimeDiff("seconds")}sec`;
+      return `${timeObj.calcTimeDiff("seconds")}s`;
     } else if (timeObj.calcTimeDiff("minutes") < 60) {
-      return `${timeObj.calcTimeDiff("minutes")}min`;
+      return `${timeObj.calcTimeDiff("minutes")}m`;
     } else if (timeObj.calcTimeDiff("hours") <= 24) {
       return `${timeObj.calcTimeDiff("hours")}h`;
     } else if (timeObj.calcTimeDiff("days") < 365) {
@@ -95,19 +97,23 @@ export default function UserPosts({ userId, userName }: UserPostsProps) {
                         <div className="flex justify-between text-lg  w-full mb-2">
                           <Link href={`/user/${post?.accountId}`}>
                             <p className=" font-semibold">{userName}</p>
+                            <p className="text-[13px] text-neutral-600 dark:text-neutral-400 ">
+                              {`${createdAtDateFormatter(post?.$createdAt)} ago`}
+                            </p>
                           </Link>
 
-                          <p className="text-[13px] text-neutral-600 dark:text-neutral-400 ">
-                            {`${createdAtDateFormatter(post?.$createdAt)} ago`}
-                          </p>
+                          {post?.accountId === currentUserId && (
+                            <Trash2
+                              onClick={() => deleteHandler(post.$id)}
+                              size={24}
+                              cursor={"pointer"}
+                            />
+                          )}
                         </div>
-                        <Trash2
-                          onClick={() => deleteHandler(post.$id)}
-                          size={24}
-                          cursor={"pointer"}
-                        />
 
-                        <p className="text-neutral-900 dark:text-neutral-200">{post?.postTitle}</p>
+                        <p className="text-neutral-900 dark:text-neutral-200">
+                          {parse(post?.postTitle)}
+                        </p>
                         <div className="h-auto w-full relative mt-2">
                           {post && post?.postImages && post?.postImages[0].length > 0 ? (
                             <Image

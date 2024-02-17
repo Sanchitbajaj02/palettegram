@@ -10,6 +10,7 @@ import { generateAvatar } from './avatarGenerator';
  */
 const registerUser = async (userData: any) => {
   try {
+
     // console.log("register: ", userData.email, userData.password, userData.fullName);
     if (userData.password != userData.confirmpassword) {
       throw Error("not matching");
@@ -20,6 +21,7 @@ const registerUser = async (userData: any) => {
       throw Error("password is not strong");
     }
     const avatar = generateAvatar(userData.fullName);
+
     const authResponse = await account.create(
       ID.unique(),
       userData.email,
