@@ -48,15 +48,17 @@ export default function User({ userId }: { userId: string }) {
               className="object-center object-cover rounded-md"
             />
           </div>
-          <section className="-mt-20 px-2">
-            <div className="flex justify-between items-end">
-              <Image
-                src="/assets/user.png"
-                alt="user"
-                width={135}
-                height={135}
-                className=" border-4 border-white dark:border-slate-800 rounded-full object-contain"
-              />
+
+          <section className="-mt-20 px-3">
+            <div className="flex justify-between items-end ">
+            <Image
+    src={user && user?.documents[0].avatarURL}
+    alt="user"
+    width={125}
+    height={125}
+    className="border-4 border-white dark:border-slate-800 rounded-full object-contain "
+  />
+
               <div className="h-fit flex gap-4">
                 <Mail className="h-7 w-7 sm:h-9 sm:w-9 border-2 p-1 rounded-full text-slate-700 dark:text-slate-400 border-slate-700 dark:border-slate-400" />
                 <ButtonLong href="#" size="normal">

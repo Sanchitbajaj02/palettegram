@@ -129,10 +129,7 @@ export default function Contact() {
           </form>
         </div>
       </section>
-
-      <div className=" bottom-0 fixed w-full">
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 }
