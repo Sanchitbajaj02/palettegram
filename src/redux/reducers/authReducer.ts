@@ -10,6 +10,7 @@ const initialState: authDetails = {
     email: "",
     createdAt: "",
     isVerified: false,
+    avatarURL: "",
   },
   error: false,
   loading: false,
