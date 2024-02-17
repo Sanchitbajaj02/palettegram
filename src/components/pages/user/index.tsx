@@ -14,7 +14,7 @@ import { ButtonLong } from "@/components/core/buttons";
 import { userCollectionDB } from "@/types/auth";
 
 export default function User({ userId }: { userId: string }) {
-  const [user, setUser] = useState<userCollectionDB[]>([]);
+  const [user, setUser] = useState<userCollectionDB>();
 
   const router = useRouter();
 
@@ -53,13 +53,13 @@ export default function User({ userId }: { userId: string }) {
 
           <section className="-mt-20 px-3">
             <div className="flex justify-between items-end ">
-            <Image
-    src={user && user?.documents[0].avatarURL}
-    alt="user"
-    width={125}
-    height={125}
-    className="border-4 border-white dark:border-slate-800 rounded-full object-contain "
-  />
+              <Image
+                src={user ? String(user?.avatarURL) : "/assets/logo.png"}
+                alt="user"
+                width={125}
+                height={125}
+                className="border-4 border-white dark:border-slate-800 rounded-full object-contain "
+              />
 
               <div className="h-fit flex gap-4">
                 <Mail className="h-7 w-7 sm:h-9 sm:w-9 border-2 p-1 rounded-full text-slate-700 dark:text-slate-400 border-slate-700 dark:border-slate-400" />
@@ -72,10 +72,10 @@ export default function User({ userId }: { userId: string }) {
             <article className="mt-2 space-y-4">
               <div className="space-y-1">
                 <h1 className="text-xl font-semibold text-black dark:text-white">
-                  {user && user[0]?.fullName}{" "}
+                  {user && user?.fullName}{" "}
                 </h1>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                  @{user && user[0]?.username}
+                  @{user && user?.username}
                 </p>
               </div>
 
@@ -108,7 +108,7 @@ export default function User({ userId }: { userId: string }) {
 
           <div className="h-px w-full mt-6 bg-neutral-500 rounded-2xl" />
 
-          <UserPosts userName={user! && user[0]?.fullName!} userId={userId} />
+          {user && <UserPosts userName={user.fullName} userId={userId} />}
         </section>
         <div className="flex-[2] hidden md:block rounded-md">
           <TrendingFeed />

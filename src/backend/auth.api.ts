@@ -25,7 +25,6 @@ const registerUser = async (userData: {
     if (!passwordRegex.test(userData.password)) {
       throw Error("password is not strong");
     }
-    const avatar = generateAvatar(userData.fullName);
 
     const authResponse = await account.create(
       ID.unique(),
@@ -61,7 +60,7 @@ const registerUser = async (userData: {
 
 /**
  * @abstract verifys the user based on the userId and secret sent to the user's email
- * @param {String} userId
+ * @param {String} accountId
  * @param {String} secret
  * @returns response status
  */
@@ -128,7 +127,6 @@ const loginUser = async (userData: any) => {
 /**
  * @abstract send a link to user's email
  * @param {string} userEmail
- * @returns {Object} response
  */
 const forgotpassword = async (userEmail: string) => {
   try {
@@ -186,7 +184,7 @@ const getCurrentUser = async () => {
 
 /**
  * @abstract logs out the user by clearing current session
- * @returns {Object} returns session
+ * @returns session
  */
 const logoutUser = async () => {
   return await account.deleteSession("current");
@@ -223,7 +221,7 @@ const saveDataToDatabase = async (session: any) => {
 
 /**
  * @abstract get single user data based on account id
- * @param id
+ * @param  {String} id
  * @returns
  */
 const getSingleUser = async (id: string) => {

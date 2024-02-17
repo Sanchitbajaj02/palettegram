@@ -13,12 +13,7 @@ import { parseCookies } from "nookies";
 
 type FormatOnType = "seconds" | "minutes" | "hours" | "days";
 
-interface UserPostsProps {
-  userId: string;
-  userName: string;
-}
-
-export default function UserPosts({ userId, userName }: UserPostsProps) {
+export default function UserPosts({ userId, userName }: { userId: string; userName: string }) {
   let userPosts = useSelector((store: any) => store.posts.posts)
     .filter((post: PostInstanceType) => post.accountId === userId && post.isActive === true)
     .reverse();
