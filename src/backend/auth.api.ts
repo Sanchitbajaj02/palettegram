@@ -16,6 +16,16 @@ const registerUser = async (userData: {
   confirmpassword: string;
 }) => {
   try {
+    // console.log("register: ", userData.email, userData.password, userData.fullName);
+    if (userData.password != userData.confirmpassword) {
+      throw Error("not matching");
+    }
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; //it will check that password must contain atleast one digit ,atleast one alphabet , atleast one special character and must be of atleast length 8
+
+    if (!passwordRegex.test(userData.password)) {
+      throw Error("password is not strong");
+    }
+
     let username = userData.email.split("@")[0];
 
     const authResponse = await account.create(
@@ -57,7 +67,7 @@ const registerUser = async (userData: {
 
 /**
  * @abstract verifys the user based on the userId and secret sent to the user's email
- * @param {String} userId
+ * @param {String} accountId
  * @param {String} secret
  * @returns response status
  */
@@ -124,7 +134,6 @@ const loginUser = async (userData: any) => {
 /**
  * @abstract send a link to user's email
  * @param {string} userEmail
- * @returns {Object} response
  */
 const forgotpassword = async (userEmail: string) => {
   try {
@@ -182,7 +191,7 @@ const getCurrentUser = async () => {
 
 /**
  * @abstract logs out the user by clearing current session
- * @returns {Object} returns session
+ * @returns session
  */
 const logoutUser = async () => {
   return await account.deleteSession("current");
@@ -195,13 +204,14 @@ const logoutUser = async () => {
  */
 const saveDataToDatabase = async (session: any) => {
   try {
-    console.log("session", session);
+    const avatar = generateAvatar(session.name);
     const resp = await db.createDocument(palettegramDB, usersCollection, ID.unique(), {
       email: session.email,
       fullName: session.name,
       isVerified: session.emailVerification,
       accountId: session.$id,
       username: session.prefs.username,
+      avatarURL: avatar,
     });
     if (!resp) {
       throw new Error("Database not working");
@@ -216,7 +226,7 @@ const saveDataToDatabase = async (session: any) => {
 
 /**
  * @abstract get single user data based on account id
- * @param id
+ * @param  {String} id
  * @returns
  */
 const getSingleUser = async (id: string) => {

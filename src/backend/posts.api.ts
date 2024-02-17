@@ -4,7 +4,6 @@ import {
   ID,
   Query,
   palettegramDB,
-  usersCollection,
   postsCollection,
   bucketStorage,
 } from "./appwrite.config";
@@ -29,16 +28,16 @@ const savePostToDb = async (data: any) => {
 
 /**
  * @description get all posts present in the database
- * @returns {Object} posts db
+ * @returns posts
  */
 const getAllPosts = async () => {
   try {
-    const tweets = await db.listDocuments(palettegramDB, postsCollection);
-    if (!tweets) {
+    const posts = await db.listDocuments(palettegramDB, postsCollection);
+    if (!posts) {
       throw new Error("Error fetching data");
     }
 
-    return tweets;
+    return posts;
   } catch (error: any) {
     console.log(error);
   }

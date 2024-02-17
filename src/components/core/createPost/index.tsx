@@ -9,7 +9,7 @@ import { toastify } from "@/helper/toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { addPost } from "@/redux/reducers/postsReducer";
 import { PostInstanceType } from "@/types/index.d";
-import isCtrlEnter from "@/helper/isCtrlEnter";
+import { isCtrlEnter } from "@/helper/isCtrlEnter";
 import Markdown from "@/components/Editor/Markdown";
 
 const CHAR_LIMIT = 500;
@@ -83,7 +83,7 @@ const CreatePost = () => {
       }
       // console.log(savetoDb);
       dispatch(addPost(finalDataToUpload));
-      toastify("Post uploaded successfully", "success", false);
+      toastify("Post uploaded successfully", "success");
 
       // setPostTitle("");
       setEditorState("");

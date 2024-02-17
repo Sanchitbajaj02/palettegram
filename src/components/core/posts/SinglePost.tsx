@@ -9,11 +9,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { removeBookmark, saveBookmark, createBookmarkEntry } from "@/backend/bookmarks.api";
 import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
 import { toastify } from "@/helper/toastify";
-import { addComment } from "@/backend/posts.api";
 import { getUserDetails } from "@/backend/auth.api";
 import { useCallback, useEffect, useState, MouseEvent } from "react";
 import { UserBookMarkType, FormatOnType } from "@/types/index";
-import isCtrlEnter from "@/helper/isCtrlEnter";
 
 interface UserDetails {
   fullName: string;

@@ -10,7 +10,7 @@ import { PostInstanceType } from "@/types";
 import { ArrowLeft } from "react-feather";
 
 import { toastify } from "@/helper/toastify";
-import isCtrlEnter from "@/helper/isCtrlEnter";
+import { isCtrlEnter } from "@/helper/isCtrlEnter";
 
 import { addComment } from "@/backend/posts.api";
 
