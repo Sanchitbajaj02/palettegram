@@ -1,5 +1,6 @@
 import HomePage from "@/components/pages/home";
 import Footer from "@/components/core/footer";
+import Navbar from "@/components/core/navbar";
 
 async function getGithubStars(): Promise<number> {
   try {
@@ -22,7 +23,8 @@ export default async function Home() {
 
   return (
     <>
-      <HomePage starCount={starCount} />
+      <Navbar starCount={starCount} />
+      <HomePage />
       <Footer />
     </>
   );
