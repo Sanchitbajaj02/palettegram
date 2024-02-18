@@ -41,11 +41,11 @@ export default function Footer({ isFixed }: { isFixed?: boolean }) {
 
   return (
     <section
-      className={`mt-12 text-center text-secondary-light dark:text-primary-light ${
+      className={`max-w-screen-lg mx-auto mt-12 bg-white dark:bg-secondary z-10 text-secondary-light dark:text-primary-light ${
         !!isFixed ? "bottom-0 fixed w-full" : ""
       } `}
     >
-      <div className="flex flex-col items-center md:flex-row border-t border-slate-500 w-11/12 min-w-75 m-auto py-10 ">
+      <div className="flex flex-col items-center md:flex-row border-t border-slate-500 py-8">
         <div className="flex items-center flex-1 pt-2 pb-9">
           <Link href="/">
             <Image
@@ -95,7 +95,7 @@ export default function Footer({ isFixed }: { isFixed?: boolean }) {
           </div>
         </div>
       </div>
-      <div className="py-4 space-y-2">
+      <div className="py-4 space-y-2 text-center">
         <p className="text-xs">
           Copyright &copy; {new Date().getFullYear()} Palettegram | MIT License <br />
         </p>
