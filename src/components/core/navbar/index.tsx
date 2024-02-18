@@ -18,7 +18,7 @@ import { logUserOut, saveUser } from "@/redux/reducers/authReducer";
 import { getPosts } from "@/redux/reducers/postsReducer";
 import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
 
-const Navbar = ({ starCount }: { starCount: number }) => {
+const Navbar = ({ starCount }: { starCount?: number }) => {
   const router = useRouter();
   const pathname = usePathname();
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -36,7 +36,7 @@ const Navbar = ({ starCount }: { starCount: number }) => {
     router.push("/");
   };
 
-  useEffect(() => {
+  /*   useEffect(() => {
     getCurrentUser()
       .then((currUser) => {
         const payload = {
@@ -79,7 +79,7 @@ const Navbar = ({ starCount }: { starCount: number }) => {
       clearTimeout(timeoutId);
       console.log("clear");
     };
-  }, [userIdFromCookies, dispatch]);
+  }, [userIdFromCookies, dispatch]); */
 
   if (userAuth.error) {
     return <h1>Error</h1>;
