@@ -1,7 +1,7 @@
 "use client";
 
 import { account, db, ID, palettegramDB, usersCollection, Query } from "./appwrite.config";
-import { generateAvatar } from './avatarGenerator';
+import { generateAvatar } from "./avatarGenerator";
 
 /**
  * @description Register the user into the database
@@ -10,7 +10,6 @@ import { generateAvatar } from './avatarGenerator';
  */
 const registerUser = async (userData: any) => {
   try {
-
     // console.log("register: ", userData.email, userData.password, userData.fullName);
     if (userData.password != userData.confirmpassword) {
       throw Error("not matching");
@@ -211,7 +210,7 @@ const saveDataToDatabase = async (session: any) => {
       isVerified: session.emailVerification,
       accountId: session.$id,
       username: username,
-      avatarURL: avatar, 
+      avatarURL: avatar,
     });
     if (!resp) {
       throw new Error("Database not working");

@@ -1,12 +1,12 @@
 import React from "react";
 import Footer from "@/components/core/footer";
+import SupportHeader from "@/components/core/supportHeader";
 
 export default function PrivacyPolicy() {
   return (
     <>
       <main className="max-w-screen-lg mx-auto my-4">
-        <h1 className="text-4xl font-bold mb-4">Privacy Policy</h1>
-        <em>Last updated: February 18, 2024</em>
+        <SupportHeader title="Privacy Policy" updatedDate="2024-02-19" effectiveDate="2024-02-19" />
         <p>
           This Privacy Policy describes Our policies and procedures on the collection, use and
           disclosure of Your information when You use the Service and tells You about Your privacy
@@ -21,14 +21,16 @@ export default function PrivacyPolicy() {
           </a>
           .
         </p>
-        <h2>Interpretation and Definitions</h2>
-        <h3>Interpretation</h3>
+        <h2 className="text-2xl my-4 font-semibold tracking-wide">
+          Interpretation and Definitions
+        </h2>
+        <h3 className="text-xl my-4">Interpretation</h3>
         <p>
           The words of which the initial letter is capitalized have meanings defined under the
           following conditions. The following definitions shall have the same meaning regardless of
           whether they appear in singular or in plural.
         </p>
-        <h3>Definitions</h3>
+        <h3 className="text-xl my-4">Definitions</h3>
         <p>For the purposes of this Privacy Policy:</p>
         <ul>
           <li>
@@ -124,8 +126,10 @@ export default function PrivacyPolicy() {
             </p>
           </li>
         </ul>
-        <h2>Collecting and Using Your Personal Data</h2>
-        <h3>Types of Data Collected</h3>
+        <h2 className="text-2xl my-4 font-semibold tracking-wide">
+          Collecting and Using Your Personal Data
+        </h2>
+        <h3 className="text-xl my-4">Types of Data Collected</h3>
         <h4>Personal Data</h4>
         <p>
           While using Our Service, We may ask You to provide Us with certain personally identifiable
@@ -152,10 +156,10 @@ export default function PrivacyPolicy() {
         <h4>Usage Data</h4>
         <p>Usage Data is collected automatically when using the Service.</p>
         <p>
-          Usage Data may include information such as Your Device's Internet Protocol address (e.g.
-          IP address), browser type, browser version, the pages of our Service that You visit, the
-          time and date of Your visit, the time spent on those pages, unique device identifiers and
-          other diagnostic data.
+          Usage Data may include information such as Your Device&apos;s Internet Protocol address
+          (e.g. IP address), browser type, browser version, the pages of our Service that You visit,
+          the time and date of Your visit, the time spent on those pages, unique device identifiers
+          and other diagnostic data.
         </p>
         <p>
           When You access the Service by or through a mobile device, We may collect certain
@@ -183,14 +187,15 @@ export default function PrivacyPolicy() {
         <p>
           If You decide to register through or otherwise grant us access to a Third-Party Social
           Media Service, We may collect Personal data that is already associated with Your
-          Third-Party Social Media Service's account, such as Your name, Your email address, Your
-          activities or Your contact list associated with that account.
+          Third-Party Social Media Service&apos;s account, such as Your name, Your email address,
+          Your activities or Your contact list associated with that account.
         </p>
         <p>
           You may also have the option of sharing additional information with the Company through
-          Your Third-Party Social Media Service's account. If You choose to provide such information
-          and Personal Data, during registration or otherwise, You are giving the Company permission
-          to use, share, and store it in a manner consistent with this Privacy Policy.
+          Your Third-Party Social Media Service&apos;s account. If You choose to provide such
+          information and Personal Data, during registration or otherwise, You are giving the
+          Company permission to use, share, and store it in a manner consistent with this Privacy
+          Policy.
         </p>
         <h4>Tracking Technologies and Cookies</h4>
         <p>
@@ -271,7 +276,7 @@ export default function PrivacyPolicy() {
           For more information about the cookies we use and your choices regarding cookies, please
           visit our Cookies Policy or the Cookies section of our Privacy Policy.
         </p>
-        <h3>Use of Your Personal Data</h3>
+        <h3 className="text-xl my-4">Use of Your Personal Data</h3>
         <p>The Company may use Personal Data for the following purposes:</p>
         <ul>
           <li>
@@ -297,10 +302,10 @@ export default function PrivacyPolicy() {
           <li>
             <p>
               <strong>To contact You:</strong> To contact You by email, telephone calls, SMS, or
-              other equivalent forms of electronic communication, such as a mobile application's
-              push notifications regarding updates or informative communications related to the
-              functionalities, products or contracted services, including the security updates, when
-              necessary or reasonable for their implementation.
+              other equivalent forms of electronic communication, such as a mobile
+              application&apos;s push notifications regarding updates or informative communications
+              related to the functionalities, products or contracted services, including the
+              security updates, when necessary or reasonable for their implementation.
             </p>
           </li>
           <li>
@@ -370,7 +375,7 @@ export default function PrivacyPolicy() {
             other purpose with Your consent.
           </li>
         </ul>
-        <h3>Retention of Your Personal Data</h3>
+        <h3 className="text-xl my-4">Retention of Your Personal Data</h3>
         <p>
           The Company will retain Your Personal Data only for as long as is necessary for the
           purposes set out in this Privacy Policy. We will retain and use Your Personal Data to the
@@ -384,13 +389,13 @@ export default function PrivacyPolicy() {
           strengthen the security or to improve the functionality of Our Service, or We are legally
           obligated to retain this data for longer time periods.
         </p>
-        <h3>Transfer of Your Personal Data</h3>
+        <h3 className="text-xl my-4">Transfer of Your Personal Data</h3>
         <p>
-          Your information, including Personal Data, is processed at the Company's operating offices
-          and in any other places where the parties involved in the processing are located. It means
-          that this information may be transferred to — and maintained on — computers located
-          outside of Your state, province, country or other governmental jurisdiction where the data
-          protection laws may differ than those from Your jurisdiction.
+          Your information, including Personal Data, is processed at the Company&apos;s operating
+          offices and in any other places where the parties involved in the processing are located.
+          It means that this information may be transferred to — and maintained on — computers
+          located outside of Your state, province, country or other governmental jurisdiction where
+          the data protection laws may differ than those from Your jurisdiction.
         </p>
         <p>
           Your consent to this Privacy Policy followed by Your submission of such information
@@ -402,7 +407,7 @@ export default function PrivacyPolicy() {
           will take place to an organization or a country unless there are adequate controls in
           place including the security of Your data and other personal information.
         </p>
-        <h3>Delete Your Personal Data</h3>
+        <h3 className="text-xl my-4">Delete Your Personal Data</h3>
         <p>
           You have the right to delete or request that We assist in deleting the Personal Data that
           We have collected about You.
@@ -421,7 +426,7 @@ export default function PrivacyPolicy() {
           Please note, however, that We may need to retain certain information when we have a legal
           obligation or lawful basis to do so.
         </p>
-        <h3>Disclosure of Your Personal Data</h3>
+        <h3 className="text-xl my-4">Disclosure of Your Personal Data</h3>
         <h4>Business Transactions</h4>
         <p>
           If the Company is involved in a merger, acquisition or asset sale, Your Personal Data may
@@ -446,14 +451,14 @@ export default function PrivacyPolicy() {
           <li>Protect the personal safety of Users of the Service or the public</li>
           <li>Protect against legal liability</li>
         </ul>
-        <h3>Security of Your Personal Data</h3>
+        <h3 className="text-xl my-4">Security of Your Personal Data</h3>
         <p>
           The security of Your Personal Data is important to Us, but remember that no method of
           transmission over the Internet, or method of electronic storage is 100% secure. While We
           strive to use commercially acceptable means to protect Your Personal Data, We cannot
           guarantee its absolute security.
         </p>
-        <h2>Children's Privacy</h2>
+        <h2 className="text-2xl my-4 font-semibold tracking-wide">Children&apos;s Privacy</h2>
         <p>
           Our Service does not address anyone under the age of 13. We do not knowingly collect
           personally identifiable information from anyone under the age of 13. If You are a parent
@@ -464,20 +469,22 @@ export default function PrivacyPolicy() {
         </p>
         <p>
           If We need to rely on consent as a legal basis for processing Your information and Your
-          country requires consent from a parent, We may require Your parent's consent before We
-          collect and use that information.
+          country requires consent from a parent, We may require Your parent&apos;s consent before
+          We collect and use that information.
         </p>
-        <h2>Links to Other Websites</h2>
+        <h2 className="text-2xl my-4 font-semibold tracking-wide">Links to Other Websites</h2>
         <p>
           Our Service may contain links to other websites that are not operated by Us. If You click
-          on a third party link, You will be directed to that third party's site. We strongly advise
-          You to review the Privacy Policy of every site You visit.
+          on a third party link, You will be directed to that third party&apos;s site. We strongly
+          advise You to review the Privacy Policy of every site You visit.
         </p>
         <p>
           We have no control over and assume no responsibility for the content, privacy policies or
           practices of any third party sites or services.
         </p>
-        <h2>Changes to this Privacy Policy</h2>
+        <h2 className="text-2xl my-4 font-semibold tracking-wide">
+          Changes to this Privacy Policy
+        </h2>
         <p>
           We may update Our Privacy Policy from time to time. We will notify You of any changes by
           posting the new Privacy Policy on this page.
@@ -491,25 +498,30 @@ export default function PrivacyPolicy() {
           You are advised to review this Privacy Policy periodically for any changes. Changes to
           this Privacy Policy are effective when they are posted on this page.
         </p>
-        <h2>Contact Us</h2>
-        <p>If you have any questions about this Privacy Policy, You can contact us:</p>
-        <ul>
-          <li>
-            <p>By email: sanchit02@outlook.com</p>
-          </li>
-          <li>
-            <p>
+
+        <article className="space-y-2">
+          <h2 className="text-2xl my-4 font-semibold tracking-wide">Contact Us</h2>
+          <p>If you have any questions about this Privacy Policy, You can contact us:</p>
+          <ul className="space-y-2">
+            <li>
+              By email:{" "}
+              <a href="mailto:sanchit02@outlook.com" className="hover:text-primary-light">
+                sanchit02@outlook.com
+              </a>
+            </li>
+            <li>
               By visiting this page on our website:{" "}
               <a
                 href="https://palettegram.vercel.app/contact"
                 rel="external nofollow noopener"
                 target="_blank"
+                className="hover:text-primary-light"
               >
                 https://palettegram.vercel.app/contact
               </a>
-            </p>
-          </li>
-        </ul>
+            </li>
+          </ul>
+        </article>
       </main>
 
       <Footer />

@@ -17,12 +17,12 @@ export default function Footer({ isFixed }: { isFixed?: boolean }) {
     {
       id: 3,
       title: "Privacy Policy",
-      slug: "/privacy-policy",
+      slug: "/privacy",
     },
     {
       id: 4,
       title: "Terms & Conditions",
-      slug: "/terms-and-conditions",
+      slug: "/terms",
     },
   ];
 
@@ -95,9 +95,12 @@ export default function Footer({ isFixed }: { isFixed?: boolean }) {
           </div>
         </div>
       </div>
-      <p className="py-2 text-[13px]">
-        Copyright &copy; {new Date().getFullYear()} Palettegram | All Rights Reserved.
-      </p>
+      <div className="py-4 space-y-2">
+        <p className="text-xs">
+          Copyright &copy; {new Date().getFullYear()} Palettegram | MIT License <br />
+        </p>
+        <p className="text-xs">Developed by Sanchit Bajaj and The Open Source Community</p>
+      </div>
     </section>
   );
 }
