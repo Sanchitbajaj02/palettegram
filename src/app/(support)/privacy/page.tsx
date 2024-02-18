@@ -1,10 +1,16 @@
 import React from "react";
 import Footer from "@/components/core/footer";
 import SupportHeader from "@/components/core/supportHeader";
+import Navbar from "@/components/core/navbar";
 
-export default function PrivacyPolicy() {
+import { getGithubStars } from "@/helper/getGithubStars";
+
+export default async function PrivacyPolicy() {
+  const starCount: number = await getGithubStars();
+
   return (
     <>
+      <Navbar starCount={starCount} />
       <main className="max-w-screen-lg mx-auto my-4">
         <SupportHeader title="Privacy Policy" updatedDate="2024-02-19" effectiveDate="2024-02-19" />
         <article>

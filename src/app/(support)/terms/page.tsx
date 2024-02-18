@@ -1,10 +1,15 @@
 import React from "react";
 import Footer from "@/components/core/footer";
 import SupportHeader from "@/components/core/supportHeader";
+import Navbar from "@/components/core/navbar";
+import { getGithubStars } from "@/helper/getGithubStars";
 
-export default function Terms() {
+export default async function Terms() {
+  const starCount: number = await getGithubStars();
+
   return (
     <>
+      <Navbar starCount={starCount} />
       <main className="max-w-screen-lg mx-auto my-4">
         <SupportHeader
           title="Terms of Use Agreement"
