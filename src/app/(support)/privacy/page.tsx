@@ -497,6 +497,7 @@ export default async function PrivacyPolicy() {
                 href="mailto:sanchit02@outlook.com"
                 className="hover:text-primary-light"
                 rel="noopener noreferrer"
+                target="_blank"
               >
                 sanchit02@outlook.com
               </a>
