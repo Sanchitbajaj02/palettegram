@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-rgb: 255, 255, 255;
@@ -35,6 +42,7 @@ body {
     filter: drop-shadow(0 5px 150px rgba(182, 0, 85, 0.75));
   }
 }
+
 @layer components {
   .card {
     @apply p-4 mx-2 md:m-0 md:p-8 rounded-xl;
@@ -69,10 +77,12 @@ body {
 .tiptap.ProseMirror {
   outline: none;
 }
+
 .is-active {
   background: black;
   color: #fff;
 }
+
 p:empty::before {
   content: "";
   display: inline-block;

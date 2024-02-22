@@ -36,7 +36,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
     router.push("/");
   };
 
-  /*   useEffect(() => {
+  useEffect(() => {
     getCurrentUser()
       .then((currUser) => {
         const payload = {
@@ -79,7 +79,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
       clearTimeout(timeoutId);
       console.log("clear");
     };
-  }, [userIdFromCookies, dispatch]); */
+  }, [userIdFromCookies, dispatch]);
 
   if (userAuth.error) {
     return <h1>Error</h1>;

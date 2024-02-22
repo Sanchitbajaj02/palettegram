@@ -42,8 +42,7 @@ export default function RegisterComponent() {
 
     try {
       setIsLoading(true);
-      setRegisterStatus("registering");
-      
+
       const nameRegex: RegExp = /^[\sa-zA-Z]+$/;
       const passwordRegex: RegExp = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@_])[A-Za-z\d@_]{6,16}$/;
 
