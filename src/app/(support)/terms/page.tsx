@@ -13,15 +13,16 @@ export default async function Terms() {
       <main className="max-w-screen-lg mx-auto my-4">
         <SupportHeader
           title="Terms of Use Agreement"
-          updatedDate="2024-02-19"
-          effectiveDate="2024-02-19"
+          updatedDate="2024-02-26"
+          effectiveDate="2024-02-26"
         />
         <section>
           <p className="text-base my-1">Welcome to Palettegram!</p>
 
           <p className="text-base my-1">
             These terms and conditions outline the rules and regulations for the use of
-            Palettegram's Website, located at https://palettegram.vercel.app/.
+            Palettegram's Website, located at{" "}
+            <a href="https://palettegram.vercel.app/">https://palettegram.vercel.app/</a> .
           </p>
 
           <p className="text-base my-1">
