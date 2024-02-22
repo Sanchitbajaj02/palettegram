@@ -22,7 +22,7 @@ export default function ThemeButton({ iconSize }: { iconSize: number }) {
     <>
       {theme === "dark" ? (
         <button
-          className="fixed my-[-82px] mx-[-89px] sm:my-0 sm:mx-[-600px]  px-2 py-2 rounded-full sm:bg-primary-600 hover:bg-primary-light hover:scale-105 text-white"
+          className="fixed my-[-82px] mx-[-89px] sm:my-0 sm:mx-[-600px] px-2 py-2 rounded-full sm:bg-primary-600 hover:bg-primary-light hover:scale-105 text-white"
           onClick={() => setTheme("light")}
         >
           <Sun size={iconSize} cursor="pointer" className="transition-all duration-300" />
