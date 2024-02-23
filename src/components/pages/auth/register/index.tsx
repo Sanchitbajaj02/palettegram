@@ -70,13 +70,12 @@ export default function RegisterComponent() {
       }
 
       const resp = await registerUser(data);
-
       const payload = {
-        accountId: resp.$id,
+        $id: resp.$id,
         email: resp.email,
         fullName: resp.name,
         isVerified: resp.emailVerification,
-        createdAt: resp.$createdAt,
+        $createdAt: resp.$createdAt,
       };
 
       dispatch(saveUser(payload));

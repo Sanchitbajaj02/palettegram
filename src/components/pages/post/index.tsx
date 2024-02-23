@@ -28,32 +28,32 @@ export default function PostById({
   const router = useRouter();
   let CHAR_LIMIT = 250;
   const [comment_message, setComment_message] = useState("");
-  const [commentCount, setCommentCount] = useState(singlePostInfo?.comments?.length || 0);
+  const [commentCount, setCommentCount] = useState(singlePostInfo?.commentsCount || 0);
   const [loading, setLoading] = useState(false);
 
-  const uploadComment = async (id: string | undefined, comment_message: string) => {
-    setLoading(true);
-    const previousComments = singlePostInfo.comments;
-    try {
-      if (previousComments === undefined || !id) return;
-      if (comment_message === "") {
-        toastify("Comment can not be empty", "error");
-        setLoading(false);
-        return;
-      }
-      const Comments = [...previousComments, comment_message];
-      const res = await addComment(id, Comments);
-      setCommentCount(res?.comments.length || singlePostInfo?.comments?.length);
-      toastify("Comment added successfully", "success");
-      singlePostInfo.comments?.push(comment_message);
-      setComment_message("");
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-      toastify("Comment cannot be added", "error");
-      setLoading(false);
-    }
-  };
+  // const uploadComment = async (id: string | undefined, comment_message: string) => {
+  //   setLoading(true);
+  //   const previousComments = singlePostInfo.comments;
+  //   try {
+  //     if (previousComments === undefined || !id) return;
+  //     if (comment_message === "") {
+  //       toastify("Comment can not be empty", "error");
+  //       setLoading(false);
+  //       return;
+  //     }
+  //     const Comments = [...previousComments, comment_message];
+  //     const res = await addComment(id, Comments);
+  //     setCommentCount(res?.comments.length || singlePostInfo?.comments?.length);
+  //     toastify("Comment added successfully", "success");
+  //     singlePostInfo.comments?.push(comment_message);
+  //     setComment_message("");
+  //     setLoading(false);
+  //   } catch (error) {
+  //     console.log(error);
+  //     toastify("Comment cannot be added", "error");
+  //     setLoading(false);
+  //   }
+  // };
 
   return (
     <>
@@ -80,15 +80,15 @@ export default function PostById({
                     placeholder="Type your comment here"
                     maxLength={CHAR_LIMIT}
                     required
-                    onKeyDown={(e) => {
-                      if (isCtrlEnter(e))
-                        uploadComment(singlePostInfo && singlePostInfo?.$id, comment_message);
-                    }}
+                    // onKeyDown={(e) => {
+                    //   if (isCtrlEnter(e))
+                    //     uploadComment(singlePostInfo && singlePostInfo?.$id, comment_message);
+                    // }}
                   />
                   <button
-                    onClick={() => {
-                      uploadComment(singlePostInfo && singlePostInfo?.$id, comment_message);
-                    }}
+                    // onClick={() => {
+                    //   uploadComment(singlePostInfo && singlePostInfo?.$id, comment_message);
+                    // }}
                     className="absolute left-3 bottom-3 transition-all duration-300 bg-primary hover:bg-primary-light text-white font-normal py-1 px-8 my-3 rounded-full"
                   >
                     {loading ? (
@@ -101,7 +101,7 @@ export default function PostById({
                 <div className=" ">{/* <button onClick={handleTest}>test</button> */}</div>
               </div>
               <div>
-                {singlePostInfo.comments?.length == 0 && (
+                {/* {singlePostInfo.comments?.length == 0 && (
                   <h1 className="text-white text-2xl text-center mt-5">There are no Comments!</h1>
                 )}
                 <Suspense fallback={<Loading />}>
@@ -115,7 +115,7 @@ export default function PostById({
                           <Comment comment={comment} />
                         </ul>
                       ))}
-                </Suspense>
+                </Suspense> */}
               </div>
             </div>
           </div>

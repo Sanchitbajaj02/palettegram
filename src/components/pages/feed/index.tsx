@@ -9,34 +9,28 @@ import CreatePost from "@/components/core/createPost";
 import Posts from "@/components/core/posts";
 import TrendingFeed from "@/components/core/trendingFeed";
 import Footer from "@/components/core/footer";
-import { getCurrentUser } from "@/backend/auth.api";
+import { getCurrentUser, getUserByUserId } from "@/backend/auth.api";
 import { useRouter } from "next/navigation";
+import { userCollectionDB } from "@/types/auth";
 
 const Feed = () => {
   const router = useRouter();
-  const [user, setUser] = useState({
-    emailVerification: undefined,
-  });
-  const cookies = parseCookies();
-  const userIdFromCookies: string = cookies["accountId"];
 
-  useEffect(() => {
-    getCurrentUser()
-      .then((resp: any) => {
-        setUser(resp);
-      })
-      .catch(console.log);
-  }, []);
-  if (user.emailVerification === false) {
+  const cookies = parseCookies();
+  const userId: string = cookies["userId"];
+  const isVerified: string = cookies["isVerified"];
+
+  if (isVerified === "false") {
     router.push("/verify");
   }
 
+  // console.log(isVerified);
   return (
     <>
       <main className="flex sm:flex-row flex-col max-w-screen-lg mx-auto pt-8 content-center px-4  ">
         <div className=" flex-1 sticky flex sm:flex-col items-center gap-8 sm:space-y-20 ">
           <Link
-            href={`/user/${userIdFromCookies}`}
+            href={`/user/${userId}`}
             className="w-12 h-12 sm:fixed rounded-full flex items-center justify-center shadow-md dark:shadow-gray-600 transition-all duration-300 text-black dark:text-white hover:text-primary-light border hover:border-primary-light"
           >
             <User size={20} />

@@ -3,12 +3,14 @@ import { verificationResponseType } from "@/types/auth";
 
 import { account, db, ID, palettegramDB, usersCollection, Query } from "./appwrite.config";
 import { generateAvatar } from "@/helper/avatarGenerator";
+import { setCookie } from "nookies";
 
 /**
  * @abstract Register the user into the database
  * @param {Object} userData
  * @returns authResponse
  */
+
 const registerUser = async (userData: {
   email: string;
   fullName: string;
@@ -71,6 +73,7 @@ const registerUser = async (userData: {
  * @param {String} secret
  * @returns response status
  */
+
 const verifyUser = async (accountId: string, secret: string) => {
   let response: verificationResponseType = {
     status: false,
@@ -109,9 +112,45 @@ const verifyUser = async (accountId: string, secret: string) => {
  * @param {Object} userData
  * @returns {Object} response
  */
+
+const getSingleUser = async (userid: string) => {
+  try {
+    const tweets = await db.listDocuments(palettegramDB, usersCollection, [
+      Query.equal("accountId", userid),
+    ]);
+    if (!tweets) {
+      throw new Error();
+    }
+    console.log("userData comming to [user/userId] -> ", tweets);
+    return tweets;
+  } catch (error: any) {
+    console.log(error);
+  }
+};
+
+const getUserByUserId = async (userId: string) => {
+  try {
+    const user = await db.listDocuments(palettegramDB, usersCollection, [
+      Query.equal("$id", userId),
+    ]);
+
+    if (!palettegramDB || !usersCollection || !userId) {
+      throw new Error("Invalid input for getting user details");
+    }
+
+    if (!user) {
+      throw new Error();
+    }
+    // console.log("userData comming by userId -> ", tweets);
+    return user;
+  } catch (error: any) {
+    console.log(error);
+  }
+};
+
 const loginUser = async (userData: any) => {
   try {
-    // console.log("login:", userData?.email, userData?.password);
+    console.log("login:", userData?.email, userData?.password);
     if (!userData?.email || !userData?.password) {
       throw new Error("email or password is empty");
     }
@@ -123,8 +162,12 @@ const loginUser = async (userData: any) => {
     if (!response || !response["$id"]) {
       throw new Error("Login failed");
     }
+    console.log("res", response);
 
-    return response;
+    const resp = await getSingleUser(response.userId);
+    console.log("res", resp);
+    setCookie(null, "userId", resp?.documents[0]?.$id!);
+    return resp;
   } catch (error: any) {
     console.log(error);
     throw new Error(error.message);
@@ -216,6 +259,8 @@ const saveDataToDatabase = async (session: any) => {
     if (!resp) {
       throw new Error("Database not working");
     }
+    console.log(resp);
+    setCookie(null, "userId", resp.$id);
 
     return resp;
   } catch (error: any) {
@@ -229,19 +274,6 @@ const saveDataToDatabase = async (session: any) => {
  * @param  {String} id
  * @returns
  */
-const getSingleUser = async (id: string) => {
-  try {
-    const tweets = await db.listDocuments(palettegramDB, usersCollection, [
-      Query.search("accountId", id),
-    ]);
-    if (!tweets) {
-      throw new Error();
-    }
-    return tweets;
-  } catch (error: any) {
-    console.log(error);
-  }
-};
 
 const loginWithGoogle = async () => {
   account.createOAuth2Session(
@@ -251,25 +283,25 @@ const loginWithGoogle = async () => {
   );
 };
 
-const getUserDetails = async (accountId: string) => {
-  try {
-    if (!palettegramDB || !usersCollection || !accountId) {
-      throw new Error("Invalid input for getting user details");
-    }
+// const getUserDetails = async (userId: string) => {
+//   try {
+//     console.log(userId, "acountId");
 
-    const user = await db.listDocuments(palettegramDB, usersCollection, [
-      Query.equal("accountId", accountId),
-      Query.select(["accountId", "fullName"]),
-    ]);
+//     if (!palettegramDB || !usersCollection || !userId) {
+//       throw new Error("Invalid input for getting user details");
+//     }
 
-    if (!user) {
-      throw new Error("User not found");
-    }
-    return user.documents.map((doc) => ({ accountId: doc.accountId, fullName: doc.fullName }));
-  } catch (error) {
-    console.error(error);
-  }
-};
+//     const user = await db.listDocuments(palettegramDB, usersCollection, [
+//       Query.equal("$id", userId),
+//     ]);
+//     if (!user) {
+//       throw new Error("User not found");
+//     }
+//     return user.documents.map((doc) => ({ accountId: doc.accountId, fullName: doc.fullName }));
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
 
 export {
   registerUser,
@@ -280,6 +312,7 @@ export {
   getCurrentUser,
   forgotpassword,
   updatepassword,
-  getUserDetails,
+  // getUserDetails,
   loginWithGoogle,
+  getUserByUserId,
 };

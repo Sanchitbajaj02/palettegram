@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Image from "next/image";
-import { getCurrentUser } from "@/backend/auth.api";
+import { getUserByUserId } from "@/backend/auth.api";
 import { saveUser } from "@/redux/reducers/authReducer";
 import { ButtonLong } from "@/components/core/buttons";
 import { parseCookies } from "nookies";
@@ -12,20 +12,21 @@ import { motion } from "framer-motion";
 function HomePage() {
   const dispatch = useDispatch();
   const cookies = parseCookies();
-  const accountIdFromCookies: string = cookies["accountId"];
+  const userId: string = cookies["userId"];
 
   const state = useSelector((state: any) => state.auth);
 
   useEffect(() => {
-    if (accountIdFromCookies) {
-      getCurrentUser()
+    if (userId) {
+      getUserByUserId(userId)
         .then((resp) => {
           if (resp) {
+            // console.log(resp, "Home:");
             const payload = {
-              userId: resp["$id"],
-              email: resp["email"],
-              isVerified: resp["emailVerification"],
-              createdAt: resp["$createdAt"],
+              $id: resp?.documents[0]?.$id,
+              email: resp?.documents[0]?.email,
+              isVerified: resp?.documents[0]?.isVerified,
+              $createdAt: resp?.documents[0]?.$createdAt,
             };
 
             dispatch(saveUser(payload));
@@ -37,7 +38,7 @@ function HomePage() {
           toastify(err.message, "error");
         });
     }
-  }, [dispatch, accountIdFromCookies]);
+  }, [dispatch, userId]);
 
   return (
     <>
@@ -85,7 +86,7 @@ function HomePage() {
               }}
               className="flex justify-center md:justify-start"
             >
-              {state?.creds.userId && state?.creds.userId !== "" ? (
+              {state?.data?.$id && state?.data?.$id !== "" ? (
                 <ButtonLong href="/feed" size="big">
                   Checkout your feed
                 </ButtonLong>

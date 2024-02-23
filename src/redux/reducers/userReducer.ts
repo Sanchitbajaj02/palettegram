@@ -5,12 +5,13 @@ import { userDetails, userCollectionDB } from "@/types/auth.d";
 
 const initialState: userDetails = {
   data: {},
+  accountId: "",
   error: false,
   loading: false,
 };
 
 export const userReducer = createSlice({
-  name: "auth",
+  name: "user",
   initialState,
   reducers: {
     saveCurrentLoggedInUser: (state, action: PayloadAction<userCollectionDB>) => {

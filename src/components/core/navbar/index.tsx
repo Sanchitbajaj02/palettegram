@@ -10,7 +10,7 @@ import ThemeButton from "@/components/core/themeButton";
 import { ButtonLong } from "../buttons";
 import { parseCookies } from "nookies";
 
-import { logoutUser, getCurrentUser } from "@/backend/auth.api";
+import { logoutUser, getUserByUserId } from "@/backend/auth.api";
 import { getAllPosts } from "@/backend/posts.api";
 import { getBookmarks } from "@/backend/bookmarks.api";
 
@@ -26,8 +26,10 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
   const dispatch = useDispatch();
   const cookies = parseCookies();
 
-  let userIdFromCookies: string | null = null;
-  userIdFromCookies = cookies["accountId"];
+  let accountIdFromCookies: string | null = null,
+    userIdFromCookies: string | null = null;
+  accountIdFromCookies = cookies["accountId"];
+  userIdFromCookies = cookies["userId"];
 
   const logout = async () => {
     await logoutUser();
@@ -37,22 +39,24 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
     router.push("/");
   };
 
-  const currentUser = useCallback(() => {
+  const currentUser = useCallback((userId: string | null) => {
     console.log("inside currentUser");
-    getCurrentUser()
-      .then((currUser: any) => {
-        console.log("currUser: ", currUser);
 
-        const payload = {
-          accountId: currUser.$id,
-          email: currUser.email,
-          isVerified: currUser.emailVerification,
-          createdAt: currUser.$createdAt,
-        };
+    if (userId) {
+      getUserByUserId(userId)
+        .then((currUser: any) => {
+          const payload = {
+            $id: currUser?.documents[0]?.$id,
+            accountId: currUser?.documents[0]?.accountId,
+            email: currUser?.documents[0]?.email,
+            isVerified: currUser?.documents[0]?.isVerified,
+            $createdAt: currUser?.documents[0]?.$createdAt,
+          };
 
-        dispatch(saveUser(payload));
-      })
-      .catch((err) => console.log(err));
+          dispatch(saveUser(payload));
+        })
+        .catch((err) => console.log(err));
+    }
   }, []);
 
   const getPostsFromDatabase = useCallback(() => {
@@ -81,8 +85,8 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
             if (bookmarks) {
               dispatch(
                 saveBookmarkToStore({
-                  accountId: userIdFromCookies,
-                  bookmark: bookmarks?.documents[0]?.bookmark,
+                  userId: bookmarks?.documents[0]?.userId?.$id,
+                  postId: bookmarks?.documents[0]?.postId,
                 }),
               );
             }
@@ -96,7 +100,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
   );
 
   useEffect(() => {
-    currentUser();
+    currentUser(userIdFromCookies);
     getPostsFromDatabase();
     getBookmarksFromDatabase(userIdFromCookies);
 
