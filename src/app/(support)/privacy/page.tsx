@@ -12,7 +12,7 @@ export default async function PrivacyPolicy() {
     <>
       <Navbar starCount={starCount} />
       <main className="max-w-screen-lg mx-auto my-4">
-        <SupportHeader title="Privacy Policy" updatedDate="2024-02-19" effectiveDate="2024-02-19" />
+        <SupportHeader title="Privacy Policy" updatedDate="2024-02-26" effectiveDate="2024-02-26" />
         <article>
           <p className="text-base my-1">
             This Privacy Policy describes Our policies and procedures on the collection, use and
@@ -497,6 +497,7 @@ export default async function PrivacyPolicy() {
                 href="mailto:sanchit02@outlook.com"
                 className="hover:text-primary-light"
                 rel="noopener noreferrer"
+                target="_blank"
               >
                 sanchit02@outlook.com
               </a>
