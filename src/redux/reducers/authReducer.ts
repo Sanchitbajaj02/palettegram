@@ -2,16 +2,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { setCookie, destroyCookie } from "nookies";
-import { authDetails } from "@/types/auth.d";
+import { authDetails, userDetails } from "@/types/auth.d";
 
-const initialState: authDetails = {
-  creds: {
-    accountId: "",
-    email: "",
-    createdAt: "",
-    isVerified: false,
-    avatarURL: "",
-  },
+const initialState: userDetails = {
+  data: {},
+  accountId: "",
   error: false,
   loading: false,
 };
@@ -22,7 +17,8 @@ export const registerReducer = createSlice({
   reducers: {
     saveUser: (state, action: PayloadAction<any>) => {
       state.loading = true;
-      state.creds = action.payload;
+      state.data = action.payload;
+      state.accountId = action.payload.accountId;
       setCookie(null, "accountId", action.payload.accountId);
       setCookie(null, "isVerified", String(action.payload.isVerified));
       state.error = false;
@@ -33,10 +29,8 @@ export const registerReducer = createSlice({
       state.loading = true;
       destroyCookie(null, "accountId");
       destroyCookie(null, "isVerified");
-      state.creds.accountId = "";
-      state.creds.email = "";
-      state.creds.createdAt = "";
-      state.creds.isVerified = false;
+      destroyCookie(null, "userId");
+      state.data = {};
       state.loading = false;
     },
   },

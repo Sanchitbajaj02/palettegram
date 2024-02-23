@@ -1,5 +1,5 @@
 /* eslint-disable quotes */
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Command, Image as NewImageFeather } from "react-feather";
 import { addNewImage, savePostToDb, getImageUrl } from "@/backend/posts.api";
 import Colorpicker from "@/components/core/colorPicker";
@@ -21,8 +21,6 @@ const CreatePost = () => {
 
   // State to manage text field
   const [editorState, setEditorState] = useState("");
-
-  // const [postTitle, setPostTitle] = useState("");
 
   // store image data
   const [imageStorage, setimageStorage] = useState<any>({
@@ -62,18 +60,18 @@ const CreatePost = () => {
         imageURL = getImageUrl(getFileObject["$id"])!;
       }
 
-      const userIdFromCookies: string = cookies["accountId"];
+      const userId: string = cookies["userId"];
       const imageArray = [imageURL];
       //console.log(imageArray);
 
       const finalDataToUpload: PostInstanceType = {
-        accountId: userIdFromCookies,
+        userId: userId,
         postTitle: editorState,
         postImages: imageArray.length > 0 ? imageArray : [],
         colors: (togglePalette && isPaletteTouched && JSON.stringify({ ...colors })) || null,
         isActive: true,
-        comments: [],
-        likes: [],
+        commentsCount: 0,
+        likesCount: 0,
       };
 
       const savetoDb = await savePostToDb(finalDataToUpload);
@@ -81,11 +79,10 @@ const CreatePost = () => {
       if (!savetoDb) {
         throw new Error();
       }
-      // console.log(savetoDb);
+      console.log(savetoDb, "svaetoDB");
       dispatch(addPost(finalDataToUpload));
       toastify("Post uploaded successfully", "success");
 
-      // setPostTitle("");
       setEditorState("");
       setimageStorage({
         preview: null,
@@ -140,19 +137,6 @@ const CreatePost = () => {
       setTogglePalette(true);
     }
   };
-
-  // const handleKeyPress = useCallback((event: KeyboardEvent) => {
-  //   if (event.ctrlKey && event.key === "Enter") {
-  //     submitRef.current.click();
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   document.addEventListener("keydown", handleKeyPress);
-  //   return () => {
-  //     document.removeEventListener("keydown", handleKeyPress);
-  //   };
-  // }, [handleKeyPress]);
 
   return (
     <>

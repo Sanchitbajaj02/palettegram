@@ -44,13 +44,15 @@ export default function LoginComponent() {
       setIsLoading(true);
 
       if (data.email !== "" && data.password !== "") {
-        const userCredentials = await loginUser(data);
-
-        if (userCredentials && userCredentials?.providerUid === data.email) {
+        const resp = await loginUser(data);
+        console.log(resp);
+        const userCredentials = resp?.documents[0];
+        if (userCredentials && userCredentials?.email === data.email) {
           const localObject = {
-            userId: userCredentials?.userId,
-            email: userCredentials?.providerUid,
-            createdAt: userCredentials.$createdAt,
+            $id: userCredentials?.$id,
+            accountId: userCredentials?.accountId,
+            email: userCredentials?.email,
+            $createdAt: userCredentials.$createdAt,
           };
 
           dispatch(saveUser(localObject));

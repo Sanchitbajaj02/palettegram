@@ -9,7 +9,7 @@ import ThemeButton from "@/components/core/themeButton";
 
 import { parseCookies } from "nookies";
 
-import { logoutUser, getCurrentUser } from "@/backend/auth.api";
+import { logoutUser, getUserByUserId } from "@/backend/auth.api";
 import { getAllPosts } from "@/backend/posts.api";
 import { getBookmarks } from "@/backend/bookmarks.api";
 
@@ -26,6 +26,7 @@ const Navbar = () => {
   const cookies = parseCookies();
 
   const userIdFromCookies: string = cookies["accountId"];
+  const userId: string = cookies["userId"];
 
   const logout = async () => {
     await logoutUser();
@@ -36,15 +37,14 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    getCurrentUser()
+    getUserByUserId(userId)
       .then((currUser: any) => {
-        console.log("currUser: ", currUser);
-
         const payload = {
-          accountId: currUser.$id,
-          email: currUser.email,
-          isVerified: currUser.emailVerification,
-          createdAt: currUser.$createdAt,
+          $id: currUser?.documents[0]?.$id,
+          accountId: currUser?.documents[0]?.accountId,
+          email: currUser?.documents[0]?.email,
+          isVerified: currUser?.documents[0]?.isVerified,
+          $createdAt: currUser?.documents[0]?.$createdAt,
         };
 
         dispatch(saveUser(payload));
@@ -62,12 +62,12 @@ const Navbar = () => {
           console.log(error);
         });
 
-      getBookmarks(userIdFromCookies)
+      getBookmarks(userId)
         .then((bookm) => {
           dispatch(
             saveBookmarkToStore({
-              accountId: userIdFromCookies,
-              bookmark: bookm?.documents[0]?.bookmark,
+              userId: bookm?.documents[0]?.userId?.$id,
+              postId: bookm?.documents[0]?.postId,
             }),
           );
         })
@@ -80,7 +80,7 @@ const Navbar = () => {
       clearTimeout(timeoutId);
       console.log("clear");
     };
-  }, [userIdFromCookies, dispatch]);
+  }, [userId, dispatch, userIdFromCookies]);
 
   if (userAuth.error) {
     return <h1>Error</h1>;
@@ -93,7 +93,7 @@ const Navbar = () => {
   return (
     <nav className="w-full sticky top-0 backdrop-blur-sm bg-grey-100 bg-opacity-20 z-50 shadow-md py-2 px-4 dark:shadow-gray-600">
       <div className="max-w-screen-lg mx-auto flex items-center content-center justify-between  h-12">
-        <Link href={userAuth.creds?.userId ? "/feed" : "/"}>
+        <Link href={userAuth.data?.$id ? "/feed" : "/"}>
           <Image
             className="navbar-brand fw-bold w-10 h-10 cursor pointer  "
             src={"/assets/logo.png"}
@@ -113,11 +113,10 @@ const Navbar = () => {
               <Home size={22} className="transition-all duration-300   " />
             </Link>
           )}
-
-          {userAuth.creds?.accountId && (
+          {userAuth.data?.$id && (
             <>
               <Link
-                href={`/user/${userIdFromCookies}`}
+                href={`/user/${userAuth.data?.$id}`}
                 className="mx-2 px-2 py-2 rounded-full  bg-primary text-white  hover:bg-primary-light hover:scale-105"
               >
                 <User size={22} className="transition-all duration-300 " />

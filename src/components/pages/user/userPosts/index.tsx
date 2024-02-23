@@ -3,7 +3,6 @@ import { removePost } from "@/backend/posts.api";
 import parse from "html-react-parser";
 import { toastify } from "@/helper/toastify";
 import { removeUserPost } from "@/redux/reducers/postsReducer";
-import { PostInstanceType } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -15,15 +14,14 @@ type FormatOnType = "seconds" | "minutes" | "hours" | "days";
 
 export default function UserPosts({ userId, userName }: { userId: string; userName: string }) {
   let userPosts = useSelector((store: any) => store.posts.posts)
-    .filter((post: PostInstanceType) => post.accountId === userId && post.isActive === true)
+    .filter((post: any) => post.userId?.$id === userId && post.isActive === true)
     .reverse();
-
+  // console.log(userPosts, "userPosts");
   const dispatch = useDispatch();
   const cookie = parseCookies();
   const currentUserId: string = cookie["accountId"];
 
   async function deleteHandler(id: string) {
-    console.log(id);
     try {
       const response = await removePost(id);
       if (response) {
@@ -34,7 +32,6 @@ export default function UserPosts({ userId, userName }: { userId: string; userNa
       console.log(error);
     }
   }
-
   function createdAtDateFormatter(postCreationTime: string) {
     const timeObj = {
       seconds: 1000,
@@ -75,7 +72,7 @@ export default function UserPosts({ userId, userName }: { userId: string; userNa
                   >
                     <section className="flex w-full h-full justify-start items-start gap-3 ">
                       <div className="h-full flex flex-col">
-                        <Link href={`/user/${post?.accountId}`}>
+                        <Link href={`/user/${post?.userId?.$id}`}>
                           <Image
                             src="/assets/user.png"
                             alt="user"
@@ -90,8 +87,8 @@ export default function UserPosts({ userId, userName }: { userId: string; userNa
 
                       <section className=" flex h-auto w-full flex-col items-start">
                         <div className="flex justify-between text-lg  w-full mb-2">
-                          <Link href={`/user/${post?.accountId}`}>
-                            <p className=" font-semibold">{userName}</p>
+                          <Link href={`/user/${post?.userId?.$id}`}>
+                            <p className=" font-semibold">{post?.userId?.fullName}</p>
                             <p className="text-[13px] text-neutral-600 dark:text-neutral-400 ">
                               {`${createdAtDateFormatter(post?.$createdAt)} ago`}
                             </p>
@@ -106,9 +103,7 @@ export default function UserPosts({ userId, userName }: { userId: string; userNa
                           )}
                         </div>
 
-                        <p className="text-neutral-900 dark:text-neutral-200">
-                          {parse(post?.postTitle)}
-                        </p>
+                        <div className="prose dark:prose-invert">{parse(post?.postTitle)}</div>
                         <div className="h-auto w-full relative mt-2">
                           {post && post?.postImages && post?.postImages[0].length > 0 ? (
                             <Image
@@ -124,18 +119,18 @@ export default function UserPosts({ userId, userName }: { userId: string; userNa
                         <div className="flex justify-between w-full pt-3 ">
                           <article className="flex flex-row gap-1 sm:gap-2 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-neutral-200 hover:text-primary">
                             <Heart className="h-4 w-4 sm:h-6 sm:w-6" />
-                            <p className="text-xs sm:text-base">{post?.likes.length}</p>
+                            <p className="text-xs sm:text-base">{post?.likesCounts}</p>
                           </article>
 
                           <article className="flex flex-row gap-1 sm:gap-2 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-neutral-200 hover:text-primary">
                             <MessageCircle className="h-4 w-4 sm:h-6 sm:w-6" />
-                            <p className="text-xs sm:text-base">{post?.comments?.length}</p>
+                            <p className="text-xs sm:text-base">{post?.commentsCount}</p>
                           </article>
 
                           <article className="flex flex-row gap-1 sm:gap-2 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-neutral-200 hover:text-primary">
                             <Bookmark className="h-4 w-4 sm:h-6 sm:w-6" />
 
-                            <p className="text-xs sm:text-base">{post?.likes.length}</p>
+                            <p className="text-xs sm:text-base">{post?.likesCount}</p>
                           </article>
                           <article className="flex flex-row gap-1 sm:gap-2 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-neutral-200 hover:text-primary">
                             <Share className="h-4 w-4 sm:h-6 sm:w-6" />

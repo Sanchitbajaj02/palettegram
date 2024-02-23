@@ -31,6 +31,7 @@ export type authDetails = {
 
 export type userDetails = {
   data: userCollectionDB | {};
+  accountId: string;
   error: boolean;
   loading: boolean;
 };

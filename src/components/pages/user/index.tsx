@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import { getSingleUser } from "@/backend/auth.api";
+import { getUserByUserId } from "@/backend/auth.api";
 
 import TrendingFeed from "@/components/core/trendingFeed";
 import Footer from "@/components/core/footer";
@@ -19,14 +19,17 @@ export default function User({ userId }: { userId: string }) {
   const router = useRouter();
 
   useEffect(() => {
-    getSingleUser(userId)
+    getUserByUserId(userId)
       .then((resp: any) => {
-        if (resp.documents) {
-          setUser(resp.documents);
+        if (resp) {
+          setUser(resp?.documents[0]);
         }
       })
       .catch(console.log);
   }, [userId]);
+  if (!user) {
+    return null;
+  }
 
   return (
     <>
@@ -44,8 +47,8 @@ export default function User({ userId }: { userId: string }) {
           </div>
           <div className="h-52 w-full relative -z-[1]">
             <Image
-              src="/assets/pinkCover.jpg"
-              alt="user"
+              src={user?.bannerURL ? user?.bannerURL : "/assets/pinkCover.jpg"}
+              alt="banner-img"
               fill
               className="object-center object-cover rounded-md"
             />
@@ -54,7 +57,7 @@ export default function User({ userId }: { userId: string }) {
           <section className="-mt-20 px-3">
             <div className="flex justify-between items-end ">
               <Image
-                src={user ? String(user?.avatarURL) : "/assets/logo.png"}
+                src={user ? user?.avatarURL! : "/assets/logo.png"}
                 alt="user"
                 width={125}
                 height={125}
@@ -80,7 +83,9 @@ export default function User({ userId }: { userId: string }) {
               </div>
 
               <p className="text-base">
-                Software-developer | Python | MERN | Next-Tailwind | Opensource
+                {user?.about
+                  ? user?.about
+                  : "Software-developer | Python | MERN | Next-Tailwind | Opensource"}
               </p>
 
               <div className="grid grid-cols-2 gap-4 text-sm text-gray-500 dark:text-gray-400">
@@ -95,7 +100,7 @@ export default function User({ userId }: { userId: string }) {
                 <aside className="flex items-center gap-2">
                   <Link2 size={16} />
                   <Link href={"/#link"} className="hover:underline text-sm">
-                    https://www.google.com
+                    {user?.userLink ? user.userLink : "https://www.dummy.com"}
                   </Link>
                 </aside>
                 <aside className="flex items-center gap-2">

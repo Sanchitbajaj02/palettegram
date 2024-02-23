@@ -1,10 +1,25 @@
+// export type PostInstanceType = {
+//   accountId: string;
+//   postTitle: string;
+//   postImages: string[];
+//   colors?: string | null;
+//   comments?: string[];
+//   likes: string[];
+//   isActive: boolean;
+//   $id?: string;
+//   $collectionId?: string;
+//   $createdAt?: string;
+// };
+
+import { userCollectionDB } from "./auth";
+
 export type PostInstanceType = {
-  accountId: string;
+  userId: any;
   postTitle: string;
   postImages: string[];
   colors?: string | null;
-  comments?: string[];
-  likes: string[];
+  commentsCount?: number;
+  likesCount: number;
   isActive: boolean;
   $id?: string;
   $collectionId?: string;
@@ -48,8 +63,8 @@ export type UserFromDB = {
 
 export type FormatOnType = "seconds" | "minutes" | "hours" | "days";
 export type UserBookMarkType = {
-  accountId: string;
-  bookmark: string[] | undefined;
+  userId: string;
+  postId: string[] | undefined;
   error: boolean;
   loading: boolean;
 };

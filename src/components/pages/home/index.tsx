@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
 import Image from "next/image";
 import { GitHub, User } from "react-feather";
-import { getCurrentUser } from "@/backend/auth.api";
+import { getUserByUserId } from "@/backend/auth.api";
 import { saveUser } from "@/redux/reducers/authReducer";
 import { Menu, X } from "react-feather";
 import ThemeButton from "@/components/core/themeButton";
@@ -16,7 +16,7 @@ import { motion } from "framer-motion";
 function HomePage({ starCount }: { starCount: number }) {
   const dispatch = useDispatch();
   const cookies = parseCookies();
-  const accountIdFromCookies: string = cookies["accountId"];
+  const userId: string = cookies["userId"];
 
   const state = useSelector((state: any) => state.auth);
 
@@ -27,15 +27,16 @@ function HomePage({ starCount }: { starCount: number }) {
   };
 
   useEffect(() => {
-    if (accountIdFromCookies) {
-      getCurrentUser()
+    if (userId) {
+      getUserByUserId(userId)
         .then((resp) => {
           if (resp) {
+            // console.log(resp, "Home:");
             const payload = {
-              userId: resp["$id"],
-              email: resp["email"],
-              isVerified: resp["emailVerification"],
-              createdAt: resp["$createdAt"],
+              $id: resp?.documents[0]?.$id,
+              email: resp?.documents[0]?.email,
+              isVerified: resp?.documents[0]?.isVerified,
+              $createdAt: resp?.documents[0]?.$createdAt,
             };
 
             dispatch(saveUser(payload));
@@ -47,7 +48,7 @@ function HomePage({ starCount }: { starCount: number }) {
           toastify(err.message, "error");
         });
     }
-  }, [dispatch, accountIdFromCookies]);
+  }, [dispatch, userId]);
 
   return (
     <>
@@ -95,7 +96,7 @@ function HomePage({ starCount }: { starCount: number }) {
               </span>
             </ButtonLong>
 
-            {!state?.creds.userId && !state?.creds.isVerified && (
+            {!state?.data?.$id && !state?.data?.isVerified && (
               <>
                 <ButtonLong href="/register" size="normal">
                   Register
@@ -134,7 +135,7 @@ function HomePage({ starCount }: { starCount: number }) {
                   <GitHub size={20} className="mr-4" /> {starCount} Stars
                 </Link>
 
-                {!state?.creds.userId && !state?.creds.isVerified && (
+                {!state?.data?.$id && !state?.data?.isVerified && (
                   <>
                     <Link
                       href="/register"
@@ -151,9 +152,9 @@ function HomePage({ starCount }: { starCount: number }) {
                     </Link>
                   </>
                 )}
-                {state?.creds.userId && state?.creds.isVerified && (
+                {state?.data?.$id && state?.data?.isVerified && (
                   <Link
-                    href={`/user/${accountIdFromCookies}`}
+                    href={`/user/${userId}`}
                     className="mx-2 px-2 py-2 rounded-full bg-primary text-white"
                   >
                     <User size={22} className="transition-all duration-300 " />
@@ -209,7 +210,7 @@ function HomePage({ starCount }: { starCount: number }) {
               }}
               className="flex justify-center md:justify-start"
             >
-              {state?.creds.userId && state?.creds.userId !== "" ? (
+              {state?.data?.$id && state?.data?.$id !== "" ? (
                 <ButtonLong href="/feed" size="big">
                   Checkout your feed
                 </ButtonLong>
