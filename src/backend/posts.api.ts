@@ -32,7 +32,12 @@ const savePostToDb = async (data: any) => {
  */
 const getAllPosts = async () => {
   try {
+    if (!palettegramDB || !postsCollection) {
+      throw new Error("Either databaseId or collectionId is not provided");
+    }
+
     const posts = await db.listDocuments(palettegramDB, postsCollection);
+
     if (!posts) {
       throw new Error("Error fetching data");
     }

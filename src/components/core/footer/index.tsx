@@ -3,13 +3,49 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function Footer({ isFixed }: { isFixed?: boolean }) {
+  const generalList = [
+    {
+      id: 1,
+      title: "Register",
+      slug: "/register",
+    },
+    {
+      id: 2,
+      title: "Login",
+      slug: "/login",
+    },
+    {
+      id: 3,
+      title: "Privacy Policy",
+      slug: "/privacy",
+    },
+    {
+      id: 4,
+      title: "Terms & Conditions",
+      slug: "/terms",
+    },
+  ];
+
+  const helpSupport = [
+    {
+      id: 1,
+      title: "Help Center",
+      slug: "/contact",
+    },
+    {
+      id: 2,
+      title: "Contribution Guidelines",
+      slug: "/contribute",
+    },
+  ];
+
   return (
     <section
-      className={`mt-12 text-center text-secondary-light dark:text-primary-light ${
+      className={`max-w-screen-xl mx-auto mt-12 bg-white dark:bg-secondary z-10 text-secondary-light dark:text-primary-light ${
         !!isFixed ? "bottom-0 fixed w-full" : ""
       } `}
     >
-      <div className="flex flex-col items-center md:flex-row border-t border-white w-11/12 min-w-75 m-auto py-10 ">
+      <div className="flex flex-col items-center md:flex-row border-t border-slate-500 py-8">
         <div className="flex items-center flex-1 pt-2 pb-9">
           <Link href="/">
             <Image
@@ -27,34 +63,44 @@ export default function Footer({ isFixed }: { isFixed?: boolean }) {
         </div>
         <div className="flex w-full md:w-auto justify-between">
           <div className="flex flex-wrap flex-col gap-2 text-left px-5 py-2 lg:w-60">
-            <h3 className="text-secondary dark:text-white text-lg">General</h3>
-            <Link href="/register" className="text-sm text-slate-400 hover:text-primary-light">
-              Register
-            </Link>
-            <Link href="/login" className="text-sm text-slate-400 hover:text-primary-light">
-              Login
-            </Link>
-            <Link href="/contact" className="text-sm text-slate-400 hover:text-primary-light">
-              Privacy Policy
-            </Link>
-            <Link href="/" className="text-sm text-slate-400 hover:text-primary-light">
-              Terms & Conditions
-            </Link>
+            <h3 className="text-secondary dark:text-white text-xl mb-2">General</h3>
+
+            {generalList &&
+              generalList.map((item) => {
+                return (
+                  <Link
+                    key={item.id}
+                    href={item.slug}
+                    className="transition-all duration-300 text-sm text-slate-400 hover:text-primary-light"
+                  >
+                    {item.title}
+                  </Link>
+                );
+              })}
           </div>
           <div className="flex flex-wrap flex-col gap-2 text-left px-5 py-2 lg:w-60">
             <h3 className="text-secondary dark:text-white text-lg">Help & Support</h3>
-            <Link href="/" className="text-sm text-slate-400 hover:text-primary-light">
-              Help center
-            </Link>
-            <Link href="/" className="text-sm text-slate-400 hover:text-primary-light">
-              Contributors guidelines
-            </Link>
+            {helpSupport &&
+              helpSupport.map((item) => {
+                return (
+                  <Link
+                    key={item.id}
+                    href={item.slug}
+                    className="transition-all duration-300 text-sm text-slate-400 hover:text-primary-light"
+                  >
+                    {item.title}
+                  </Link>
+                );
+              })}
           </div>
         </div>
       </div>
-      <p className="py-2 text-[13px]">
-        Copyright &copy; {new Date().getFullYear()} Palettegram | All Rights Reserved.
-      </p>
+      <div className="py-4 space-y-2 text-center">
+        <p className="text-xs">
+          Copyright &copy; {new Date().getFullYear()} Palettegram | MIT License <br />
+        </p>
+        <p className="text-xs">Developed by Sanchit Bajaj and The Open Source Community</p>
+      </div>
     </section>
   );
 }

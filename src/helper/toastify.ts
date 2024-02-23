@@ -15,10 +15,11 @@ export function toastify(text: string, statusType: ToastTypes) {
     case "info":
       return toast.info(text);
     case "error":
-      return toast.success(text);
+      return toast.error(text);
     case "warning":
-      return toast.success(text);
-    default:
-      return toast.message(text);
+      return toast.warning(text);
+    // default:
+    //   return toast.message(text);
+    //   break;
   }
 }

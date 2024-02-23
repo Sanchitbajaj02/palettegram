@@ -46,6 +46,9 @@ export default function RegisterComponent() {
     try {
       setIsLoading(true);
 
+      const nameRegex: RegExp = /^[\sa-zA-Z]+$/;
+      const passwordRegex: RegExp = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@_])[A-Za-z\d@_]{6,16}$/;
+
       if (!nameRegex.test(data.fullName)) {
         throw new Error("Name should not contain any number or special character");
       }
