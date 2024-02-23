@@ -23,7 +23,11 @@ export default async function PrivacyPolicy() {
             We use Your Personal data to provide and improve the Service. By using the Service, You
             agree to the collection and use of information in accordance with this Privacy Policy.
             This Privacy Policy has been created with the help of the{" "}
-            <a href="https://www.termsfeed.com/privacy-policy-generator/" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.termsfeed.com/privacy-policy-generator/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Privacy Policy Generator
             </a>
             .
@@ -205,7 +209,11 @@ export default async function PrivacyPolicy() {
             remain on Your personal computer or mobile device when You go offline, while Session
             Cookies are deleted as soon as You close Your web browser. You can learn more about
             cookies on{" "}
-            <a href="https://www.termsfeed.com/blog/cookies/#What_Are_Cookies" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.termsfeed.com/blog/cookies/#What_Are_Cookies"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               TermsFeed website
             </a>{" "}
             article.
@@ -485,7 +493,11 @@ export default async function PrivacyPolicy() {
           <ul className="space-y-2 list-disc list-inside">
             <li>
               By email:{" "}
-              <a href="mailto:sanchit02@outlook.com" className="hover:text-primary-light" rel="noopener noreferrer">
+              <a
+                href="mailto:sanchit02@outlook.com"
+                className="hover:text-primary-light"
+                rel="noopener noreferrer"
+              >
                 sanchit02@outlook.com
               </a>
             </li>
