@@ -1,6 +1,6 @@
 "use client";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
@@ -26,7 +26,8 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
   const dispatch = useDispatch();
   const cookies = parseCookies();
 
-  const userIdFromCookies: string = cookies["accountId"];
+  let userIdFromCookies: string | null = null;
+  userIdFromCookies = cookies["accountId"];
 
   const logout = async () => {
     await logoutUser();
@@ -36,7 +37,8 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
     router.push("/");
   };
 
-  useEffect(() => {
+  const currentUser = useCallback(() => {
+    console.log("inside currentUser");
     getCurrentUser()
       .then((currUser) => {
         const payload = {
@@ -49,8 +51,12 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
         dispatch(saveUser(payload));
       })
       .catch((err) => console.log(err));
+  }, []);
 
-    const timeoutId = setTimeout(() => {
+  const getPostsFromDatabase = useCallback(() => {
+    console.log("inside getPostsFromDatabase");
+
+    if (userIdFromCookies) {
       getAllPosts()
         .then((posts) => {
           if (posts && posts?.documents.length > 0) {
@@ -60,24 +66,40 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
         .catch((error) => {
           console.log(error);
         });
+    }
+  }, [userIdFromCookies]);
 
-      getBookmarks(userIdFromCookies)
-        .then((bookm) => {
-          dispatch(
-            saveBookmarkToStore({
-              accountId: userIdFromCookies,
-              bookmark: bookm?.documents[0]?.bookmark,
-            }),
-          );
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }, 2000);
+  const getBookmarksFromDatabase = useCallback(
+    (userIdFromCookies: string | null) => {
+      console.log("inside getBookmarksFromDatabase");
+
+      if (userIdFromCookies) {
+        getBookmarks(userIdFromCookies)
+          .then((bookmarks) => {
+            if (bookmarks) {
+              dispatch(
+                saveBookmarkToStore({
+                  accountId: userIdFromCookies,
+                  bookmark: bookmarks?.documents[0]?.bookmark,
+                }),
+              );
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    },
+    [userIdFromCookies],
+  );
+
+  useEffect(() => {
+    currentUser();
+    getPostsFromDatabase();
+    getBookmarksFromDatabase(userIdFromCookies);
 
     return () => {
-      clearTimeout(timeoutId);
-      console.log("clear");
+      console.log("cleanup");
     };
   }, []);
 
