@@ -79,7 +79,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
       clearTimeout(timeoutId);
       console.log("clear");
     };
-  }, [userIdFromCookies, dispatch]);
+  }, []);
 
   if (userAuth.error) {
     return <h1>Error</h1>;
