@@ -57,7 +57,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <Toaster
           position="top-right"
           duration={3000}
-          closeButton={true}
+          closeButton={false}
           richColors
           expand
           theme="light"
