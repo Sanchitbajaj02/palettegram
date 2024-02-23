@@ -13,15 +13,19 @@ export default async function Terms() {
       <main className="max-w-screen-lg mx-auto my-4">
         <SupportHeader
           title="Terms of Use Agreement"
-          updatedDate="2024-02-19"
-          effectiveDate="2024-02-19"
+          updatedDate="2024-02-26"
+          effectiveDate="2024-02-26"
         />
         <section>
-          <p className="text-base my-1">Welcome to Palettegram!</p>
+          <h2 className="text-2xl my-4 font-semibold tracking-wide">Welcome to Palettegram!</h2>
 
           <p className="text-base my-1">
             These terms and conditions outline the rules and regulations for the use of
-            Palettegram's Website, located at https://palettegram.vercel.app/.
+            Palettegram's Website, located at{" "}
+            <a href="https://palettegram.vercel.app/" target="_blank" rel="noopener noreferrer">
+              https://palettegram.vercel.app/
+            </a>{" "}
+            .
           </p>
 
           <p className="text-base my-1">
@@ -44,9 +48,9 @@ export default async function Terms() {
             as interchangeable and therefore as referring to same.
           </p>
 
-          <h3 className="text-xl my-4">
+          <h2 className="text-2xl my-4 font-semibold tracking-wide">
             <strong>Cookies</strong>
-          </h3>
+          </h2>
 
           <p className="text-base my-1">
             We employ the use of cookies. By accessing Palettegram, you agreed to use cookies in
@@ -60,9 +64,9 @@ export default async function Terms() {
             partners may also use cookies.
           </p>
 
-          <h3 className="text-xl my-4">
+          <h2 className="text-2xl my-4 font-semibold tracking-wide">
             <strong>License</strong>
-          </h3>
+          </h2>
 
           <p className="text-base my-1">
             Unless otherwise stated, Palettegram and/or its licensors own the intellectual property
@@ -87,6 +91,8 @@ export default async function Terms() {
             </a>
             .
           </p>
+
+          <br />
 
           <p className="text-base my-1">
             Parts of this website offer an opportunity for users to post and exchange opinions and
@@ -132,9 +138,9 @@ export default async function Terms() {
             formats or media.
           </p>
 
-          <h3 className="text-xl my-4">
+          <h2 className="text-2xl my-4 font-semibold tracking-wide">
             <strong>Hyperlinking to our Content</strong>
-          </h3>
+          </h2>
 
           <p className="text-base my-1">
             The following organizations may link to our Website without prior written approval:
@@ -218,18 +224,18 @@ export default async function Terms() {
             trademark license agreement.
           </p>
 
-          <h3 className="text-xl my-4">
+          <h2 className="text-2xl my-4 font-semibold tracking-wide">
             <strong>iFrames</strong>
-          </h3>
+          </h2>
 
           <p className="text-base my-1">
             Without prior approval and written permission, you may not create frames around our
             Webpages that alter in any way the visual presentation or appearance of our Website.
           </p>
 
-          <h3 className="text-xl my-4">
+          <h2 className="text-2xl my-4 font-semibold tracking-wide">
             <strong>Content Liability</strong>
-          </h3>
+          </h2>
 
           <p className="text-base my-1">
             We shall not be hold responsible for any content that appears on your Website. You agree
@@ -239,9 +245,9 @@ export default async function Terms() {
             of, any third party rights.
           </p>
 
-          <h3 className="text-xl my-4">
+          <h2 className="text-2xl my-4 font-semibold tracking-wide">
             <strong>Reservation of Rights</strong>
-          </h3>
+          </h2>
 
           <p className="text-base my-1">
             We reserve the right to request that you remove all links or any particular link to our
@@ -251,9 +257,9 @@ export default async function Terms() {
             linking terms and conditions.
           </p>
 
-          <h3 className="text-xl my-4">
+          <h2 className="text-2xl my-4 font-semibold tracking-wide">
             <strong>Removal of links from our website</strong>
-          </h3>
+          </h2>
 
           <p className="text-base my-1">
             If you find any link on our Website that is offensive for any reason, you are free to

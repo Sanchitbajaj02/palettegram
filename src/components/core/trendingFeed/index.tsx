@@ -39,8 +39,11 @@ export default function TrendingFeed() {
         <Link href="/contact" className="text-xs text-slate-500 hover:text-primary-light">
           Help Center
         </Link>
-        <Link href="/" className="text-xs text-slate-500 hover:text-primary-light">
-          Privacy & Terms
+        <Link href="/privacy" className="text-xs text-slate-500 hover:text-primary-light">
+          Privacy
+        </Link>
+        <Link href="/terms" className="text-xs text-slate-500 hover:text-primary-light">
+          Terms
         </Link>
       </div>
     </section>
