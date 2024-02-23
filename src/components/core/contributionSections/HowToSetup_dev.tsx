@@ -14,10 +14,10 @@ export default function HowToSetup_dev() {
   const handleCopyClick = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
-      toastify(`Copied to clipbroad`, "success");
+      toastify(`Copied to clipboard`, "success");
     } catch (error) {
       console.log(`copy clipboard error` + error);
-      toastify(`Eh! some problem has occured ${error}`, "error");
+      toastify(`Oops! Something went wrong. Please try again.`, "error");
     }
   };
 
@@ -51,7 +51,7 @@ export default function HowToSetup_dev() {
             src={"/assets/contribute/cd_pal.png"}
             width={1200}
             height={100}
-            alt="settings"
+            alt="Navigating to Palettegram directory"
           />
           <pre className="block relative overflow-x-auto bg-gray-900 text-white py-4 px-2 mt-3">
             {"cd palettegram"}
@@ -83,7 +83,7 @@ export default function HowToSetup_dev() {
             src={"/assets/contribute/add_upstream.png"}
             width={1200}
             height={100}
-            alt="settings"
+            alt="Adding upstream repository"
           />
 
           <pre className="block relative overflow-x-auto bg-gray-900 text-white py-4 px-2 mt-3">
@@ -120,7 +120,7 @@ export default function HowToSetup_dev() {
             src={"/assets/contribute/add_origin.png"}
             width={1200}
             height={100}
-            alt="settings"
+            alt="Adding origin repository"
           />
 
           <pre className="block relative overflow-x-auto bg-gray-900 text-white py-4 px-2 mt-3">
@@ -156,7 +156,7 @@ export default function HowToSetup_dev() {
               src={"/assets/contribute/pull_upstream.png"}
               width={1200}
               height={100}
-              alt="settings"
+              alt="pull updates"
             />
             <pre className="block relative overflow-x-auto bg-gray-900 text-white py-4 px-2 mt-3">
               {"git pull upstream master"}
@@ -188,7 +188,7 @@ export default function HowToSetup_dev() {
             src={"/assets/contribute/create_branch.png"}
             width={1200}
             height={100}
-            alt="settings"
+            alt="new branch"
           />
           <pre className="block relative overflow-x-auto bg-gray-900 text-white py-4 px-2 mt-3">
             {"git branch -b <your_branch_name>"}
@@ -219,7 +219,7 @@ export default function HowToSetup_dev() {
             src={"/assets/contribute/install_dep.png"}
             width={1200}
             height={100}
-            alt="settings"
+            alt="install dependencies"
           />
           <pre className="block relative overflow-x-auto bg-gray-900 text-white py-4 px-2 mt-3">
             {"yarn install --frozen-lockfile"}
@@ -250,7 +250,7 @@ export default function HowToSetup_dev() {
             src={"/assets/contribute/stage.png"}
             width={1200}
             height={100}
-            alt="settings"
+            alt="save changes"
           />
           <pre className="block relative overflow-x-auto bg-gray-900 text-white py-4 px-2 mt-3">
             {"git add ."}
@@ -284,7 +284,7 @@ export default function HowToSetup_dev() {
             src={"/assets/contribute/commit.png"}
             width={1200}
             height={100}
-            alt="settings"
+            alt="commit"
           />
           <pre className="block relative overflow-x-auto bg-gray-900 text-white py-4 px-2 mt-3">
             {"git commit -m 'your commit message' "}
@@ -316,7 +316,7 @@ export default function HowToSetup_dev() {
             src={"/assets/contribute/push.png"}
             width={1200}
             height={100}
-            alt="settings"
+            alt="push changes"
           />
           <pre className="block relative overflow-x-auto bg-gray-900 text-white py-4 px-2 mt-3">
             {"git push -u origin <your_branch_name>"}
@@ -348,7 +348,7 @@ export default function HowToSetup_dev() {
             src={"/assets/contribute/pull_req.png"}
             width={1200}
             height={100}
-            alt="settings"
+            alt="pull pr"
           />
         </motion.div>
         <motion.div
@@ -373,7 +373,7 @@ export default function HowToSetup_dev() {
             src={"/assets/contribute/commit_detail.png"}
             width={1200}
             height={100}
-            alt="settings"
+            alt="add detail"
           />
         </motion.div>
         <p className="p-4 my-5 text-3xl md:text-4xl text-center font-extrabold tracking-wide text-black dark:text-white ">

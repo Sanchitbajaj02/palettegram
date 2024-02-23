@@ -17,7 +17,7 @@ export default function HowToSetup_Appwrite() {
       toastify(`Copied to clipbroad`, "success");
     } catch (error) {
       console.log(`copy clipboard error` + error);
-      toastify(`Eh! some problem has occured ${error}`, "error");
+      toastify(`Oops! Something went wrong. Please try again.`, "error");
     }
   };
 
@@ -59,28 +59,28 @@ export default function HowToSetup_Appwrite() {
             src={"/assets/contribute/new-proj.jpg"}
             width={1200}
             height={500}
-            alt="settings"
+            alt="create project"
           />
           <Image
             className="shadow shadow-gray-500 border-[1px] mb-3 border-primary rounded-lg"
             src={"/assets/contribute/proj-name.jpg"}
             width={1200}
             height={500}
-            alt="settings"
+            alt="create project 2"
           />
           <Image
             className="shadow shadow-gray-500 border-[1px] mb-3 border-primary rounded-lg"
             src={"/assets/contribute/web-proj.jpg"}
             width={1200}
             height={500}
-            alt="settings"
+            alt="create project 3"
           />
           <Image
             className="shadow shadow-gray-500 border-[1px] mb-3 border-primary rounded-lg"
             src={"/assets/contribute/hostname.jpg"}
             width={1200}
             height={500}
-            alt="settings"
+            alt="hostname"
           />
         </motion.div>
 
@@ -141,14 +141,14 @@ cp appwrite-gen/.env.example appwrite-gen/.env`}
             src={"/assets/contribute/proj-setting.jpg"}
             width={1200}
             height={500}
-            alt="settings"
+            alt="project setting"
           />
           <Image
             className="shadow shadow-gray-500 border-[1px] mb-3 border-primary rounded-lg"
             src={"/assets/contribute/proj-id.jpg"}
             width={1200}
             height={500}
-            alt="settings"
+            alt="project id"
           />
         </motion.div>
 
@@ -173,7 +173,7 @@ cp appwrite-gen/.env.example appwrite-gen/.env`}
             src={"/assets/contribute/api-button.jpg"}
             width={1200}
             height={500}
-            alt="settings"
+            alt="api button"
           />
         </motion.div>
 
@@ -201,21 +201,21 @@ cp appwrite-gen/.env.example appwrite-gen/.env`}
             src={"/assets/contribute/api-key.jpg"}
             width={1200}
             height={500}
-            alt="settings"
+            alt="api key"
           />
           <Image
             className="shadow shadow-gray-500 border-[1px] mb-3 border-primary rounded-lg"
             src={"/assets/contribute/scopes.jpg"}
             width={1200}
             height={500}
-            alt="settings"
+            alt="scopes"
           />
           <Image
             className="shadow shadow-gray-500 border-[1px] mb-3 border-primary rounded-lg"
             src={"/assets/contribute/copy-api.jpg"}
             width={1200}
             height={500}
-            alt="settings"
+            alt="copy api"
           />
         </motion.div>
 

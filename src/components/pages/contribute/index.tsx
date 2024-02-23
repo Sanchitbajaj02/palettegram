@@ -1,17 +1,18 @@
 "use client";
+import { useCallback } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
 import Footer from "@/components/core/footer";
 import Navbar from "@/components/core/navbar";
 import { Forking, AppwriteSetup, DevSetup } from "@/components/core/contributionSections";
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { useState, useCallback } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 
+// Component to render the contribution guide with dynamic tabs
 export default function Contribute() {
-  const [isActive, setIsActive] = useState("");
-
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
+  // Dynamic tab rendering based on currentTab state
+
   const currentTab = searchParams.get("currentTab");
 
   const loadComponent = [
@@ -33,7 +34,6 @@ export default function Contribute() {
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams.toString());
       params.set(name, value);
-      console.log("hi");
 
       return params.toString();
     },
@@ -41,6 +41,7 @@ export default function Contribute() {
   );
 
   return (
+    // Main render block
     <>
       <Navbar />
       <div className="mx-10 my-3">
@@ -84,6 +85,7 @@ const Tabs = ({ currentTab }: { currentTab: string }) => {
       return <DevSetup />;
     case "appwriteSetup":
       return <AppwriteSetup />;
+    // Default to Forking component if currentTab does not match any case
     default:
       return <Forking />;
   }

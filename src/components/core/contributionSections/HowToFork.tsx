@@ -17,7 +17,7 @@ export default function HowToFork() {
       toastify(`Copied to clipbroad`, "success");
     } catch (error) {
       console.log(`copy clipboard error` + error);
-      toastify(`Eh! some problem has occured ${error}`, "error");
+      toastify(`Oops! Something went wrong. Please try again.`, "error");
     }
   };
 
@@ -41,7 +41,7 @@ export default function HowToFork() {
             src={"/assets/contribute/fork.png"}
             width={1200}
             height={100}
-            alt="settings"
+            alt="fork repo"
           />
         </div>
         <div className="my-2">
@@ -53,14 +53,14 @@ export default function HowToFork() {
             src={"/assets/contribute/clone_link.png"}
             width={1200}
             height={500}
-            alt="settings"
+            alt="clone link"
           />
           <Image
             className="shadow shadow-gray-500 border-[1px] border-primary rounded-sm mt-3"
             src={"/assets/contribute/clone_cli.png"}
             width={1200}
             height={100}
-            alt="settings"
+            alt="cli"
           />
 
           <pre className="block relative overflow-x-auto bg-gray-900 text-white py-4 px-2 mt-3">
