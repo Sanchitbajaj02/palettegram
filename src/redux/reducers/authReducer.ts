@@ -2,25 +2,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { setCookie, destroyCookie } from "nookies";
-import { authDetails, userDetails } from "@/types/auth.d";
+import { userCollectionDB, userDetails } from "@/types/auth.d";
 
 const initialState: userDetails = {
   data: {},
-  accountId: "",
   error: false,
   loading: false,
 };
 
-export const registerReducer = createSlice({
+export const registerReducer: any = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    saveUser: (state, action: PayloadAction<any>) => {
+    saveUserToStore: (state, action: PayloadAction<userCollectionDB>) => {
       state.loading = true;
       state.data = action.payload;
-      state.accountId = action.payload.accountId;
       setCookie(null, "accountId", action.payload.accountId);
       setCookie(null, "isVerified", String(action.payload.isVerified));
+
+      if (action.payload.$id) {
+        setCookie(null, "userId", action.payload.$id);
+      }
       state.error = false;
       state.loading = false;
     },
@@ -36,6 +38,6 @@ export const registerReducer = createSlice({
   },
 });
 
-export const { saveUser, logUserOut } = registerReducer.actions;
+export const { saveUserToStore, logUserOut } = registerReducer.actions;
 
 export default registerReducer.reducer;

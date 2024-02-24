@@ -14,7 +14,7 @@ import { logoutUser, getUserByUserId } from "@/backend/auth.api";
 import { getAllPosts } from "@/backend/posts.api";
 import { getBookmarks } from "@/backend/bookmarks.api";
 
-import { logUserOut, saveUser } from "@/redux/reducers/authReducer";
+import { logUserOut, saveUserToStore } from "@/redux/reducers/authReducer";
 import { getPosts } from "@/redux/reducers/postsReducer";
 import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
 
@@ -39,25 +39,28 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
     router.push("/");
   };
 
-  const currentUser = useCallback((userId: string | null) => {
-    console.log("inside currentUser");
+  const currentUser = useCallback(
+    (userId: string | null) => {
+      console.log("inside currentUser");
 
-    if (userId) {
-      getUserByUserId(userId)
-        .then((currUser: any) => {
-          const payload = {
-            $id: currUser?.documents[0]?.$id,
-            accountId: currUser?.documents[0]?.accountId,
-            email: currUser?.documents[0]?.email,
-            isVerified: currUser?.documents[0]?.isVerified,
-            $createdAt: currUser?.documents[0]?.$createdAt,
-          };
+      if (userId) {
+        getUserByUserId(userId)
+          .then((currUser: any) => {
+            const payload = {
+              $id: currUser?.documents[0]?.$id,
+              accountId: currUser?.documents[0]?.accountId,
+              email: currUser?.documents[0]?.email,
+              isVerified: currUser?.documents[0]?.isVerified,
+              $createdAt: currUser?.documents[0]?.$createdAt,
+            };
 
-          dispatch(saveUser(payload));
-        })
-        .catch((err) => console.log(err));
-    }
-  }, []);
+            dispatch(saveUserToStore(payload));
+          })
+          .catch((err) => console.log(err));
+      }
+    },
+    [dispatch],
+  );
 
   const getPostsFromDatabase = useCallback(() => {
     console.log("inside getPostsFromDatabase");
@@ -73,7 +76,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
           console.log(error);
         });
     }
-  }, [userIdFromCookies]);
+  }, [dispatch, userIdFromCookies]);
 
   const getBookmarksFromDatabase = useCallback(
     (userIdFromCookies: string | null) => {
@@ -96,7 +99,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
           });
       }
     },
-    [userIdFromCookies],
+    [dispatch],
   );
 
   useEffect(() => {
@@ -107,7 +110,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
     return () => {
       console.log("cleanup");
     };
-  }, []);
+  }, [currentUser, getBookmarksFromDatabase, getPostsFromDatabase, userIdFromCookies]);
 
   if (userAuth.error) {
     return <h1>Error</h1>;

@@ -219,8 +219,8 @@
           "error": "",
           "required": false,
           "array": false,
-          "min": -2147483647,
-          "max": 2147483647,
+          "min": -9223372036854776000,
+          "max": 9223372036854776000,
           "default": null
         }
       ],
@@ -252,7 +252,7 @@
           "relationType": "oneToOne",
           "twoWay": false,
           "twoWayKey": "6559b707984a4f046a08",
-          "onDelete": "cascade",
+          "onDelete": "setNull",
           "side": "parent"
         },
         {
@@ -294,7 +294,7 @@
           "relationType": "oneToMany",
           "twoWay": false,
           "twoWayKey": "65acb78f522ef1f69f60",
-          "onDelete": "cascade",
+          "onDelete": "setNull",
           "side": "parent"
         },
         {
@@ -308,7 +308,7 @@
           "relationType": "oneToMany",
           "twoWay": false,
           "twoWayKey": "65acb78f522ef1f69f60",
-          "onDelete": "cascade",
+          "onDelete": "setNull",
           "side": "parent"
         }
       ],
@@ -388,7 +388,7 @@
           "relationType": "manyToOne",
           "twoWay": false,
           "twoWayKey": "65cbb76c6ffb060ac5f6",
-          "onDelete": "cascade",
+          "onDelete": "setNull",
           "side": "parent"
         }
       ],
@@ -399,13 +399,19 @@
     {
       "$id": "65a27126f17d920bff46",
       "$createdAt": "2024-02-11T19:05:33.352+00:00",
-      "$updatedAt": "2024-02-11T19:05:33.352+00:00",
-      "$permissions": [],
+      "$updatedAt": "2024-02-24T15:18:32.917+00:00",
+      "$permissions": [
+        "create(\"users\")",
+        "read(\"users\")",
+        "update(\"users\")",
+        "delete(\"users\")",
+        "read(\"any\")"
+      ],
       "fileSecurity": false,
-      "name": "bucky",
+      "name": "postImages",
       "enabled": true,
-      "maximumFileSize": 5242880,
-      "allowedFileExtensions": [],
+      "maximumFileSize": 50000000,
+      "allowedFileExtensions": ["jpg", "png", "svg"],
       "compression": "none",
       "encryption": true,
       "antivirus": true

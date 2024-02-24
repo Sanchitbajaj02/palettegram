@@ -9,7 +9,7 @@ import CreatePost from "@/components/core/createPost";
 import Posts from "@/components/core/posts";
 import TrendingFeed from "@/components/core/trendingFeed";
 import Footer from "@/components/core/footer";
-import { getCurrentUser, getUserByUserId } from "@/backend/auth.api";
+import { getUserByUserId } from "@/backend/auth.api";
 import { useRouter } from "next/navigation";
 import { userCollectionDB } from "@/types/auth";
 

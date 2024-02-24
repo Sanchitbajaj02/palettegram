@@ -14,24 +14,23 @@ export type userCollectionDB = {
   bannerURL?: string;
   about?: string;
   userLink?: string;
-  $createdAt: Date;
-  $updatedAt: Date;
+  $createdAt: string;
+  $updatedAt: string;
 };
 
-export type authDetails = {
-  creds: {
-    accountId: string;
-    email: string;
-    createdAt: string;
-    isVerified: boolean;
-  };
-  error: boolean;
-  loading: boolean;
-};
+// export type authDetails = {
+//   creds: {
+//     accountId: string;
+//     email: string;
+//     createdAt: string;
+//     isVerified: boolean;
+//   };
+//   error: boolean;
+//   loading: boolean;
+// };
 
 export type userDetails = {
   data: userCollectionDB | {};
-  accountId: string;
   error: boolean;
   loading: boolean;
 };

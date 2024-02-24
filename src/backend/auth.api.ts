@@ -11,22 +11,15 @@ import { setCookie } from "nookies";
  * @returns authResponse
  */
 
-const registerUser = async (userData: {
+const register = async (userData: {
   email: string;
   fullName: string;
   password: string;
   confirmpassword: string;
 }) => {
   try {
-    // console.log("register: ", userData.email, userData.password, userData.fullName);
-    if (userData.password != userData.confirmpassword) {
-      throw Error("not matching");
-    }
-    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; //it will check that password must contain atleast one digit ,atleast one alphabet , atleast one special character and must be of atleast length 8
-
-    if (!passwordRegex.test(userData.password)) {
-      throw Error("password is not strong");
-    }
+    // const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    //it will check that password must contain atleast one digit ,atleast one alphabet , atleast one special character and must be of atleast length 8
 
     let username = userData.email.split("@")[0];
 
@@ -41,7 +34,7 @@ const registerUser = async (userData: {
       throw new Error("User registration failed");
     }
 
-    const session = await loginUser(userData);
+    const session = await login(userData);
 
     if (!session) {
       throw new Error("Session failed");
@@ -58,7 +51,6 @@ const registerUser = async (userData: {
     const authResp = await account.updatePrefs({
       username: username,
     });
-    console.log("authresp:", authResp);
 
     return authResp;
   } catch (error: any) {
@@ -85,15 +77,13 @@ const verifyUser = async (accountId: string, secret: string) => {
     if (!verifyResponse) {
       throw new Error("User not verified");
     }
-    const session = await getCurrentUser();
+    const userSession = await getUserSession();
 
-    if (!session || Object.keys(session).length < 0) {
+    if (!userSession || Object.keys(userSession).length < 0) {
       throw new Error("Session not maintained");
     }
 
-    const dbData = await saveDataToDatabase(session);
-
-    console.log("db data at save time:", dbData);
+    const dbData = await saveDataToDatabase(userSession);
 
     response = {
       status: true,
@@ -109,20 +99,21 @@ const verifyUser = async (accountId: string, secret: string) => {
 
 /**
  * @abstract log in the user based on emailId and password
- * @param {Object} userData
- * @returns {Object} response
+ * @param {string} accountId
+ * @returns response
  */
 
-const getSingleUser = async (userid: string) => {
+const getUserByAccountId = async (accountId: string) => {
   try {
-    const tweets = await db.listDocuments(palettegramDB, usersCollection, [
-      Query.equal("accountId", userid),
+    const singleUser = await db.listDocuments(palettegramDB, usersCollection, [
+      Query.equal("accountId", accountId),
     ]);
-    if (!tweets) {
-      throw new Error();
+
+    if (!singleUser || singleUser.documents.length < 1) {
+      throw new Error("user not exists");
     }
-    console.log("userData comming to [user/userId] -> ", tweets);
-    return tweets;
+
+    return singleUser.documents[0];
   } catch (error: any) {
     console.log(error);
   }
@@ -148,26 +139,19 @@ const getUserByUserId = async (userId: string) => {
   }
 };
 
-const loginUser = async (userData: any) => {
+const login = async ({ email, password }: { email: string; password: string }) => {
   try {
-    console.log("login:", userData?.email, userData?.password);
-    if (!userData?.email || !userData?.password) {
-      throw new Error("email or password is empty");
-    }
+    const response = await account.createEmailSession(email, password);
 
-    const response = await account.createEmailSession(userData?.email, userData?.password);
-
-    // console.log("Email session:", response);
-
-    if (!response || !response["$id"]) {
+    if (!response) {
       throw new Error("Login failed");
     }
-    console.log("res", response);
 
-    const resp = await getSingleUser(response.userId);
-    console.log("res", resp);
-    setCookie(null, "userId", resp?.documents[0]?.$id!);
-    return resp;
+    const accountId: string = response && response.userId;
+
+    const user = await getUserByAccountId(accountId);
+
+    return user;
   } catch (error: any) {
     console.log(error);
     throw new Error(error.message);
@@ -224,7 +208,7 @@ const updatepassword = async (userData: any) => {
  * @abstract returns the state of current user
  * @returns Session
  */
-const getCurrentUser = async () => {
+const getUserSession = async () => {
   try {
     return account.get();
   } catch (error: any) {
@@ -304,12 +288,11 @@ const loginWithGoogle = async () => {
 // };
 
 export {
-  registerUser,
+  register,
   verifyUser,
-  loginUser,
+  login,
   logoutUser,
-  getSingleUser,
-  getCurrentUser,
+  getUserByAccountId,
   forgotpassword,
   updatepassword,
   // getUserDetails,
