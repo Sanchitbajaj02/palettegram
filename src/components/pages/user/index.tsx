@@ -22,7 +22,7 @@ export default function User({ userId }: { userId: string }) {
     getUserByUserId(userId)
       .then((resp: any) => {
         if (resp) {
-          setUser(resp?.documents[0]);
+          setUser(resp);
         }
       })
       .catch(console.log);

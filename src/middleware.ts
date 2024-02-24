@@ -13,8 +13,6 @@ export function middleware(request: NextRequest) {
 
   let isTokenAvailable: string = request.cookies.get("accountId")?.value || "";
   let isUserVerified: string = request.cookies.get("isVerified")?.value || "";
-  console.log(isTokenAvailable);
-  console.log(isUserVerified);
 
   if (isPublicRoutes && isTokenAvailable) {
     return NextResponse.redirect(new URL("/", request.nextUrl));

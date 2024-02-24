@@ -132,8 +132,8 @@ const getUserByUserId = async (userId: string) => {
     if (!user) {
       throw new Error();
     }
-    // console.log("userData comming by userId -> ", tweets);
-    return user;
+    console.log("userData comming by userId -> ", user);
+    return user.documents[0];
   } catch (error: any) {
     console.log(error);
   }

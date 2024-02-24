@@ -9,7 +9,7 @@ export default async function Home() {
 
   const cookieStore = cookies();
 
-  const accountId = cookieStore.get("accountId")?.value;
+  const accountId: string | undefined = cookieStore.get("accountId")?.value;
 
   return (
     <>

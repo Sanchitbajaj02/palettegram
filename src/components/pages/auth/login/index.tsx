@@ -59,8 +59,8 @@ export default function LoginComponent() {
           accountId: resp.accountId,
           email: resp.email,
           fullName: resp.name,
-          username: resp.prefs.username,
-          isVerified: resp.emailVerification,
+          username: resp.username,
+          isVerified: resp.isVerified,
           $createdAt: resp.$createdAt,
           $updatedAt: resp.$updatedAt,
         };

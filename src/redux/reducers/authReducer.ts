@@ -17,6 +17,7 @@ export const registerReducer: any = createSlice({
     saveUserToStore: (state, action: PayloadAction<userCollectionDB>) => {
       state.loading = true;
       state.data = action.payload;
+
       setCookie(null, "accountId", action.payload.accountId);
       setCookie(null, "isVerified", String(action.payload.isVerified));
 
@@ -27,7 +28,7 @@ export const registerReducer: any = createSlice({
       state.loading = false;
     },
     logUserOut: (state) => {
-      state.error = true;
+      state.error = false;
       state.loading = true;
       destroyCookie(null, "accountId");
       destroyCookie(null, "isVerified");

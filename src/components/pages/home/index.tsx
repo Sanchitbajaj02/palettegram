@@ -3,7 +3,7 @@ import Image from "next/image";
 import { ButtonLong } from "@/components/core/buttons";
 import { motion } from "framer-motion";
 
-function HomePage({ accountId }: { accountId: string | undefined | null }) {
+function HomePage({ accountId }: { accountId: string | undefined }) {
   return (
     <>
       <main className="max-w-screen-lg mx-auto px-2">
