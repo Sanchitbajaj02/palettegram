@@ -1,45 +1,9 @@
 "use client";
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import Image from "next/image";
-import { getUserByUserId } from "@/backend/auth.api";
-import { saveUser } from "@/redux/reducers/authReducer";
 import { ButtonLong } from "@/components/core/buttons";
-import { parseCookies } from "nookies";
-import { toastify } from "@/helper/toastify";
 import { motion } from "framer-motion";
 
-function HomePage() {
-  const dispatch = useDispatch();
-  const cookies = parseCookies();
-  const userId: string = cookies["userId"];
-
-  const state = useSelector((state: any) => state.auth);
-
-  useEffect(() => {
-    if (userId) {
-      getUserByUserId(userId)
-        .then((resp) => {
-          if (resp) {
-            // console.log(resp, "Home:");
-            const payload = {
-              $id: resp?.documents[0]?.$id,
-              email: resp?.documents[0]?.email,
-              isVerified: resp?.documents[0]?.isVerified,
-              $createdAt: resp?.documents[0]?.$createdAt,
-            };
-
-            dispatch(saveUser(payload));
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-
-          toastify(err.message, "error");
-        });
-    }
-  }, [dispatch, userId]);
-
+function HomePage({ accountId }: { accountId: string | undefined | null }) {
   return (
     <>
       <main className="max-w-screen-lg mx-auto px-2">
@@ -86,7 +50,7 @@ function HomePage() {
               }}
               className="flex justify-center md:justify-start"
             >
-              {state?.data?.$id && state?.data?.$id !== "" ? (
+              {accountId ? (
                 <ButtonLong href="/feed" size="big">
                   Checkout your feed
                 </ButtonLong>
