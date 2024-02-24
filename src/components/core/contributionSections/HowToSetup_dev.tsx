@@ -43,8 +43,8 @@ export default function HowToSetup_dev() {
           }}
           className="mt-10 mb-2"
         >
-          <h5 className="my-4 text-lg font-semibold">
-            <span className="text-primary-light"> Step 1</span> Navigate to Palettegram Directory
+          <h5 className="mt-6 mb-2 text-lg font-semibold">
+            <span className="text-primary-light"> Step 1:</span> Navigate to Palettegram Directory
           </h5>
           <Image
             className="shadow shadow-gray-500 border-[1px] border-primary rounded-lg"
@@ -74,7 +74,7 @@ export default function HowToSetup_dev() {
           }}
           className="my-2"
         >
-          <h5 className="my-4 text-lg font-semibold">
+          <h5 className="mt-10 mb-2 text-lg font-semibold">
             <span className="text-primary-light"> Step 2:</span> Add a reference(upstream) to the
             original repository
           </h5>
@@ -111,7 +111,7 @@ export default function HowToSetup_dev() {
           }}
           className="my-2"
         >
-          <h5>
+          <h5 className="mt-10 mb-2  text-lg font-semibold leading-8">
             <span className="text-primary-light"> Step 3:</span> Add a reference(origin) to the
             remote repository
           </h5>
@@ -148,7 +148,7 @@ export default function HowToSetup_dev() {
           }}
           className="my-2"
         >
-          <h5 className="my-4 text-lg font-semibold">
+          <h5 className="mt-10 mb-2  text-lg font-semibold leading-8">
             <span className="text-primary-light"> Step 4:</span> Take a pull from the upstream
             repository to your main branch to keep it updated as per the main project repository
             <Image
@@ -180,7 +180,7 @@ export default function HowToSetup_dev() {
           }}
           className="my-2"
         >
-          <h5>
+          <h5 className="mt-10 mb-2  text-lg font-semibold leading-8">
             <span className="text-primary-light"> Step 5:</span> Create a new Branch
           </h5>
           <Image
@@ -211,7 +211,7 @@ export default function HowToSetup_dev() {
           }}
           className="my-2"
         >
-          <h5 className="my-4 text-lg font-semibold">
+          <h5 className="mt-10 mb-2  text-lg font-semibold leading-8">
             <span className="text-primary-light"> Step 6:</span> install dependencies
           </h5>
           <Image
@@ -242,7 +242,7 @@ export default function HowToSetup_dev() {
           }}
           className="my-2"
         >
-          <h5 className="my-4 text-lg font-semibold">
+          <h5 className="mt-10 mb-2  text-lg font-semibold leading-8">
             <span className="text-primary-light"> Step 7:</span> Stage your changes
           </h5>
           <Image
@@ -273,11 +273,18 @@ export default function HowToSetup_dev() {
           }}
           className="my-2"
         >
-          <h5 className="my-4 text-lg font-semibold">
+          <h5 className="mt-10 mb-2  text-lg font-semibold leading-8">
             <span className="text-primary-light"> Step 8:</span> Commit your changes
           </h5>
           <h4 className="p-4 my-5 text-2xl md:text-3xl text-center font-extrabold tracking-wide text-black dark:text-white ">
-            Make sure to visit CommitLint file here <span>here</span>
+            Make sure to visit CommitLint file{" "}
+            <a
+              className="underline"
+              href="https://github.com/Sanchitbajaj02/palettegram/blob/master/docs/commitlint.md"
+              target="_blank"
+            >
+              here
+            </a>
           </h4>
           <Image
             className="shadow shadow-gray-500 border-[1px] border-primary rounded-lg"
@@ -307,7 +314,7 @@ export default function HowToSetup_dev() {
           }}
           className="my-2"
         >
-          <h5>
+          <h5 className="mt-10 mb-2  text-lg font-semibold leading-8">
             <span className="text-primary-light"> Step 9:</span> Push changes to yours remote
             master/main or
           </h5>
@@ -339,7 +346,7 @@ export default function HowToSetup_dev() {
           }}
           className="my-2"
         >
-          <h5 className="my-4 text-lg font-semibold">
+          <h5 className="mt-10 mb-2  text-lg font-semibold leading-8">
             <span className="text-primary-light"> Step 10:</span> To create a pull request click on
             compare and pull request
           </h5>
@@ -363,7 +370,7 @@ export default function HowToSetup_dev() {
           }}
           className="my-2"
         >
-          <h5 className="my-4 text-lg font-semibold">
+          <h5 className="mt-10 mb-2  text-lg font-semibold leading-8">
             <span className="text-primary-light"> Step 11:</span> Add an appropriate title and
             description to your PR explaining changes and click on create pull request then wait for
             merge
