@@ -5,18 +5,19 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 
-import { User, LogOut, Home, GitHub, X, Menu } from "react-feather";
+import { User, LogOut, Home, GitHub, X, Menu, Bookmark } from "react-feather";
 import ThemeButton from "@/components/core/themeButton";
 import { ButtonLong } from "../buttons";
-import { parseCookies } from "nookies";
 
-import { logoutUser, getCurrentUser } from "@/backend/auth.api";
+import { logoutUser, getUserByUserId } from "@/backend/auth.api";
 import { getAllPosts } from "@/backend/posts.api";
 import { getBookmarks } from "@/backend/bookmarks.api";
 
-import { logUserOut, saveUser } from "@/redux/reducers/authReducer";
+import { logUserOut, saveUserToStore } from "@/redux/reducers/authReducer";
 import { getPosts } from "@/redux/reducers/postsReducer";
 import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
+import { userCollectionDB } from "@/types/auth";
+import { parseCookies } from "nookies";
 
 const Navbar = ({ starCount }: { starCount?: number }) => {
   const router = useRouter();
@@ -26,8 +27,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
   const dispatch = useDispatch();
   const cookies = parseCookies();
 
-  let userIdFromCookies: string | null = null;
-  userIdFromCookies = cookies["accountId"];
+  const userIdFromCookies: string = cookies["userId"];
 
   const logout = async () => {
     await logoutUser();
@@ -37,21 +37,20 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
     router.push("/");
   };
 
-  const currentUser = useCallback(() => {
-    console.log("inside currentUser");
-    getCurrentUser()
-      .then((currUser) => {
-        const payload = {
-          accountId: currUser.$id,
-          email: currUser.email,
-          isVerified: currUser.emailVerification,
-          createdAt: currUser.$createdAt,
-        };
+  const currentUser = useCallback(
+    (userIdFromCookies: string) => {
+      console.log("inside currentUser");
 
-        dispatch(saveUser(payload));
-      })
-      .catch((err) => console.log(err));
-  }, []);
+      if (userIdFromCookies) {
+        getUserByUserId(userIdFromCookies)
+          .then((currUser: any) => {
+            dispatch(saveUserToStore(currUser));
+          })
+          .catch((err) => console.log(err));
+      }
+    },
+    [dispatch],
+  );
 
   const getPostsFromDatabase = useCallback(() => {
     console.log("inside getPostsFromDatabase");
@@ -67,10 +66,10 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
           console.log(error);
         });
     }
-  }, [userIdFromCookies]);
+  }, [dispatch, userIdFromCookies]);
 
   const getBookmarksFromDatabase = useCallback(
-    (userIdFromCookies: string | null) => {
+    (userIdFromCookies: string) => {
       console.log("inside getBookmarksFromDatabase");
 
       if (userIdFromCookies) {
@@ -79,8 +78,8 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
             if (bookmarks) {
               dispatch(
                 saveBookmarkToStore({
-                  accountId: userIdFromCookies,
-                  bookmark: bookmarks?.documents[0]?.bookmark,
+                  userId: bookmarks?.documents[0]?.userId?.$id,
+                  postId: bookmarks?.documents[0]?.postId,
                 }),
               );
             }
@@ -90,18 +89,20 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
           });
       }
     },
-    [userIdFromCookies],
+    [dispatch],
   );
 
   useEffect(() => {
-    currentUser();
-    getPostsFromDatabase();
-    getBookmarksFromDatabase(userIdFromCookies);
+    if (userIdFromCookies) {
+      currentUser(userIdFromCookies);
+      getPostsFromDatabase();
+      getBookmarksFromDatabase(userIdFromCookies);
+    }
 
     return () => {
       console.log("cleanup");
     };
-  }, []);
+  }, [currentUser, getBookmarksFromDatabase, getPostsFromDatabase, userIdFromCookies]);
 
   if (userAuth.error) {
     return <h1>Error</h1>;
@@ -141,7 +142,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
 
           <div className="hidden md:flex gap-2 flex-row items-center">
             <ThemeButton iconSize={22} />
-            {userAuth.creds?.accountId && userAuth.creds?.isVerified ? (
+            {userAuth && userAuth.data?.$id ? (
               <>
                 {pathname !== "/feed" && (
                   <Link
@@ -152,10 +153,17 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
                   </Link>
                 )}
                 <Link
-                  href={`/user/${userIdFromCookies}`}
+                  href={`/user/${userAuth.data?.$id}`}
                   className="mx-2 px-2 py-2 rounded-full  bg-primary text-white  hover:bg-primary-light hover:scale-105"
                 >
                   <User size={22} className="transition-all duration-300 " />
+                </Link>
+
+                <Link
+                  href={`/user/bookmarks`}
+                  className="mx-2 px-2 py-2 rounded-full  bg-primary text-white  hover:bg-primary-light hover:scale-105"
+                >
+                  <Bookmark size={22} className="transition-all duration-300 " />
                 </Link>
 
                 <button
@@ -214,7 +222,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
                 <GitHub size={20} className="mr-4" /> {starCount} Stars
               </Link>
 
-              {!userAuth?.creds.userId && !userAuth?.creds.isVerified && (
+              {userAuth && userAuth.data?.$id && (
                 <>
                   <Link
                     href="/register"
@@ -231,9 +239,9 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
                   </Link>
                 </>
               )}
-              {userAuth?.creds.userId && userAuth?.creds.isVerified && (
+              {userAuth && userAuth.data?.$id && (
                 <Link
-                  href={`/user/${userIdFromCookies}`}
+                  href={`/user/${userAuth.data?.$id}`}
                   className="mx-2 px-2 py-2 rounded-full bg-primary text-white"
                 >
                   <User size={22} className="transition-all duration-300 " />

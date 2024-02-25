@@ -1,5 +1,4 @@
 import { toast } from "sonner";
-
 type ToastTypes = "success" | "info" | "warning" | "error";
 
 /**

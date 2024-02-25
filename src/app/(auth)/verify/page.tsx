@@ -29,16 +29,16 @@ export default function VerifyPage({ searchParams }: VerifyProps) {
             </div>
           </div>
         </section>
-        <Footer isFixed />
+        <Footer />
       </>
     );
   }
   return (
     <>
       <Suspense fallback={<Loader />}>
-        <VerificationComponent userId={String(userId)} secret={String(secret)} />
+        <VerificationComponent accountId={String(userId)} secret={String(secret)} />
       </Suspense>
-      <Footer isFixed />
+      <Footer />
     </>
   );
 }

@@ -4,16 +4,8 @@ import { parseCookies } from "nookies";
 
 // Store
 import { addLikesToAPost } from "@/redux/reducers/postsReducer";
-// import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
-
-import { PostInstanceType } from "@/types/index.d";
-
+import { PostInstanceType } from "@/types/index";
 import PostSkeleton from "../../pages/feed/loading";
-
-// Api
-// import { getAllPosts, likeTweet } from "@/backend/posts.api";
-// import { getBookmarks } from "@/backend/bookmarks.api";
-
 import SinglePost from "./SinglePost";
 
 export default function Posts() {
@@ -21,8 +13,6 @@ export default function Posts() {
   const dispatch = useDispatch();
 
   const cookies = parseCookies();
-
-  let copyPosts: PostInstanceType[] = [];
 
   const likePost = async (post: PostInstanceType) => {
     const userIdFromCookies: string = cookies["accountId"];
@@ -34,8 +24,6 @@ export default function Posts() {
       }),
     );
 
-    // console.log("og:", postState);
-
     // likeTweet(post)
     //   .then((response) => {
     //     console.log("original", response);
@@ -44,15 +32,6 @@ export default function Posts() {
     //     console.log(err);
     //   });
   };
-
-  if (postState.posts && postState.posts.length > 0) {
-    copyPosts = [...postState.posts];
-
-    copyPosts?.sort(
-      (a: any, b: any) => new Date(b["$createdAt"]).getTime() - new Date(a["$createdAt"]).getTime(),
-    );
-    copyPosts = copyPosts.filter((post: PostInstanceType) => post.isActive === true);
-  }
 
   if (postState.loading) {
     return (
@@ -68,10 +47,10 @@ export default function Posts() {
 
   return (
     <>
-      {!copyPosts && <PostSkeleton />}
-      {copyPosts &&
-        copyPosts.length > 0 &&
-        copyPosts.map((post: PostInstanceType, index: number) => (
+      {postState.posts.length < 0 && <PostSkeleton />}
+      {postState.posts &&
+        postState.posts.length > 0 &&
+        postState.posts?.map((post: PostInstanceType, index: number) => (
           <div key={index} className="w-full">
             <SinglePost singlePost={post} onLikeClick={likePost} />
           </div>

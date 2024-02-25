@@ -1,30 +1,19 @@
 "use client";
-import { useEffect, useState } from "react";
 import { Briefcase, Link2, Mail, MapPin, Smile, ArrowLeft } from "react-feather";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
-import { UserFromDB } from "@/types";
-import { getSingleUser } from "@/backend/auth.api";
-
 import TrendingFeed from "@/components/core/trendingFeed";
 import Footer from "@/components/core/footer";
 import UserPosts from "./userPosts";
 import { ButtonLong } from "@/components/core/buttons";
+import { useSelector } from "react-redux";
+import { userCollectionDB } from "@/types/auth";
 
 export default function User({ userId }: { userId: string }) {
-  const [user, setUser] = useState<UserFromDB>();
-
   const router = useRouter();
 
-  useEffect(() => {
-    getSingleUser(userId)
-      .then((resp: any) => {
-        setUser(resp);
-      })
-      .catch(console.log);
-  }, [userId]);
+  const userAuth: userCollectionDB = useSelector((state: any) => state.auth.data);
 
   return (
     <>
@@ -42,18 +31,26 @@ export default function User({ userId }: { userId: string }) {
           </div>
           <div className="h-52 w-full relative -z-[1]">
             <Image
-              src="/assets/pinkCover.jpg"
-              alt="user"
+              src={
+                userAuth && userAuth?.bannerURL
+                  ? userAuth?.bannerURL!
+                  : "https://placehold.co/1200x300"
+              }
+              alt="banner-img"
               fill
               className="object-center object-cover rounded-md"
             />
           </div>
 
-          <section className="-mt-20 px-3">
+          <section className="-mt-16 px-3">
             <div className="flex justify-between items-end ">
               <Image
-                src={user && user?.documents[0].avatarURL}
-                alt="user"
+                src={
+                  userAuth && userAuth?.avatarURL
+                    ? userAuth?.avatarURL!
+                    : "https://placehold.co/100x100"
+                }
+                alt="userAuth.data"
                 width={125}
                 height={125}
                 className="border-4 border-white dark:border-slate-800 rounded-full object-contain "
@@ -70,15 +67,15 @@ export default function User({ userId }: { userId: string }) {
             <article className="mt-2 space-y-4">
               <div className="space-y-1">
                 <h1 className="text-xl font-semibold text-black dark:text-white">
-                  {user && user?.documents[0]?.fullName}{" "}
+                  {userAuth && userAuth?.fullName}{" "}
                 </h1>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                  @{user && user?.documents[0]?.username}
+                  @{userAuth && userAuth?.username}
                 </p>
               </div>
 
               <p className="text-base">
-                Software-developer | Python | MERN | Next-Tailwind | Opensource
+                {userAuth?.about ? userAuth?.about : "Professional palettegram user"}
               </p>
 
               <div className="grid grid-cols-2 gap-4 text-sm text-gray-500 dark:text-gray-400">
@@ -88,17 +85,24 @@ export default function User({ userId }: { userId: string }) {
                 </aside>
                 <aside className="flex items-center gap-2">
                   <MapPin size={16} />
-                  <p className="text-sm">Hyderabad</p>
+                  <p className="text-sm">
+                    {userAuth && userAuth.location ? userAuth.location : "Work from home"}
+                  </p>
                 </aside>
                 <aside className="flex items-center gap-2">
                   <Link2 size={16} />
                   <Link href={"/#link"} className="hover:underline text-sm">
-                    https://www.google.com
+                    {userAuth?.userLink ? userAuth.userLink : "https://www.google.com"}
                   </Link>
                 </aside>
                 <aside className="flex items-center gap-2">
                   <Smile size={16} />
-                  <p className="text-sm">Joined on {"8 jan 2012"}</p>
+                  <p className="text-sm">
+                    Joined on{" "}
+                    {userAuth && userAuth.$createdAt
+                      ? new Date(userAuth.$createdAt).toDateString()
+                      : new Date().toDateString()}
+                  </p>
                 </aside>
               </div>
             </article>
@@ -106,7 +110,7 @@ export default function User({ userId }: { userId: string }) {
 
           <div className="h-px w-full mt-6 bg-neutral-500 rounded-2xl" />
 
-          <UserPosts userName={user! && user?.documents[0]?.fullName!} userId={userId} />
+          {userAuth && <UserPosts userId={userId} />}
         </section>
         <div className="flex-[2] hidden md:block rounded-md">
           <TrendingFeed />

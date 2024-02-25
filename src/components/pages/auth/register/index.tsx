@@ -6,14 +6,18 @@ import { ArrowLeftCircle, Loader } from "react-feather";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 // Components
-import { saveUser } from "@/redux/reducers/authReducer";
+import { saveUserToStore } from "@/redux/reducers/authReducer";
 import { toastify } from "@/helper/toastify";
 
 // API
-import { registerUser } from "@/backend/auth.api";
+import { register } from "@/backend/auth.api";
 
 // Icons
 import { Eye, EyeOff } from "react-feather";
+import { userCollectionDB } from "@/types/auth";
+
+const nameRegex: RegExp = /^[\sa-zA-Z]+$/;
+const passwordRegex: RegExp = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@_])[A-Za-z\d@_]{6,16}$/;
 
 export default function RegisterComponent() {
   const [showPassword, setShowPassword] = useState(false);
@@ -43,11 +47,8 @@ export default function RegisterComponent() {
     try {
       setIsLoading(true);
 
-      const nameRegex: RegExp = /^[\sa-zA-Z]+$/;
-      const passwordRegex: RegExp = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@_])[A-Za-z\d@_]{6,16}$/;
-
       if (!nameRegex.test(data.fullName)) {
-        throw new Error("Name should not contain any number or special character");
+        throw new Error("Name contains special characters or numbers");
       }
 
       if (data.password !== data.confirmpassword) {
@@ -55,36 +56,35 @@ export default function RegisterComponent() {
       }
 
       if (data.password.length < 6 || data.password.length > 16) {
-        throw new Error(
-          "Your password should be in range of 6 to 16 characters and avoid commonly used choices.",
-        );
+        throw new Error("Password should be in range of 6 to 16 characters");
       }
 
       if (!passwordRegex.test(data.password)) {
-        throw new Error(
-          "Oops!, Password must contain a character, a number and a special character",
-        );
+        throw new Error("password format not matched");
       }
 
-      const resp = await registerUser(data);
+      const resp = await register(data);
 
-      const payload = {
+      const payload: userCollectionDB = {
+        $id: null!,
         accountId: resp.$id,
         email: resp.email,
         fullName: resp.name,
+        username: resp.prefs.username,
         isVerified: resp.emailVerification,
-        createdAt: resp.$createdAt,
+        $createdAt: resp.$createdAt,
+        $updatedAt: resp.$updatedAt,
       };
 
-      dispatch(saveUser(payload));
+      dispatch(saveUserToStore(payload));
 
       setIsLoading(false);
       toastify("Register Successful. Please check your email to verify", "success");
       router.push("/verify");
     } catch (error: any) {
-      setIsLoading(true);
+      setIsLoading(false);
 
-      toastify(error.message, "info");
+      toastify(error.message, "error");
     }
   }
 
@@ -211,6 +211,7 @@ export default function RegisterComponent() {
                   )}
                 </button>
               </div>
+              <small>Password must contain a character, a number and a special character</small>
             </motion.div>
 
             <motion.div
@@ -249,6 +250,7 @@ export default function RegisterComponent() {
                   )}
                 </button>
               </div>
+              <small>Password must contain a character, a number and a special character</small>
             </motion.div>
 
             <motion.div

@@ -32,20 +32,21 @@ export const postsReducer = createSlice({
 
       const { postId, userId } = action.payload;
 
-      state.posts.forEach((post: PostInstanceType) => {
-        if (post.$id === postId) {
-          if (post.likes.includes(userId)) {
-            // console.log(post.likes.indexOf(userId));
-            post.likes.splice(post.likes.indexOf(userId), 1);
-            console.log("dislike");
-          } else {
-            post.likes.push(userId);
-            console.log("like");
-          }
-        }
+      // state.posts.forEach((post: PostInstanceType) => {
+      //   if (post.$id === postId) {
+      //     if (post.likes.includes(userId)) {
+      //       // console.log(post.likes.indexOf(userId));
+      //       post.likes.splice(post.likes.indexOf(userId), 1);
+      //       console.log("dislike");
+      //     } else {
+      //       post.likes.push(userId);
+      //       console.log("like");
+      //     }
+      //   }
 
-        return post;
-      });
+      //   return post;
+      // }
+      // );
 
       // for (let post of state.posts) {
       //   if (post.$id === postId) {
