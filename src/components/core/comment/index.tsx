@@ -1,4 +1,4 @@
-import { ThumbsUp, ThumbsDown, Repeat } from "react-feather";
+import { ThumbsUp, ThumbsDown, Repeat2 } from "lucide-react";
 import Image from "next/image";
 
 type propType = {
@@ -36,7 +36,7 @@ export default function Comment(props: propType) {
         </article>
 
         <article className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary">
-          <Repeat size={22} orientation={"vertical"} />
+          <Repeat2 size={22} orientation={"vertical"} />
         </article>
       </div>
     </div>

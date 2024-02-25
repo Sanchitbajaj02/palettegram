@@ -1,7 +1,7 @@
 "use client";
 import { Suspense } from "react";
 import Link from "next/link";
-import { User, Bookmark } from "react-feather";
+import { User, Bookmark } from "lucide-react";
 import { parseCookies } from "nookies";
 import CreatePost from "@/components/core/createPost";
 import Posts from "@/components/core/posts";

@@ -1,7 +1,7 @@
 "use client";
 import { useSelector } from "react-redux";
 import SinglePost from "@/components/core/posts/SinglePost";
-import { ArrowLeft } from "react-feather";
+import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 import { PostInstanceType } from "@/types/index.d";

@@ -5,8 +5,7 @@ import SinglePost from "@/components/core/posts/SinglePost";
 import TrendingFeed from "@/components/core/trendingFeed";
 
 import { PostInstanceType } from "@/types";
-import { ArrowLeft } from "react-feather";
-import { Loader } from "react-feather";
+import { ArrowLeft, Loader } from "lucide-react";
 
 export default function PostById({
   singlePostInfo,

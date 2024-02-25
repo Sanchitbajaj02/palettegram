@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
-import { ArrowLeftCircle, Loader } from "react-feather";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 // Components
@@ -13,7 +12,7 @@ import { toastify } from "@/helper/toastify";
 import { register } from "@/backend/auth.api";
 
 // Icons
-import { Eye, EyeOff } from "react-feather";
+import { ArrowLeftCircle, Loader, Eye, EyeOff } from "lucide-react";
 import { userCollectionDB } from "@/types/auth";
 
 const nameRegex: RegExp = /^[\sa-zA-Z]+$/;

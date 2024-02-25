@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Loader, ArrowLeftCircle } from "react-feather";
+import { Loader, ArrowLeftCircle } from "lucide-react";
 
 // Components
 import { toastify } from "@/helper/toastify";

@@ -1,6 +1,6 @@
 /* eslint-disable quotes */
 import { useRef, useState } from "react";
-import { Command, Image as NewImageFeather } from "react-feather";
+import { Command, Image as NewImageFeather } from "lucide-react";
 import { addNewImage, savePostToDb, getImageUrl } from "@/backend/posts.api";
 import Colorpicker from "@/components/core/colorPicker";
 import Image from "next/image";
