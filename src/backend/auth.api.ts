@@ -5,7 +5,6 @@ import { account, db, ID, palettegramDB, usersCollection, Query } from "./appwri
 import { generateAvatar } from "@/helper/avatarGenerator";
 import { setCookie } from "nookies";
 
-
 /**
  * @abstract Register the user into the database
  * @param {Object} userData
