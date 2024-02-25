@@ -34,7 +34,7 @@ const register = async (userData: {
       throw new Error("User registration failed");
     }
 
-    const session = await login(userData);
+    const session = await account.createEmailSession(userData.email, userData.password);
 
     if (!session) {
       throw new Error("Session failed");
@@ -109,11 +109,7 @@ const getUserByAccountId = async (accountId: string) => {
       Query.equal("accountId", accountId),
     ]);
 
-    if (!singleUser || singleUser.documents.length < 1) {
-      throw new Error("user not exists");
-    }
-
-    return singleUser.documents[0];
+    return singleUser && singleUser.documents[0];
   } catch (error: any) {
     console.log(error);
   }
@@ -132,14 +128,13 @@ const getUserByUserId = async (userId: string) => {
     if (!user) {
       throw new Error();
     }
-    console.log("userData comming by userId -> ", user);
     return user.documents[0];
   } catch (error: any) {
     console.log(error);
   }
 };
 
-const login = async ({ email, password }: { email: string; password: string }) => {
+const login = async (email: string, password: string) => {
   try {
     const response = await account.createEmailSession(email, password);
 
@@ -150,7 +145,6 @@ const login = async ({ email, password }: { email: string; password: string }) =
     const accountId: string = response && response.userId;
 
     const user = await getUserByAccountId(accountId);
-
     return user;
   } catch (error: any) {
     console.log(error);

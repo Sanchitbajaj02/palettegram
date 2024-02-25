@@ -12,7 +12,7 @@ const nextConfig = {
   },
   images: {
     dangerouslyAllowSVG: true,
-    domains: ["cloud.appwrite.io", "source.boringavatars.com", "media.dev.to"],
+    domains: ["cloud.appwrite.io", "source.boringavatars.com", "media.dev.to", "placehold.co"],
   },
 
   experimental: {

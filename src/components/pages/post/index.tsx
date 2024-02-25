@@ -1,22 +1,12 @@
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Suspense, useState } from "react";
+import { useState } from "react";
 
 import SinglePost from "@/components/core/posts/SinglePost";
 import TrendingFeed from "@/components/core/trendingFeed";
-import Footer from "@/components/core/footer";
 
 import { PostInstanceType } from "@/types";
 import { ArrowLeft } from "react-feather";
-
-import { toastify } from "@/helper/toastify";
-import { isCtrlEnter } from "@/helper/isCtrlEnter";
-
-import { addComment } from "@/backend/posts.api";
-
 import { Loader } from "react-feather";
-import Loading from "@/app/feed/loading";
-import Comment from "@/components/core/comment";
 
 export default function PostById({
   singlePostInfo,

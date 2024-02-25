@@ -1,20 +1,7 @@
-// export type PostInstanceType = {
-//   accountId: string;
-//   postTitle: string;
-//   postImages: string[];
-//   colors?: string | null;
-//   comments?: string[];
-//   likes: string[];
-//   isActive: boolean;
-//   $id?: string;
-//   $collectionId?: string;
-//   $createdAt?: string;
-// };
-
 import { userCollectionDB } from "./auth";
 
 export type PostInstanceType = {
-  userId: any;
+  userId: userCollectionDB | string;
   postTitle: string;
   postImages: string[];
   colors?: string | null;

@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 
-import { User, LogOut, Home, GitHub, X, Menu } from "react-feather";
+import { User, LogOut, Home, GitHub, X, Menu, Bookmark } from "react-feather";
 import ThemeButton from "@/components/core/themeButton";
 import { ButtonLong } from "../buttons";
 
@@ -157,6 +157,13 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
                   className="mx-2 px-2 py-2 rounded-full  bg-primary text-white  hover:bg-primary-light hover:scale-105"
                 >
                   <User size={22} className="transition-all duration-300 " />
+                </Link>
+
+                <Link
+                  href={`/user/bookmarks`}
+                  className="mx-2 px-2 py-2 rounded-full  bg-primary text-white  hover:bg-primary-light hover:scale-105"
+                >
+                  <Bookmark size={22} className="transition-all duration-300 " />
                 </Link>
 
                 <button

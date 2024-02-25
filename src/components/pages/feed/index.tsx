@@ -3,12 +3,11 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { User, Bookmark } from "react-feather";
 import { parseCookies } from "nookies";
-
-import Loader from "@/app/loading";
 import CreatePost from "@/components/core/createPost";
 import Posts from "@/components/core/posts";
 import TrendingFeed from "@/components/core/trendingFeed";
 import { useRouter } from "next/navigation";
+import Loader from "@/app/loading";
 
 const Feed = () => {
   const router = useRouter();
@@ -40,9 +39,9 @@ const Feed = () => {
       </section>
       <section className="flex-[5] mt-4 sm:mt-0">
         <CreatePost />
-        {/* <Suspense fallback={<Loader />}> */}
-        <Posts />
-        {/* </Suspense> */}
+        <Suspense fallback={<Loader />}>
+          <Posts />
+        </Suspense>
       </section>
       <section className="flex-[2] hidden md:block">
         <TrendingFeed />

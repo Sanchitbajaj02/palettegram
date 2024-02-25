@@ -36,7 +36,9 @@ const getAllPosts = async () => {
       throw new Error("Either databaseId or collectionId is not provided");
     }
 
-    const posts = await db.listDocuments(palettegramDB, postsCollection);
+    const posts = await db.listDocuments(palettegramDB, postsCollection, [
+      Query.orderDesc("$createdAt"),
+    ]);
 
     if (!posts) {
       throw new Error("Error fetching data");
@@ -71,13 +73,16 @@ const getSinglePost = async (id: string) => {
  */
 const getAllUserPosts = async (userId: string) => {
   try {
-    const tweets = await db.listDocuments(palettegramDB, postsCollection, [
+    const allPosts = await db.listDocuments(palettegramDB, postsCollection, [
       Query.equal("userId", userId),
+      Query.orderDesc("$createdAt"),
     ]);
 
-    if (tweets) {
-      return tweets;
+    if (!allPosts) {
+      throw new Error("could not find posts");
     }
+
+    return allPosts?.documents;
   } catch (error: any) {
     console.log(error);
   }

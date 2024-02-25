@@ -9,7 +9,9 @@ import { removeBookmark, saveBookmark, createBookmarkEntry } from "@/backend/boo
 import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
 import { toastify } from "@/helper/toastify";
 import { useState, MouseEvent } from "react";
-import { UserBookMarkType, FormatOnType } from "@/types/index";
+import { UserBookMarkType } from "@/types/index";
+import { postDisplayTimeFormatter } from "@/helper/postDisplayTimeFormatter";
+import { userCollectionDB } from "@/types/auth";
 
 export default function SinglePost({
   singlePost,
@@ -25,10 +27,6 @@ export default function SinglePost({
   const dispatch = useDispatch();
 
   const userBookmarks: UserBookMarkType = useSelector((state: any) => state.bookmarks);
-
-  // const copyText = async (color: string) => {
-  //   await navigator.clipboard.writeText(color);
-  // };
 
   const sharePost = async () => {
     try {
@@ -46,33 +44,6 @@ export default function SinglePost({
       console.error("Error sharing post:", error);
     }
   };
-
-  function createdAtDateFormatter(postCreationTime: string) {
-    const timeObj = {
-      seconds: 1000,
-      minutes: 1000 * 60,
-      hours: 1000 * 60 * 60,
-      days: 1000 * 60 * 60 * 24,
-      postCreatedTime: new Date(postCreationTime),
-      currentTime: new Date(),
-      calcTimeDiff(formatOn: FormatOnType) {
-        const timeDiff = this.currentTime.valueOf() - this.postCreatedTime.valueOf();
-        return Math.round(timeDiff / this[formatOn]);
-      },
-    };
-
-    if (timeObj.calcTimeDiff("seconds") < 60) {
-      return `${timeObj.calcTimeDiff("seconds")}s`;
-    } else if (timeObj.calcTimeDiff("minutes") < 60) {
-      return `${timeObj.calcTimeDiff("minutes")}m`;
-    } else if (timeObj.calcTimeDiff("hours") <= 24) {
-      return `${timeObj.calcTimeDiff("hours")}h`;
-    } else if (timeObj.calcTimeDiff("days") < 365) {
-      return `${timeObj.calcTimeDiff("days")}d`;
-    } else {
-      return `${timeObj.calcTimeDiff("days") / 365}y`;
-    }
-  }
 
   const handleUpdateBookmark = async (postId: string | undefined) => {
     if (postId) {
@@ -122,6 +93,7 @@ export default function SinglePost({
       }
     }
   };
+
   const handleClick = (e: MouseEvent<HTMLDivElement | HTMLSpanElement>) => {
     const element = e.target as HTMLDivElement | HTMLSpanElement;
     const spanElement = element.querySelector("span");
@@ -152,35 +124,46 @@ export default function SinglePost({
         .catch(console.log);
     }
   };
-  const colors =
+
+  // color object parsed seperately
+  const colorsObject =
     singlePost?.colors && typeof singlePost?.colors === "string" && JSON.parse(singlePost.colors);
+
+  // fetch user seperately
+  const relationedUser: userCollectionDB | null =
+    singlePost && typeof singlePost.userId !== "string" ? singlePost.userId : null;
+
+  console.log("relationedUser:", relationedUser);
 
   return (
     <div
       className={` ${
         width
-          ? "w-96 p-3 m-auto  rounded-md shadow dark:shadow-gray-600 mb-4 mt-40 "
+          ? "w-96 p-3 m-auto rounded-md shadow dark:shadow-gray-600 mb-4 mt-40 "
           : "p-3 rounded-md shadow dark:shadow-gray-600 mb-4"
       } `}
     >
+      {/* show user info */}
       <Link
         className="flex items-center gap-3 mb-3"
-        href={`/user/${singlePost && singlePost?.userId?.$id ? singlePost?.userId?.$id : null}`}
+        href={`/user/${relationedUser && relationedUser.$id ? relationedUser.$id : null}`}
       >
         <div className="w-12 h-12 rounded-full border flex items-center justify-center shadow">
           <Image src="/assets/user.png" alt="user" width={40} height={40} />
         </div>
         <div>
           <h5 className="font-medium text-base">
-            {singlePost?.userId ? singlePost?.userId?.fullName : "Anonymous User"}
+            {relationedUser && relationedUser.fullName ? relationedUser.fullName : "Anonymous User"}
           </h5>
-          {singlePost?.$createdAt ? (
-            <p className="font-thin text-xs/[10px] text-slate-950 dark:text-slate-400">{`${createdAtDateFormatter(
-              singlePost.$createdAt,
-            )} ago`}</p>
+          {singlePost && singlePost.$createdAt ? (
+            <p className="font-thin text-xs/[10px] text-slate-950 dark:text-slate-400">
+              {postDisplayTimeFormatter(singlePost.$createdAt)} ago
+            </p>
           ) : null}
         </div>
       </Link>
+
+      {/* show post info */}
       <Link href={`/post/${singlePost && singlePost?.$id}`}>
         <div className="text-md mb-4">
           {singlePost && singlePost?.postTitle ? (
@@ -202,25 +185,15 @@ export default function SinglePost({
         ) : null}
       </Link>
 
-      {colors && Object.keys(colors).length > 0 ? (
+      {/* show colors */}
+      {colorsObject && Object.keys(colorsObject).length > 0 ? (
         <div className="my-2 flex flex-row justify-between items-center w-full">
-          {/* {JSON.parse(singlePost.colors).map((color: string, index: number) => {
-            return (
-              <div
-                key={index}
-                className="flex-grow h-52 cursor-pointer  transition duration-200"
-                onClick={() => copyText(`#${color}`)}
-                style={{
-                  backgroundColor: `#${color}`,
-                }}
-              ></div>
-            );
-          })} */}
           <div className="w-full  h-[200px] bg-tranparent mx-auto flex mb-3.5 gap-1">
             <div
               className="cursor-pointer w-full flex justify-center items-center group"
               style={{
-                backgroundColor: (typeof colors.color01 === "string" && colors.color01) || "",
+                backgroundColor:
+                  (typeof colorsObject.color01 === "string" && colorsObject.color01) || "",
               }}
               onClick={handleClick}
             >
@@ -228,46 +201,50 @@ export default function SinglePost({
                 className="bg-slate-950/[0.4] text-xs px-0.5 opacity-0 transition ease-out duration-300 group-hover:opacity-100 group-hover:ease-in group-hover:scale-110"
                 onClick={handleClick}
               >
-                {colors.color01}
+                {colorsObject.color01}
               </span>
             </div>
             <div
               className="cursor-pointer w-full flex justify-center items-center group "
               style={{
-                backgroundColor: (typeof colors.color02 === "string" && colors.color02) || "",
+                backgroundColor:
+                  (typeof colorsObject.color02 === "string" && colorsObject.color02) || "",
               }}
               onClick={handleClick}
             >
               <span className="bg-slate-950/[0.4] text-xs px-0.5 opacity-0 transition ease-out duration-300 group-hover:opacity-100 group-hover:ease-in group-hover:scale-110">
-                {colors.color02}
+                {colorsObject.color02}
               </span>
             </div>
             <div
               className="cursor-pointer w-full flex justify-center items-center group gap-2"
               style={{
-                backgroundColor: (typeof colors.color03 === "string" && colors.color03) || "",
+                backgroundColor:
+                  (typeof colorsObject.color03 === "string" && colorsObject.color03) || "",
               }}
               onClick={handleClick}
             >
               <span className="bg-slate-950/[0.4] text-xs px-0.5 opacity-0 transition ease-out duration-300 group-hover:opacity-100 group-hover:ease-in group-hover:scale-110">
-                {colors.color03}
+                {colorsObject.color03}
               </span>
             </div>
             <div
               className="cursor-pointer w-full flex justify-center items-center group"
               style={{
-                backgroundColor: (typeof colors.color04 === "string" && colors.color04) || "",
+                backgroundColor:
+                  (typeof colorsObject.color04 === "string" && colorsObject.color04) || "",
               }}
               onClick={handleClick}
             >
               <span className="bg-slate-950/[0.4] text-xs px-0.5 opacity-0 transition ease-out duration-300 group-hover:opacity-100 group-hover:ease-in group-hover:scale-110">
-                {colors.color04}
+                {colorsObject.color04}
               </span>
             </div>
           </div>
         </div>
       ) : null}
 
+      {/* reactions */}
       <div className="flex justify-around">
         <article
           onClick={() => onLikeClick(singlePost)}

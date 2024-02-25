@@ -112,6 +112,16 @@
           "array": false,
           "size": 1000,
           "default": null
+        },
+        {
+          "key": "location",
+          "type": "string",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "size": 1000,
+          "default": null
         }
       ],
       "indexes": [
@@ -186,7 +196,7 @@
           "required": false,
           "array": false,
           "min": 0,
-          "max": 10000,
+          "max": 100000,
           "default": null
         },
         {
@@ -219,8 +229,8 @@
           "error": "",
           "required": false,
           "array": false,
-          "min": -9223372036854776000,
-          "max": 9223372036854776000,
+          "min": 0,
+          "max": 100000,
           "default": null
         }
       ],

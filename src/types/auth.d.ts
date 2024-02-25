@@ -14,6 +14,7 @@ export type userCollectionDB = {
   bannerURL?: string;
   about?: string;
   userLink?: string;
+  location?: string;
   $createdAt: string;
   $updatedAt: string;
 };
@@ -34,3 +35,8 @@ export type userDetails = {
   error: boolean;
   loading: boolean;
 };
+
+export enum LoginOptions {
+  REGISTER,
+  LOGIN,
+}

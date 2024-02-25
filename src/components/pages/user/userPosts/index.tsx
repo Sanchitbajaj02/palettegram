@@ -5,19 +5,15 @@ import { toastify } from "@/helper/toastify";
 import { removeUserPost } from "@/redux/reducers/postsReducer";
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Bookmark, Download, Heart, MessageCircle, Share, Trash2 } from "react-feather";
-import { useSelector, useDispatch } from "react-redux";
 import { parseCookies } from "nookies";
+import { postDisplayTimeFormatter } from "@/helper/postDisplayTimeFormatter";
+import { getAllUserPosts } from "@/backend/posts.api";
+import { PostInstanceType } from "@/types";
+import { Models } from "appwrite";
 
-type FormatOnType = "seconds" | "minutes" | "hours" | "days";
-
-export default function UserPosts({ userId, userName }: { userId: string; userName: string }) {
-  let userPosts = useSelector((store: any) => store.posts.posts)
-    .filter((post: any) => post.userId?.$id === userId && post.isActive === true)
-    .reverse();
-  // console.log(userPosts, "userPosts");
-  const dispatch = useDispatch();
+export default function UserPosts({ userId }: { userId: string }) {
   const cookie = parseCookies();
   const currentUserId: string = cookie["accountId"];
 
@@ -32,32 +28,26 @@ export default function UserPosts({ userId, userName }: { userId: string; userNa
       console.log(error);
     }
   }
-  function createdAtDateFormatter(postCreationTime: string) {
-    const timeObj = {
-      seconds: 1000,
-      minutes: 1000 * 60,
-      hours: 1000 * 60 * 60,
-      days: 1000 * 60 * 60 * 24,
-      postCreatedTime: new Date(postCreationTime),
-      currentTime: new Date(),
-      calcTimeDiff(formatOn: FormatOnType) {
-        const timeDiff = this.currentTime.valueOf() - this.postCreatedTime.valueOf();
-        return Math.round(timeDiff / this[formatOn]);
-      },
-    };
 
-    if (timeObj.calcTimeDiff("seconds") < 60) {
-      return `${timeObj.calcTimeDiff("seconds")}s`;
-    } else if (timeObj.calcTimeDiff("minutes") < 60) {
-      return `${timeObj.calcTimeDiff("minutes")}m`;
-    } else if (timeObj.calcTimeDiff("hours") <= 24) {
-      return `${timeObj.calcTimeDiff("hours")}h`;
-    } else if (timeObj.calcTimeDiff("days") < 365) {
-      return `${timeObj.calcTimeDiff("days")}d`;
-    } else {
-      return `${timeObj.calcTimeDiff("days") / 365}y`;
-    }
-  }
+  const [userPosts, setUserPosts] = useState<Models.Document[]>([]);
+
+  useEffect(() => {
+    getAllUserPosts(userId)
+      .then((allPosts: Models.Document[] | undefined) => {
+        if (allPosts && allPosts.length > 0) {
+          setUserPosts(allPosts);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toastify("error fetching posts", "error");
+      });
+
+    return () => {
+      console.log("cleanup");
+    };
+  }, [userId]);
+
   return (
     <>
       <main className="w-full h-full">
@@ -90,7 +80,7 @@ export default function UserPosts({ userId, userName }: { userId: string; userNa
                           <Link href={`/user/${post?.userId?.$id}`}>
                             <p className=" font-semibold">{post?.userId?.fullName}</p>
                             <p className="text-[13px] text-neutral-600 dark:text-neutral-400 ">
-                              {`${createdAtDateFormatter(post?.$createdAt)} ago`}
+                              {postDisplayTimeFormatter(post?.$createdAt)} ago
                             </p>
                           </Link>
 
@@ -154,4 +144,7 @@ export default function UserPosts({ userId, userName }: { userId: string; userNa
       </main>
     </>
   );
+}
+function dispatch(arg0: { payload: string; type: "posts/removeUserPost" }) {
+  throw new Error("Function not implemented.");
 }

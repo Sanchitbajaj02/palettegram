@@ -51,7 +51,7 @@ export default function LoginComponent() {
         throw new Error("Email and Password fields should be filled");
       }
 
-      const resp = await login(data);
+      const resp = await login(data.email, data.password);
 
       if (resp && resp.email === data.email) {
         const payload: userCollectionDB = {
