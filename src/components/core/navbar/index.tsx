@@ -102,11 +102,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
     return () => {
       console.log("cleanup");
     };
-<<<<<<< HEAD
   }, [currentUser, getBookmarksFromDatabase, getPostsFromDatabase, userIdFromCookies]);
-=======
-  }, [userIdFromCookies,dispatch]);
->>>>>>> 6b7b27cc1fd6a005fcc8888305b74aa13b00e0f1
 
   if (userAuth.error) {
     return <h1>Error</h1>;
