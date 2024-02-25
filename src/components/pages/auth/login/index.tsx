@@ -7,24 +7,24 @@ import { Loader, ArrowLeftCircle } from "react-feather";
 import { motion } from "framer-motion";
 
 // Components
-import { saveUser } from "@/redux/reducers/authReducer";
+import { saveUserToStore } from "@/redux/reducers/authReducer";
 import { toastify } from "@/helper/toastify";
 
 // API
-import { loginUser } from "@/backend/auth.api";
-import { loginWithGoogle } from "@/backend/auth.api";
+import { login, loginWithGoogle } from "@/backend/auth.api";
 
 // Icons
 import { Eye, EyeOff } from "react-feather";
+import { userCollectionDB } from "@/types/auth";
 
 export default function LoginComponent() {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const dispatch = useDispatch();
-  const authSelector = useSelector((state: any) => state.auth);
-
   const router = useRouter();
+  const authSelector = useSelector((state: any) => state.auth);
+  const dispatch = useDispatch();
+
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -43,22 +43,33 @@ export default function LoginComponent() {
     try {
       setIsLoading(true);
 
-      if (data.email !== "" && data.password !== "") {
-        const userCredentials = await loginUser(data);
+      if (data.password.length < 6 || data.password.length > 16) {
+        throw new Error("Password should be in range of 6 to 16 characters");
+      }
 
-        if (userCredentials && userCredentials?.providerUid === data.email) {
-          const localObject = {
-            userId: userCredentials?.userId,
-            email: userCredentials?.providerUid,
-            createdAt: userCredentials.$createdAt,
-          };
+      if (data.email === "" || data.password === "") {
+        throw new Error("Email and Password fields should be filled");
+      }
 
-          dispatch(saveUser(localObject));
-          setIsLoading(false);
-          toastify("Login Successful", "success");
+      const resp = await login(data.email, data.password);
 
-          router.push("/feed");
-        }
+      if (resp && resp.email === data.email) {
+        const payload: userCollectionDB = {
+          $id: resp.$id,
+          accountId: resp.accountId,
+          email: resp.email,
+          fullName: resp.name,
+          username: resp.username,
+          isVerified: resp.isVerified,
+          $createdAt: resp.$createdAt,
+          $updatedAt: resp.$updatedAt,
+        };
+
+        dispatch(saveUserToStore(payload));
+        toastify("Login Successful", "success");
+
+        setIsLoading(false);
+        router.push("/feed");
       }
     } catch (error: any) {
       setIsLoading(false);

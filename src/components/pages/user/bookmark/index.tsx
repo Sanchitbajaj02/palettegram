@@ -1,13 +1,14 @@
 "use client";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import SinglePost from "@/components/core/posts/SinglePost";
 import { ArrowLeft } from "react-feather";
 import { useRouter } from "next/navigation";
 
 import { PostInstanceType } from "@/types/index.d";
 
-function getSinglePostData(bookmarkId: string, posts: PostInstanceType[]) {
-  return posts.filter((post: PostInstanceType) => post.$id === bookmarkId)[0];
+function getSinglePostData(ids: string, posts: PostInstanceType[]) {
+  const singlepost = posts.filter((post: PostInstanceType) => post?.$id === ids)[0];
+  return singlepost;
 }
 
 export default function UserBookmark() {
@@ -40,20 +41,16 @@ export default function UserBookmark() {
         </div>
 
         <main className="my-8">
-          {userBookmarks && userBookmarks?.bookmark && userBookmarks?.bookmark.length > 0 ? (
-            userBookmarks.bookmark.map((ids: string, i: number) => {
+          {userBookmarks && userBookmarks?.postId && userBookmarks?.postId.length > 0 ? (
+            userBookmarks.postId.map((ids: string, idx: number) => {
               return (
-                <>
-                  <SinglePost key={i} singlePost={getSinglePostData(ids, totalPosts.posts)} />
-                </>
+                <div key={idx}>
+                  <SinglePost singlePost={getSinglePostData(ids, totalPosts.posts)} />
+                </div>
               );
             })
           ) : (
-            <>
-              <h1 className="text-black dark:text-white text-base font-medium">
-                No bookmarks saved
-              </h1>
-            </>
+            <h1 className="text-black dark:text-white text-base font-medium">No bookmarks saved</h1>
           )}
         </main>
       </section>

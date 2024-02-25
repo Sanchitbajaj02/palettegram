@@ -156,7 +156,7 @@ const EditorMenubar = ({ editor }: { editor: Editor }) => {
     <>
       <div className="flex flex-wrap gap-2">
         {MenuBarFunctions.length > 0 &&
-          MenuBarFunctions.map((menu) => (
+          MenuBarFunctions.map((menu: any, index: number) => (
             <button
               key={menu.id}
               role="button"

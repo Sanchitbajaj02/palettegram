@@ -7,22 +7,23 @@ import { ButtonLong } from "@/components/core/buttons";
 import Loader from "@/app/loading";
 import { setCookie } from "nookies";
 import Image from "next/image";
+import { verificationResponseType } from "@/types/auth";
 
 interface Verification {
-  userId: string;
+  accountId: string;
   secret: string;
 }
 
-export default function VerificationComponent({ userId, secret }: Verification) {
+export default function VerificationComponent({ accountId, secret }: Verification) {
   const [isVerified, setVerified] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    verifyUser(userId, secret)
-      .then((resp) => {
+    verifyUser(accountId, secret)
+      .then((resp: verificationResponseType) => {
         if (resp.status) {
           setVerified(resp.status);
-          setCookie(null, "isVerified", "true");
+          setCookie(null, "isVerified", String(resp.status));
         }
       })
       .catch((err) => {
@@ -30,7 +31,7 @@ export default function VerificationComponent({ userId, secret }: Verification) 
 
         toastify(err.message, "error");
       });
-  }, [router, secret, userId]);
+  }, [router, secret, accountId]);
 
   return (
     <>
