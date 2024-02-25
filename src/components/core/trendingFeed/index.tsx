@@ -4,7 +4,7 @@ import { trendingPosts } from "@/backend/trendingPosts.dummy";
 
 export default function TrendingFeed() {
   return (
-    <section className="lg:w-64 fixed px-4 inline-block h-screen z-10">
+    <section className="lg:w-64 sticky top-24 px-4 inline-block h-fit z-10">
       <h3 className="text-left text-xl font-semibold mb-4 tracking-wide">Trending Posts</h3>
       <div className="mb-4 max-h-96 overflow-y-scroll scrollbar-thin scrollbar-thumb-primary scrollbar-track-secondary-light scrollbar-track-rounded-full">
         {trendingPosts.length &&
