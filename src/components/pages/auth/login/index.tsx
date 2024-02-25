@@ -3,7 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { Loader, ArrowLeftCircle } from "react-feather";
+import { Loader, ArrowLeftCircle, Eye, EyeOff } from "lucide-react";
 import { motion } from "framer-motion";
 
 // Components
@@ -14,7 +14,6 @@ import { toastify } from "@/helper/toastify";
 import { login, loginWithGoogle } from "@/backend/auth.api";
 
 // Icons
-import { Eye, EyeOff } from "react-feather";
 import { userCollectionDB } from "@/types/auth";
 
 export default function LoginComponent() {

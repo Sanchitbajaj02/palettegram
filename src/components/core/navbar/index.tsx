@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 
-import { User, LogOut, Home, GitHub, X, Menu, Bookmark } from "react-feather";
+import { User, LogOut, Home, Github, X, Menu, Bookmark } from "lucide-react";
 import ThemeButton from "@/components/core/themeButton";
 import { ButtonLong } from "../buttons";
 
@@ -181,7 +181,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
                   size="normal"
                 >
                   <span className="flex items-center">
-                    <GitHub size={20} className="mr-2" /> {starCount} Stars
+                    <Github size={20} className="mr-2" /> {starCount} Stars
                   </span>
                 </ButtonLong>
                 <ButtonLong href="/register" size="normal">
@@ -219,7 +219,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
                 rel="noopener noreferrer"
                 className="flex items-center text-sm mx-2 px-10 py-2 rounded-full bg-primary text-white"
               >
-                <GitHub size={20} className="mr-4" /> {starCount} Stars
+                <Github size={20} className="mr-4" /> {starCount} Stars
               </Link>
 
               {userAuth && userAuth.data?.$id && (

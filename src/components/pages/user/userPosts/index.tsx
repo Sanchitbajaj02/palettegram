@@ -6,7 +6,7 @@ import { removeUserPost } from "@/redux/reducers/postsReducer";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense, useEffect, useState } from "react";
-import { Bookmark, Download, Heart, MessageCircle, Share, Trash2 } from "react-feather";
+import { Bookmark, Download, Heart, MessageCircle, Share, Trash2 } from "lucide-react";
 import { parseCookies } from "nookies";
 import { postDisplayTimeFormatter } from "@/helper/postDisplayTimeFormatter";
 import { getAllUserPosts } from "@/backend/posts.api";

@@ -1,5 +1,5 @@
 "use client";
-import { Briefcase, Link2, Mail, MapPin, Smile, ArrowLeft } from "react-feather";
+import { Briefcase, Link2, Mail, MapPin, Smile, ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";

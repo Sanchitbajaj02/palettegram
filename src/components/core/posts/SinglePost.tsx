@@ -1,7 +1,7 @@
 import Link from "next/link";
 import parse from "html-react-parser";
 import Image from "next/image";
-import { Download, Heart, MessageCircle, Share, Bookmark } from "react-feather";
+import { Download, Heart, MessageCircle, Share, Bookmark } from "lucide-react";
 import { PostInstanceType } from "@/types/index.d";
 import { parseCookies } from "nookies";
 import { useSelector, useDispatch } from "react-redux";

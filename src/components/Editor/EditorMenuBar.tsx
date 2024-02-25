@@ -15,8 +15,8 @@ import {
   Redo,
   Strikethrough,
   Undo,
+  CodeSquare,
 } from "lucide-react";
-import { Codepen } from "react-feather";
 
 const EditorMenubar = ({ editor }: { editor: Editor }) => {
   const MenuBarFunctions = [
@@ -124,7 +124,7 @@ const EditorMenubar = ({ editor }: { editor: Editor }) => {
       title: "codeBlock",
       onFunction: () => editor.chain().focus().toggleCodeBlock().run(),
       offFunction: () => !editor.can().chain().focus().toggleCodeBlock().run(),
-      icon: Codepen,
+      icon: CodeSquare,
     },
     {
       id: 14,
