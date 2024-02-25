@@ -4,7 +4,6 @@ import { BubbleMenu, EditorContent, FloatingMenu, useEditor } from "@tiptap/reac
 import { HardBreak } from "@tiptap/extension-hard-break";
 import StarterKit from "@tiptap/starter-kit";
 import EditorMenubar from "./EditorMenuBar";
-import { Codepen } from "react-feather";
 import {
   BoldIcon,
   Italic,
@@ -14,6 +13,7 @@ import {
   List,
   ListOrdered,
   StrikethroughIcon,
+  CodeSquare,
 } from "lucide-react";
 
 interface EditorProps {
@@ -65,7 +65,7 @@ const Markdown = ({ editorState, setEditorState }: EditorProps) => {
     {
       title: "codeBlck",
       onFunction: () => editor?.chain().focus().toggleCodeBlock().run(),
-      icon: <Codepen size={16} className="font-bold " />,
+      icon: <CodeSquare size={16} className="font-bold " />,
     },
   ];
 
@@ -86,7 +86,7 @@ const Markdown = ({ editorState, setEditorState }: EditorProps) => {
       title: `codeBlock`,
       attribute: { level: 1 },
       onFunction: () => editor?.chain().focus().toggleCodeBlock().run(),
-      icon: <Codepen className="w-4 h-4" />,
+      icon: <CodeSquare className="w-4 h-4" />,
     },
     {
       title: `bulletList`,
@@ -107,7 +107,7 @@ const Markdown = ({ editorState, setEditorState }: EditorProps) => {
           <BubbleMenu className="bubble-menu" tippyOptions={{ duration: 100 }} editor={editor}>
             <div className="flex gap-1 bg-white px-4 py-1 text-black rounded-sm">
               {BubbleMenuFunctions.length > 0 &&
-                BubbleMenuFunctions.map((func, index) => (
+                BubbleMenuFunctions.map((func: any, index: number) => (
                   <button
                     key={index}
                     role="button"
@@ -132,7 +132,7 @@ const Markdown = ({ editorState, setEditorState }: EditorProps) => {
           <FloatingMenu className="floating-menu" tippyOptions={{ duration: 100 }} editor={editor}>
             <div className="flex gap-1 bg-white px-4 py-1 text-black rounded-sm">
               {FloatingMenuFunctions.length > 0 &&
-                FloatingMenuFunctions.map((func, index) => (
+                FloatingMenuFunctions.map((func: any, index: number) => (
                   <button
                     key={index}
                     role="button"

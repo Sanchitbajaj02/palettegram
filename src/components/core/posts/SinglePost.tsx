@@ -1,23 +1,17 @@
 import Link from "next/link";
 import parse from "html-react-parser";
-import { redirect } from "next/navigation";
 import Image from "next/image";
-import { Download, Heart, MessageCircle, Share, Bookmark } from "react-feather";
+import { Download, Heart, MessageCircle, Share, Bookmark } from "lucide-react";
 import { PostInstanceType } from "@/types/index.d";
 import { parseCookies } from "nookies";
 import { useSelector, useDispatch } from "react-redux";
 import { removeBookmark, saveBookmark, createBookmarkEntry } from "@/backend/bookmarks.api";
 import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
 import { toastify } from "@/helper/toastify";
-import { addComment } from "@/backend/posts.api";
-import { getUserDetails } from "@/backend/auth.api";
-import { useCallback, useEffect, useState, MouseEvent } from "react";
-import { UserBookMarkType, FormatOnType } from "@/types/index";
-import isCtrlEnter from "@/helper/isCtrlEnter";
-
-interface UserDetails {
-  fullName: string;
-}
+import { useState, MouseEvent } from "react";
+import { UserBookMarkType } from "@/types/index";
+import { postDisplayTimeFormatter } from "@/helper/postDisplayTimeFormatter";
+import { userCollectionDB } from "@/types/auth";
 
 export default function SinglePost({
   singlePost,
@@ -28,27 +22,11 @@ export default function SinglePost({
   onLikeClick?: any;
   width?: string;
 }) {
-  const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
-  const [commentCount, setCommentCount] = useState(singlePost?.comments?.length || 0);
+  const [commentCount, setCommentCount] = useState(singlePost?.commentsCount || 0);
 
   const dispatch = useDispatch();
 
-  const authState = useSelector((state: any) => state.auth);
   const userBookmarks: UserBookMarkType = useSelector((state: any) => state.bookmarks);
-
-  const copyText = async (color: string) => {
-    await navigator.clipboard.writeText(color);
-  };
-
-  const fetchUserDetails = useCallback(async () => {
-    try {
-      const detailsArray = await getUserDetails(singlePost.accountId);
-      const userDetails = detailsArray && detailsArray.length > 0 ? detailsArray[0] : null;
-      setUserDetails(userDetails);
-    } catch (error) {
-      console.error("Error fetching user details:", error);
-    }
-  }, [singlePost.accountId]);
 
   const sharePost = async () => {
     try {
@@ -67,46 +45,19 @@ export default function SinglePost({
     }
   };
 
-  function createdAtDateFormatter(postCreationTime: string) {
-    const timeObj = {
-      seconds: 1000,
-      minutes: 1000 * 60,
-      hours: 1000 * 60 * 60,
-      days: 1000 * 60 * 60 * 24,
-      postCreatedTime: new Date(postCreationTime),
-      currentTime: new Date(),
-      calcTimeDiff(formatOn: FormatOnType) {
-        const timeDiff = this.currentTime.valueOf() - this.postCreatedTime.valueOf();
-        return Math.round(timeDiff / this[formatOn]);
-      },
-    };
-
-    if (timeObj.calcTimeDiff("seconds") < 60) {
-      return `${timeObj.calcTimeDiff("seconds")}s`;
-    } else if (timeObj.calcTimeDiff("minutes") < 60) {
-      return `${timeObj.calcTimeDiff("minutes")}m`;
-    } else if (timeObj.calcTimeDiff("hours") <= 24) {
-      return `${timeObj.calcTimeDiff("hours")}h`;
-    } else if (timeObj.calcTimeDiff("days") < 365) {
-      return `${timeObj.calcTimeDiff("days")}d`;
-    } else {
-      return `${timeObj.calcTimeDiff("days") / 365}y`;
-    }
-  }
-
   const handleUpdateBookmark = async (postId: string | undefined) => {
     if (postId) {
       const cookies = parseCookies();
-      const accountId: string = cookies["accountId"];
-      if (Array.isArray(userBookmarks.bookmark)) {
-        if (userBookmarks.bookmark.some((current: string) => current === postId)) {
-          // console.log(accountId, "remove bookmark");
-          removeBookmark(accountId, postId)
+      const userId: string = cookies["userId"];
+
+      if (Array.isArray(userBookmarks.postId)) {
+        if (userBookmarks.postId.some((current: string) => current === postId)) {
+          removeBookmark(userId, postId)
             .then((resp) => {
               dispatch(
                 saveBookmarkToStore({
-                  accountId: resp.accountId,
-                  bookmark: resp.bookmark,
+                  userId: resp.userId?.$id,
+                  postId: resp.postId,
                 }),
               );
 
@@ -114,13 +65,12 @@ export default function SinglePost({
             })
             .catch((err) => console.log(err));
         } else {
-          // console.log(accountId, "save bookmark");
-          saveBookmark(accountId, postId)
+          saveBookmark(userId, postId)
             .then((resp) => {
               dispatch(
                 saveBookmarkToStore({
-                  accountId: resp.accountId,
-                  bookmark: resp.bookmark,
+                  userId: resp.userId?.$id,
+                  postId: resp.postId,
                 }),
               );
               toastify("Bookmark saved", "success");
@@ -129,12 +79,12 @@ export default function SinglePost({
         }
       } else {
         // console.log(accountId, "account not exist");
-        createBookmarkEntry(accountId, postId)
+        createBookmarkEntry(userId, postId)
           .then((resp) => {
             dispatch(
               saveBookmarkToStore({
-                accountId: resp.accountId,
-                bookmark: resp.bookmark,
+                userId: resp.userId?.$id,
+                postId: resp.postId,
               }),
             );
             toastify("Bookmark saved", "success");
@@ -143,10 +93,6 @@ export default function SinglePost({
       }
     }
   };
-
-  useEffect(() => {
-    fetchUserDetails();
-  }, [fetchUserDetails]);
 
   const handleClick = (e: MouseEvent<HTMLDivElement | HTMLSpanElement>) => {
     const element = e.target as HTMLDivElement | HTMLSpanElement;
@@ -178,35 +124,46 @@ export default function SinglePost({
         .catch(console.log);
     }
   };
-  const colors =
+
+  // color object parsed seperately
+  const colorsObject =
     singlePost?.colors && typeof singlePost?.colors === "string" && JSON.parse(singlePost.colors);
+
+  // fetch user seperately
+  const relationedUser: userCollectionDB | null =
+    singlePost && typeof singlePost.userId !== "string" ? singlePost.userId : null;
+
+  console.log("relationedUser:", relationedUser);
 
   return (
     <div
       className={` ${
         width
-          ? "w-96 p-3 m-auto  rounded-md shadow dark:shadow-gray-600 mb-4 mt-40 "
+          ? "w-96 p-3 m-auto rounded-md shadow dark:shadow-gray-600 mb-4 mt-40 "
           : "p-3 rounded-md shadow dark:shadow-gray-600 mb-4"
       } `}
     >
+      {/* show user info */}
       <Link
         className="flex items-center gap-3 mb-3"
-        href={`/user/${singlePost && singlePost?.accountId}`}
+        href={`/user/${relationedUser && relationedUser.$id ? relationedUser.$id : null}`}
       >
         <div className="w-12 h-12 rounded-full border flex items-center justify-center shadow">
           <Image src="/assets/user.png" alt="user" width={40} height={40} />
         </div>
         <div>
           <h5 className="font-medium text-base">
-            {userDetails ? userDetails.fullName : "Anonymous User"}
+            {relationedUser && relationedUser.fullName ? relationedUser.fullName : "Anonymous User"}
           </h5>
-          {singlePost?.$createdAt ? (
-            <p className="font-thin text-xs/[10px] text-slate-950 dark:text-slate-400">{`${createdAtDateFormatter(
-              singlePost.$createdAt,
-            )} ago`}</p>
+          {singlePost && singlePost.$createdAt ? (
+            <p className="font-thin text-xs/[10px] text-slate-950 dark:text-slate-400">
+              {postDisplayTimeFormatter(singlePost.$createdAt)} ago
+            </p>
           ) : null}
         </div>
       </Link>
+
+      {/* show post info */}
       <Link href={`/post/${singlePost && singlePost?.$id}`}>
         <div className="text-md mb-4">
           {singlePost && singlePost?.postTitle ? (
@@ -218,6 +175,7 @@ export default function SinglePost({
 
         {singlePost && singlePost?.postImages && singlePost?.postImages[0]?.length > 0 ? (
           <Image
+            priority
             className="w-full mb-4"
             src={singlePost?.postImages[0]}
             alt={singlePost && singlePost?.postTitle}
@@ -227,25 +185,15 @@ export default function SinglePost({
         ) : null}
       </Link>
 
-      {colors && Object.keys(colors).length > 0 ? (
+      {/* show colors */}
+      {colorsObject && Object.keys(colorsObject).length > 0 ? (
         <div className="my-2 flex flex-row justify-between items-center w-full">
-          {/* {JSON.parse(singlePost.colors).map((color: string, index: number) => {
-            return (
-              <div
-                key={index}
-                className="flex-grow h-52 cursor-pointer  transition duration-200"
-                onClick={() => copyText(`#${color}`)}
-                style={{
-                  backgroundColor: `#${color}`,
-                }}
-              ></div>
-            );
-          })} */}
           <div className="w-full  h-[200px] bg-tranparent mx-auto flex mb-3.5 gap-1">
             <div
               className="cursor-pointer w-full flex justify-center items-center group"
               style={{
-                backgroundColor: (typeof colors.color01 === "string" && colors.color01) || "",
+                backgroundColor:
+                  (typeof colorsObject.color01 === "string" && colorsObject.color01) || "",
               }}
               onClick={handleClick}
             >
@@ -253,66 +201,58 @@ export default function SinglePost({
                 className="bg-slate-950/[0.4] text-xs px-0.5 opacity-0 transition ease-out duration-300 group-hover:opacity-100 group-hover:ease-in group-hover:scale-110"
                 onClick={handleClick}
               >
-                {colors.color01}
+                {colorsObject.color01}
               </span>
             </div>
             <div
               className="cursor-pointer w-full flex justify-center items-center group "
               style={{
-                backgroundColor: (typeof colors.color02 === "string" && colors.color02) || "",
+                backgroundColor:
+                  (typeof colorsObject.color02 === "string" && colorsObject.color02) || "",
               }}
               onClick={handleClick}
             >
               <span className="bg-slate-950/[0.4] text-xs px-0.5 opacity-0 transition ease-out duration-300 group-hover:opacity-100 group-hover:ease-in group-hover:scale-110">
-                {colors.color02}
+                {colorsObject.color02}
               </span>
             </div>
             <div
               className="cursor-pointer w-full flex justify-center items-center group gap-2"
               style={{
-                backgroundColor: (typeof colors.color03 === "string" && colors.color03) || "",
+                backgroundColor:
+                  (typeof colorsObject.color03 === "string" && colorsObject.color03) || "",
               }}
               onClick={handleClick}
             >
               <span className="bg-slate-950/[0.4] text-xs px-0.5 opacity-0 transition ease-out duration-300 group-hover:opacity-100 group-hover:ease-in group-hover:scale-110">
-                {colors.color03}
+                {colorsObject.color03}
               </span>
             </div>
             <div
               className="cursor-pointer w-full flex justify-center items-center group"
               style={{
-                backgroundColor: (typeof colors.color04 === "string" && colors.color04) || "",
+                backgroundColor:
+                  (typeof colorsObject.color04 === "string" && colorsObject.color04) || "",
               }}
               onClick={handleClick}
             >
               <span className="bg-slate-950/[0.4] text-xs px-0.5 opacity-0 transition ease-out duration-300 group-hover:opacity-100 group-hover:ease-in group-hover:scale-110">
-                {colors.color04}
+                {colorsObject.color04}
               </span>
             </div>
           </div>
         </div>
       ) : null}
 
+      {/* reactions */}
       <div className="flex justify-around">
         <article
           onClick={() => onLikeClick(singlePost)}
-          className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${
-            singlePost?.likes && singlePost?.likes.includes(authState?.userId)
-              ? "text-primary hover:text-primary"
-              : "text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
-          }`}
+          className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer"
         >
-          <Heart
-            size={22}
-            fill="true"
-            className={`${
-              singlePost?.likes && singlePost?.likes.includes(authState?.userId)
-                ? "fill-primary"
-                : "fill-transparent"
-            }`}
-          />
+          <Heart size={22} fill="true" />
           <span className="text-base">
-            {singlePost && singlePost?.likes && singlePost?.likes.length}
+            {singlePost && singlePost?.likesCount && singlePost?.likesCount}
           </span>
         </article>
 
@@ -324,7 +264,7 @@ export default function SinglePost({
           {commentCount ? (
             <span className="text-base">{commentCount}</span>
           ) : (
-            <span className="text-base">{singlePost.comments?.length} </span>
+            <span className="text-base">{singlePost?.commentsCount} </span>
           )}
         </Link>
 
@@ -332,9 +272,9 @@ export default function SinglePost({
           onClick={() => handleUpdateBookmark(singlePost?.$id)}
           className={`flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer ${
             userBookmarks &&
-            userBookmarks?.bookmark &&
-            userBookmarks?.bookmark?.length > 0 &&
-            userBookmarks?.bookmark.includes(singlePost && singlePost?.$id!)
+            userBookmarks?.postId &&
+            userBookmarks?.postId?.length > 0 &&
+            userBookmarks?.postId.includes(singlePost && singlePost?.$id!)
               ? "text-primary hover:text-primary dark:hover:text-primary"
               : "text-secondary-light dark:text-white hover:text-primary dark:hover:text-primary"
           }`}
@@ -344,9 +284,9 @@ export default function SinglePost({
             fill="true"
             className={`${
               userBookmarks &&
-              userBookmarks?.bookmark &&
-              userBookmarks?.bookmark?.length > 0 &&
-              userBookmarks?.bookmark.includes(singlePost && singlePost?.$id!)
+              userBookmarks?.postId &&
+              userBookmarks?.postId?.length > 0 &&
+              userBookmarks?.postId.includes(singlePost && singlePost?.$id!)
                 ? "fill-primary"
                 : "fill-transparent"
             }`}

@@ -1,5 +1,5 @@
 "use client";
-import { Sun, Moon } from "react-feather";
+import { Sun, Moon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 import Loader from "@/app/loading";
@@ -22,7 +22,7 @@ export default function ThemeButton({ iconSize }: { iconSize: number }) {
     <>
       {theme === "dark" ? (
         <button
-          className="px-2 py-2 rounded-full bg-primary hover:bg-primary-light hover:scale-105 text-white"
+          className="px-2 py-2 md:flex fixed md:static block md:top-0 md:m-0 top-1 m-2 rounded-full hover:bg-primary-light hover:scale-105 bg-primary text-white"
           onClick={() => setTheme("light")}
         >
           <Sun size={iconSize} cursor="pointer" className="transition-all duration-300" />
@@ -30,7 +30,7 @@ export default function ThemeButton({ iconSize }: { iconSize: number }) {
         </button>
       ) : (
         <button
-          className="px-2 py-2 rounded-full hover:bg-primary-light hover:scale-105 bg-primary text-white"
+          className="px-2 py-2 md:flex fixed md:static block md:top-0 md:m-0 top-1 m-2 rounded-full hover:bg-primary-light hover:scale-105 bg-primary text-white"
           onClick={() => setTheme("dark")}
         >
           <Moon size={iconSize} cursor="pointer" className="transition-all duration-300" />

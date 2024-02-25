@@ -6,18 +6,20 @@ export default function Custom404() {
   return (
     <>
       <Navbar />
-      <div className=" flex flex-col items-center justify-center h-[80vh]">
-        <h1 className="py-5 font-semibold text-4xl"> Error 404: Page does not Exist! </h1>
-        <h2 className="mb-5 text-2xl">Please check the url again</h2>
-        <ButtonLong href="/" size="big">
-          Get Back To Home
-        </ButtonLong>
-        <div></div>
 
-        <div className=" bottom-0 fixed w-full">
-          <Footer />
+      <section className="max-w-screen-lg mx-auto">
+        <div className="flex flex-col items-center justify-center h-[64vh]">
+          <h1 className="my-4 font-semibold text-4xl tracking-wide">
+            Error 404: Page does not Exist!
+          </h1>
+          <h2 className="my-4 text-2xl">Please check the url again</h2>
+          <ButtonLong href="/" size="big">
+            Get Back To Home
+          </ButtonLong>
         </div>
-      </div>
+      </section>
+
+      <Footer />
     </>
   );
 }
