@@ -18,33 +18,33 @@ const removePostIdFromBookmarks = function (bookmarks: string[], postId: string)
   return [...beforeIdx, ...afterIdx];
 };
 
-const getBookmarks = async (accountId: string) => {
+const getBookmarks = async (userId: string) => {
   try {
     const getSavedBookmarkData = await db.listDocuments(palettegramDB, bookmarksCollection, [
-      Query.equal("accountId", accountId),
+      Query.equal("userId", userId),
     ]);
-
+    // console.log(getSavedBookmarkData);
     return getSavedBookmarkData;
   } catch (error) {
     console.log(error);
   }
 };
 
-const saveBookmark = async (accountId: string, postId: string) => {
+const saveBookmark = async (userId: string, postId: string) => {
   try {
-    const getSavedBookmarkData = await getBookmarks(accountId);
-
+    const getSavedBookmarkData = await getBookmarks(userId);
+    console.log(getSavedBookmarkData);
     if (!getSavedBookmarkData) {
       throw new Error("Account does not exist");
     }
 
     const documentId = getSavedBookmarkData.documents[0].$id;
-    let oldBookmarkArray = getSavedBookmarkData.documents[0].bookmark;
+    let oldBookmarkArray = getSavedBookmarkData.documents[0].postId;
 
     oldBookmarkArray.push(postId);
 
     const updatedData = await db.updateDocument(palettegramDB, bookmarksCollection, documentId, {
-      bookmark: oldBookmarkArray,
+      postId: oldBookmarkArray,
     });
 
     if (!updatedData) {
@@ -57,21 +57,20 @@ const saveBookmark = async (accountId: string, postId: string) => {
   }
 };
 
-const removeBookmark = async (accountId: string, postId: string) => {
+const removeBookmark = async (userId: string, postId: string) => {
   try {
-    const getSavedBookmarkData = await getBookmarks(accountId);
-
+    const getSavedBookmarkData = await getBookmarks(userId);
     if (!getSavedBookmarkData) {
       throw new Error("Account does not exist");
     }
 
     const documentId = getSavedBookmarkData.documents[0].$id;
-    let oldBookmarkArray = getSavedBookmarkData.documents[0].bookmark;
+    let oldBookmarkArray = getSavedBookmarkData.documents[0].postId;
 
     let newBookmarkArray: string[] = removePostIdFromBookmarks(oldBookmarkArray, postId);
 
     const updatedData = await db.updateDocument(palettegramDB, bookmarksCollection, documentId, {
-      bookmark: newBookmarkArray,
+      postId: newBookmarkArray,
     });
 
     if (!updatedData) {
@@ -84,11 +83,11 @@ const removeBookmark = async (accountId: string, postId: string) => {
   }
 };
 
-const createBookmarkEntry = async (accountId: string, postId: string) => {
+const createBookmarkEntry = async (userId: string, postId: string) => {
   try {
     const bookmarkDocs = await db.createDocument(palettegramDB, bookmarksCollection, ID.unique(), {
-      accountId: accountId,
-      bookmark: [postId],
+      userId: userId,
+      postId: [postId],
     });
 
     if (!bookmarkDocs) {

@@ -41,7 +41,7 @@ export default function Footer({ isFixed }: { isFixed?: boolean }) {
 
   return (
     <section
-      className={`max-w-screen-lg mx-auto mt-12 bg-white dark:bg-secondary z-10 text-secondary-light dark:text-primary-light ${
+      className={`max-w-screen-xl mx-auto mt-12 bg-white dark:bg-secondary clear-both z-0 text-secondary-light dark:text-primary-light ${
         !!isFixed ? "bottom-0 fixed w-full" : ""
       } `}
     >

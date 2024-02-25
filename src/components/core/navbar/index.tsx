@@ -1,22 +1,23 @@
 "use client";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 
-import { User, LogOut, Home, GitHub, X, Menu } from "react-feather";
+import { User, LogOut, Home, Github, X, Menu, Bookmark } from "lucide-react";
 import ThemeButton from "@/components/core/themeButton";
 import { ButtonLong } from "../buttons";
-import { parseCookies } from "nookies";
 
-import { logoutUser, getCurrentUser } from "@/backend/auth.api";
+import { logoutUser, getUserByUserId } from "@/backend/auth.api";
 import { getAllPosts } from "@/backend/posts.api";
 import { getBookmarks } from "@/backend/bookmarks.api";
 
-import { logUserOut, saveUser } from "@/redux/reducers/authReducer";
+import { logUserOut, saveUserToStore } from "@/redux/reducers/authReducer";
 import { getPosts } from "@/redux/reducers/postsReducer";
 import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
+import { userCollectionDB } from "@/types/auth";
+import { parseCookies } from "nookies";
 
 const Navbar = ({ starCount }: { starCount?: number }) => {
   const router = useRouter();
@@ -26,7 +27,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
   const dispatch = useDispatch();
   const cookies = parseCookies();
 
-  const userIdFromCookies: string = cookies["accountId"];
+  const userIdFromCookies: string = cookies["userId"];
 
   const logout = async () => {
     await logoutUser();
@@ -36,21 +37,25 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
     router.push("/");
   };
 
-  useEffect(() => {
-    getCurrentUser()
-      .then((currUser) => {
-        const payload = {
-          accountId: currUser.$id,
-          email: currUser.email,
-          isVerified: currUser.emailVerification,
-          createdAt: currUser.$createdAt,
-        };
+  const currentUser = useCallback(
+    (userIdFromCookies: string) => {
+      console.log("inside currentUser");
 
-        dispatch(saveUser(payload));
-      })
-      .catch((err) => console.log(err));
+      if (userIdFromCookies) {
+        getUserByUserId(userIdFromCookies)
+          .then((currUser: any) => {
+            dispatch(saveUserToStore(currUser));
+          })
+          .catch((err) => console.log(err));
+      }
+    },
+    [dispatch],
+  );
 
-    const timeoutId = setTimeout(() => {
+  const getPostsFromDatabase = useCallback(() => {
+    console.log("inside getPostsFromDatabase");
+
+    if (userIdFromCookies) {
       getAllPosts()
         .then((posts) => {
           if (posts && posts?.documents.length > 0) {
@@ -60,26 +65,44 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
         .catch((error) => {
           console.log(error);
         });
+    }
+  }, [dispatch, userIdFromCookies]);
 
-      getBookmarks(userIdFromCookies)
-        .then((bookm) => {
-          dispatch(
-            saveBookmarkToStore({
-              accountId: userIdFromCookies,
-              bookmark: bookm?.documents[0]?.bookmark,
-            }),
-          );
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }, 2000);
+  const getBookmarksFromDatabase = useCallback(
+    (userIdFromCookies: string) => {
+      console.log("inside getBookmarksFromDatabase");
+
+      if (userIdFromCookies) {
+        getBookmarks(userIdFromCookies)
+          .then((bookmarks) => {
+            if (bookmarks) {
+              dispatch(
+                saveBookmarkToStore({
+                  userId: bookmarks?.documents[0]?.userId?.$id,
+                  postId: bookmarks?.documents[0]?.postId,
+                }),
+              );
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    },
+    [dispatch],
+  );
+
+  useEffect(() => {
+    if (userIdFromCookies) {
+      currentUser(userIdFromCookies);
+      getPostsFromDatabase();
+      getBookmarksFromDatabase(userIdFromCookies);
+    }
 
     return () => {
-      clearTimeout(timeoutId);
-      console.log("clear");
+      console.log("cleanup");
     };
-  }, [userIdFromCookies, dispatch]);
+  }, [currentUser, getBookmarksFromDatabase, getPostsFromDatabase, userIdFromCookies]);
 
   if (userAuth.error) {
     return <h1>Error</h1>;
@@ -119,7 +142,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
 
           <div className="hidden md:flex gap-2 flex-row items-center">
             <ThemeButton iconSize={22} />
-            {userAuth.creds?.accountId && userAuth.creds?.isVerified ? (
+            {userAuth && userAuth.data?.$id ? (
               <>
                 {pathname !== "/feed" && (
                   <Link
@@ -130,10 +153,17 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
                   </Link>
                 )}
                 <Link
-                  href={`/user/${userIdFromCookies}`}
+                  href={`/user/${userAuth.data?.$id}`}
                   className="mx-2 px-2 py-2 rounded-full  bg-primary text-white  hover:bg-primary-light hover:scale-105"
                 >
                   <User size={22} className="transition-all duration-300 " />
+                </Link>
+
+                <Link
+                  href={`/user/bookmarks`}
+                  className="mx-2 px-2 py-2 rounded-full  bg-primary text-white  hover:bg-primary-light hover:scale-105"
+                >
+                  <Bookmark size={22} className="transition-all duration-300 " />
                 </Link>
 
                 <button
@@ -151,7 +181,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
                   size="normal"
                 >
                   <span className="flex items-center">
-                    <GitHub size={20} className="mr-2" /> {starCount} Stars
+                    <Github size={20} className="mr-2" /> {starCount} Stars
                   </span>
                 </ButtonLong>
                 <ButtonLong href="/register" size="normal">
@@ -189,10 +219,10 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
                 rel="noopener noreferrer"
                 className="flex items-center text-sm mx-2 px-10 py-2 rounded-full bg-primary text-white"
               >
-                <GitHub size={20} className="mr-4" /> {starCount} Stars
+                <Github size={20} className="mr-4" /> {starCount} Stars
               </Link>
 
-              {!userAuth?.creds.userId && !userAuth?.creds.isVerified && (
+              {userAuth && userAuth.data?.$id && (
                 <>
                   <Link
                     href="/register"
@@ -209,9 +239,9 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
                   </Link>
                 </>
               )}
-              {userAuth?.creds.userId && userAuth?.creds.isVerified && (
+              {userAuth && userAuth.data?.$id && (
                 <Link
-                  href={`/user/${userIdFromCookies}`}
+                  href={`/user/${userAuth.data?.$id}`}
                   className="mx-2 px-2 py-2 rounded-full bg-primary text-white"
                 >
                   <User size={22} className="transition-all duration-300 " />

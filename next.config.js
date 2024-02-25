@@ -11,7 +11,8 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    domains: ["cloud.appwrite.io"],
+    dangerouslyAllowSVG: true,
+    domains: ["cloud.appwrite.io", "source.boringavatars.com", "media.dev.to", "placehold.co"],
   },
 
   experimental: {
