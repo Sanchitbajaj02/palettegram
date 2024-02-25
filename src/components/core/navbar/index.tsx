@@ -112,8 +112,6 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
     return <h1>Loading...</h1>;
   }
 
-  console.log("User auth:", userAuth);
-
   return (
     <>
       <nav className="w-full sticky top-0 shadow-md py-2 dark:shadow-gray-600 z-50">
