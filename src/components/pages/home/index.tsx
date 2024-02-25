@@ -1,44 +1,9 @@
 "use client";
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import Image from "next/image";
-import { getCurrentUser } from "@/backend/auth.api";
-import { saveUser } from "@/redux/reducers/authReducer";
 import { ButtonLong } from "@/components/core/buttons";
-import { parseCookies } from "nookies";
-import { toastify } from "@/helper/toastify";
 import { motion } from "framer-motion";
 
-function HomePage() {
-  const dispatch = useDispatch();
-  const cookies = parseCookies();
-  const accountIdFromCookies: string = cookies["accountId"];
-
-  const state = useSelector((state: any) => state.auth);
-
-  useEffect(() => {
-    if (accountIdFromCookies) {
-      getCurrentUser()
-        .then((resp) => {
-          if (resp) {
-            const payload = {
-              userId: resp["$id"],
-              email: resp["email"],
-              isVerified: resp["emailVerification"],
-              createdAt: resp["$createdAt"],
-            };
-
-            dispatch(saveUser(payload));
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-
-          toastify(err.message, "error");
-        });
-    }
-  }, [dispatch, accountIdFromCookies]);
-
+function HomePage({ accountId }: { accountId: string | undefined }) {
   return (
     <>
       <main className="max-w-screen-lg mx-auto px-2">
@@ -85,7 +50,7 @@ function HomePage() {
               }}
               className="flex justify-center md:justify-start"
             >
-              {state?.creds.userId && state?.creds.userId !== "" ? (
+              {accountId ? (
                 <ButtonLong href="/feed" size="big">
                   Checkout your feed
                 </ButtonLong>

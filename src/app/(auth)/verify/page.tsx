@@ -1,21 +1,22 @@
 "use client";
 import { Suspense } from "react";
-import Loader from "@/app/loading";
+import Loader from "./loading";
 import VerificationComponent from "@/components/pages/auth/verification";
 import Footer from "@/components/core/footer";
 import Image from "next/image";
 import { ButtonLong } from "@/components/core/buttons";
+
 type VerifyProps = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
 export default function VerifyPage({ searchParams }: VerifyProps) {
-  const { userId, secret, expire } = searchParams;
+  const { userId, secret } = searchParams;
 
   if (userId === undefined && secret === undefined) {
     return (
       <>
-        <section className="max-w-screen-md mx-auto h-screen flex justify-center items-center">
+        <section className="max-w-screen-md mx-auto h-[80vh] flex justify-center items-center">
           <div className="card">
             <div className="flex flex-col gap-4 items-center ">
               <Image src={"/assets/logo.png"} alt="logo" height={80} width={80} />
@@ -29,16 +30,16 @@ export default function VerifyPage({ searchParams }: VerifyProps) {
             </div>
           </div>
         </section>
-        <Footer isFixed />
+        <Footer />
       </>
     );
   }
   return (
     <>
       <Suspense fallback={<Loader />}>
-        <VerificationComponent userId={String(userId)} secret={String(secret)} />
+        <VerificationComponent accountId={String(userId)} secret={String(secret)} />
       </Suspense>
-      <Footer isFixed />
+      <Footer />
     </>
   );
 }

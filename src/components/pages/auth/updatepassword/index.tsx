@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowLeftCircle, Loader } from "react-feather";
+import { ArrowLeftCircle, Loader, Eye, EyeOff } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 // Components
@@ -9,9 +9,6 @@ import { toastify } from "@/helper/toastify";
 
 // API
 import { updatepassword } from "@/backend/auth.api";
-
-// Icons
-import { Eye, EyeOff } from "react-feather";
 
 export default function UpdatePasswordComponent() {
   const [showPassword, setShowPassword] = useState(false);
