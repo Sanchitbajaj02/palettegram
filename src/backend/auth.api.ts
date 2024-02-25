@@ -3,6 +3,7 @@
 import { account, db, ID, palettegramDB, usersCollection, Query } from "./appwrite.config";
 import { generateAvatar } from "./avatarGenerator";
 
+
 /**
  * @description Register the user into the database
  * @param {Object} userData

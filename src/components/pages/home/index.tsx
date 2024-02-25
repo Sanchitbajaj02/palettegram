@@ -9,6 +9,7 @@ import { parseCookies } from "nookies";
 import { toastify } from "@/helper/toastify";
 import { motion } from "framer-motion";
 
+
 function HomePage() {
   const dispatch = useDispatch();
   const cookies = parseCookies();
@@ -17,6 +18,7 @@ function HomePage() {
   const state = useSelector((state: any) => state.auth);
 
   useEffect(() => {
+ 
     if (accountIdFromCookies) {
       getCurrentUser()
         .then((resp) => {
