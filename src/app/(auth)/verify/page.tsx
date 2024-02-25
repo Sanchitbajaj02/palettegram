@@ -5,16 +5,21 @@ import VerificationComponent from "@/components/pages/auth/verification";
 import Footer from "@/components/core/footer";
 import Image from "next/image";
 import { ButtonLong } from "@/components/core/buttons";
+
 type VerifyProps = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
 export default function VerifyPage({ searchParams }: VerifyProps) {
   const { userId, secret, expire } = searchParams;
-
+ 
+  
+  
   if (userId === undefined && secret === undefined) {
     return (
       <>
+     
+
         <section className="max-w-screen-md mx-auto h-screen flex justify-center items-center">
           <div className="card">
             <div className="flex flex-col gap-4 items-center ">
