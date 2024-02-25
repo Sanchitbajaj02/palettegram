@@ -23,7 +23,7 @@ const Feed = () => {
 
   return (
     <main className="flex sm:flex-row flex-col max-w-screen-lg mx-auto pt-8 content-center px-2">
-      <div className="flex-1 sticky flex sm:flex-col items-center gap-8 sm:space-y-20 ">
+      <section className="flex-1 sticky flex sm:flex-col items-center sm:space-y-20">
         <Link
           href={`/user/${userId}`}
           className="w-12 h-12 sm:fixed rounded-full flex items-center justify-center shadow-md dark:shadow-gray-600 transition-all duration-300 text-black dark:text-white hover:text-primary-light border hover:border-primary-light"
@@ -37,16 +37,16 @@ const Feed = () => {
         >
           <Bookmark size={20} />
         </Link>
-      </div>
-      <div className="flex-[5] mt-4 sm:mt-0">
+      </section>
+      <section className="flex-[5] mt-4 sm:mt-0">
         <CreatePost />
         {/* <Suspense fallback={<Loader />}> */}
         <Posts />
         {/* </Suspense> */}
-      </div>
-      <div className="flex-[2] hidden md:block">
+      </section>
+      <section className="flex-[2] hidden md:block">
         <TrendingFeed />
-      </div>
+      </section>
     </main>
   );
 };
