@@ -5,11 +5,6 @@ import { toastify } from "@/helper/toastify";
 
 export default function HowToSetup_dev() {
   const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
 
   const handleCopyClick = async (text: string) => {
     try {
@@ -23,12 +18,8 @@ export default function HowToSetup_dev() {
 
   return (
     <div className="relative">
-      <motion.div
-        className="fixed bottom-2 left-0 right-0 h-2 bg-primary origin-center"
-        style={{ scaleX }}
-      />
       <section className="md:max-w-screen-lg mx-auto">
-        <h4 className="p-4 my-5 text-2xl md:text-4xl text-center font-extrabold tracking-wide text-black dark:text-white ">
+        <h4 className="p-4 my-5 text-xl md:text-3xl text-center font-bold tracking-wide text-black dark:text-white">
           If you want to setup project locally, follow these steps
         </h4>
         <motion.div
@@ -383,9 +374,9 @@ export default function HowToSetup_dev() {
             alt="add detail"
           />
         </motion.div>
-        <p className="p-4 my-5 text-3xl md:text-4xl text-center font-extrabold tracking-wide text-black dark:text-white ">
-          Congratulations🎉, you have made a PR to the palettegram. Wait for your submission to be
-          accepted and your PR to be merged by a maintainer.
+        <p className="p-4 my-5 text-xl md:text-3xl text-center font-extrabold tracking-wide text-black dark:text-white">
+          Congratulations🎉, you have made a PR to the palettegram. <br /> Wait for your submission
+          to be accepted and your PR to be merged by a maintainer.
         </p>
       </section>
     </div>

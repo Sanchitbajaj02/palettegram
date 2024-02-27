@@ -1,16 +1,9 @@
 import Image from "next/image";
-import { motion, useScroll, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
 import { Copy } from "lucide-react";
 import { toastify } from "@/helper/toastify";
 
 export default function HowToSetup_Appwrite() {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
-
   const handleCopyClick = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
@@ -22,14 +15,10 @@ export default function HowToSetup_Appwrite() {
   };
 
   return (
-    <div className="relative">
-      <motion.div
-        className="fixed bottom-2 left-0 right-0 h-2 bg-primary origin-center"
-        style={{ scaleX }}
-      />
-      <section className="md:max-w-screen-lg mx-auto">
+    <section className="relative">
+      <div className="max-w-screen-lg mx-auto">
         <div className="mt-10">
-          <h4 className="p-4 my-5 text-2xl md:text-4xl text-center font-extrabold tracking-wide text-black dark:text-white ">
+          <h4 className="p-4 my-5 text-xl md:text-3xl text-center font-bold tracking-wide text-black dark:text-white">
             If you want to setup Appwrite instance, follow these steps
           </h4>
           <h5 className="mt-10 text-lg font-semibold leading-9">
@@ -266,10 +255,10 @@ cp appwrite-gen/.env.example appwrite-gen/.env`}
           </h5>
         </motion.div>
 
-        <p className="p-4 my-5 text-3xl md:text-4xl text-center font-extrabold tracking-wide text-black dark:text-white ">
+        <p className="p-4 my-5 text-xl md:text-3xl text-center font-extrabold tracking-wide text-black dark:text-white">
           🫡 All set start coding
         </p>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }

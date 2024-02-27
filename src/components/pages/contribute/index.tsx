@@ -1,10 +1,10 @@
 "use client";
 import { useCallback } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { motion } from "framer-motion";
 import Footer from "@/components/core/footer";
 import Navbar from "@/components/core/navbar";
 import { Forking, AppwriteSetup, DevSetup } from "@/components/core/contributionSections";
+import { motion, useScroll, useSpring } from "framer-motion";
 
 // Component to render the contribution guide with dynamic tabs
 export default function Contribute() {
@@ -13,22 +13,29 @@ export default function Contribute() {
   const pathname = usePathname();
   // Dynamic tab rendering based on currentTab state
 
-  const currentTab = searchParams.get("currentTab");
+  const currentTab = searchParams.get("currentTab") ?? "forkingandclone";
 
   const loadComponent = [
     {
       name: "forkingandclone",
-      toShow: "How to Fork and Clone",
+      toShow: "Fork and Clone",
     },
     {
       name: "localdevelopmentsetup",
-      toShow: "How to setup locally",
+      toShow: "Local Setup",
     },
     {
       name: "appwriteSetup",
-      toShow: "How to do Appwrite setup",
+      toShow: "Appwrite setup",
     },
   ];
+
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -44,8 +51,8 @@ export default function Contribute() {
     // Main render block
     <>
       <Navbar />
-      <div className="mx-2">
-        <section className="flex flex-col text-center md:flex-row justify-center max-w-screen-lg mx-auto px-auto ">
+      <section className=" max-w-screen-lg mx-auto px-auto my-4">
+        <article className="flex flex-col text-center md:flex-row justify-center gap-4">
           {loadComponent.map((compo, idx) => {
             return (
               <motion.div
@@ -57,19 +64,23 @@ export default function Contribute() {
                 onClick={() => {
                   router.push(pathname + "?" + createQueryString("currentTab", compo.name));
                 }}
-                className={`cursor-pointer px-2 py-3 border-b-[1px] border-gray-800  ${
-                  currentTab == compo.name ? `border-b-4 border-primary` : ""
+                className={`cursor-pointer p-4 border-b-2 border-gray-600 tex-xl font-medium  ${
+                  currentTab == compo.name ? `border-primary` : ""
                 } `}
               >
                 <p>{compo.toShow}</p>
               </motion.div>
             );
           })}
-        </section>
-        <section>
+        </article>
+        <article>
           <Tabs currentTab={currentTab || ""} />
-        </section>
-      </div>
+          <motion.div
+            className="fixed bottom-0 left-0 right-0 h-2 bg-primary origin-center"
+            style={{ scaleX }}
+          />
+        </article>
+      </section>
       <Footer />
     </>
   );
