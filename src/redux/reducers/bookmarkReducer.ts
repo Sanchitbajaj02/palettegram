@@ -5,8 +5,8 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { BookmarkInitType, Bookmark } from "@/types/index.d";
 
 const initialState: any = {
-  bookmark: [],
-  accountId: "",
+  postId: [],
+  userId: "",
   error: false,
   loading: false,
 };
@@ -17,8 +17,8 @@ const bookmarkSlice = createSlice({
   reducers: {
     saveBookmarkToStore: (state, action) => {
       state.loading = true;
-      state.accountId = action.payload.accountId;
-      state.bookmark = action.payload.bookmark;
+      state.userId = action.payload.userId;
+      state.postId = action.payload.postId;
       state.error = false;
       state.loading = false;
     },

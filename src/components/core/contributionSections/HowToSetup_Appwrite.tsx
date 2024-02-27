@@ -32,7 +32,7 @@ export default function HowToSetup_Appwrite() {
           <h4 className="p-4 my-5 text-2xl md:text-4xl text-center font-extrabold tracking-wide text-black dark:text-white ">
             If you want to setup Appwrite instance, follow these steps
           </h4>
-          <h5 className="my-4 text-lg font-semibold leading-10">
+          <h5 className="mt-10 text-lg font-semibold leading-9">
             {" "}
             <span className="text-primary-light"> Step 1:</span> Creating an account on Appwrite
             Cloud.
@@ -50,7 +50,7 @@ export default function HowToSetup_Appwrite() {
           }}
           className="my-2"
         >
-          <h5 className="my-4 text-lg font-semibold leading-10">
+          <h5 className="mt-4 mb-2 text-lg font-semibold leading-9">
             <span className="text-primary-light"> Step 2:</span> Create a new project with any name
             you want and choose web as a platform.
           </h5>
@@ -96,7 +96,7 @@ export default function HowToSetup_Appwrite() {
           }}
           className="my-2"
         >
-          <h5 className="my-4 text-lg font-semibold leading-9">
+          <h5 className="mt-10 mb-2 text-lg font-semibold leading-9">
             <span className="text-primary-light"> Step 3:</span>
             Copy<span className="bg-primary m-1 p-[1px] rounded ">.env.example</span> file to{" "}
             <span className="bg-primary mx-1 p-1 rounded ">.env.local</span> and
@@ -130,7 +130,7 @@ cp appwrite-gen/.env.example appwrite-gen/.env`}
           }}
           className="my-2"
         >
-          <h5 className="my-4 text-lg font-semibold leading-10">
+          <h5 className="mt-10 mb-2 text-lg font-semibold leading-9">
             <span className="text-primary-light"> Step 4: </span> Go to settings and copy your
             project id and paste it in{" "}
             <span className="bg-primary mx-1 p-1 rounded "> .env.local </span> file as well as in{" "}
@@ -164,7 +164,7 @@ cp appwrite-gen/.env.example appwrite-gen/.env`}
           }}
           className="my-2"
         >
-          <h5 className="my-4 text-lg font-semibold leading-10">
+          <h5 className="mt-10 mb-2 text-lg font-semibold leading-9">
             <span className="text-primary-light"> Step 5:</span>
             While on the settings page click on View API Keys button
           </h5>
@@ -189,7 +189,7 @@ cp appwrite-gen/.env.example appwrite-gen/.env`}
           }}
           className="my-2"
         >
-          <h5 className="my-4 text-lg font-semibold leading-10">
+          <h5 className="mt-10 mb-2 text-lg font-semibold leading-9">
             <span className="text-primary-light"> Step 6:</span>
             Create an <span className="bg-primary mx-1 p-1 rounded "> API key </span> with any name
             you like, set the scopes to all and copy it value and paste it in{" "}
@@ -231,7 +231,7 @@ cp appwrite-gen/.env.example appwrite-gen/.env`}
           }}
           className="my-2"
         >
-          <h5 className="my-4 text-lg font-semibold leading-10">
+          <h5 className="mt-10 mb-2 text-lg font-semibold leading-9">
             <span className="text-primary-light"> Step 7:</span>
             Setup your database with the command:
           </h5>
@@ -256,7 +256,7 @@ cp appwrite-gen/.env.example appwrite-gen/.env`}
           }}
           className="my-2"
         >
-          <h5 className="my-4 text-lg font-semibold leading-10">
+          <h5 className="mt-10 mb-2 text-lg font-semibold leading-9">
             <span className="text-primary-light"> Step 8:</span>
             Fill in the rest of <span className="bg-primary mx-1 p-1 rounded ">
               {" "}
