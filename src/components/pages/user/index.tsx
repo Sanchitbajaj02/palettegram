@@ -17,7 +17,7 @@ export default function User({ userId }: { userId: string }) {
 
   return (
     <>
-      <main className="flex sm:flex-row flex-col max-w-screen-lg mx-auto pt-8 content-center  ">
+      <main className="flex sm:flex-row flex-col max-w-screen-lg mx-auto pt-8 content-center">
         <section className="flex-[5] h-full mt-4 sm:mt-0 px-4">
           <div className="my-4 flex gap-2 items-center">
             <ArrowLeft
