@@ -169,16 +169,6 @@
       "documentSecurity": false,
       "attributes": [
         {
-          "key": "accountId",
-          "type": "string",
-          "status": "available",
-          "error": "",
-          "required": true,
-          "array": false,
-          "size": 100,
-          "default": null
-        },
-        {
           "key": "postTitle",
           "type": "string",
           "status": "available",
@@ -209,23 +199,14 @@
           "default": null
         },
         {
-          "key": "likes",
-          "type": "string",
+          "key": "likesCount",
+          "type": "integer",
           "status": "available",
           "error": "",
           "required": false,
-          "array": true,
-          "size": 30,
-          "default": null
-        },
-        {
-          "key": "comments",
-          "type": "string",
-          "status": "available",
-          "error": "",
-          "required": false,
-          "array": true,
-          "size": 500,
+          "array": false,
+          "min": 0,
+          "max": 100000,
           "default": null
         },
         {
@@ -236,18 +217,34 @@
           "required": false,
           "array": false,
           "default": true
-        }
-      ],
-      "indexes": [
+        },
         {
-          "key": "idx_accountId",
-          "type": "fulltext",
+          "key": "userId",
+          "type": "relationship",
           "status": "available",
           "error": "",
-          "attributes": ["accountId"],
-          "orders": ["ASC"]
+          "required": false,
+          "array": false,
+          "relatedCollection": "651d85ff826413d8f258",
+          "relationType": "manyToOne",
+          "twoWay": false,
+          "twoWayKey": "651d86daa59be4aad058",
+          "onDelete": "setNull",
+          "side": "parent"
+        },
+        {
+          "key": "commentsCount",
+          "type": "integer",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "min": 0,
+          "max": 100000,
+          "default": null
         }
-      ]
+      ],
+      "indexes": []
     },
     {
       "$id": "6559b707984a4f046a08",
@@ -265,44 +262,31 @@
       "documentSecurity": false,
       "attributes": [
         {
-          "key": "accountId",
-          "type": "string",
+          "key": "userId",
+          "type": "relationship",
           "status": "available",
           "error": "",
-          "required": true,
+          "required": false,
           "array": false,
-          "size": 100,
-          "default": null
+          "relatedCollection": "651d85ff826413d8f258",
+          "relationType": "oneToOne",
+          "twoWay": false,
+          "twoWayKey": "6559b707984a4f046a08",
+          "onDelete": "setNull",
+          "side": "parent"
         },
         {
-          "key": "bookmark",
+          "key": "postId",
           "type": "string",
           "status": "available",
           "error": "",
           "required": false,
           "array": true,
-          "size": 100,
+          "size": 1000,
           "default": null
         }
       ],
-      "indexes": [
-        {
-          "key": "idx_accountId",
-          "type": "fulltext",
-          "status": "available",
-          "error": "",
-          "attributes": ["accountId"],
-          "orders": ["ASC"]
-        },
-        {
-          "key": "idx_bookmark",
-          "type": "fulltext",
-          "status": "available",
-          "error": "",
-          "attributes": ["bookmark"],
-          "orders": ["ASC"]
-        }
-      ]
+      "indexes": []
     },
     {
       "$id": "65acb78f522ef1f69f60",
@@ -320,6 +304,20 @@
       "documentSecurity": false,
       "attributes": [
         {
+          "key": "userId",
+          "type": "relationship",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "relatedCollection": "651d85ff826413d8f258",
+          "relationType": "oneToMany",
+          "twoWay": false,
+          "twoWayKey": "65acb78f522ef1f69f60",
+          "onDelete": "setNull",
+          "side": "parent"
+        },
+        {
           "key": "postId",
           "type": "relationship",
           "status": "available",
@@ -327,22 +325,11 @@
           "required": false,
           "array": false,
           "relatedCollection": "651d86daa59be4aad058",
-          "relationType": "oneToOne",
+          "relationType": "oneToMany",
           "twoWay": false,
           "twoWayKey": "65acb78f522ef1f69f60",
-          "onDelete": "cascade",
+          "onDelete": "setNull",
           "side": "parent"
-        },
-        {
-          "key": "likeCount",
-          "type": "integer",
-          "status": "available",
-          "error": "",
-          "required": true,
-          "array": false,
-          "min": 0,
-          "max": 20000,
-          "default": null
         }
       ],
       "indexes": []
@@ -394,6 +381,38 @@
         }
       ],
       "indexes": []
+    },
+    {
+      "$id": "65cbb76c6ffb060ac5f6",
+      "$createdAt": "2024-02-13T18:39:40.459+00:00",
+      "$updatedAt": "2024-02-17T14:53:26.625+00:00",
+      "$permissions": [
+        "create(\"users\")",
+        "read(\"users\")",
+        "update(\"users\")",
+        "delete(\"users\")"
+      ],
+      "databaseId": "651d85ea69357206cfe5",
+      "name": "comments",
+      "enabled": true,
+      "documentSecurity": false,
+      "attributes": [
+        {
+          "key": "postId",
+          "type": "relationship",
+          "status": "available",
+          "error": "",
+          "required": false,
+          "array": false,
+          "relatedCollection": "651d86daa59be4aad058",
+          "relationType": "manyToOne",
+          "twoWay": false,
+          "twoWayKey": "65cbb76c6ffb060ac5f6",
+          "onDelete": "setNull",
+          "side": "parent"
+        }
+      ],
+      "indexes": []
     }
   ],
   "buckets": [
@@ -410,8 +429,8 @@
       "fileSecurity": false,
       "name": "bucky",
       "enabled": true,
-      "maximumFileSize": 5242880,
-      "allowedFileExtensions": [],
+      "maximumFileSize": 50000000,
+      "allowedFileExtensions": ["jpg", "png", "svg"],
       "compression": "none",
       "encryption": true,
       "antivirus": true

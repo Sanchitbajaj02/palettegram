@@ -1,12 +1,12 @@
-import { Url } from "next/dist/shared/lib/router/router";
+import { userCollectionDB } from "./auth";
 
 export type PostInstanceType = {
-  accountId: string;
+  userId: userCollectionDB | string;
   postTitle: string;
   postImages: string[];
   colors?: string | null;
-  comments?: string[];
-  likes: string[];
+  commentsCount?: number;
+  likesCount: number;
   isActive: boolean;
   $id?: string;
   $collectionId?: string;
@@ -15,17 +15,6 @@ export type PostInstanceType = {
 
 export type PostInitStateType = {
   posts: PostInstanceType[];
-  error: boolean;
-  loading: boolean;
-};
-
-export type userDetail = {
-  creds: {
-    accountId: string;
-    email: string;
-    createdAt: string;
-    isVerified: boolean;
-  };
   error: boolean;
   loading: boolean;
 };
@@ -60,8 +49,8 @@ export type UserFromDB = {
 
 export type FormatOnType = "seconds" | "minutes" | "hours" | "days";
 export type UserBookMarkType = {
-  accountId: string;
-  bookmark: string[] | undefined;
+  userId: string;
+  postId: string[] | undefined;
   error: boolean;
   loading: boolean;
 };

@@ -4,7 +4,6 @@ import {
   ID,
   Query,
   palettegramDB,
-  usersCollection,
   postsCollection,
   postBucketStorage,
 } from "./appwrite.config";
@@ -29,16 +28,23 @@ const savePostToDb = async (data: any) => {
 
 /**
  * @description get all posts present in the database
- * @returns {Object} posts db
+ * @returns posts
  */
 const getAllPosts = async () => {
   try {
-    const tweets = await db.listDocuments(palettegramDB, postsCollection);
-    if (!tweets) {
+    if (!palettegramDB || !postsCollection) {
+      throw new Error("Either databaseId or collectionId is not provided");
+    }
+
+    const posts = await db.listDocuments(palettegramDB, postsCollection, [
+      Query.orderDesc("$createdAt"),
+    ]);
+
+    if (!posts) {
       throw new Error("Error fetching data");
     }
 
-    return tweets;
+    return posts;
   } catch (error: any) {
     console.log(error);
   }
@@ -67,13 +73,16 @@ const getSinglePost = async (id: string) => {
  */
 const getAllUserPosts = async (userId: string) => {
   try {
-    const tweets = await db.listDocuments(palettegramDB, postsCollection, [
+    const allPosts = await db.listDocuments(palettegramDB, postsCollection, [
       Query.equal("userId", userId),
+      Query.orderDesc("$createdAt"),
     ]);
 
-    if (tweets) {
-      return tweets;
+    if (!allPosts) {
+      throw new Error("could not find posts");
     }
+
+    return allPosts?.documents;
   } catch (error: any) {
     console.log(error);
   }

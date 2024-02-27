@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { ArrowLeftCircle, Loader } from "react-feather";
+import { ArrowLeftCircle, Loader } from "lucide-react";
 import { parseCookies } from "nookies";
 import { toastify } from "@/helper/toastify";
 import { saveImage, updateImageURL } from "@/backend/updateProfile.api";

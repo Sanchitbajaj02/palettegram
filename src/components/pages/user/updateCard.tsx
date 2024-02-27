@@ -1,4 +1,4 @@
-import { ArrowLeftCircle } from "react-feather";
+import { ArrowLeftCircle } from "lucide-react";
 import React, { ChangeEvent, useState } from "react";
 import { motion } from "framer-motion";
 import { updateUserDetail } from "@/backend/updateProfile.api";

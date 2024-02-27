@@ -16,12 +16,12 @@ type Prop = {
 
 const PostDisplay = ({ params: { id } }: Prop) => {
   const [post, setPost] = useState<PostInstanceType>({
-    accountId: "",
+    userId: "",
     postTitle: "",
     postImages: [],
-    colors: [],
-    comments: [],
-    likes: [],
+    colors: "",
+    commentsCount: 0,
+    likesCount: 0,
     $collectionId: "",
     $createdAt: "",
     $id: "",
@@ -34,19 +34,18 @@ const PostDisplay = ({ params: { id } }: Prop) => {
         const res = await getSinglePost(id);
         if (res) {
           setPost({
-            accountId: res.accountId,
+            userId: res.userId?.$id,
             postTitle: res.postTitle,
             postImages: res.postImages,
             colors: res.colors || [],
-            comments: res.comments || [],
-            likes: res.likes,
+            commentsCount: res.commentCount || [],
+            likesCount: res.likesCount,
             $id: res.$id || "",
             $collectionId: res.$collectionId || "",
             $createdAt: res.$createdAt || "",
             isActive: res.isActive,
           });
         }
-        console.log("display", res);
       } catch (error: any) {
         console.log("error while fetching single post ", error.message);
       }

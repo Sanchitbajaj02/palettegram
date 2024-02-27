@@ -1,12 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Briefcase, Link2, Mail, MapPin, ArrowLeft, Edit, Edit3, Calendar } from "react-feather";
+import { Briefcase, Link2, Mail, MapPin, ArrowLeft, Edit, Edit3, Calendar } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { parseCookies } from "nookies";
 
-import { getSingleUser } from "@/backend/auth.api";
-
+/* import { getSingleUser } from "@/backend/auth.api";
+ */
 import TrendingFeed from "@/components/core/trendingFeed";
 import Footer from "@/components/core/footer";
 import { ButtonLong } from "@/components/core/buttons";
@@ -16,43 +16,30 @@ import ImageUpload from "./imageUpload";
 import UpdateCard from "./updateCard";
 import { Models } from "appwrite";
 
+import { useSelector } from "react-redux";
+import { userCollectionDB } from "@/types/auth";
+
 type sizeType = {
   isbannerImage: boolean;
   intialImageUrl: string;
   title: string;
 };
 
-export default function User({ accountId }: { accountId: string }) {
+export default function User({ userId }: { userId: string }) {
   const [user, setUser] = useState<Models.Document>();
   const router = useRouter();
   const [edit, setEdit] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [profileUpdate, setProfileUpdate] = useState(false);
   const [size, setSize] = useState<sizeType>();
-
   const cookies = parseCookies();
 
-  const currenUserID: string = cookies["accountId"];
-
-  const getUserDetail = async (userId: string) => {
-    try {
-      const resp: any = await getSingleUser(userId);
-      if (!resp) throw new Error("Unable  to get user-details, retry!");
-      setUser(resp.documents[0]);
-      currenUserID === userId ? setEdit(true) : setEdit(false);
-    } catch (error: any) {
-      console.log(error.message);
-    }
-  };
-
   useEffect(() => {
-    /*  getSingleUser(accountId)
-      .then((resp: any) => {
-        setUser(resp);
-      })
-      .catch(console.log); */
-    getUserDetail(accountId);
-  }, [accountId]);
+    const currentUserID: string = cookies["userId"];
+    if (currentUserID) setEdit(true);
+  }, []);
+
+  const userAuth: userCollectionDB = useSelector((state: any) => state.auth.data);
 
   const handlePhotoClick = ({ isbannerImage, title, intialImageUrl }: sizeType) => {
     setSize({
@@ -164,7 +151,9 @@ export default function User({ accountId }: { accountId: string }) {
                 </aside>
                 <aside className="flex items-center gap-2">
                   <MapPin size={16} />
-                  <p className="text-sm">{user && user?.location ? user?.location : "India "} </p>
+                  <p className="text-sm">
+                    {userAuth && userAuth?.location ? userAuth?.location : "India "}{" "}
+                  </p>
                 </aside>
                 <aside className="flex items-center gap-2">
                   <Link2 size={16} />
@@ -197,7 +186,7 @@ export default function User({ accountId }: { accountId: string }) {
 
           <div className="h-px w-full mt-6 bg-neutral-500 rounded-2xl" />
 
-          <UserPosts userName={user! && user?.fullName!} userId={accountId} />
+          {userId && <UserPosts userId={userId} />}
         </section>
         <div className="flex-[2] hidden md:block rounded-md">
           <TrendingFeed />

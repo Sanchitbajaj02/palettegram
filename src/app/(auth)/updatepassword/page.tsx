@@ -1,4 +1,3 @@
-import React from "react";
 import UpdatePasswordComponent from "@/components/pages/auth/updatepassword";
 import Footer from "@/components/core/footer";
 
