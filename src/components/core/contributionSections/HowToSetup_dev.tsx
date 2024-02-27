@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { Copy } from "react-feather";
+import { Copy } from "lucide-react";
 import { toastify } from "@/helper/toastify";
 
 export default function HowToSetup_dev() {
