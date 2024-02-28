@@ -28,6 +28,9 @@ export {
   usersCollection,
   postsCollection,
   bookmarksCollection,
+  contactsCollection,
+  likesCollection,
+  commentsCollection,
   postBucketStorage,
-  userBucketStorage
+  userBucketStorage,
 };

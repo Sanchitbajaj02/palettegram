@@ -29,11 +29,15 @@ export default function UserPosts({ userId }: { userId: string }) {
     }
   }
 
+  console.log(userId);
+
   const [userPosts, setUserPosts] = useState<Models.Document[]>([]);
 
   useEffect(() => {
     getAllUserPosts(userId)
       .then((allPosts: Models.Document[] | undefined) => {
+        console.log("posts inside api", allPosts);
+
         if (allPosts && allPosts.length > 0) {
           setUserPosts(allPosts);
         }
@@ -46,7 +50,9 @@ export default function UserPosts({ userId }: { userId: string }) {
     return () => {
       console.log("cleanup");
     };
-  }, [userId]);
+  }, []);
+
+  console.log("all user posts:", userPosts);
 
   return (
     <>

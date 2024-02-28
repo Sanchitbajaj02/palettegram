@@ -130,7 +130,7 @@
           "error": "",
           "required": false,
           "array": false,
-          "size": 10,
+          "size": 100,
           "default": null
         }
       ],

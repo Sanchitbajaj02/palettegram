@@ -26,18 +26,13 @@ type sizeType = {
 };
 
 export default function User({ userId }: { userId: string }) {
-  const [user, setUser] = useState<Models.Document>();
+  const [user, setUser] = useState<any>();
   const router = useRouter();
   const [edit, setEdit] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [profileUpdate, setProfileUpdate] = useState(false);
   const [size, setSize] = useState<sizeType>();
   const cookies = parseCookies();
-
-  useEffect(() => {
-    const currentUserID: string = cookies["userId"];
-    if (currentUserID) setEdit(true);
-  }, []);
 
   const userAuth: userCollectionDB = useSelector((state: any) => state.auth.data);
 
@@ -49,6 +44,13 @@ export default function User({ userId }: { userId: string }) {
     });
     setHovered(true);
   };
+
+  useEffect(() => {
+    const currentUserID: string = cookies["userId"];
+    if (currentUserID) setEdit(true);
+
+    if (userAuth) setUser(userAuth);
+  }, []);
 
   return (
     <>
@@ -72,7 +74,7 @@ export default function User({ userId }: { userId: string }) {
           </div>
           <div className="h-52 w-full relative ">
             <img
-              src={user?.bannerURL! || "/assets/pinkCover.jpg"}
+              src={user && user?.bannerURL ? user?.bannerURL! : "https://placehold.co/1200x300"}
               alt="user Cover Photo"
               className="object-center object-cover w-full h-48 rounded-md"
             />
@@ -83,7 +85,8 @@ export default function User({ userId }: { userId: string }) {
                   handlePhotoClick({
                     isbannerImage: true,
                     title: "Cover Photo",
-                    intialImageUrl: user?.bannerURL ?? "/assets/pinkCover.jpg",
+                    intialImageUrl:
+                      user && user?.bannerURL ? user?.bannerURL! : "https://placehold.co/1200x300",
                   })
                 }
                 color="black"
@@ -96,14 +99,17 @@ export default function User({ userId }: { userId: string }) {
             <div className="flex justify-between items-end">
               <div className=" relative inline-block">
                 <img
-                  src={user?.avatarURL ?? "/assets/user.png"}
+                  src={user && user?.avatarURL ? user?.avatarURL! : "https://placehold.co/100x100"}
                   alt="user"
                   onClick={() => {
                     edit &&
                       handlePhotoClick({
                         isbannerImage: false,
                         title: "Profile Photo",
-                        intialImageUrl: user?.avatarURL ? user?.avatarURL! : "/assets/user.png",
+                        intialImageUrl:
+                          user && user?.avatarURL
+                            ? user?.avatarURL!
+                            : "https://placehold.co/100x100",
                       });
                   }}
                   className=" w-[135px] h-[135px] relative inline-block border-4 border-white dark:border-slate-800 rounded-full object-cover cursor-pointer"
@@ -137,49 +143,45 @@ export default function User({ userId }: { userId: string }) {
               </div>
 
               <p className="text-base">
-                {user && user?.about
-                  ? user?.about
-                  : " Software-developer | Python | MERN | Next-Tailwind | Opensource"}
+                {user?.about ? user?.about : "Professional palettegram user"}
               </p>
 
               <div className="grid grid-cols-2 gap-4 text-sm text-gray-500 dark:text-gray-400">
                 <aside className="flex items-center gap-2">
                   <Briefcase size={16} />
                   <p className="text-sm">
-                    {user && user?.profession ? user?.profession : "Software-developer"}
+                    {user && user?.username ? user?.profession : "Software-developer"}
                   </p>
                 </aside>
                 <aside className="flex items-center gap-2">
                   <MapPin size={16} />
                   <p className="text-sm">
-                    {userAuth && userAuth?.location ? userAuth?.location : "India "}{" "}
+                    {user && user.location ? user.location : "Work from home"}
                   </p>
                 </aside>
                 <aside className="flex items-center gap-2">
                   <Link2 size={16} />
                   <Link href={"/#link"} className="hover:underline text-sm">
-                    {user && user?.userLink ? user?.userLink : "https://www.google.com"}
+                    {user?.userLink ? user.userLink : "https://www.google.com"}
                   </Link>
                 </aside>
                 <aside className="flex items-center gap-2">
                   <Calendar size={16} />
                   <p className="text-sm">
                     Joined on{" "}
-                    {user && user?.$createdAt
+                    {user && user.$createdAt
                       ? new Date(user.$createdAt).toLocaleDateString("en-US", {
                           day: "numeric",
                           month: "short",
                           year: "numeric",
                         })
-                      : "8 jan 2012"}
+                      : new Date().toLocaleDateString("en-US", {
+                          day: "numeric",
+                          month: "short",
+                          year: "numeric",
+                        })}
                   </p>
                 </aside>
-                {/*     <aside className="flex items-center gap-2">
-                  <Smile size={16} />
-                  <p className="text-sm">
-                    <span className="font-bold">9500 </span>followers
-                  </p>
-                </aside> */}
               </div>
             </article>
           </section>

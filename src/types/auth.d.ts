@@ -15,6 +15,7 @@ export type userCollectionDB = {
   about?: string;
   userLink?: string;
   location?: string;
+  profession?: string;
   $createdAt: string;
   $updatedAt: string;
 };

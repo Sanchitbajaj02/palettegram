@@ -133,8 +133,6 @@ export default function SinglePost({
   const relationedUser: userCollectionDB | null =
     singlePost && typeof singlePost.userId !== "string" ? singlePost.userId : null;
 
-  console.log("relationedUser:", relationedUser);
-
   return (
     <div
       className={` ${
