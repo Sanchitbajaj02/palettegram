@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { toastify } from "@/helper/toastify";
 import { ButtonLong } from "@/components/core/buttons";
 import { setCookie } from "nookies";
-import useWindowSize from "react-use/lib/useWindowSize";
+import {useWindowSize} from "react-use";
 import Confetti from "react-confetti";
 
 import Image from "next/image";

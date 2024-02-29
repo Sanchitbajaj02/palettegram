@@ -16,7 +16,6 @@ import { getBookmarks } from "@/backend/bookmarks.api";
 import { logUserOut, saveUserToStore } from "@/redux/reducers/authReducer";
 import { getPosts } from "@/redux/reducers/postsReducer";
 import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
-import { userCollectionDB } from "@/types/auth";
 import { parseCookies } from "nookies";
 
 const Navbar = ({ starCount }: { starCount?: number }) => {

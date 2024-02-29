@@ -1,7 +1,7 @@
 "use client";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { setCookie, destroyCookie } from "nookies";
+import { destroyCookie } from "nookies";
 import { userCollectionDB, userDetails } from "@/types/auth.d";
 
 const initialState: userDetails = {
@@ -17,13 +17,6 @@ export const registerReducer: any = createSlice({
     saveUserToStore: (state, action: PayloadAction<userCollectionDB>) => {
       state.loading = true;
       state.data = action.payload;
-
-      setCookie(null, "accountId", action.payload.accountId);
-      setCookie(null, "isVerified", String(action.payload.isVerified));
-
-      if (action.payload.$id) {
-        setCookie(null, "userId", action.payload.$id);
-      }
       state.error = false;
       state.loading = false;
     },
