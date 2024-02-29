@@ -14,6 +14,7 @@ import { register } from "@/backend/auth.api";
 // Icons
 import { ArrowLeftCircle, Loader, Eye, EyeOff } from "lucide-react";
 import { userCollectionDB } from "@/types/auth";
+import { setCookie } from "nookies";
 
 const nameRegex: RegExp = /^[\sa-zA-Z]+$/;
 const passwordRegex: RegExp = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@_])[A-Za-z\d@_]{6,16}$/;
@@ -74,6 +75,13 @@ export default function RegisterComponent() {
         $createdAt: resp.$createdAt,
         $updatedAt: resp.$updatedAt,
       };
+
+      setCookie(null, "accountId", payload?.accountId);
+      setCookie(null, "isVerified", String(payload?.isVerified));
+
+      if (payload?.$id) {
+        setCookie(null, "userId", payload?.$id);
+      }
 
       dispatch(saveUserToStore(payload));
 
