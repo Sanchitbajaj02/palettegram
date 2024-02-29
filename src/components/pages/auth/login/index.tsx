@@ -15,6 +15,7 @@ import { login, loginWithGoogle } from "@/backend/auth.api";
 
 // Icons
 import { userCollectionDB } from "@/types/auth";
+import { setCookie } from "nookies";
 
 export default function LoginComponent() {
   const [isLoading, setIsLoading] = useState(false);
@@ -63,6 +64,13 @@ export default function LoginComponent() {
           $createdAt: resp.$createdAt,
           $updatedAt: resp.$updatedAt,
         };
+
+        setCookie(null, "accountId", payload?.accountId);
+        setCookie(null, "isVerified", String(payload?.isVerified));
+
+        if (payload?.$id) {
+          setCookie(null, "userId", payload?.$id);
+        }
 
         dispatch(saveUserToStore(payload));
         toastify("Login Successful", "success");
