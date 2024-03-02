@@ -84,7 +84,7 @@ const updateUserDetail = async (
     profession,
     location,
     userlink,
-  }: { fullName: string; about: string; profession: string; location: string; userlink: string }
+  }: { fullName: string; about: string; profession: string; location: string; userlink: string },
 ) => {
   const userField = await getUserFieldByAccountId(userId);
   let docId = userField?.documents[0].$id;

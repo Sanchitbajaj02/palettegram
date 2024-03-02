@@ -1,12 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { Briefcase, Link2, Mail, MapPin, ArrowLeft, Edit, Edit3, Calendar } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { parseCookies } from "nookies";
-
-/* import { getSingleUser } from "@/backend/auth.api";
- */
+import Loader from "@/app/loading";
 import TrendingFeed from "@/components/core/trendingFeed";
 import Footer from "@/components/core/footer";
 import { ButtonLong } from "@/components/core/buttons";
@@ -14,7 +13,6 @@ import { ButtonLong } from "@/components/core/buttons";
 import UserPosts from "./userPosts";
 import ImageUpload from "./imageUpload";
 import UpdateCard from "./updateCard";
-import { Models } from "appwrite";
 
 import { useSelector } from "react-redux";
 import { userCollectionDB } from "@/types/auth";
@@ -50,7 +48,9 @@ export default function User({ userId }: { userId: string }) {
     if (currentUserID) setEdit(true);
 
     if (userAuth) setUser(userAuth);
-  }, []);
+  }, [cookies, userAuth]);
+
+  console.log("param userid:", user);
 
   return (
     <>
@@ -73,10 +73,12 @@ export default function User({ userId }: { userId: string }) {
             <h1 className="text-black dark:text-white text-base font-semibold">Go Back</h1>
           </div>
           <div className="h-52 w-full relative ">
-            <img
+            <Image
               src={user && user?.bannerURL ? user?.bannerURL! : "https://placehold.co/1200x300"}
               alt="user Cover Photo"
               className="object-center object-cover w-full h-48 rounded-md"
+              width={1200}
+              height={300}
             />
 
             {edit && (
@@ -98,7 +100,7 @@ export default function User({ userId }: { userId: string }) {
           <section className="-mt-20 px-2">
             <div className="flex justify-between items-end">
               <div className=" relative inline-block">
-                <img
+                <Image
                   src={user && user?.avatarURL ? user?.avatarURL! : "https://placehold.co/100x100"}
                   alt="user"
                   onClick={() => {
@@ -112,6 +114,8 @@ export default function User({ userId }: { userId: string }) {
                             : "https://placehold.co/100x100",
                       });
                   }}
+                  width={1200}
+                  height={300}
                   className=" w-[135px] h-[135px] relative inline-block border-4 border-white dark:border-slate-800 rounded-full object-cover cursor-pointer"
                 />
               </div>
@@ -148,24 +152,6 @@ export default function User({ userId }: { userId: string }) {
 
               <div className="grid grid-cols-2 gap-4 text-sm text-gray-500 dark:text-gray-400">
                 <aside className="flex items-center gap-2">
-                  <Briefcase size={16} />
-                  <p className="text-sm">
-                    {user && user?.username ? user?.profession : "Software-developer"}
-                  </p>
-                </aside>
-                <aside className="flex items-center gap-2">
-                  <MapPin size={16} />
-                  <p className="text-sm">
-                    {user && user.location ? user.location : "Work from home"}
-                  </p>
-                </aside>
-                <aside className="flex items-center gap-2">
-                  <Link2 size={16} />
-                  <Link href={"/#link"} className="hover:underline text-sm">
-                    {user?.userLink ? user.userLink : "https://www.google.com"}
-                  </Link>
-                </aside>
-                <aside className="flex items-center gap-2">
                   <Calendar size={16} />
                   <p className="text-sm">
                     Joined on{" "}
@@ -182,13 +168,37 @@ export default function User({ userId }: { userId: string }) {
                         })}
                   </p>
                 </aside>
+                <aside className="flex items-center gap-2">
+                  <Briefcase size={16} />
+                  <p className="text-sm">
+                    {user && user?.profession ? user?.profession : "No Data"}
+                  </p>
+                </aside>
+                <aside className="flex items-center gap-2">
+                  <MapPin size={16} />
+                  <p className="text-sm">{user && user.location ? user.location : "No Data"}</p>
+                </aside>
+                <aside className="flex items-center gap-2">
+                  <Link2 size={16} />
+                  {user?.userLink ? (
+                    <Link href={user.userLink} className="hover:underline text-sm">
+                      {user.userLink}
+                    </Link>
+                  ) : (
+                    <p>No Data</p>
+                  )}
+                </aside>
               </div>
             </article>
           </section>
 
           <div className="h-px w-full mt-6 bg-neutral-500 rounded-2xl" />
 
-          {userId && <UserPosts userId={userId} />}
+          {userId && (
+            <Suspense fallback={<Loader />}>
+              <UserPosts userId={userId} />
+            </Suspense>
+          )}
         </section>
         <div className="flex-[2] hidden md:block rounded-md">
           <TrendingFeed />

@@ -44,8 +44,7 @@ export type UserFromDB = {
   updatedAt: Date;
   profession: string | null;
   location: string | null;
-}
-
+};
 
 export type FormatOnType = "seconds" | "minutes" | "hours" | "days";
 export type UserBookMarkType = {

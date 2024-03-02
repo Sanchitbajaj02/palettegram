@@ -254,7 +254,6 @@ const saveDataToDatabase = async (session: any) => {
  */
 const getSingleUser = async (id: string) => {
   try {
-
     const resp = await db.listDocuments(palettegramDB, usersCollection, [
       Query.search("accountId", id),
     ]);
