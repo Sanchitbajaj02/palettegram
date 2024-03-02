@@ -2,8 +2,6 @@ import "@/styles/globals.css";
 import { Poppins } from "next/font/google";
 import { Metadata } from "next";
 import ReduxProvider from "@/redux/ReduxProvider";
-// import { ToastContainer } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
 import { Toaster } from "sonner";
 
 import { Providers } from "./providers";
