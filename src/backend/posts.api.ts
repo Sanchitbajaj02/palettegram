@@ -73,6 +73,7 @@ const getSinglePost = async (id: string) => {
  */
 const getAllUserPosts = async (userId: string) => {
   try {
+
     const allPosts = await db.listDocuments(palettegramDB, postsCollection, [
       Query.equal("userId", userId),
       Query.orderDesc("$createdAt"),

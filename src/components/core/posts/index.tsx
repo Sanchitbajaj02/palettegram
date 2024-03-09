@@ -52,7 +52,7 @@ export default function Posts() {
         postState.posts.length > 0 &&
         postState.posts?.map((post: PostInstanceType, index: number) => (
           <div key={index} className="w-full">
-            <SinglePost singlePost={post} onLikeClick={likePost} />
+            {post.isActive && <SinglePost singlePost={post} onLikeClick={likePost} />}
           </div>
         ))}
     </>
