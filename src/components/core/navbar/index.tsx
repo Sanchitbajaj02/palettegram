@@ -148,7 +148,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
                     href="/feed"
                     className="mx-2 px-2 py-2 rounded-full bg-primary text-white hover:bg-primary-light hover:scale-105"
                   >
-                    <Home size={22} className="transition-all duration-300   " />
+                    <Home size={22} className="transition-all duration-300 " />
                   </Link>
                 )}
                 <Link

@@ -1,11 +1,26 @@
+import Image from "next/image";
+
 export default async function Loading() {
   return (
     <>
+      <nav className="w-full justify-between sticky top-0 shadow-md py-2 dark:shadow-gray-600 z-50 ">
+        <div className="max-w-screen-lg mx-auto flex items-center content-center justify-between backdrop-blur-sm bg-grey-100 bg-opacity-20 h-12">
+          <Image
+            className="navbar-brand fw-bold w-10 h-10 cursor pointer dark:shadow-md dark:shadow-gray-500 rounded-full ml-2 md:ml-0"
+            src={"/assets/logo.png"}
+            alt="settings"
+            width={100}
+            height={100}
+          />
+          <div className="flex gap-2">
+            <div className="w-10 h-10  bg-gray-200 rounded-full dark:bg-gray-700 animate-pulse"></div>
+            <div className="w-10 h-10  bg-gray-200 rounded-full dark:bg-gray-700 animate-pulse"></div>
+            <div className="w-10 h-10  bg-gray-200 rounded-full dark:bg-gray-700 animate-pulse"></div>
+            <div className="w-10 h-10  bg-gray-200 rounded-full dark:bg-gray-700 animate-pulse"></div>
+          </div>
+        </div>
+      </nav>
       <main className="flex sm:flex-row flex-col max-w-screen-lg mx-auto pt-8 content-center px-2">
-        <section className="flex-1 sticky flex sm:flex-col items-center gap-8">
-          <div className="w-12 h-12 rounded-full dark:bg-white/10 bg-black/10 animate-pulse" />
-          <div className="w-12 h-12 rounded-full bg-black/10 dark:bg-white/20 animate-pulse" />
-        </section>
         <section className="flex-[5] mt-4 sm:mt-0">
           <div className="w-full h-60 mb-4 rounded-lg dark:bg-white/10 bg-black/10 animate-pulse" />
 
