@@ -1,7 +1,7 @@
 name: ✨ Feature Request
 description: Suggest a feature request
 title: "Feat: "
-labels: ["⭐ enhancement", "SWOC S4"]
+labels: ["⭐ enhancement"]
 body:
   - type: textarea
     id: what-feature
