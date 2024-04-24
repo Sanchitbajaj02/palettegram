@@ -40,6 +40,16 @@ const register = async (userData: {
       throw new Error("Session failed");
     }
 
+    const authResp = await account.updatePrefs({
+      username: username,
+    });
+
+    const dbData = await saveDataToDatabase(authResp);
+
+    if (!dbData) {
+      throw new Error("User data can't be saved properly");
+    }
+
     const createVerify = await account.createVerification(
       `${process.env.NEXT_PUBLIC_BASE_URL}/verify`,
     );
@@ -48,13 +58,9 @@ const register = async (userData: {
       throw new Error("Error sending verification email");
     }
 
-    const authResp = await account.updatePrefs({
-      username: username,
-    });
-
     return authResp;
   } catch (error: any) {
-    console.log(error + "Message");
+    console.log(error, "Message");
     throw new Error(error.message);
   }
 };
@@ -83,11 +89,25 @@ const verifyUser = async (accountId: string, secret: string) => {
       throw new Error("Session not maintained");
     }
 
-    const dbData = await saveDataToDatabase(userSession);
+    const currentUser = await db.listDocuments(palettegramDB, usersCollection, [
+      Query.equal("accountId", userSession.$id),
+    ]);
+
+    if (!currentUser) {
+      throw new Error("Current user might be corrupted");
+    }
+
+    const result = db.updateDocument(palettegramDB, usersCollection, currentUser.documents[0].$id, {
+      isVerified: true,
+    });
+
+    if (!result) {
+      throw new Error("Error in verifying user");
+    }
 
     response = {
       status: true,
-      data: dbData,
+      data: {},
     };
   } catch (error: any) {
     console.log(error);
@@ -162,6 +182,15 @@ const forgotpassword = async (userEmail: string) => {
     if (!userEmail) {
       throw new Error("email is empty");
     }
+
+    // const getOldUserDetails = await db.listDocuments(palettegramDB, usersCollection, [
+    //   Query.equal("email", userEmail),
+    // ]);
+
+    // if (!getOldUserDetails) {
+    //   throw new Error("user does not exist");
+    // }
+
     const response = await account.createRecovery(
       userEmail,
       `${process.env.NEXT_PUBLIC_BASE_URL}/updatepassword`,
@@ -182,12 +211,7 @@ const forgotpassword = async (userEmail: string) => {
 const updatepassword = async (userData: any) => {
   const { password, confirmpassword, USER_ID, SECRET } = userData;
   try {
-    if (
-      userData.password === "" ||
-      userData.confirmpassword === "" ||
-      userData.USER_ID === "" ||
-      userData.SECRET === " "
-    ) {
+    if (password === "" || confirmpassword === "" || USER_ID === "" || SECRET === " ") {
       throw new Error("Request has failed");
     }
     const response = await account.updateRecovery(USER_ID, SECRET, password, confirmpassword);
@@ -231,7 +255,7 @@ const saveDataToDatabase = async (session: any) => {
       fullName: session.name,
       isVerified: session.emailVerification,
       accountId: session.$id,
-      username: session.prefs.username,
+      username: session?.prefs?.username,
       avatarURL: avatar,
     });
     if (!resp) {

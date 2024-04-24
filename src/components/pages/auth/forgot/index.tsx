@@ -26,17 +26,23 @@ export default function ForgotComponent() {
     try {
       setIsLoading(true);
 
-      if (email !== "") {
-        const response = await forgotpassword(email);
-        setIsLoading(false);
-        toastify("Send Successful", "success");
-        router.push("/login");
+      if (!email || email == "") {
+        throw new Error("Email not provided");
       }
+
+      const response = await forgotpassword(email);
+
+      if (!response) {
+        throw new Error("Err in sending email");
+      }
+
+      setIsLoading(false);
+      toastify("Send Successful", "success");
     } catch (error: any) {
       setIsLoading(false);
       console.log(error.message);
 
-      toastify("failed! Please click on send again", "error");
+      toastify(error.message, "error");
     }
   }
 
@@ -47,7 +53,7 @@ export default function ForgotComponent() {
           <article className="mb-8">
             <ArrowLeftCircle
               size={22}
-              onClick={() => router.back()}
+              onClick={() => router.push("/")}
               className="hover:cursor-pointer text-secondary dark:text-white"
             />
             <h1 className="text-xl md:text-3xl mb-2 text-center font-bold text-secondary dark:text-white">

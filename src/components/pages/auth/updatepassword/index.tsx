@@ -40,6 +40,10 @@ export default function UpdatePasswordComponent() {
       setUpdatingStatus("updating");
       if (data.password === data.confirmpassword) {
         const resp = await updatepassword(data);
+        if (!resp) {
+          throw new Error("Err in changing password");
+        }
+
         router.push("/login");
         setUpdatingStatus("success");
         setIsLoading(false);
