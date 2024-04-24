@@ -64,7 +64,7 @@ function HomePage({ accountId }: { accountId: string | undefined }) {
 
           <figure className="w-[70%] my-4 text-center">
             <motion.div
-              initial={{ opacity: 0, y: -640 }}
+              initial={{ opacity: 0, y: -200 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{
