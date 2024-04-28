@@ -1,9 +1,7 @@
 "use client";
 import { verificationResponseType } from "@/types/auth";
-
 import { account, db, ID, palettegramDB, usersCollection, Query } from "./appwrite.config";
 import { generateAvatar } from "@/helper/avatarGenerator";
-import { setCookie } from "nookies";
 
 /**
  * @abstract Register the user into the database
@@ -69,7 +67,7 @@ const register = async (userData: {
  * @abstract verifys the user based on the userId and secret sent to the user's email
  * @param {String} accountId
  * @param {String} secret
- * @returns response status
+ * @returns {Boolean} status
  */
 
 const verifyUser = async (accountId: string, secret: string) => {
@@ -78,19 +76,17 @@ const verifyUser = async (accountId: string, secret: string) => {
     data: null,
   };
   try {
+    console.log("data:", accountId, secret);
+
     const verifyResponse = await account.updateVerification(accountId, secret);
 
     if (!verifyResponse) {
       throw new Error("User not verified");
     }
-    const userSession = await getUserSession();
-
-    if (!userSession || Object.keys(userSession).length < 0) {
-      throw new Error("Session not maintained");
-    }
+    console.log("verifyResponse:", verifyResponse);
 
     const currentUser = await db.listDocuments(palettegramDB, usersCollection, [
-      Query.equal("accountId", userSession.$id),
+      Query.equal("accountId", verifyResponse.userId),
     ]);
 
     if (!currentUser) {
@@ -107,7 +103,7 @@ const verifyUser = async (accountId: string, secret: string) => {
 
     response = {
       status: true,
-      data: {},
+      data: null,
     };
   } catch (error: any) {
     console.log(error);
@@ -262,7 +258,6 @@ const saveDataToDatabase = async (session: any) => {
       throw new Error("Database not working");
     }
     console.log(resp);
-    setCookie(null, "userId", resp.$id);
 
     return resp;
   } catch (error: any) {

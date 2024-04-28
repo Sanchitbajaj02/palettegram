@@ -47,11 +47,11 @@ export default function VerificationComponent({ accountId, secret }: Verificatio
         console.log(err.message);
         toastify(err.message, "error");
       });
-  }, [router, secret, accountId]);
+  }, [secret, accountId]);
 
   return (
     <>
-      {showConfetti && (
+      {showConfetti && isVerified === "TRUE" && (
         <Confetti width={window.width} height={window.height} numberOfPieces={150} />
       )}
 

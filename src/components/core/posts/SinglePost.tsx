@@ -331,9 +331,9 @@ export default function SinglePost({
         <div className="flex justify-around">
           <article
             onClick={() => onLikeClick(singlePost)}
-            className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer"
+            className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer hover:text-primary dark:hover:text-primary text-secondary-light dark:text-white"
           >
-            <Heart size={22} fill="true" />
+            <Heart size={22} />
             <span className="text-base">
               {singlePost && singlePost?.likesCount && singlePost?.likesCount}
             </span>
@@ -341,7 +341,7 @@ export default function SinglePost({
 
           <Link
             href={`/post/${singlePost && singlePost?.$id}`}
-            className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer text-secondary-light dark:text-white hover:text-primary"
+            className="flex flex-row gap-3 items-center transition ease-in-out duration-200 hover:cursor-pointer  hover:text-primary text-secondary-light dark:text-white"
           >
             <MessageCircle size={22} />
             {commentCount ? (
