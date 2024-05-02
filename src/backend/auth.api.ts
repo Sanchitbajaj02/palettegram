@@ -179,13 +179,13 @@ const forgotpassword = async (userEmail: string) => {
       throw new Error("email is empty");
     }
 
-    // const getOldUserDetails = await db.listDocuments(palettegramDB, usersCollection, [
-    //   Query.equal("email", userEmail),
-    // ]);
+    const getOldUserDetails = await db.listDocuments(palettegramDB, usersCollection, [
+      Query.equal("email", userEmail),
+    ]);
 
-    // if (!getOldUserDetails) {
-    //   throw new Error("user does not exist");
-    // }
+    if (!getOldUserDetails) {
+      throw new Error("user does not exist");
+    }
 
     const response = await account.createRecovery(
       userEmail,

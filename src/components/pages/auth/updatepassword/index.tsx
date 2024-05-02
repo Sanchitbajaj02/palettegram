@@ -41,7 +41,9 @@ export default function UpdatePasswordComponent() {
       if (data.password === data.confirmpassword) {
         const resp = await updatepassword(data);
         if (!resp) {
-          throw new Error("Err in changing password");
+          throw new Error(
+            "Failed to update password. Please ensure your details are correct and try again.",
+          );
         }
 
         router.push("/login");

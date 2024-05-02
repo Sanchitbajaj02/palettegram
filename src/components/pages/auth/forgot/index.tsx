@@ -26,14 +26,14 @@ export default function ForgotComponent() {
     try {
       setIsLoading(true);
 
-      if (!email || email == "") {
+      if (!email || email == "" || !email.trim()) {
         throw new Error("Email not provided");
       }
 
       const response = await forgotpassword(email);
 
       if (!response) {
-        throw new Error("Err in sending email");
+        throw new Error("Error occurred while sending the email. Please try again.");
       }
 
       setIsLoading(false);
