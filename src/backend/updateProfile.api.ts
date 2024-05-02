@@ -41,6 +41,10 @@ const getUserFieldByAccountId = async (userId: string) => {
 
 const saveImage = async (image: File) => {
   try {
+    if (!image) {
+      throw new Error("error aa rha hai");
+    }
+
     const resp = await storage.createFile(userBucketStorage, ID.unique(), image);
     if (!resp) {
       console.log(resp);
@@ -55,21 +59,30 @@ const saveImage = async (image: File) => {
 const updateImageURL = async (userId: string, image: string, isBanner: boolean) => {
   try {
     const resp = await getUserFieldByAccountId(userId);
-    let docId = resp?.documents[0].$id;
+    let docId = resp?.documents[0]?.$id;
+
+    if (!docId) {
+      throw new Error("Doc id issue");
+    }
+
+    console.log(resp);
+
     if (isBanner) {
-      const resp = await db.updateDocument(palettegramDB, usersCollection, docId!, {
+      const result01 = await db.updateDocument(palettegramDB, usersCollection, docId, {
         bannerURL: image,
       });
-      if (resp) {
-        return resp;
+      if (!result01) {
+        throw new Error("Error aa rha hai bannerURL mai");
       }
+      return result01;
     } else {
-      const resp = await db.updateDocument(palettegramDB, usersCollection, docId!, {
+      const result02 = await db.updateDocument(palettegramDB, usersCollection, docId, {
         avatarURL: image,
       });
-      if (resp) {
-        return resp;
+      if (!result02) {
+        throw new Error("Error aa rha hai bannerURL mai");
       }
+      return result02;
     }
   } catch (error: any) {
     console.log(error);

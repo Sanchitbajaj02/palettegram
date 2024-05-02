@@ -1,7 +1,7 @@
 name: 🐞 Bug Report
 description: File a bug report
 title: "Bug: "
-labels: ["🛠 goal: fix", "🪲 bug", "SWOC S4"]
+labels: ["🛠 goal: fix", "🪲 bug"]
 body:
   - type: textarea
     id: what-happened
