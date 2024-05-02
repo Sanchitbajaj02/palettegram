@@ -1,18 +1,11 @@
+"use client";
 import { ArrowLeftCircle, Loader } from "lucide-react";
 import React, { ChangeEvent, useState } from "react";
 import { updateUserDetail } from "@/backend/updateProfile.api";
 import { parseCookies } from "nookies";
 import { toastify } from "@/helper/toastify";
-import { Models } from "appwrite";
-import { UserFromDB } from "@/types";
 import { useSelector, useDispatch } from "react-redux";
 import { saveUserToStore } from "@/redux/reducers/authReducer";
-
-type propsType = {
-  setProfileUpdate: React.Dispatch<React.SetStateAction<boolean>>;
-  setUser: React.Dispatch<React.SetStateAction<Models.Document | undefined>>;
-  user: Models.Document | UserFromDB | undefined;
-};
 
 export default function UpdateCard({
   setProfileUpdate,

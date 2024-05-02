@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import Image from "next/image";
 import { ArrowLeftCircle, Loader } from "lucide-react";
@@ -5,14 +6,13 @@ import { parseCookies } from "nookies";
 import { toastify } from "@/helper/toastify";
 import { saveImage, updateImageURL } from "@/backend/updateProfile.api";
 import { getUserImageUrl } from "@/backend/updateProfile.api";
-import { Models } from "appwrite";
 import { userImageUploadSizeTypes } from "@/types";
+import { useDispatch } from "react-redux";
+import { saveUserToStore } from "@/redux/reducers/authReducer";
 
 type propsType = {
   imgSize: userImageUploadSizeTypes;
   setHovered: React.Dispatch<React.SetStateAction<boolean>>;
-  setUser: React.Dispatch<React.SetStateAction<Models.Document | undefined>>;
-  user: Models.Document | undefined;
 };
 
 type imageType = {
@@ -22,7 +22,9 @@ type imageType = {
 
 const MAX_FILE_SIZE: number = 1024;
 
-export default function ImageUpload({ imgSize, setHovered, setUser, user }: propsType) {
+export default function ImageUpload({ imgSize, setHovered }: propsType) {
+  const dispatcher = useDispatch();
+
   const [image, setImage] = useState<imageType>({
     file: null,
     preview: "",
@@ -76,10 +78,9 @@ export default function ImageUpload({ imgSize, setHovered, setUser, user }: prop
       console.log("Image:", resp);
 
       if (!resp) {
-        toastify("Problem with uploading the image", "error");
-        throw new Error();
+        throw new Error("Problem with uploading the image");
       }
-      setUser(resp);
+      dispatcher(saveUserToStore(resp));
       toastify("Image Uploaded sucessfully", "success");
       setHovered(false);
     } catch (error: any) {
