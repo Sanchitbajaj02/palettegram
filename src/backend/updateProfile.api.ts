@@ -30,18 +30,6 @@ const getUserImageUrl = (imageId: string, bucketId: string): string => {
   return "";
 };
 
-const getUserFieldByAccountId = async (userId: string) => {
-  try {
-    const resp = await db.listDocuments(palettegramDB, usersCollection, [
-      Query.search("accountId", userId),
-    ]);
-    if (!resp) throw new Error("Failed to update user details");
-    return resp;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 const saveImage = async (image: File) => {
   try {
     if (!image) {
@@ -97,18 +85,15 @@ const updateUserDetail = async (
     userlink,
   }: { fullName: string; about: string; profession: string; location: string; userlink: string },
 ) => {
-  const userField = await getUserFieldByAccountId(userId);
-  let docId = userField?.documents[0].$id;
-  /*   const { fullName, about, profession, location, userlink } = data
-   */ try {
-    const resp = await db.updateDocument(palettegramDB, usersCollection, docId!, {
+  try {
+    const resp = await db.updateDocument(palettegramDB, usersCollection, userId!, {
       fullName: fullName,
       about: about,
       location: location,
       userLink: userlink,
       profession: profession,
     });
-    if (!resp) throw new Error();
+    if (!resp) throw new Error("Failed to retrieve data");
     return resp;
   } catch (error) {
     console.log(error);

@@ -1,6 +1,5 @@
-import { ArrowLeftCircle } from "lucide-react";
+import { ArrowLeftCircle, Loader } from "lucide-react";
 import React, { ChangeEvent, useState } from "react";
-import { motion } from "framer-motion";
 import { updateUserDetail } from "@/backend/updateProfile.api";
 import { parseCookies } from "nookies";
 import { toastify } from "@/helper/toastify";
@@ -16,7 +15,8 @@ type propsType = {
 export default function UpdateCard({ setProfileUpdate, setUser, user }: propsType) {
   const [userDetail, setUserDetail] = useState(user);
   const cookie = parseCookies();
-  const currenUserId = cookie["accountId"];
+  const currenUserId = cookie["userId"];
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -25,9 +25,11 @@ export default function UpdateCard({ setProfileUpdate, setUser, user }: propsTyp
     });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+
     try {
-      let temp;
       const resp = await updateUserDetail(currenUserId, {
         fullName: userDetail?.fullName,
         about: userDetail?.about,
@@ -35,14 +37,19 @@ export default function UpdateCard({ setProfileUpdate, setUser, user }: propsTyp
         location: userDetail?.location,
         userlink: userDetail?.userLink,
       });
-      console.log(resp);
+      console.log("Update Card response", resp);
       if (!resp) throw new Error("Error in updating, retry!");
+
       toastify("Update Successfully", "success");
+
       setUser(resp);
+
       setProfileUpdate(false);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      toastify(error.message, "error");
     }
+    setIsLoading(false);
   };
 
   return (
@@ -60,7 +67,7 @@ export default function UpdateCard({ setProfileUpdate, setUser, user }: propsTyp
             </h1>
           </article>
 
-          <div>
+          <form onSubmit={handleSubmit}>
             <div className="mb-6">
               <label
                 htmlFor="fullName"
@@ -171,18 +178,15 @@ export default function UpdateCard({ setProfileUpdate, setUser, user }: propsTyp
               <button
                 type="button"
                 className="w-full py-2 text-sm md:text-base rounded-full text-white bg-primary transition duration-300 ease hover:bg-secondary"
-                onClick={handleSubmit}
-                // disabled={registerStatus === "success" || registerStatus === "registering"}
               >
-                {/* {isLoading ? (
-                  <Loader size={24} className="mx-auto animate-spin" />
+                {isLoading ? (
+                  <Loader size={24} className="mx-auto animate-spin self-center" />
                 ) : (
-                  <p>Register Now</p>
-                )} */}
-                <p>Update Now</p>
+                  "Upload"
+                )}
               </button>
             </div>
-          </div>
+          </form>
         </div>
       </section>
     </div>

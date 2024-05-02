@@ -22,7 +22,6 @@ import { userImageUploadSizeTypes } from "@/types";
 export default function User({ userId }: { userId: string }) {
   const [user, setUser] = useState<any>();
   const router = useRouter();
-  const [edit, setEdit] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [profileUpdate, setProfileUpdate] = useState(false);
   const [size, setSize] = useState<userImageUploadSizeTypes>({
@@ -42,13 +41,11 @@ export default function User({ userId }: { userId: string }) {
     });
     setHovered(true);
   };
+  const currentUserID: string = cookies["userId"];
 
   useEffect(() => {
-    const currentUserID: string = cookies["userId"];
-    if (currentUserID) setEdit(true);
-
     if (userAuth) setUser(userAuth);
-  }, [cookies, userAuth]);
+  }, [cookies, userAuth, currentUserID]);
 
   console.log("param userid:", user);
 
@@ -81,7 +78,7 @@ export default function User({ userId }: { userId: string }) {
               height={300}
             />
 
-            {edit && (
+            {currentUserID && (
               <Edit3
                 onClick={() =>
                   handlePhotoClick({
@@ -104,7 +101,7 @@ export default function User({ userId }: { userId: string }) {
                   src={user && user?.avatarURL ? user?.avatarURL! : "https://placehold.co/100x100"}
                   alt="user"
                   onClick={() => {
-                    edit &&
+                    currentUserID &&
                       handlePhotoClick({
                         isbannerImage: false,
                         title: "Profile Photo",
@@ -121,7 +118,7 @@ export default function User({ userId }: { userId: string }) {
               </div>
               <div className="flex gap-4 items-center">
                 <button>
-                  {edit && (
+                  {currentUserID && (
                     <Edit
                       width={25}
                       onClick={() => setProfileUpdate(true)}

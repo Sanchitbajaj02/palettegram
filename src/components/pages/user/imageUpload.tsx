@@ -32,8 +32,6 @@ export default function ImageUpload({ imgSize, setHovered, setUser, user }: prop
   const currenUserId = cookie["userId"];
 
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("file upload:", event.target.files);
-
     const fsize: number | null =
       event.target.files && Math.round(event.target.files[0].size / MAX_FILE_SIZE);
     if (fsize && fsize > MAX_FILE_SIZE) {
@@ -55,6 +53,7 @@ export default function ImageUpload({ imgSize, setHovered, setUser, user }: prop
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
+    setIsLoading(true);
     try {
       if (!image || image.file === null) {
         throw new Error("file corrupted or file not uploaded");
@@ -74,16 +73,20 @@ export default function ImageUpload({ imgSize, setHovered, setUser, user }: prop
 
       const resp = await updateImageURL(currenUserId, imageUrl, imgSize?.isbannerImage);
 
+      console.log("Image:", resp);
+
       if (!resp) {
         toastify("Problem with uploading the image", "error");
-        return;
+        throw new Error();
       }
       setUser(resp);
       toastify("Image Uploaded sucessfully", "success");
       setHovered(false);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      toastify(error.message, "error");
     }
+    setIsLoading(false);
   };
 
   return (
@@ -160,7 +163,7 @@ export default function ImageUpload({ imgSize, setHovered, setUser, user }: prop
                 {isLoading ? (
                   <Loader size={24} className="mx-auto animate-spin self-center" />
                 ) : (
-                  <p>Upload</p>
+                  "Upload"
                 )}
               </button>
             </div>
