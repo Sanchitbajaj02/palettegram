@@ -53,3 +53,9 @@ export type UserBookMarkType = {
   error: boolean;
   loading: boolean;
 };
+
+export type userImageUploadSizeTypes = {
+  isbannerImage: boolean;
+  intialImageUrl: string;
+  title: string;
+};

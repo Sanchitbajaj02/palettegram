@@ -141,7 +141,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
 
           <div className="hidden md:flex gap-2 flex-row items-center">
             <ThemeButton iconSize={22} />
-            {userAuth && userAuth.data?.$id ? (
+            {userIdFromCookies ? (
               <>
                 {pathname !== "/feed" && (
                   <Link

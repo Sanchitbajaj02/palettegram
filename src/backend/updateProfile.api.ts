@@ -13,30 +13,21 @@ import {
  * @param imageId
  * @returns
  */
-const getUserImageUrl = (imageId: string) => {
+const getUserImageUrl = (imageId: string, bucketId: string): string => {
   try {
     if (!imageId) {
       throw new Error("Image ID is required");
     }
 
-    const url = `https://cloud.appwrite.io/v1/storage/buckets/${userBucketStorage}/files/${imageId}/view?project=${process.env.NEXT_PUBLIC_PROJECT_ID}`;
+    const url = `https://cloud.appwrite.io/v1/storage/buckets/${bucketId}/files/${imageId}/view?project=${String(
+      process.env.NEXT_PUBLIC_PROJECT_ID,
+    )}`;
 
     return url;
   } catch (error) {
     console.log(error);
   }
-};
-
-const getUserFieldByAccountId = async (userId: string) => {
-  try {
-    const resp = await db.listDocuments(palettegramDB, usersCollection, [
-      Query.search("accountId", userId),
-    ]);
-    if (!resp) throw new Error("Failed to update user details");
-    return resp;
-  } catch (error) {
-    console.log(error);
-  }
+  return "";
 };
 
 const saveImage = async (image: File) => {
@@ -46,6 +37,7 @@ const saveImage = async (image: File) => {
     }
 
     const resp = await storage.createFile(userBucketStorage, ID.unique(), image);
+
     if (!resp) {
       console.log(resp);
       throw new Error("Photo cannot be uploaded");
@@ -58,35 +50,29 @@ const saveImage = async (image: File) => {
 
 const updateImageURL = async (userId: string, image: string, isBanner: boolean) => {
   try {
-    const resp = await getUserFieldByAccountId(userId);
-    let docId = resp?.documents[0]?.$id;
-
-    if (!docId) {
-      throw new Error("Doc id issue");
-    }
-
-    console.log(resp);
+    console.log(image);
 
     if (isBanner) {
-      const result01 = await db.updateDocument(palettegramDB, usersCollection, docId, {
+      const result01 = await db.updateDocument(palettegramDB, usersCollection, userId, {
         bannerURL: image,
       });
       if (!result01) {
-        throw new Error("Error aa rha hai bannerURL mai");
+        throw new Error("Error in updating user image");
       }
       return result01;
     } else {
-      const result02 = await db.updateDocument(palettegramDB, usersCollection, docId, {
+      const result02 = await db.updateDocument(palettegramDB, usersCollection, userId, {
         avatarURL: image,
       });
       if (!result02) {
-        throw new Error("Error aa rha hai bannerURL mai");
+        throw new Error("Error in updating user image");
       }
       return result02;
     }
   } catch (error: any) {
     console.log(error);
   }
+  return null;
 };
 
 const updateUserDetail = async (
@@ -96,21 +82,18 @@ const updateUserDetail = async (
     about,
     profession,
     location,
-    userlink,
-  }: { fullName: string; about: string; profession: string; location: string; userlink: string },
+    userLink,
+  }: { fullName: string; about: string; profession: string; location: string; userLink: string },
 ) => {
-  const userField = await getUserFieldByAccountId(userId);
-  let docId = userField?.documents[0].$id;
-  /*   const { fullName, about, profession, location, userlink } = data
-   */ try {
-    const resp = await db.updateDocument(palettegramDB, usersCollection, docId!, {
+  try {
+    const resp = await db.updateDocument(palettegramDB, usersCollection, userId, {
       fullName: fullName,
       about: about,
       location: location,
-      userLink: userlink,
+      userLink: userLink,
       profession: profession,
     });
-    if (!resp) throw new Error();
+    if (!resp) throw new Error("Failed to retrieve data");
     return resp;
   } catch (error) {
     console.log(error);
