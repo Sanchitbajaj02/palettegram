@@ -51,9 +51,7 @@ export default function User({ userId }: { userId: string }) {
 
   return (
     <>
-      {profileUpdate && (
-        <UpdateCard setProfileUpdate={setProfileUpdate} setUser={setUser} user={user} />
-      )}
+      {profileUpdate && <UpdateCard setProfileUpdate={setProfileUpdate} />}
       {hovered && (
         <ImageUpload imgSize={size} setHovered={setHovered} setUser={setUser} user={user} />
       )}

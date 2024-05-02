@@ -82,15 +82,15 @@ const updateUserDetail = async (
     about,
     profession,
     location,
-    userlink,
-  }: { fullName: string; about: string; profession: string; location: string; userlink: string },
+    userLink,
+  }: { fullName: string; about: string; profession: string; location: string; userLink: string },
 ) => {
   try {
-    const resp = await db.updateDocument(palettegramDB, usersCollection, userId!, {
+    const resp = await db.updateDocument(palettegramDB, usersCollection, userId, {
       fullName: fullName,
       about: about,
       location: location,
-      userLink: userlink,
+      userLink: userLink,
       profession: profession,
     });
     if (!resp) throw new Error("Failed to retrieve data");
