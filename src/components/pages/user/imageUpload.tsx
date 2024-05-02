@@ -6,15 +6,10 @@ import { toastify } from "@/helper/toastify";
 import { saveImage, updateImageURL } from "@/backend/updateProfile.api";
 import { getUserImageUrl } from "@/backend/updateProfile.api";
 import { Models } from "appwrite";
+import { userImageUploadSizeTypes } from "@/types";
 
 type propsType = {
-  imgSize:
-    | {
-        intialImageUrl: string;
-        title: string;
-        isbannerImage: boolean;
-      }
-    | undefined;
+  imgSize: userImageUploadSizeTypes;
   setHovered: React.Dispatch<React.SetStateAction<boolean>>;
   setUser: React.Dispatch<React.SetStateAction<Models.Document | undefined>>;
   user: Models.Document | undefined;
@@ -25,16 +20,23 @@ type imageType = {
   preview: string;
 };
 
+const MAX_FILE_SIZE: number = 1024;
+
 export default function ImageUpload({ imgSize, setHovered, setUser, user }: propsType) {
-  const [image, setImage] = useState<imageType>();
+  const [image, setImage] = useState<imageType>({
+    file: null,
+    preview: "",
+  });
   const [isLoading, setIsLoading] = useState<Boolean>(false);
   const cookie = parseCookies();
-  const currenUserId = cookie["accountId"];
-  const imageSizeLimit: number = 1024;
+  const currenUserId = cookie["userId"];
 
-  const handleFileUpload = async (event: any) => {
-    const fsize: number = Math.round(event.target.files[0].size / imageSizeLimit);
-    if (fsize > imageSizeLimit) {
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("file upload:", event.target.files);
+
+    const fsize: number | null =
+      event.target.files && Math.round(event.target.files[0].size / MAX_FILE_SIZE);
+    if (fsize && fsize > MAX_FILE_SIZE) {
       toastify("Image size cannot be more that 1MB", "error");
       setImage({
         file: null,
@@ -42,30 +44,35 @@ export default function ImageUpload({ imgSize, setHovered, setUser, user }: prop
       });
       return;
     }
-    // console.log(event.target.files[0]);
-    setImage({
-      preview: URL.createObjectURL(event.target.files[0]),
-      file: event.target.files[0],
-    });
+
+    if (event.target.files) {
+      setImage({
+        preview: URL.createObjectURL(event.target.files[0]),
+        file: event.target.files[0],
+      });
+    }
   };
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     try {
-      let imageUrl = "";
-
-      if (!image) {
-        throw new Error("file corrupted");
+      if (!image || image.file === null) {
+        throw new Error("file corrupted or file not uploaded");
       }
 
-      const fileObject = await saveImage(image?.file!);
+      const fileObject = await saveImage(image?.file);
+
       if (!fileObject) {
         throw new Error("Failed to load image, retry!");
       }
 
-      imageUrl = getUserImageUrl(fileObject["$id"])!;
+      const imageUrl = getUserImageUrl(fileObject["$id"], fileObject["bucketId"]);
 
-      const resp = await updateImageURL(currenUserId, imageUrl, imgSize?.isbannerImage!);
+      if (!imageUrl) {
+        throw new Error("Image url can't be generated properly");
+      }
+
+      const resp = await updateImageURL(currenUserId, imageUrl, imgSize?.isbannerImage);
 
       if (!resp) {
         toastify("Problem with uploading the image", "error");

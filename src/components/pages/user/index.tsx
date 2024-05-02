@@ -17,11 +17,7 @@ import UpdateCard from "./updateCard";
 import { useSelector } from "react-redux";
 import { userCollectionDB } from "@/types/auth";
 
-type sizeType = {
-  isbannerImage: boolean;
-  intialImageUrl: string;
-  title: string;
-};
+import { userImageUploadSizeTypes } from "@/types";
 
 export default function User({ userId }: { userId: string }) {
   const [user, setUser] = useState<any>();
@@ -29,12 +25,16 @@ export default function User({ userId }: { userId: string }) {
   const [edit, setEdit] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [profileUpdate, setProfileUpdate] = useState(false);
-  const [size, setSize] = useState<sizeType>();
+  const [size, setSize] = useState<userImageUploadSizeTypes>({
+    isbannerImage: false,
+    intialImageUrl: "",
+    title: "",
+  });
   const cookies = parseCookies();
 
   const userAuth: userCollectionDB = useSelector((state: any) => state.auth.data);
 
-  const handlePhotoClick = ({ isbannerImage, title, intialImageUrl }: sizeType) => {
+  const handlePhotoClick = ({ isbannerImage, title, intialImageUrl }: userImageUploadSizeTypes) => {
     setSize({
       isbannerImage: isbannerImage,
       intialImageUrl: intialImageUrl,

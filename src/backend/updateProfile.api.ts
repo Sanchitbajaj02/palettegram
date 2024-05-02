@@ -13,18 +13,21 @@ import {
  * @param imageId
  * @returns
  */
-const getUserImageUrl = (imageId: string) => {
+const getUserImageUrl = (imageId: string, bucketId: string): string => {
   try {
     if (!imageId) {
       throw new Error("Image ID is required");
     }
 
-    const url = `https://cloud.appwrite.io/v1/storage/buckets/${userBucketStorage}/files/${imageId}/view?project=${process.env.NEXT_PUBLIC_PROJECT_ID}`;
+    const url = `https://cloud.appwrite.io/v1/storage/buckets/${bucketId}/files/${imageId}/view?project=${String(
+      process.env.NEXT_PUBLIC_PROJECT_ID,
+    )}`;
 
     return url;
   } catch (error) {
     console.log(error);
   }
+  return "";
 };
 
 const getUserFieldByAccountId = async (userId: string) => {
@@ -46,6 +49,7 @@ const saveImage = async (image: File) => {
     }
 
     const resp = await storage.createFile(userBucketStorage, ID.unique(), image);
+
     if (!resp) {
       console.log(resp);
       throw new Error("Photo cannot be uploaded");
@@ -58,35 +62,29 @@ const saveImage = async (image: File) => {
 
 const updateImageURL = async (userId: string, image: string, isBanner: boolean) => {
   try {
-    const resp = await getUserFieldByAccountId(userId);
-    let docId = resp?.documents[0]?.$id;
-
-    if (!docId) {
-      throw new Error("Doc id issue");
-    }
-
-    console.log(resp);
+    console.log(image);
 
     if (isBanner) {
-      const result01 = await db.updateDocument(palettegramDB, usersCollection, docId, {
+      const result01 = await db.updateDocument(palettegramDB, usersCollection, userId, {
         bannerURL: image,
       });
       if (!result01) {
-        throw new Error("Error aa rha hai bannerURL mai");
+        throw new Error("Error in updating user image");
       }
       return result01;
     } else {
-      const result02 = await db.updateDocument(palettegramDB, usersCollection, docId, {
+      const result02 = await db.updateDocument(palettegramDB, usersCollection, userId, {
         avatarURL: image,
       });
       if (!result02) {
-        throw new Error("Error aa rha hai bannerURL mai");
+        throw new Error("Error in updating user image");
       }
       return result02;
     }
   } catch (error: any) {
     console.log(error);
   }
+  return null;
 };
 
 const updateUserDetail = async (
