@@ -1,7 +1,7 @@
 name: 👯‍♂️ Style Changing Request
 description: Suggest a style design
 title: "Style: "
-labels: ["✨ goal: improve interface", "SWOC S4"]
+labels: ["✨ goal: improve interface"]
 body:
   - type: textarea
     id: style-idea

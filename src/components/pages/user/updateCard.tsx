@@ -1,22 +1,32 @@
-import { ArrowLeftCircle } from "lucide-react";
+"use client";
+import { ArrowLeftCircle, Loader } from "lucide-react";
 import React, { ChangeEvent, useState } from "react";
-import { motion } from "framer-motion";
 import { updateUserDetail } from "@/backend/updateProfile.api";
 import { parseCookies } from "nookies";
 import { toastify } from "@/helper/toastify";
-import { Models } from "appwrite";
-import { UserFromDB } from "@/types";
+import { useSelector, useDispatch } from "react-redux";
+import { saveUserToStore } from "@/redux/reducers/authReducer";
 
-type propsType = {
+export default function UpdateCard({
+  setProfileUpdate,
+}: {
   setProfileUpdate: React.Dispatch<React.SetStateAction<boolean>>;
-  setUser: React.Dispatch<React.SetStateAction<Models.Document | undefined>>;
-  user: Models.Document | UserFromDB | undefined;
-};
+}) {
+  const dispatcher = useDispatch();
+  const userDataFromStore = useSelector((state: any) => state.auth.data);
 
-export default function UpdateCard({ setProfileUpdate, setUser, user }: propsType) {
-  const [userDetail, setUserDetail] = useState(user);
   const cookie = parseCookies();
-  const currenUserId = cookie["accountId"];
+  const currenUserId = cookie["userId"];
+
+  const [userDetail, setUserDetail] = useState<any>({
+    fullName: userDataFromStore && userDataFromStore?.fullName ? userDataFromStore?.fullName : "",
+    about: userDataFromStore && userDataFromStore?.about ? userDataFromStore?.about : "",
+    profession:
+      userDataFromStore && userDataFromStore?.profession ? userDataFromStore?.profession : "",
+    location: userDataFromStore && userDataFromStore?.location ? userDataFromStore?.location : "",
+    userLink: userDataFromStore && userDataFromStore?.userLink ? userDataFromStore?.userLink : "",
+  });
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -25,24 +35,32 @@ export default function UpdateCard({ setProfileUpdate, setUser, user }: propsTyp
     });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+
     try {
-      let temp;
+      console.log("some use detail", userDetail);
+
       const resp = await updateUserDetail(currenUserId, {
-        fullName: userDetail?.fullName,
-        about: userDetail?.about,
-        profession: userDetail?.profession,
-        location: userDetail?.location,
-        userlink: userDetail?.userLink,
+        fullName: userDetail && userDetail?.fullName ? userDetail?.fullName : "",
+        about: userDetail && userDetail?.about ? userDetail?.about : "",
+        profession: userDetail && userDetail?.profession ? userDetail?.profession : "",
+        location: userDetail && userDetail?.location ? userDetail?.location : "",
+        userLink: userDetail && userDetail?.userLink ? userDetail?.userLink : "",
       });
-      console.log(resp);
       if (!resp) throw new Error("Error in updating, retry!");
+
       toastify("Update Successfully", "success");
-      setUser(resp);
+
+      dispatcher(saveUserToStore(resp));
+
       setProfileUpdate(false);
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      console.warn(error);
+      toastify(error.message, "error");
     }
+    setIsLoading(false);
   };
 
   return (
@@ -60,8 +78,8 @@ export default function UpdateCard({ setProfileUpdate, setUser, user }: propsTyp
             </h1>
           </article>
 
-          <div>
-            <div className="mb-6">
+          <form onSubmit={handleSubmit}>
+            <div className="mb-4">
               <label
                 htmlFor="fullName"
                 aria-required="true"
@@ -73,7 +91,7 @@ export default function UpdateCard({ setProfileUpdate, setUser, user }: propsTyp
                 type="text"
                 name="fullName"
                 id="fullName"
-                value={userDetail?.fullName}
+                defaultValue={userDetail?.fullName}
                 required={true}
                 onChange={changeHandler}
                 placeholder="Enter your full name"
@@ -81,27 +99,26 @@ export default function UpdateCard({ setProfileUpdate, setUser, user }: propsTyp
               />
             </div>
 
-            <div className="mb-6">
+            <div className="mb-4">
               <label
-                htmlFor="bio"
+                htmlFor="about"
                 aria-required="true"
                 className="mb-2 block text-sm font-medium text-secondary-light dark:text-gray-50"
               >
-                Bio
+                A bit about yourself
               </label>
               <input
                 type="text"
                 name="about"
                 id="about"
-                value={userDetail?.about}
-                required={true}
+                defaultValue={userDetail?.about}
                 onChange={changeHandler}
                 placeholder="Enter your Bio"
                 className="w-full rounded-md bg-white py-2 px-4 text-sm md:text-base font-medium text-secondary outline-none border border-white focus:border-secondary-light dark:border-secondary-light dark:focus:border-white"
               />
             </div>
 
-            <div className="mb-6">
+            <div className="mb-4">
               <label
                 htmlFor="profession"
                 aria-required="true"
@@ -114,8 +131,7 @@ export default function UpdateCard({ setProfileUpdate, setUser, user }: propsTyp
                   type="text"
                   name="profession"
                   id="profession"
-                  value={userDetail?.profession}
-                  required={true}
+                  defaultValue={userDetail?.profession}
                   onChange={changeHandler}
                   placeholder="Enter your Profession"
                   className="w-full rounded-md bg-white py-2 px-4 text-sm md:text-base font-medium text-secondary outline-none border border-white focus:border-secondary-light dark:border-secondary-light dark:focus:border-white"
@@ -123,7 +139,7 @@ export default function UpdateCard({ setProfileUpdate, setUser, user }: propsTyp
               </div>
             </div>
 
-            <div className="mb-6">
+            <div className="mb-4">
               <label
                 htmlFor="location"
                 aria-required="true"
@@ -136,8 +152,7 @@ export default function UpdateCard({ setProfileUpdate, setUser, user }: propsTyp
                   type="text"
                   name="location"
                   id="location"
-                  value={userDetail?.location}
-                  required={true}
+                  defaultValue={userDetail?.location}
                   onChange={changeHandler}
                   placeholder="Enter Location"
                   className="w-full rounded-md bg-white py-2 px-4 text-sm md:text-base font-medium text-secondary outline-none border border-white focus:border-secondary-light dark:border-secondary-light dark:focus:border-white"
@@ -145,21 +160,20 @@ export default function UpdateCard({ setProfileUpdate, setUser, user }: propsTyp
               </div>
             </div>
 
-            <div className="mb-6">
+            <div className="mb-4">
               <label
-                htmlFor="link"
+                htmlFor="userLink"
                 aria-required="true"
                 className="mb-2 block text-sm font-medium text-secondary-light dark:text-gray-50"
               >
-                Connection Link
+                Website/Blog
               </label>
               <div className="relative">
                 <input
                   type="text"
-                  name="userlink"
-                  id="userlink"
-                  required={true}
-                  value={userDetail?.userLink}
+                  name="userLink"
+                  id="userLink"
+                  defaultValue={userDetail?.userLink}
                   onChange={changeHandler}
                   placeholder="Enter Some links"
                   className="w-full rounded-md bg-white py-2 px-4 text-sm md:text-base font-medium text-secondary outline-none border border-white focus:border-secondary-light dark:border-secondary-light dark:focus:border-white"
@@ -169,20 +183,18 @@ export default function UpdateCard({ setProfileUpdate, setUser, user }: propsTyp
 
             <div className="mb-4">
               <button
-                type="button"
+                type="submit"
+                role="button"
                 className="w-full py-2 text-sm md:text-base rounded-full text-white bg-primary transition duration-300 ease hover:bg-secondary"
-                onClick={handleSubmit}
-                // disabled={registerStatus === "success" || registerStatus === "registering"}
               >
-                {/* {isLoading ? (
-                  <Loader size={24} className="mx-auto animate-spin" />
+                {isLoading ? (
+                  <Loader size={24} className="mx-auto animate-spin self-center" />
                 ) : (
-                  <p>Register Now</p>
-                )} */}
-                <p>Update Now</p>
+                  "Upload"
+                )}
               </button>
             </div>
-          </div>
+          </form>
         </div>
       </section>
     </div>
