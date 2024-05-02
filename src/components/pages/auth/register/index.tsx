@@ -15,6 +15,7 @@ import { register } from "@/backend/auth.api";
 import { ArrowLeftCircle, Loader, Eye, EyeOff } from "lucide-react";
 import { userCollectionDB } from "@/types/auth";
 import { setCookie } from "nookies";
+import { Models } from "appwrite";
 
 const nameRegex: RegExp = /^[\sa-zA-Z]+$/;
 const passwordRegex: RegExp = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@_])[A-Za-z\d@_]{6,16}$/;
@@ -63,15 +64,15 @@ export default function RegisterComponent() {
         throw new Error("password format not matched");
       }
 
-      const resp = await register(data);
+      const resp: Models.Document = await register(data);
 
       const payload: userCollectionDB = {
-        $id: null!,
-        accountId: resp.$id,
+        $id: resp.$id,
+        accountId: resp.accountId,
         email: resp.email,
-        fullName: resp.name,
-        username: resp.prefs.username,
-        isVerified: resp.emailVerification,
+        fullName: resp.fullName,
+        username: resp.username,
+        isVerified: resp.isVerified,
         $createdAt: resp.$createdAt,
         $updatedAt: resp.$updatedAt,
       };
