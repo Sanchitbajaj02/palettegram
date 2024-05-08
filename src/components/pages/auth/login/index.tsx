@@ -11,7 +11,7 @@ import { saveUserToStore } from "@/redux/reducers/authReducer";
 import { toastify } from "@/helper/toastify";
 
 // API
-import { login, loginWithGoogle } from "@/backend/auth.api";
+import { login, loginWithGithub, logoutUser } from "@/backend/auth.api";
 
 // Icons
 import { userCollectionDB } from "@/types/auth";
@@ -257,7 +257,7 @@ export default function LoginComponent() {
                   className="px-4 py-2 flex flex-row text-sm md:text-base rounded border text-black bg-white transition duration-300 ease hover:bg-secondary hover:text-white items-center"
                   onClick={(e) => {
                     e.preventDefault();
-                    loginWithGoogle();
+                    loginWithGithub();
                   }}
                 >
                   <span>Login with Google</span>
