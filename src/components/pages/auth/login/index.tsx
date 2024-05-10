@@ -67,10 +67,7 @@ export default function LoginComponent() {
 
         setCookie(null, "accountId", payload?.accountId);
         setCookie(null, "isVerified", String(payload?.isVerified));
-
-        if (payload?.$id) {
-          setCookie(null, "userId", payload?.$id);
-        }
+        setCookie(null, "userId", payload?.$id);
 
         dispatch(saveUserToStore(payload));
         toastify("Login Successful", "success");

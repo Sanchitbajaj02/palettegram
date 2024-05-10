@@ -9,7 +9,6 @@ import { useWindowSize } from "react-use";
 import Confetti from "react-confetti";
 
 import Image from "next/image";
-import { verificationResponseType } from "@/types/auth";
 import Loader from "@/app/loading";
 
 interface Verification {
@@ -34,12 +33,16 @@ export default function VerificationComponent({ accountId, secret }: Verificatio
   };
 
   useEffect(() => {
+    setVerified("LOAD");
     verifyUser(accountId, secret)
-      .then((resp: verificationResponseType) => {
-        if (resp.status) {
-          confetti();
+      .then((resp: { userId: string; accountId: string; isVerified: boolean }) => {
+        if (resp.userId && resp.accountId && resp.isVerified) {
+          // confetti();
+          setCookie(null, "accountId", resp.accountId);
+          setCookie(null, "isVerified", String(resp.isVerified));
+          setCookie(null, "userId", resp.userId);
+          setshowConfetti(true);
           setVerified("TRUE");
-          setCookie(null, "isVerified", String(resp.status));
         }
       })
       .catch((err) => {
@@ -47,7 +50,9 @@ export default function VerificationComponent({ accountId, secret }: Verificatio
         console.log(err.message);
         toastify(err.message, "error");
       });
-  }, [secret, accountId]);
+
+    return () => setVerified("LOAD");
+  }, [accountId, secret]);
 
   return (
     <>

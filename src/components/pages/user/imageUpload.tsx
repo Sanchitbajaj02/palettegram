@@ -75,8 +75,6 @@ export default function ImageUpload({ imgSize, setHovered }: propsType) {
 
       const resp = await updateImageURL(currenUserId, imageUrl, imgSize?.isbannerImage);
 
-      console.log("Image:", resp);
-
       if (!resp) {
         throw new Error("Problem with uploading the image");
       }

@@ -1,5 +1,4 @@
 "use client";
-import { verificationResponseType } from "@/types/auth";
 import { account, db, ID, palettegramDB, usersCollection, Query } from "./appwrite.config";
 import { generateAvatar } from "@/helper/avatarGenerator";
 
@@ -8,7 +7,6 @@ import { generateAvatar } from "@/helper/avatarGenerator";
  * @param {Object} userData
  * @returns authResponse
  */
-
 const register = async (userData: {
   email: string;
   fullName: string;
@@ -56,7 +54,7 @@ const register = async (userData: {
       throw new Error("Error sending verification email");
     }
 
-    return authResp;
+    return dbData;
   } catch (error: any) {
     console.log(error, "Message");
     throw new Error(error.message);
@@ -71,10 +69,6 @@ const register = async (userData: {
  */
 
 const verifyUser = async (accountId: string, secret: string) => {
-  let response: verificationResponseType = {
-    status: false,
-    data: null,
-  };
   try {
     console.log("data:", accountId, secret);
 
@@ -83,8 +77,6 @@ const verifyUser = async (accountId: string, secret: string) => {
     if (!verifyResponse) {
       throw new Error("User not verified");
     }
-    console.log("verifyResponse:", verifyResponse);
-
     const currentUser = await db.listDocuments(palettegramDB, usersCollection, [
       Query.equal("accountId", verifyResponse.userId),
     ]);
@@ -101,16 +93,15 @@ const verifyUser = async (accountId: string, secret: string) => {
       throw new Error("Error in verifying user");
     }
 
-    response = {
-      status: true,
-      data: null,
+    return {
+      userId: currentUser.documents[0].$id,
+      accountId: verifyResponse.userId,
+      isVerified: true,
     };
   } catch (error: any) {
     console.log(error);
     throw new Error(error.message);
   }
-
-  return response;
 };
 
 /**
@@ -257,7 +248,6 @@ const saveDataToDatabase = async (session: any) => {
     if (!resp) {
       throw new Error("Database not working");
     }
-    console.log(resp);
 
     return resp;
   } catch (error: any) {

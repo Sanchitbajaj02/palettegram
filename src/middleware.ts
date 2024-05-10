@@ -19,7 +19,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/", request.nextUrl));
   }
 
-  if (isPrivateRoutes && isUserVerified === "false") {
+  if (isPrivateRoutes && isUserVerified.toLowerCase() === "false") {
     return NextResponse.redirect(new URL("/login", request.nextUrl));
   }
 
