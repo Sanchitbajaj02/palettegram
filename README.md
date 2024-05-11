@@ -2,7 +2,7 @@
 
 [![Palettegram Banner](.github/assets/palettegram-cover.png)](https://github.com/Sanchitbajaj02/palettegram)
 
-<!-- A web app to get designs inspirations and color palettes for professionals by professionals. -->
+<!-- A web app to get design inspirations and color palettes for professionals by professionals. -->
 
 ## ⚡ Project Status
 
@@ -43,12 +43,12 @@ contributors to open-source software development. <a href="docs/iwoc.md">Click h
     <tr>
       <td><img src=".github/assets/swoc-banner.png" width="200" height="auto" loading="lazy" alt="Welcome to Social Winter of S4" /></td>
       <td>Social Winter of Code 2024</td>
-      <td>Social Winter of Code is a 2 month-long open-source program envisioned by the Social. It aims to bring students into the world of open source development and see the power of unified problem-solving in real time. <a href="docs/swoc.md">Click here</a> to get the guidelines. </td>
+      <td>Social Winter of Code is a 2-month-long open-source program envisioned by the Social. It aims to bring students into the world of open-source development and see the power of unified problem-solving in real-time. <a href="docs/swoc.md">Click here</a> to get the guidelines. </td>
     </tr>
     <tr>
       <td><img src=".github/assets/hacktoberfest-banner.png" width="200" height="auto" loading="lazy" alt="Welcome to Hacktoberfest" /></td>
       <td>Hacktoberfest 2023</td>
-      <td>Hacktoberfest is a month-long October event welcoming all skill levels to join the open source community, contribute quality pull requests on GitHub, and earn cool swag.</td>
+      <td>Hacktoberfest is a month-long October event welcoming all skill levels to join the open-source community, contribute quality pull requests on GitHub, and earn cool swag.</td>
     </tr>
         
 </table>
@@ -71,9 +71,9 @@ contributors to open-source software development. <a href="docs/iwoc.md">Click h
 
 ## 🤔 Why open source
 
-Contributing in open source increases your opportunities to work with different projects and mentors, getting to know various insights and ideas. It is a platform where contributors grow together with a construvtive and a positive attitude.
+Contributing to open source increases your opportunities to work with different projects and mentors, getting to know various insights and ideas. It is a platform where contributors grow together with a constructive and positive attitude.
 
-This repository also provides one such platforms where contributers come over and put their ideas of new games and make our website as interactive as much they can!
+This repository also provides one such platform where contributors come over and put their ideas for new games and make our website as interactive as they can!
 
 <h5 align="center"><i>If you like the project, please <a href="https://github.com/Sanchitbajaj02/palettegram/stargazers">★</a> this repository to show your support! 🤩</i></h5>
 
@@ -90,7 +90,7 @@ Visit https://palettegram.vercel.app to see the live demo!
 
 ## 👋 Introduction
 
-Palettegram is a social media application dedicated to professionals like graphic designers, UI/UX designers, Developers, etc. to leverage UI designs, design ideas, UX approaches and color palettes.
+Palettegram is a social media application dedicated to professionals like graphic designers, UI/UX designers, Developers, etc. to leverage UI designs, design ideas, UX approaches, and color palettes.
 
 This application provides a streamlined workflow for the users to find the best color palettes and design ideas for their use and contribute back to the community.
 
@@ -102,14 +102,10 @@ UI designers are always looking for new inspiration, and a social media platform
 
 ### Features
 
-The platform would have a number of features that would make it valuable for UI designers, including:
-
+The platform would have several features that would make it valuable for UI designers, including:
 - A user-friendly interface: The platform would be easy to use and navigate so that designers could focus on sharing their work and getting feedback.
-
 - A variety of ways to share work: Designers would be able to share their work in a variety of ways, including by uploading images, creating projects, and writing blog posts.
-
 - A community of designers: The platform would be an excellent way for designers to connect with other designers and get feedback on their work.
-
 - A marketplace: The platform could also include a marketplace where designers could sell their work or hire other designers.
 
 ### Benefits
@@ -122,13 +118,13 @@ There are many benefits to a social media platform for UI designers, including:
 
 - New inspiration: The platform would be an excellent way for designers to find new inspiration for their work.
 
-- Opportunities for growth: The platform could provide opportunities for designers to grow their businesses or find new jobs.
+- Growth opportunities: The platform could provide opportunities for designers to grow their businesses or find new jobs.
 
 ## 🛡️ License
 
 Palettegram is licensed under the MIT License - see the [LICENSE](Licence) file for details.
 
-## 🤔 How to contribute ?
+## 🤔 How to contribute?
 
 Contributing to open-source software (OSS) projects can be a rewarding and fulfilling experience. Not only can you learn new skills, but you can also help make a valuable contribution to a project that benefits the broader community
 
