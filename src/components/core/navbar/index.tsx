@@ -113,10 +113,10 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
 
   return (
     <>
-      <nav className="w-full sticky top-0 shadow-md py-2 dark:shadow-gray-600 z-50">
+      <nav className="w-full sticky top-0 shadow-md dark:shadow-gray-600 z-50">
         {/* Desktop menu items */}
 
-        <div className="max-w-screen-lg mx-auto flex items-center content-center justify-between backdrop-blur-sm bg-grey-100 bg-opacity-20 h-12">
+        <div className="max-w-screen-lg mx-auto flex items-center content-center justify-between backdrop-blur-sm bg-grey-100 bg-opacity-20 h-12 my-2">
           <Link href={userAuth.creds?.userId ? "/feed" : "/"}>
             <Image
               className="navbar-brand fw-bold w-10 h-10 cursor pointer dark:shadow-md dark:shadow-gray-500 rounded-full ml-2 md:ml-0 "
