@@ -1,5 +1,5 @@
 # GirlScript Summer of Code Guidelines & Code of Conduct
-<img src="assets/gssoc24.png"/>
+
 
 For FAQ, visit [GSSoC FAQ Page](https://gssoc.girlscript.tech/faq)
 
