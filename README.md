@@ -54,18 +54,18 @@ contributors to open-source software development. <a href="docs/iwoc.md">Click h
 </table>
 
 ## Table of Contents
-* [Why Open Source?](https://github.com/SpaciousCoder78/palettegram?tab=readme-ov-file#-why-open-source)
-* [Tech Stack](https://github.com/SpaciousCoder78/palettegram?tab=readme-ov-file#-tech-stack)
-* [Live Demo](https://github.com/SpaciousCoder78/palettegram?tab=readme-ov-file#live-demo-)
-* [Introduction](https://github.com/SpaciousCoder78/palettegram?tab=readme-ov-file#-introduction)
-* [What does it do?](https://github.com/SpaciousCoder78/palettegram?tab=readme-ov-file#-what-does-it-do)
-    * [Features](https://github.com/SpaciousCoder78/palettegram?tab=readme-ov-file#features)
-    * [Benefits](https://github.com/SpaciousCoder78/palettegram?tab=readme-ov-file#benefits)
-* [License](https://github.com/SpaciousCoder78/palettegram?tab=readme-ov-file#%EF%B8%8F-license)
-* [How to contribute?](https://github.com/SpaciousCoder78/palettegram?tab=readme-ov-file#-how-to-contribute-)
-    * [Setup](https://github.com/SpaciousCoder78/palettegram?tab=readme-ov-file#setup)
-* [Top Contributors](https://github.com/SpaciousCoder78/palettegram?tab=readme-ov-file#-top-contributors)
-* [Support](https://github.com/SpaciousCoder78/palettegram?tab=readme-ov-file#-top-contributors)
+* [Why Open Source?](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#-why-open-source)
+* [Tech Stack](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#-tech-stack)
+* [Live Demo](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#live-demo-)
+* [Introduction](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#-introduction)
+* [What does it do?](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#-what-does-it-do)
+    * [Features](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#features)
+    * [Benefits](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#benefits)
+* [License](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#%EF%B8%8F-license)
+* [How to contribute?](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#-how-to-contribute-)
+    * [Setup](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#setup)
+* [Top Contributors](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#-top-contributors)
+* [Support](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#-top-contributors)
       
 
 
