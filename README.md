@@ -1,4 +1,4 @@
-![gssoc24](https://github.com/SpaciousCoder78/palettegram/assets/88923986/4510473a-7d81-486a-8a59-b0302135af30)# Palettegram - social media for professionals
+# Palettegram - social media for professionals
 
 [![Palettegram Banner](.github/assets/palettegram-cover.png)](https://github.com/Sanchitbajaj02/palettegram)
 
