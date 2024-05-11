@@ -1,4 +1,4 @@
-# Palettegram - social media for professionals
+![gssoc24](https://github.com/SpaciousCoder78/palettegram/assets/88923986/4510473a-7d81-486a-8a59-b0302135af30)# Palettegram - social media for professionals
 
 [![Palettegram Banner](.github/assets/palettegram-cover.png)](https://github.com/Sanchitbajaj02/palettegram)
 
@@ -33,6 +33,11 @@
       <th>Event Logo</th>
       <th>Event Name</th>
       <th>Event Description</th>
+    </tr>
+    <tr>
+        <td><img src=".github/assets/gssoc24.png" width="200" height="auto" loading="lazy" alt="GSSoC 24"/></td>
+        <td>GirlScript Summer of Code 2024</td>
+        <td>GirlScript Summer of Code is a three-month-long Open Source Program conducted every summer by GirlScript Foundation. It is an initiative to bring more beginners to Open-Source Software Development. <a href="docs/gssoc.md">Click here</a> to get the guidelines.  </td>
     </tr>
     <tr>
       <td><img src=".github/assets/iwoc-banner.png" width="200" height="auto" loading="lazy" alt="Welcome to Social Winter of S4" /></td>
