@@ -34,13 +34,14 @@ const Markdown = ({ editorState, setEditorState, charLimit }: EditorProps) => {
     extensions: [StarterKit, CustomHardBreak],
     content: editorState,
     onUpdate: ({ editor }) => {
-      const currLength = editor?.getText()?.length;
+      const currLength = editor?.getText()?.replaceAll(/<[^>]*>/g, "").length;
+       
       if (currLength >= charLimit) {
         toastify("Character Limit Exceeded", "error");
         editor.commands.undo();
         return;
       }
-      else { 
+      else {
         setEditorState(editor.getHTML());
       }
     },
