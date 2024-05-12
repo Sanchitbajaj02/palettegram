@@ -40,8 +40,6 @@ export default function UpdateCard({
     setIsLoading(true);
 
     try {
-      console.log("some use detail", userDetail);
-
       const resp = await updateUserDetail(currenUserId, {
         fullName: userDetail && userDetail?.fullName ? userDetail?.fullName : "",
         about: userDetail && userDetail?.about ? userDetail?.about : "",

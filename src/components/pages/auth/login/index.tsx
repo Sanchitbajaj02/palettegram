@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { Loader, ArrowLeftCircle, Eye, EyeOff } from "lucide-react";
@@ -67,10 +68,7 @@ export default function LoginComponent() {
 
         setCookie(null, "accountId", payload?.accountId);
         setCookie(null, "isVerified", String(payload?.isVerified));
-
-        if (payload?.$id) {
-          setCookie(null, "userId", payload?.$id);
-        }
+        setCookie(null, "userId", payload?.$id);
 
         dispatch(saveUserToStore(payload));
         toastify("Login Successful", "success");
@@ -244,27 +242,42 @@ export default function LoginComponent() {
                 )}
               </button>
             </motion.div>
-            <div>
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.3, type: "spring", stiffness: 110, delay: 1.5 }}
-                className="flex flex-col justify-center items-center gap-2"
-              >
-                <p>OR</p>
+          </form>
+
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3, type: "spring", stiffness: 110, delay: 1.5 }}
+              className="flex flex-col justify-center items-center gap-2"
+            >
+              <p>OR</p>
+              <div className="flex gap-2 w-full">
                 <button
-                  className="px-4 py-2 flex flex-row text-sm md:text-base rounded border text-black bg-white transition duration-300 ease hover:bg-secondary hover:text-white items-center"
+                  className="flex-1 flex flex-row gap-2 justify-center items-center py-2 text-sm md:text-base rounded-full text-white bg-primary transition duration-300 ease hover:bg-secondary"
                   onClick={(e) => {
                     e.preventDefault();
                     loginWithGithub();
                   }}
                 >
-                  <span>Login with Google</span>
+                  <Image src="/assets/icons/google.svg" width={32} height={32} alt="Google icon" />{" "}
+                  Login with Google
                 </button>
-              </motion.div>
-            </div>
-          </form>
+
+                <button
+                  className="flex-1 flex flex-row gap-2 justify-center items-center py-2 text-sm md:text-base rounded-full text-white bg-primary transition duration-300 ease hover:bg-secondary"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    loginWithGithub();
+                  }}
+                >
+                  <Image src="/assets/icons/github.svg" width={32} height={32} alt="GitHub icon" />{" "}
+                  Login with GitHub
+                </button>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </motion.section>
     </>

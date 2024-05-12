@@ -1,8 +1,3 @@
-export type verificationResponseType = {
-  status: boolean;
-  data: any;
-};
-
 export type userCollectionDB = {
   $id: string;
   accountId: string;
