@@ -113,7 +113,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
 
   return (
     <>
-      <nav className="w-full sticky top-0 shadow-md py-2 dark:shadow-gray-600 z-50">
+      <nav className="w-full sticky top-0 shadow-md py-2 backdrop-blur-sm dark:shadow-gray-600 z-50">
         {/* Desktop menu items */}
 
         <div className="max-w-screen-lg mx-auto flex items-center content-center justify-between backdrop-blur-sm bg-grey-100 bg-opacity-20 h-12">
