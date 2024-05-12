@@ -15,12 +15,14 @@ import {
   StrikethroughIcon,
   CodeSquare,
 } from "lucide-react";
+import { toastify } from "@/helper/toastify";
 
 interface EditorProps {
   editorState: string;
   setEditorState: (params: string) => void;
+  charLimit: number;
 }
-const Markdown = ({ editorState, setEditorState }: EditorProps) => {
+const Markdown = ({ editorState, setEditorState, charLimit }: EditorProps) => {
   const CustomHardBreak = HardBreak.extend({
     addKeyboardShortcuts() {
       return {
@@ -32,7 +34,16 @@ const Markdown = ({ editorState, setEditorState }: EditorProps) => {
     extensions: [StarterKit, CustomHardBreak],
     content: editorState,
     onUpdate: ({ editor }) => {
-      setEditorState(editor.getHTML());
+      const currLength = editor?.getText()?.replaceAll(/<[^>]*>/g, "").length;
+       
+      if (currLength >= charLimit) {
+        toastify("Character Limit Exceeded", "error");
+        editor.commands.undo();
+        return;
+      }
+      else {
+        setEditorState(editor.getHTML());
+      }
     },
   });
   useEffect(() => {

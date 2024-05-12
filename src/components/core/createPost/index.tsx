@@ -152,7 +152,7 @@ const CreatePost = () => {
               isCtrlEnter(e) ? handleSubmit(e) : null;
             }}
           >
-            <Markdown editorState={editorState} setEditorState={setEditorState} />
+            <Markdown editorState={editorState} setEditorState={setEditorState} charLimit={CHAR_LIMIT}/>
           </div>
           {togglePalette ? (
             <Colorpicker

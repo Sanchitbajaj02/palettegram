@@ -35,6 +35,11 @@
       <th>Event Description</th>
     </tr>
     <tr>
+        <td><img src=".github/assets/gssoc24.png" width="200" height="auto" loading="lazy" alt="GSSoC 24"/></td>
+        <td>GirlScript Summer of Code 2024</td>
+        <td>GirlScript Summer of Code is a three-month-long Open Source Program conducted every summer by GirlScript Foundation. It is an initiative to bring more beginners to Open-Source Software Development. <a href="docs/gssoc.md">Click here</a> to get the guidelines.  </td>
+    </tr>
+    <tr>
       <td><img src=".github/assets/iwoc-banner.png" width="200" height="auto" loading="lazy" alt="Welcome to Social Winter of S4" /></td>
       <td>Innogeeks Winter of Code 2024</td>
       <td>Innogeeks Winter of Code is a month-long open-source program envisioned by the Innogeeks. It is an online initiative that introduces new
@@ -54,20 +59,19 @@ contributors to open-source software development. <a href="docs/iwoc.md">Click h
 </table>
 
 ## Table of Contents
-* [Why Open Source?](https://github.com/SpaciousCoder78/palettegram?tab=readme-ov-file#-why-open-source)
-* [Tech Stack](https://github.com/SpaciousCoder78/palettegram?tab=readme-ov-file#-tech-stack)
-* [Live Demo](https://github.com/SpaciousCoder78/palettegram?tab=readme-ov-file#live-demo-)
-* [Introduction](https://github.com/SpaciousCoder78/palettegram?tab=readme-ov-file#-introduction)
-* [What does it do?](https://github.com/SpaciousCoder78/palettegram?tab=readme-ov-file#-what-does-it-do)
-    * [Features](https://github.com/SpaciousCoder78/palettegram?tab=readme-ov-file#features)
-    * [Benefits](https://github.com/SpaciousCoder78/palettegram?tab=readme-ov-file#benefits)
-* [License](https://github.com/SpaciousCoder78/palettegram?tab=readme-ov-file#%EF%B8%8F-license)
-* [How to contribute?](https://github.com/SpaciousCoder78/palettegram?tab=readme-ov-file#-how-to-contribute-)
-    * [Setup](https://github.com/SpaciousCoder78/palettegram?tab=readme-ov-file#setup)
-* [Top Contributors](https://github.com/SpaciousCoder78/palettegram?tab=readme-ov-file#-top-contributors)
-* [Support](https://github.com/SpaciousCoder78/palettegram?tab=readme-ov-file#-top-contributors)
-      
 
+- [Why Open Source?](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#-why-open-source)
+- [Tech Stack](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#-tech-stack)
+- [Live Demo](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#live-demo-)
+- [Introduction](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#-introduction)
+- [What does it do?](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#-what-does-it-do)
+  - [Features](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#features)
+  - [Benefits](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#benefits)
+- [License](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#%EF%B8%8F-license)
+- [How to contribute?](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#-how-to-contribute-)
+  - [Setup](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#setup)
+- [Top Contributors](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#-top-contributors)
+- [Support](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#-top-contributors)
 
 ## 🤔 Why open source
 
@@ -86,7 +90,7 @@ This repository also provides one such platform where contributors come over and
 
 ## Live demo 💻
 
-Visit https://palettegram.vercel.app to see the live demo!
+### Visit https://palettegram.vercel.app to see the live demo!
 
 ## 👋 Introduction
 
@@ -103,6 +107,7 @@ UI designers are always looking for new inspiration, and a social media platform
 ### Features
 
 The platform would have several features that would make it valuable for UI designers, including:
+
 - A user-friendly interface: The platform would be easy to use and navigate so that designers could focus on sharing their work and getting feedback.
 - A variety of ways to share work: Designers would be able to share their work in a variety of ways, including by uploading images, creating projects, and writing blog posts.
 - A community of designers: The platform would be an excellent way for designers to connect with other designers and get feedback on their work.
