@@ -59,6 +59,7 @@ contributors to open-source software development. <a href="docs/iwoc.md">Click h
 </table>
 
 ## Table of Contents
+
 * [Why Open Source?](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#-why-open-source)
 * [Tech Stack](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#-tech-stack)
 * [Live Demo](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#live-demo-)
@@ -71,6 +72,8 @@ contributors to open-source software development. <a href="docs/iwoc.md">Click h
         * [Setup](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#setup)
 * [Top Contributors](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#-top-contributors)
 * [Support](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#-top-contributors)
+
+
 
 ## 🤔 Why open source
 
@@ -137,7 +140,7 @@ Contributing to open-source software (OSS) projects can be a rewarding and fulfi
 
 - Follow the [Contribution Guidelines](CONTRIBUTING.md).
 
-- Create an [issue](https://github.com/Sanchitbajaj02/palettegram/issues) to report bugs, and vulnerabilities or add a new feature.
+- Create an [issue](https://github.com/GIrish-bari/comic-cult/issues) to report bugs, and vulnerabilities or add a new feature.
 
 - Remember to add a good commit message.
 

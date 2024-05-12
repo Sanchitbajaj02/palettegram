@@ -1,6 +1,7 @@
 "use client";
 import { account, db, ID, palettegramDB, usersCollection, Query } from "./appwrite.config";
 import { generateAvatar } from "@/helper/avatarGenerator";
+import { Models } from "appwrite";
 
 /**
  * @abstract Register the user into the database
@@ -210,12 +211,13 @@ const updatepassword = async (userData: any) => {
 };
 
 /**
- * @abstract returns the state of current user
+ * @abstract returns the details of currently logged in user
  * @returns Session
  */
 const getUserSession = async () => {
   try {
-    return account.get();
+    const user = await account.get();
+    return user;
   } catch (error: any) {
     throw new Error(error.message);
   }
@@ -248,7 +250,7 @@ const saveDataToDatabase = async (session: any) => {
     if (!resp) {
       throw new Error("Database not working");
     }
-
+    console.log(resp);
     return resp;
   } catch (error: any) {
     console.log(error.message);
@@ -261,27 +263,70 @@ const saveDataToDatabase = async (session: any) => {
  * @param  {String} id
  * @returns
  */
-const getSingleUser = async (id: string) => {
+const getSingleUser = async (email: string) => {
   try {
     const resp = await db.listDocuments(palettegramDB, usersCollection, [
-      Query.search("accountId", id),
+      Query.search("Email", email),
     ]);
 
-    if (!resp) {
-      throw new Error();
-    }
     return resp;
   } catch (error: any) {
     console.log(error);
   }
 };
 
-const loginWithGoogle = async () => {
+/* const loginWithGoogle = async () => {
   account.createOAuth2Session(
     "google",
     "http://localhost:3000/feed", // Success URL
     "http://localhost:3000", // Failure URL
   );
+}; */
+
+const loginWithGithub = async () => {
+  try {
+    account.createOAuth2Session(
+      "github",
+      `${process.env.NEXT_PUBLIC_BASE_URL}/feed`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/login`,
+      ["repo", "user"],
+    );
+    /*   const userSession = await getUserSession();
+
+    const resp = saveDataToDatabaseForOauth(userSession); */
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const saveDataToDatabaseForOauth = async (session: Models.User<Models.Preferences>) => {
+  try {
+    const currentUser = await db.listDocuments(palettegramDB, usersCollection, [
+      Query.equal("email", session.email),
+    ]);
+
+    let resp;
+
+    if (currentUser.documents.length === 0) {
+      const avatar = generateAvatar(session.name);
+      resp = await db.createDocument(palettegramDB, usersCollection, ID.unique(), {
+        email: session.email,
+        fullName: session.name,
+        isVerified: session.emailVerification,
+        accountId: session.$id,
+        username: session?.prefs?.username,
+        avatarURL: avatar,
+      });
+    }
+    if (!resp) {
+      throw new Error("Database not working");
+    }
+    console.log(resp);
+    return resp;
+  } catch (error: any) {
+    console.log(error.message);
+    throw new Error(error.message);
+  }
 };
 
 // const getUserDetails = async (userId: string) => {
@@ -313,6 +358,6 @@ export {
   forgotpassword,
   updatepassword,
   // getUserDetails,
-  loginWithGoogle,
+  loginWithGithub,
   getUserByUserId,
 };
