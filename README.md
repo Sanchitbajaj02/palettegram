@@ -134,7 +134,7 @@ Contributing to open-source software (OSS) projects can be a rewarding and fulfi
 
 - Follow the [Contribution Guidelines](CONTRIBUTING.md).
 
-- Create an [issue](https://github.com/Sanchitbajaj02/palettegram/issues) to report bugs, and vulnerabilities or add a new feature.
+- Create an [issue](https://github.com/GIrish-bari/comic-cult/issues) to report bugs, and vulnerabilities or add a new feature.
 
 - Remember to add a good commit message.
 
