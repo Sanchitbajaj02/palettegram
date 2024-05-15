@@ -19,4 +19,4 @@ EXPOSE 3000
 # RUN chown -R node /app
 # USER node
 # Command to run on container start
-CMD ["yarn","dev"]
+CMD ["yarn","start"]
