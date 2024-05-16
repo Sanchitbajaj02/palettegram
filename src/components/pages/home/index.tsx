@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 function HomePage({ accountId }: { accountId: string | undefined }) {
   return (
     <>
-      <main className="max-w-screen-lg mx-auto px-2">
+      <main className="max-w-screen-lg  mx-auto px-2">
         <section className="flex flex-col items-center mt-32 mb-32 gap-4 md:flex-row md:justify-between">
           <article>
             <motion.h1

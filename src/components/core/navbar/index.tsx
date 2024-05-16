@@ -113,8 +113,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
 
   return (
     <>
-      <nav className="w-full sticky top-0 shadow-md py-2 backdrop-blur-sm dark:shadow-gray-600 z-50">
-
+      <nav className="sticky w-[100vw] top-0 right-0 shadow-md py-2 dark:shadow-gray-600 z-50">
         {/* Desktop menu items */}
 
         <div className="max-w-screen-lg mx-auto flex items-center content-center justify-between backdrop-blur-sm bg-grey-100 bg-opacity-20 h-16 my-2">
@@ -198,10 +197,10 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
 
         {/* Mobile menu */}
         {isMenuOpen && (
-          <div className="bg-secondary-light bg-opacity-25 dark:bg-primary-light dark:bg-opacity-25 h-full z-10 w-1/2 fixed inset-y-0 right-0 md:hidden transition-transform duration-300">
+          <div className="bg-secondary bg-opacity-90 bg-gradient-to-b dark:from-primary-light dark:to-primary-light/30 dark:bg-opacity-90 h-full fixed right-0 inset-y-0 w-[70%] md:hidden transition-transform duration-300">
             <button
               onClick={() => setMenuOpen(!isMenuOpen)}
-              className={`absolute right-2 top-6 dark:text-white dark:hover:text-primary focus:outline-none ${
+              className={`absolute right-2 top-6 text-white dark:text-white dark:hover:text-primary focus:outline-none ${
                 isMenuOpen ? "open" : "closed"
               } text-gray-600 hover:text-primary lg:hidden`}
             >
@@ -217,35 +216,34 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
                 href="https://github.com/Sanchitbajaj02/palettegram"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center text-sm mx-2 px-10 py-2 rounded-full bg-primary text-white"
+                className="flex justify-center max-w-[300px] w-[200px] mx-auto items-center text-sm px-10 py-2 rounded-full bg-primary text-white"
               >
                 <Github size={20} className="mr-4" /> {starCount} Stars
               </Link>
 
-              {userAuth && userAuth.data?.$id && (
-                <>
-                  <Link
-                    href="/register"
-                    className="inline-block mx-2 px-6 py-2 text-sm rounded-full text-white bg-primary text-center"
-                  >
-                    Register
-                  </Link>
-
-                  <Link
-                    href="/login"
-                    className="inline-block mx-2 px-6 py-2 text-sm rounded-full text-white bg-primary text-center"
-                  >
-                    Login
-                  </Link>
-                </>
-              )}
-              {userAuth && userAuth.data?.$id && (
+              {userAuth && userAuth.data?.$id ? (
                 <Link
                   href={`/user/${userAuth.data?.$id}`}
                   className="mx-2 px-2 py-2 rounded-full bg-primary text-white"
                 >
                   <User size={22} className="transition-all duration-300 " />
                 </Link>
+              ) : (
+                <>
+                  <Link
+                    href="/register"
+                    className="px-6 py-2 text-sm max-w-[300px] w-[200px] mx-auto rounded-full text-white bg-primary text-center"
+                  >
+                    Register
+                  </Link>
+
+                  <Link
+                    href="/login"
+                    className="inline-block px-6 max-w-[300px] w-[200px] mx-auto py-2 text-sm rounded-full text-white bg-primary text-center"
+                  >
+                    Login
+                  </Link>
+                </>
               )}
             </div>
           </div>
