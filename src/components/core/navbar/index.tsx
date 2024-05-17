@@ -1,4 +1,3 @@
-
 "use client";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState, useCallback } from "react";
@@ -33,9 +32,9 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
     await logoutUser();
 
     dispatch(logUserOut());
+
     router.push("/");
   };
-
 
   const currentUser = useCallback(
     (userIdFromCookies: string) => {
@@ -114,13 +113,11 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
 
   return (
     <>
-
       <nav className="w-full sticky top-0 shadow-md py-2 backdrop-blur-sm dark:shadow-gray-600 z-50">
 
         {/* Desktop menu items */}
 
         <div className="max-w-screen-lg mx-auto flex items-center content-center justify-between backdrop-blur-sm bg-grey-100 bg-opacity-20 h-16 my-2">
-
           <Link href={userAuth.creds?.userId ? "/feed" : "/"}>
             <Image
               className="navbar-brand fw-bold w-10 h-10 cursor pointer dark:shadow-md dark:shadow-gray-500 rounded-full ml-2 md:ml-0 "
@@ -131,42 +128,28 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
             />
           </Link>
 
-      
           {/* Hamburger menu button for small screens */}
-          <div className=" flex justify-between">
-           <div className="flex md:hidden">
-             <ThemeButton iconSize={20} />
-             </div>
-            <div>
-          <Link
-                href="https://github.com/Sanchitbajaj02/palettegram"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center text-sm mx-2 px-10 py-2 rounded-full bg-primary text-white"
-              >
-                <Github size={20} className="mr-4" /> {starCount} Stars
-              </Link>
-              </div>
-                     
-              
 
-             <div className="flex justify-between md:hidden">
-          
-              <button
-                  onClick={() => setMenuOpen(!isMenuOpen)}
-                  className={`flex px-2 dark:text-white dark:hover:text-primary text-secondary hover:text-primary transition-all duration-300 focus:outline-none ${
-                    isMenuOpen ? "hidden" : "closed"
-                  }` }
+         
+
+          <div className="md:hidden flex justify-end">
+          <div className="flex justify-end">
+                <ThemeButton iconSize={20} />
+              </div>
+         <div className="flex">
+            <button
+              onClick={() => setMenuOpen(!isMenuOpen)}
+              className={`px-2 lg:hidden dark:text-white dark:hover:text-primary text-secondary hover:text-primary transition-all duration-300 focus:outline-none ${
+                isMenuOpen ? "hidden" : "closed"
+              }`}
             >
               <Menu size={32} />
             </button>
-          </div>
+            </div>
           </div>
 
-     
-         
           <div className="hidden md:flex gap-2 flex-row items-center">
-         
+            <ThemeButton iconSize={22} />
             {userIdFromCookies ? (
               <>
                 {pathname !== "/feed" && (
@@ -199,10 +182,16 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
                 </button>
               </>
             ) : (
-
-               
               <div className="hidden md:flex gap-2">
-             
+                <ButtonLong
+                  href="https://github.com/Sanchitbajaj02/palettegram"
+                  newTab
+                  size="normal"
+                >
+                  <span className="flex items-center">
+                    <Github size={20} className="mr-2" /> {starCount} Stars
+                  </span>
+                </ButtonLong>
                 <ButtonLong href="/register" size="normal">
                   Register
                 </ButtonLong>
@@ -211,7 +200,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
                   Login
                 </ButtonLong>
 
-              <ThemeButton iconSize={20} />
+               
               </div>
             )}
           </div>
@@ -219,8 +208,8 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
 
         {/* Mobile menu */}
         {isMenuOpen && (
-          <div className="bg-secondary-light bg-opacity-25 lg:hidden dark:bg-primary-light dark:backdrop-blur-md dark:bg-opacity-25 h-full z-10 w-1/2 fixed inset-y-0 right-0 transition-transform duration-300 ">
-          
+          <div className="bg-secondary-light backdrop-blur-sm bg-opacity-60 dark:bg-primary-light dark:bg-opacity-60 h-[100vh] z-50 w-1/2 fixed inset-y-0 right-0 md:hidden transition-transform duration-300">
+    
             <button
               onClick={() => setMenuOpen(!isMenuOpen)}
               className={`absolute right-2 top-6 dark:text-white dark:hover:text-primary focus:outline-none ${
@@ -230,28 +219,37 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
               <X size={32} />
             </button>
 
-            <div className="grid grid-cols-1 gap-2 mt-24 h-full md:backdrop-blur-sm ">
-          
+            <div className="grid grid-cols-1 gap-4 mt-24 backdrop-blur-sm ">
+            
+              <Link
+                href="https://github.com/Sanchitbajaj02/palettegram"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center text-sm mx-2 px-10 py-2 rounded-full bg-primary text-white  hover:border-2 hover:bg-transparent"
+              >
+                <Github size={20} className="mr-4" /> {starCount} Stars
+              </Link>
+
+           
                   <Link
                     href="/register"
-                    className="mx-2 px-6 py-2 text-sm rounded-full text-white bg-primary text-center"
+                    className="inline-block mx-2 px-6 py-2 text-sm rounded-full text-white bg-primary text-center hover:border-2 hover:bg-transparent "
                   >
                     Register
                   </Link>
 
                   <Link
                     href="/login"
-                    className="inline-block mx-2 px-6 py-2 text-sm rounded-full text-white bg-primary text-center"
+                    className="inline-block mx-2 px-6 py-2 text-sm rounded-full text-white bg-primary text-center  hover:border-2 hover:bg-transparent"
                   >
                     Login
                   </Link>
-             
-              
+               
+           
               {userAuth && userAuth.data?.$id && (
-                
                 <Link
                   href={`/user/${userAuth.data?.$id}`}
-                  className="mx-2 px-2 py-2 rounded-full bg-primary text-white"
+                  className="mx-2 px-2 py-2 rounded-full bg-primary hover text-white "
                 >
                   <User size={22} className="transition-all duration-300 " />
                 </Link>
