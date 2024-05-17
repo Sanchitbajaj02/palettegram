@@ -18,9 +18,8 @@ import { setCookie } from "nookies";
 import { Models } from "appwrite";
 
 const nameRegex: RegExp = /^[\sa-zA-Z]+$/;
-const disallowedPasswordRegex: RegExp = /[^A-Za-z\d@_!#$%^&*-+=]/;
-const passwordRegex: RegExp =
-  /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@_!#$%^&*-+=])[A-Za-z\d@_!#$%^&*-+=]{6,16}$/;
+const disallowedPasswordRegex: RegExp = /[^A-Za-z\d@_!#$%^&]/;
+const passwordRegex: RegExp = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@_!#$%^&])[A-Za-z\d@_!#$%^&]{6,16}$/;
 
 export default function RegisterComponent() {
   const [showPassword, setShowPassword] = useState(false);
@@ -63,9 +62,7 @@ export default function RegisterComponent() {
       }
 
       if (disallowedPasswordRegex.test(data.password)) {
-        throw new Error(
-          "Invalid password. Allowed special characters are @, _, !, #, $, %, ^, &, *, -, +, =",
-        );
+        throw new Error("Invalid password. Allowed special characters are @, _, !, #, $, %, ^, &");
       }
 
       if (!passwordRegex.test(data.password)) {
