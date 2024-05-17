@@ -1,22 +1,22 @@
-FROM node:18 as builder
-
+FROM node:alpine
 WORKDIR /app
-
-# Update npm
-RUN npm install -g npm@latest
+COPY next.config.js .
+COPY package.json .
+COPY postcss.config.js .
+COPY tailwind.config.js .
+COPY tsconfig.json .
+ COPY yarn.lock .
 
 # Install app dependencies
-COPY ["package.json", "yarn.lock*", "./"]
+ #RUN npm install 
 RUN yarn install
 
-#  Copy source code
 COPY . .
-
+ #RUN npm run build
+RUN yarn build
 EXPOSE 3000
-
 # Create a non-root user and switch to it
 # RUN chown -R node /app
 # USER node
-
 # Command to run on container start
-CMD ["yarn", "dev"]
+CMD ["yarn","start"]
