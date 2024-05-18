@@ -41,9 +41,8 @@ export default function Footer({ isFixed }: { isFixed?: boolean }) {
 
   return (
     <section
-      className={`max-w-screen-xl mx-auto mt-12 bg-white dark:bg-secondary clear-both z-0 text-secondary-light dark:text-primary-light ${
-        !!isFixed ? "bottom-0 fixed w-full" : ""
-      } `}
+      className={`max-w-screen-xl mx-auto mt-12 md:px-10 bg-white dark:bg-secondary clear-both z-0 text-secondary-light dark:text-primary-light ${!!isFixed ? "bottom-0 fixed w-full" : ""
+        } `}
     >
       <div className="flex flex-col items-center md:flex-row border-t border-slate-500 py-8">
         <div className="flex items-center flex-1 pt-2 pb-9">
