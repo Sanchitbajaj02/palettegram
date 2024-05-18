@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 * {
   margin: 0;
@@ -41,9 +40,6 @@ body {
 @layer utilities {
   .custom-shadow {
     filter: drop-shadow(0 5px 150px rgba(182, 0, 85, 0.75));
-  }
-  .sub-section {
-    filter: invert(10%) sepia(79%) saturate(7012%) hue-rotate(325deg) brightness(84%) contrast(101%);
   }
 }
 

@@ -121,7 +121,7 @@ function HomePage({ accountId }: { accountId: string | undefined }) {
               }}
               className="text-3xl md:text-6xl text-center font-extrabold tracking-wide text-black dark:text-white md:text-right"
             >
-              What is <br /> Palettegram?
+              What is Palettegram?
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, x: 100 }}
@@ -232,7 +232,7 @@ function HomePage({ accountId }: { accountId: string | undefined }) {
               }}
               className="text-3xl md:text-6xl text-center font-extrabold tracking-wide text-black dark:text-white md:text-right"
             >
-              Create, Showcase <br /> Collaborate
+              Create, Showcase Collaborate
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, x: 100 }}
