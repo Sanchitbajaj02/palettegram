@@ -19,7 +19,7 @@ import { Models } from "appwrite";
 
 const nameRegex: RegExp = /^[\sa-zA-Z]+$/;
 const disallowedPasswordRegex: RegExp = /[^A-Za-z\d@_!#$%^&]/;
-const passwordRegex: RegExp = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@_!#$%^&])[A-Za-z\d@_!#$%^&]{6,16}$/;
+const passwordRegex: RegExp = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@_!#$%^&])[A-Za-z\d@_!#$%^&]{6,24}$/;
 
 export default function RegisterComponent() {
   const [showPassword, setShowPassword] = useState(false);
@@ -57,8 +57,8 @@ export default function RegisterComponent() {
         throw new Error("Password and Confirm Password does not match");
       }
 
-      if (data.password.length < 6 || data.password.length > 16) {
-        throw new Error("Password should be in range of 6 to 16 characters");
+      if (data.password.length < 6 || data.password.length > 24) {
+        throw new Error("Password should be in range of 6 to 24 characters");
       }
 
       if (disallowedPasswordRegex.test(data.password)) {
