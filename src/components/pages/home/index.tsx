@@ -6,8 +6,8 @@ import { motion } from "framer-motion";
 function HomePage({ accountId }: { accountId: string | undefined }) {
   return (
     <>
-      <main className="max-w-screen-lg mx-auto px-2">
-        <section className="flex flex-col items-center mt-32 mb-32 gap-4 md:flex-row md:justify-between">
+      <main className="max-w-screen-lg mx-auto px-4 md:px-10 lg:px-5">
+        <section className="flex flex-col items-center mt-28 mb-32 gap-4 md:flex-row md:justify-between">
           <article>
             <motion.h1
               initial={{ opacity: 0, x: 100 }}
@@ -19,7 +19,7 @@ function HomePage({ accountId }: { accountId: string | undefined }) {
                 stiffness: 110,
                 delay: 0,
               }}
-              className="text-3xl font-bold text-center tracking-wide text-secondary dark:text-white md:text-6xl md:text-left"
+              className="text-3xl font-bold text-center tracking-wide text-secondary dark:text-white md:text-5xl lg:text-6xl md:text-left"
             >
               Present Palettes Around the World
             </motion.h1>
@@ -33,7 +33,7 @@ function HomePage({ accountId }: { accountId: string | undefined }) {
                 stiffness: 110,
                 delay: 0.1,
               }}
-              className="text-xl my-6 font-medium text-center text-secondary dark:text-white md:text-2xl md:text-left"
+              className="text-xl my-6 font-medium text-center text-secondary dark:text-white md:text-xl lg:text-2xl md:text-left"
             >
               Transform ideas into Beautiful Palettes, Inspire Fellow Designers.
             </motion.p>
@@ -119,7 +119,7 @@ function HomePage({ accountId }: { accountId: string | undefined }) {
                 stiffness: 80,
                 delay: 0,
               }}
-              className="text-3xl md:text-6xl text-center font-extrabold tracking-wide text-black dark:text-white md:text-right"
+              className="text-3xl md:text-4xl lg:text-6xl text-center font-extrabold tracking-wide text-black dark:text-white md:text-right"
             >
               Who is <br /> Palettegram for?
             </motion.h1>
@@ -133,7 +133,7 @@ function HomePage({ accountId }: { accountId: string | undefined }) {
                 stiffness: 80,
                 delay: 0.1,
               }}
-              className="text-xl md:text-2xl text-center my-8 text-black dark:text-white md:text-right"
+              className="text-xl md:text-lg lg:text-xl text-center my-8 text-black dark:text-white md:text-right"
             >
               Anyone who wants to share their designs and color palettes to get the review among the
               professionals.

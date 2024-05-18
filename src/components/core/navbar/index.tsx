@@ -113,7 +113,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
 
   return (
     <>
-      <nav className="w-full sticky top-0 shadow-md py-2 backdrop-blur-sm dark:shadow-gray-600 z-50">
+      <nav className="w-full sticky top-0 shadow-md py-2 px-4 md:px-10 backdrop-blur-sm dark:shadow-gray-600 z-50">
 
         {/* Desktop menu items */}
 
@@ -132,9 +132,8 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setMenuOpen(!isMenuOpen)}
-              className={`px-2 lg:hidden dark:text-white dark:hover:text-primary text-secondary hover:text-primary transition-all duration-300 focus:outline-none ${
-                isMenuOpen ? "hidden" : "closed"
-              }`}
+              className={`px-2 lg:hidden dark:text-white dark:hover:text-primary text-secondary hover:text-primary transition-all duration-300 focus:outline-none ${isMenuOpen ? "hidden" : "closed"
+                }`}
             >
               <Menu size={32} />
             </button>
@@ -201,9 +200,8 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
           <div className="bg-secondary-light bg-opacity-25 dark:bg-primary-light dark:bg-opacity-25 h-full z-10 w-1/2 fixed inset-y-0 right-0 md:hidden transition-transform duration-300">
             <button
               onClick={() => setMenuOpen(!isMenuOpen)}
-              className={`absolute right-2 top-6 dark:text-white dark:hover:text-primary focus:outline-none ${
-                isMenuOpen ? "open" : "closed"
-              } text-gray-600 hover:text-primary lg:hidden`}
+              className={`absolute right-2 top-6 dark:text-white dark:hover:text-primary focus:outline-none ${isMenuOpen ? "open" : "closed"
+                } text-gray-600 hover:text-primary lg:hidden`}
             >
               <X size={32} />
             </button>
