@@ -130,23 +130,20 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
 
           {/* Hamburger menu button for small screens */}
 
-         
+          <div className="md:hidden flex justify-end items-center ">
+                <div className="mr-10">
+                  <ThemeButton iconSize={20} />
+                </div>
+                <button
+                  onClick={() => setMenuOpen(!isMenuOpen)}
+                  className={`px-2 lg:hidden dark:text-white dark:hover:text-primary text-secondary hover:text-primary transition-all duration-300 focus:outline-none ${
+                    isMenuOpen ? "hidden" : "block"
+                  }`}
+                >
+                  <Menu size={32} />
+                </button>
+    </div>
 
-          <div className="md:hidden flex justify-end">
-          <div className="flex justify-end">
-                <ThemeButton iconSize={20} />
-              </div>
-         <div className="flex">
-            <button
-              onClick={() => setMenuOpen(!isMenuOpen)}
-              className={`px-2 lg:hidden dark:text-white dark:hover:text-primary text-secondary hover:text-primary transition-all duration-300 focus:outline-none ${
-                isMenuOpen ? "hidden" : "closed"
-              }`}
-            >
-              <Menu size={32} />
-            </button>
-            </div>
-          </div>
 
           <div className="hidden md:flex gap-2 flex-row items-center">
             <ThemeButton iconSize={22} />
