@@ -132,9 +132,9 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
 
          
 
-          <div className="md:hidden flex justify-end">
-          <div className="flex justify-end">
-                <ThemeButton iconSize={20} />
+          <div className="md:hidden flex justify-end items-center">
+          <div className="mr-10">
+                <ThemeButton iconSize={18} />
               </div>
          <div className="flex">
             <button

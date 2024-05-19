@@ -828,7 +828,7 @@
     "normalize-path" "^3.0.0"
     "picomatch" "^2.0.4"
 
-"appwrite-gen@file:D:\\firstpr\\palettegram\\appwrite-gen":
+"appwrite-gen@file:D:\\GSSoC'24\\palettegram\\appwrite-gen":
   "resolved" "file:appwrite-gen"
   "version" "1.0.0"
   dependencies:
@@ -4687,7 +4687,7 @@
   "resolved" "https://registry.npmjs.org/typescript/-/typescript-5.4.2.tgz"
   "version" "5.4.2"
 
-"typescript@>=2.7", "typescript@>=3.3.1", "typescript@>=4", "typescript@>=4.2.0", "typescript@>=4.9.5", "typescript@5.1.6":
+"typescript@>=2.7", "typescript@>=3.3.1", "typescript@>=4", "typescript@>=4.2.0", "typescript@>=4.9.5":
   "integrity" "sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA=="
   "resolved" "https://registry.npmjs.org/typescript/-/typescript-5.1.6.tgz"
   "version" "5.1.6"
@@ -4903,11 +4903,6 @@
     "string-width" "^4.2.3"
     "y18n" "^5.0.5"
     "yargs-parser" "^21.1.1"
-
-"yarn@^1.22.22":
-  "integrity" "sha512-prL3kGtyG7o9Z9Sv8IPfBNrWTDmXB4Qbes8A9rEzt6wkJV8mUvoirjU0Mp3GGAU06Y0XQyA3/2/RQFVuK7MTfg=="
-  "resolved" "https://registry.npmjs.org/yarn/-/yarn-1.22.22.tgz"
-  "version" "1.22.22"
 
 "yn@3.1.1":
   "integrity" "sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q=="
