@@ -62,7 +62,7 @@ export default function RegisterComponent() {
       }
 
       if (disallowedPasswordRegex.test(data.password)) {
-        throw new Error("Invalid password. Allowed special characters are @, _, !, #, $, %, ^, &");
+        throw new Error("Invalid password. Only the following special characters are allowed: @, _, !, #, $, %, ^, &");
       }
 
       if (!passwordRegex.test(data.password)) {
