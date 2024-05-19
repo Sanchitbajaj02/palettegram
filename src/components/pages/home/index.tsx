@@ -99,7 +99,7 @@ function HomePage({ accountId }: { accountId: string | undefined }) {
               }}
             >
               <Image
-                src="/assets/imgA.png"
+                src="/assets/img-1.png"
                 alt="What is palettegram section"
                 loading="lazy"
                 width={600}
@@ -185,7 +185,7 @@ function HomePage({ accountId }: { accountId: string | undefined }) {
               }}
             >
               <Image
-                src="/assets/imgB.png"
+                src="/assets/img-2.png"
                 alt="Who is palettegram for section"
                 loading="lazy"
                 width={600}
@@ -210,7 +210,7 @@ function HomePage({ accountId }: { accountId: string | undefined }) {
               }}
             >
               <Image
-                src="/assets/imgC.png"
+                src="/assets/img-3.png"
                 alt="What you can do section"
                 loading="lazy"
                 width={600}
