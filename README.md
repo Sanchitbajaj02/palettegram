@@ -92,6 +92,13 @@ This repository also provides one such platform where contributors come over and
 
 ### Visit https://palettegram.vercel.app to see the live demo!
 
+### Demo Credentials to test applications:
+
+|Email Address| Password|
+|--------|--------------|
+|demo@gmail.com|SharePassword@101|
+
+
 ## 👋 Introduction
 
 Palettegram is a social media application dedicated to professionals like graphic designers, UI/UX designers, Developers, etc. to leverage UI designs, design ideas, UX approaches, and color palettes.
