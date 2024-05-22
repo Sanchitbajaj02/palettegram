@@ -12,11 +12,15 @@ import { saveUserToStore } from "@/redux/reducers/authReducer";
 import { toastify } from "@/helper/toastify";
 
 // API
-import { login, loginWithGithub, logoutUser } from "@/backend/auth.api";
+import { login, loginWithGithub } from "@/backend/auth.api";
 
 // Icons
 import { userCollectionDB } from "@/types/auth";
 import { setCookie } from "nookies";
+
+const disallowedPasswordRegex: RegExp = /[^A-Za-z\d@_!#$%^&]/;
+const passwordRegex: RegExp = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@_!#$%^&])[A-Za-z\d@_!#$%^&]{6,24}$/;
+
 
 export default function LoginComponent() {
   const [isLoading, setIsLoading] = useState(false);
@@ -44,12 +48,20 @@ export default function LoginComponent() {
     try {
       setIsLoading(true);
 
-      if (data.password.length < 6 || data.password.length > 16) {
-        throw new Error("Password should be in range of 6 to 16 characters");
-      }
-
       if (data.email === "" || data.password === "") {
         throw new Error("Email and Password fields should be filled");
+      }
+
+      if (data.password.length < 6 || data.password.length > 24) {
+        throw new Error("Password should be in range of 6 to 24 characters");
+      }
+
+      if (disallowedPasswordRegex.test(data.password)) {
+        throw new Error("Invalid password. Only the following special characters are allowed: @, _, !, #, $, %, ^, &");
+      }
+
+      if (!passwordRegex.test(data.password)) {
+        throw new Error("password format not matched");
       }
 
       const resp = await login(data.email, data.password);
