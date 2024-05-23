@@ -10,7 +10,7 @@ const Newsletter = () => {
             <h4 className="text-xs uppercase">Newsletter</h4>
             <h2  className="text-xs md:text-base uppercase text-primary-light text-center">Sign up for latest updates and offers</h2>
             <div className="flex flex-col gap-4 md:flex-row">
-                <input type="text" placeholder="Email Address" className="bg-white text-black px-3" ></input>
+                <input type="text" placeholder="Email Address" className="bg-white text-black py-1 px-3" ></input>
                 <button className=" bg-primary py-1 px-3 " >Subscribe</button>
             </div>
             <h5 className="text-xs text-gray-300 text-center">Will be used in accordance with our policy</h5>
