@@ -114,7 +114,6 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
   return (
     <>
       <nav className="w-full sticky top-0 shadow-md py-2 backdrop-blur-sm dark:shadow-gray-600 z-50">
-
         {/* Desktop menu items */}
 
         <div className="max-w-screen-lg mx-auto flex items-center content-center justify-between backdrop-blur-sm bg-grey-100 bg-opacity-20 h-16 my-2">
@@ -129,15 +128,21 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
           </Link>
 
           {/* Hamburger menu button for small screens */}
-          <div className="md:hidden flex items-center">
-            <button
-              onClick={() => setMenuOpen(!isMenuOpen)}
-              className={`px-2 lg:hidden dark:text-white dark:hover:text-primary text-secondary hover:text-primary transition-all duration-300 focus:outline-none ${
-                isMenuOpen ? "hidden" : "closed"
-              }`}
-            >
-              <Menu size={32} />
-            </button>
+
+          <div className="md:hidden flex justify-end items-center">
+            <div className="mr-2">
+              <ThemeButton iconSize={18} />
+            </div>
+            <div className="flex">
+              <button
+                onClick={() => setMenuOpen(!isMenuOpen)}
+                className={`px-2 lg:hidden dark:text-white dark:hover:text-primary text-secondary hover:text-primary transition-all duration-300 focus:outline-none ${
+                  isMenuOpen ? "hidden" : "closed"
+                }`}
+              >
+                <Menu size={32} />
+              </button>
+            </div>
           </div>
 
           <div className="hidden md:flex gap-2 flex-row items-center">
@@ -198,51 +203,44 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
 
         {/* Mobile menu */}
         {isMenuOpen && (
-          <div className="bg-secondary-light bg-opacity-25 dark:bg-primary-light dark:bg-opacity-25 h-full z-10 w-1/2 fixed inset-y-0 right-0 md:hidden transition-transform duration-300">
+          <div className="bg-secondary-light backdrop-blur-sm bg-opacity-60 dark:bg-primary-light dark:bg-opacity-60 h-[100vh] z-50 w-1/2 fixed inset-y-0 right-0 md:hidden transition-transform duration-300">
             <button
               onClick={() => setMenuOpen(!isMenuOpen)}
-              className={`absolute right-2 top-6 dark:text-white dark:hover:text-primary focus:outline-none ${
+              className={`absolute right-2 top-6 text-white dark:hover:text-primary focus:outline-none ${
                 isMenuOpen ? "open" : "closed"
-              } text-gray-600 hover:text-primary lg:hidden`}
+              }  hover:text-primary lg:hidden`}
             >
               <X size={32} />
             </button>
 
-            <div className="grid grid-cols-1 gap-10 mt-24">
-              <div className="text-center">
-                <ThemeButton iconSize={24} />
-              </div>
-
+            <div className="grid grid-cols-1 gap-4 mt-24 backdrop-blur-sm ">
               <Link
                 href="https://github.com/Sanchitbajaj02/palettegram"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center text-sm mx-2 px-10 py-2 rounded-full bg-primary text-white"
+                className="flex items-center text-sm mx-2 px-10 py-2 rounded-full bg-primary text-white  hover:border-2 hover:bg-transparent"
               >
                 <Github size={20} className="mr-4" /> {starCount} Stars
               </Link>
 
-              {userAuth && userAuth.data?.$id && (
-                <>
-                  <Link
-                    href="/register"
-                    className="inline-block mx-2 px-6 py-2 text-sm rounded-full text-white bg-primary text-center"
-                  >
-                    Register
-                  </Link>
+              <Link
+                href="/register"
+                className="inline-block mx-2 px-6 py-2 text-sm rounded-full text-white bg-primary text-center hover:border-2 hover:bg-transparent "
+              >
+                Register
+              </Link>
 
-                  <Link
-                    href="/login"
-                    className="inline-block mx-2 px-6 py-2 text-sm rounded-full text-white bg-primary text-center"
-                  >
-                    Login
-                  </Link>
-                </>
-              )}
+              <Link
+                href="/login"
+                className="inline-block mx-2 px-6 py-2 text-sm rounded-full text-white bg-primary text-center  hover:border-2 hover:bg-transparent"
+              >
+                Login
+              </Link>
+
               {userAuth && userAuth.data?.$id && (
                 <Link
                   href={`/user/${userAuth.data?.$id}`}
-                  className="mx-2 px-2 py-2 rounded-full bg-primary text-white"
+                  className="mx-2 px-2 py-2 rounded-full bg-primary hover text-white "
                 >
                   <User size={22} className="transition-all duration-300 " />
                 </Link>
