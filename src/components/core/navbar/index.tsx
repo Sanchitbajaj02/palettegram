@@ -114,7 +114,6 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
   return (
     <>
       <nav className="w-full sticky top-0 shadow-md py-2 backdrop-blur-sm dark:shadow-gray-600 z-50">
-
         {/* Desktop menu items */}
 
         <div className="max-w-screen-lg mx-auto flex items-center content-center justify-between backdrop-blur-sm bg-grey-100 bg-opacity-20 h-16 my-2">
@@ -130,21 +129,19 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
 
           {/* Hamburger menu button for small screens */}
 
-         
-
           <div className="md:hidden flex justify-end items-center">
-          <div className="mr-10">
-                <ThemeButton iconSize={18} />
-              </div>
-         <div className="flex">
-            <button
-              onClick={() => setMenuOpen(!isMenuOpen)}
-              className={`px-2 lg:hidden dark:text-white dark:hover:text-primary text-secondary hover:text-primary transition-all duration-300 focus:outline-none ${
-                isMenuOpen ? "hidden" : "closed"
-              }`}
-            >
-              <Menu size={32} />
-            </button>
+            <div className="mr-2">
+              <ThemeButton iconSize={18} />
+            </div>
+            <div className="flex">
+              <button
+                onClick={() => setMenuOpen(!isMenuOpen)}
+                className={`px-2 lg:hidden dark:text-white dark:hover:text-primary text-secondary hover:text-primary transition-all duration-300 focus:outline-none ${
+                  isMenuOpen ? "hidden" : "closed"
+                }`}
+              >
+                <Menu size={32} />
+              </button>
             </div>
           </div>
 
@@ -199,8 +196,6 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
                 <ButtonLong href="/login" size="normal">
                   Login
                 </ButtonLong>
-
-               
               </div>
             )}
           </div>
@@ -209,18 +204,16 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
         {/* Mobile menu */}
         {isMenuOpen && (
           <div className="bg-secondary-light backdrop-blur-sm bg-opacity-60 dark:bg-primary-light dark:bg-opacity-60 h-[100vh] z-50 w-1/2 fixed inset-y-0 right-0 md:hidden transition-transform duration-300">
-    
             <button
               onClick={() => setMenuOpen(!isMenuOpen)}
-              className={`absolute right-2 top-6 dark:text-white dark:hover:text-primary focus:outline-none ${
+              className={`absolute right-2 top-6 text-white dark:hover:text-primary focus:outline-none ${
                 isMenuOpen ? "open" : "closed"
-              } text-gray-600 hover:text-primary lg:hidden`}
+              }  hover:text-primary lg:hidden`}
             >
               <X size={32} />
             </button>
 
             <div className="grid grid-cols-1 gap-4 mt-24 backdrop-blur-sm ">
-            
               <Link
                 href="https://github.com/Sanchitbajaj02/palettegram"
                 target="_blank"
@@ -230,22 +223,20 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
                 <Github size={20} className="mr-4" /> {starCount} Stars
               </Link>
 
-           
-                  <Link
-                    href="/register"
-                    className="inline-block mx-2 px-6 py-2 text-sm rounded-full text-white bg-primary text-center hover:border-2 hover:bg-transparent "
-                  >
-                    Register
-                  </Link>
+              <Link
+                href="/register"
+                className="inline-block mx-2 px-6 py-2 text-sm rounded-full text-white bg-primary text-center hover:border-2 hover:bg-transparent "
+              >
+                Register
+              </Link>
 
-                  <Link
-                    href="/login"
-                    className="inline-block mx-2 px-6 py-2 text-sm rounded-full text-white bg-primary text-center  hover:border-2 hover:bg-transparent"
-                  >
-                    Login
-                  </Link>
-               
-           
+              <Link
+                href="/login"
+                className="inline-block mx-2 px-6 py-2 text-sm rounded-full text-white bg-primary text-center  hover:border-2 hover:bg-transparent"
+              >
+                Login
+              </Link>
+
               {userAuth && userAuth.data?.$id && (
                 <Link
                   href={`/user/${userAuth.data?.$id}`}
