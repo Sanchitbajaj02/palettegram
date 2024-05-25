@@ -66,7 +66,7 @@ Here are some resources to help you get started with the technologies used in th
 The Platelogram project is designed to develop a platform where users can discover designs and color palettes curated by designers, for designers. It serves as a hub for creative inspiration and collaboration.
 
 ### Who can contribute to this project?
-Individuals with expertise in Next.js, TypeScript, Tailwind CSS, and Appwrite are encouraged to contribute to this project. Whether you're a seasoned developer or just starting out, your contributions are welcome and valued.
+Individuals with expertise in Next.js, TypeScript, Tailwind CSS, and Appwrite are encouraged to contribute. Whether you're a seasoned developer or just starting out, your contributions are welcome and valued.
 
 ### How can I test the project locally?
 You can clone the repository to your local machine using detailed instructions provided in [CONTRIBUTING.md](./CONTRIBUTING.md) file.
