@@ -35,7 +35,6 @@ Here are some resources to help you get started with the technologies used in th
 ### Appwrite:
 - **Documentation:** Appwrite documentation details features, API endpoints, and integration possibilities.
    - [Appwrite Documentation](https://appwrite.io/docs)
- 
 <hr>
 
 ## Frequently Asked Questions (FAQ) ❓
