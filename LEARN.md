@@ -21,29 +21,6 @@ Appwrite: Appwrite is an open-source backend platform designed for developing we
 Here are some resources to help you get started with the technologies used in this project:
 
 ### Next.js:
-
-### TypeScript:
-
-### Tailwind CSS:
-
-### Appwrite:
-
-### What is the purpose of this project?
-
-### Who can contribute to this project?
-
-### How can I test the project locally?
-
-### Where can I find the project documentation?
-
-### Who do I contact for help or questions?
-
-### How do I suggest new features for the project?
-
-### Are there any guidelines for coding standards?
-
-### Can I report bugs and issues?
-
 - **Documentation:** Next.js documentation offers tutorials and API references for a comprehensive understanding of the framework.
    - [Next.js Documentation](https://nextjs.org/docs)
 
