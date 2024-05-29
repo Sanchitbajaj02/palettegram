@@ -1,2 +1,4 @@
 wait for reviewers:
   - "**/*"
+gssoc:
+  - "**/*"
