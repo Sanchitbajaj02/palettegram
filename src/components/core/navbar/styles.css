@@ -1,0 +1,75 @@
+ .shepherd-element {
+    background-color: #ffffff;
+    border-radius: 20px;
+    border:3px solid rgb(240 46 101);
+    box-shadow: 0 10px 20px rgba(194, 64, 241, 0.15);
+    padding: 0.6rem;
+    transition: all 0.3s ease;
+    transform: scale(1);
+}
+
+ .shepherd-element:hover {
+    transform: scale(1.05);
+}
+
+.shepherd-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.shepherd-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333333; 
+    margin: 0;
+}
+
+ .shepherd-close {
+    background: transparent;
+    border: none;
+    color: #333333; 
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+ .shepherd-close:hover {
+    color: rgb(240 46 101) ;
+}
+
+ .shepherd-text {
+    font-size: 1rem;
+    color: #555555;
+    margin-top: 0.5rem;
+    line-height: 1.5;
+}
+ .shepherd-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+ .shepherd-button {
+    background-color: rgb(240 46 101);
+    border: none;
+    border-radius: 16px;
+    color: #ffffff;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 0.5rem;
+}
+
+
+.custom-tour .shepherd-button:hover {
+    background-color: rgb(242, 42, 98);
+    transform: translateY(-3px);
+}
+
+ .shepherd-button:active {
+    transform: translateY(0);
+}
+

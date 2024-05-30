@@ -17,7 +17,7 @@ export default function ThemeButton({ iconSize }: { iconSize: number }) {
     // return <small className="text-sm">Loading...</small>;
     return (
       <>
-        <button className="px-2 py-2 md:flex fixed md:static block md:top-0 md:m-0 top-1 m-2 rounded-full hover:bg-primary-light hover:scale-105 bg-primary text-white">
+        <button className=" px-2 py-2 md:flex fixed md:static block md:top-0 md:m-0 top-1 m-2 rounded-full hover:bg-primary-light hover:scale-105 bg-primary text-white">
           <Loader2 className="transition-all duration-300 animate-spin" />
         </button>
       </>
@@ -28,18 +28,18 @@ export default function ThemeButton({ iconSize }: { iconSize: number }) {
     <>
       {theme === "dark" ? (
         <button
-          className="px-2 py-2 md:flex rounded-full hover:bg-primary-light hover:scale-105 bg-primary text-white"
+          className=" px-2 py-2 md:flex rounded-full hover:bg-primary-light hover:scale-105 bg-primary text-white"
           onClick={() => setTheme("light")}
         >
-          <Sun size={iconSize} cursor="pointer" className="transition-all duration-300" />
+          <Sun size={iconSize} cursor="pointer" className=" transition-all duration-300" />
           <span className="sr-only">theme button</span>
         </button>
       ) : (
         <button
-          className="px-2 py-2 md:flex rounded-full hover:bg-primary-light hover:scale-105 bg-primary text-white"
+          className=" px-2 py-2 md:flex rounded-full hover:bg-primary-light hover:scale-105 bg-primary text-white"
           onClick={() => setTheme("dark")}
         >
-          <Moon size={iconSize} cursor="pointer" className="transition-all duration-300" />
+          <Moon size={iconSize} cursor="pointer" className=" transition-all duration-300" />
           <span className="sr-only">theme button</span>
         </button>
       )}

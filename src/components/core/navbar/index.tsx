@@ -18,7 +18,169 @@ import { getPosts } from "@/redux/reducers/postsReducer";
 import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
 import { parseCookies } from "nookies";
 
+import Shepherd from 'shepherd.js'; 
+import '../../../../node_modules/shepherd.js/dist/cjs/css/shepherd.css';
+import './styles.css';
+
+
+const startTour = () => {
+  const tour = new Shepherd.Tour({
+    defaultStepOptions: {
+      cancelIcon: {
+        enabled: true,
+      },
+      classes: 'shepherd-theme-arrows custom-tour',
+      scrollTo: { behavior: 'smooth', block: 'center' },
+    },
+    useModalOverlay: true,
+  });
+
+  tour.addStep({
+    id: 'step1',
+    text: 'Welcome to Palettegram! Let’s start with an overview of what this platform offers.',
+    attachTo: {
+      element: '.hero',
+      on: 'bottom',
+    },
+    buttons: [
+      {
+        text: 'Next',
+        action: tour.next,
+        classes: 'shepherd-button shepherd-button-primary',
+      },
+    ],
+  });
+
+  tour.addStep({
+    id: 'step2',
+    text: 'Click to change the theme either dark mode or light mode.',
+    attachTo: {
+      element: '.themebttn', 
+      on: 'bottom',
+    },
+    buttons: [
+      {
+        text: 'Next',
+        action: tour.next,
+        classes: 'shepherd-button shepherd-button-primary',
+      },
+    ],
+  });
+
+  tour.addStep({
+    id: 'step3',
+    text: 'Click this button to navigate to the codebase.',
+    attachTo: {
+      element: '.git', 
+      on: 'bottom',
+    },
+    buttons: [
+      {
+        text: 'Next',
+        action: tour.next,
+        classes: 'shepherd-button shepherd-button-primary',
+      },
+    ],
+  });
+
+  tour.addStep({
+    id: 'step4',
+    text: 'Click here to sign in.',
+    attachTo: {
+      element: '.signin',
+      on: 'top',
+    },
+    buttons: [
+      {
+        text: 'Next',
+        action: tour.next,
+        classes: 'shepherd-button shepherd-button-primary',
+      },
+    ],
+  });
+
+  tour.addStep({
+    id: 'step5',
+    text: 'Already have an account? Login here.',
+    attachTo: {
+      element: '.loginin',
+      on: 'top',
+    },
+    buttons: [
+      {
+        text: 'Next',
+        action: tour.next,
+        classes: 'shepherd-button shepherd-button-primary',
+      },
+    ],
+  });
+  tour.addStep({
+    id: 'step6',
+    text: 'Click "Start your journey" to begin exploring all the exciting features we offer. Let\'s get started on creating something amazing together!',
+    attachTo: {
+      element: 'section:nth-of-type(1)',
+      on: 'bottom',
+    },
+    buttons: [
+      {
+        text: 'Next',
+        action: tour.next,
+        classes: 'shepherd-button shepherd-button-primary',
+      },
+    ],
+  });
+  tour.addStep({
+    id: 'step7',
+    text: 'This section explains what Palettegram is about.',
+    attachTo: {
+      element: 'section:nth-of-type(2)',
+      on: 'bottom',
+    },
+    buttons: [
+      {
+        text: 'Next',
+        action: tour.next,
+        classes: 'shepherd-button shepherd-button-primary',
+      },
+    ],
+  });
+  tour.addStep({
+    id: 'step8',
+    text: 'This section explains who Palettegram is for. ',
+    attachTo: {
+      element: 'section:nth-of-type(3)',
+      on: 'top',
+    },
+    buttons: [
+      {
+        text: 'Next',
+        action: tour.next,
+        classes: 'shepherd-button shepherd-button-primary',
+      },
+    ],
+  });
+  tour.addStep({
+    id: 'step9',
+    text: 'This section explains what you can do on Palettegram.',
+    attachTo: {
+      element: 'section:nth-of-type(4)',
+      on: 'top',
+    },
+    buttons: [
+      {
+        text: 'Finish',
+        action: tour.complete,
+        classes: 'shepherd-button shepherd-button-primary',
+      },
+    ],
+  });
+
+  tour.start();
+};
+
 const Navbar = ({ starCount }: { starCount?: number }) => {
+  
+
   const router = useRouter();
   const pathname = usePathname();
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -119,7 +281,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
         <div className="max-w-screen-lg mx-auto flex items-center content-center justify-between backdrop-blur-sm bg-grey-100 bg-opacity-20 h-16 my-2">
           <Link href={userAuth.creds?.userId ? "/feed" : "/"}>
             <Image
-              className="navbar-brand fw-bold w-10 h-10 cursor pointer dark:shadow-md dark:shadow-gray-500 rounded-full ml-2 md:ml-0 "
+              className="navbar-brand fw-bold w-10 h-10 cursor pointer dark:shadow-md dark:shadow-gray-500 rounded-full ml-2 md:ml-0 hero"
               src={"/assets/logo.png"}
               alt="settings"
               width={100}
@@ -129,7 +291,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
 
           {/* Hamburger menu button for small screens */}
 
-          <div className="md:hidden flex justify-end items-center">
+          <div className="md:hidden flex justify-end items-center ">
             <div className="mr-2">
               <ThemeButton iconSize={18} />
             </div>
@@ -147,6 +309,12 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
 
           <div className="hidden md:flex gap-2 flex-row items-center">
             <ThemeButton iconSize={22} />
+            <button 
+              className="start-tour-button mx-2 px-4 py-2 rounded-full bg-primary text-white hover:bg-primary-light hover:scale-105"
+              onClick={startTour}
+            >
+              Start Tour
+            </button>
             {userIdFromCookies ? (
               <>
                 {pathname !== "/feed" && (
@@ -180,22 +348,28 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
               </>
             ) : (
               <div className="hidden md:flex gap-2">
+              <span className="flex items-center git">
                 <ButtonLong
                   href="https://github.com/Sanchitbajaj02/palettegram"
                   newTab
                   size="normal"
                 >
+                  
                   <span className="flex items-center">
                     <Github size={20} className="mr-2" /> {starCount} Stars
                   </span>
                 </ButtonLong>
+                </span>
+                <span className="flex items-center signin">
                 <ButtonLong href="/register" size="normal">
                   Register
                 </ButtonLong>
-
+                </span>
+                <span className="flex items-center loginin">
                 <ButtonLong href="/login" size="normal">
                   Login
                 </ButtonLong>
+                </span>
               </div>
             )}
           </div>
