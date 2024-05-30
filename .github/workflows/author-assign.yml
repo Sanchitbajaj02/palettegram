@@ -5,12 +5,16 @@ on:
     types: [opened, reopened]
 
 jobs:
-  assign-author:
+  assign-author-and-reviewer:
     runs-on: ubuntu-latest
     steps:
       - uses: toshimaru/auto-author-assign@v1.1.0
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
 
-  reviewers:
-    - sanchitbajaj02
+      - name: Add Reviewers
+        uses: kentaro-m/auto-assign-action@v2.2.0
+        with:
+          add-reviewers: true
+          reviewers: "sanchitbajaj02"
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"

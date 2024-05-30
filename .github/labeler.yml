@@ -1,4 +1,14 @@
+# .github/labeler.yml
+# Define labels based on file paths or other criteria
+
+# Example: Apply "wait for reviewers" label to all files
 wait for reviewers:
   - "**/*"
+
+# Example: Apply "gssoc" label to all files
 gssoc:
   - "**/*"
+
+# Example: Apply "📄 docs update" label to Markdown files
+📄 docs update:
+  - "*.md"
