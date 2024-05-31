@@ -151,7 +151,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
 
           <div className="hidden md:flex gap-2 flex-row items-center">
             <ThemeButton iconSize={22} />
-            <button 
+            <button type="button" 
               className="start-tour-button mx-2 px-4 py-2 rounded-full bg-primary text-white hover:bg-primary-light hover:scale-105"
               onClick={startTour}
             >
