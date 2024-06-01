@@ -18,6 +18,8 @@ import { getPosts } from "@/redux/reducers/postsReducer";
 import { saveBookmarkToStore } from "@/redux/reducers/bookmarkReducer";
 import { parseCookies } from "nookies";
 
+import { startTour } from "@/helper/startTour";
+
 const Navbar = ({ starCount }: { starCount?: number }) => {
   const router = useRouter();
   const pathname = usePathname();
@@ -119,7 +121,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
         <div className="max-w-screen-lg mx-auto flex items-center content-center justify-between backdrop-blur-sm bg-grey-100 bg-opacity-20 h-16 my-2">
           <Link href={userAuth.creds?.userId ? "/feed" : "/"}>
             <Image
-              className="navbar-brand fw-bold w-10 h-10 cursor pointer dark:shadow-md dark:shadow-gray-500 rounded-full ml-2 md:ml-0 "
+              className="navbar-brand fw-bold w-10 h-10 cursor pointer dark:shadow-md dark:shadow-gray-500 rounded-full ml-2 md:ml-0 hero"
               src={"/assets/logo.png"}
               alt="settings"
               width={100}
@@ -129,7 +131,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
 
           {/* Hamburger menu button for small screens */}
 
-          <div className="md:hidden flex justify-end items-center">
+          <div className="md:hidden flex justify-end items-center ">
             <div className="mr-2">
               <ThemeButton iconSize={18} />
             </div>
@@ -147,6 +149,13 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
 
           <div className="hidden md:flex gap-2 flex-row items-center">
             <ThemeButton iconSize={22} />
+            <button
+              type="button"
+              className="px-10 py-2 text-base rounded-full  bg-primary text-white  hover:bg-primary-light hover:scale-105"
+              onClick={() => startTour().start()}
+            >
+              Start Tour
+            </button>
             {userIdFromCookies ? (
               <>
                 {pathname !== "/feed" && (
@@ -180,22 +189,27 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
               </>
             ) : (
               <div className="hidden md:flex gap-2">
-                <ButtonLong
-                  href="https://github.com/Sanchitbajaj02/palettegram"
-                  newTab
-                  size="normal"
-                >
-                  <span className="flex items-center">
-                    <Github size={20} className="mr-2" /> {starCount} Stars
-                  </span>
-                </ButtonLong>
-                <ButtonLong href="/register" size="normal">
-                  Register
-                </ButtonLong>
-
-                <ButtonLong href="/login" size="normal">
-                  Login
-                </ButtonLong>
+                <span className="flex items-center git">
+                  <ButtonLong
+                    href="https://github.com/Sanchitbajaj02/palettegram"
+                    newTab
+                    size="normal"
+                  >
+                    <span className="flex items-center">
+                      <Github size={20} className="mr-2" /> {starCount} Stars
+                    </span>
+                  </ButtonLong>
+                </span>
+                <span className="flex items-center register">
+                  <ButtonLong href="/register" size="normal">
+                    Register
+                  </ButtonLong>
+                </span>
+                <span className="flex items-center loginin">
+                  <ButtonLong href="/login" size="normal">
+                    Login
+                  </ButtonLong>
+                </span>
               </div>
             )}
           </div>
