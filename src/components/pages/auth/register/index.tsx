@@ -43,8 +43,28 @@ export default function RegisterComponent() {
     });
   }
 
-  async function submitHander(event: React.FormEvent<HTMLFormElement>) {
+  async function checkEmail(email: string): Promise<boolean> {
+    try {
+      const response = await fetch(`https://disposable.debounce.io/?email=${email}`);
+      const data = await response.json();
+      if (data.disposable === "true") {
+        alert("Disposable email");
+        return false;
+      }
+      alert("Email is genuine");
+      return true;
+    } catch (error) {
+      console.error('Error:', error);
+      alert("An error occurred while checking the email.");
+      return false;
+    }
+  }
+
+  async function submitHandler(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    const isGenuineEmail = await checkEmail(data.email);
+    if (!isGenuineEmail) return;
 
     try {
       setIsLoading(true);
@@ -54,7 +74,7 @@ export default function RegisterComponent() {
       }
 
       if (data.password !== data.confirmpassword) {
-        throw new Error("Password and Confirm Password does not match");
+        throw new Error("Password and Confirm Password do not match");
       }
 
       if (data.password.length < 6 || data.password.length > 24) {
@@ -66,7 +86,7 @@ export default function RegisterComponent() {
       }
 
       if (!passwordRegex.test(data.password)) {
-        throw new Error("password format not matched");
+        throw new Error("Password format not matched");
       }
 
       const resp: Models.Document = await register(data);
@@ -134,7 +154,7 @@ export default function RegisterComponent() {
             </motion.p>
           </article>
 
-          <form method="POST" onSubmit={submitHander}>
+          <form method="POST" onSubmit={submitHandler}>
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
