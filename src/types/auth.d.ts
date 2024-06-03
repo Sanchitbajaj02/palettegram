@@ -30,6 +30,7 @@ export type userDetails = {
   data: userCollectionDB | {};
   error: boolean;
   loading: boolean;
+  accountId?: string
 };
 
 export enum LoginOptions {

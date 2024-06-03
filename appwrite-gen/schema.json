@@ -3,16 +3,16 @@
     {
       "$id": "651d85ea69357206cfe5",
       "name": "PalettegramDB",
-      "$createdAt": "2024-01-30T08:55:24.011+00:00",
-      "$updatedAt": "2024-01-30T08:55:24.011+00:00",
+      "$createdAt": "2024-06-02T07:21:11.678+00:00",
+      "$updatedAt": "2024-06-02T07:21:11.678+00:00",
       "enabled": true
     }
   ],
   "collections": [
     {
       "$id": "651d85ff826413d8f258",
-      "$createdAt": "2024-01-30T08:55:24.772+00:00",
-      "$updatedAt": "2024-01-30T08:55:24.772+00:00",
+      "$createdAt": "2024-06-02T07:21:12.609+00:00",
+      "$updatedAt": "2024-06-02T07:21:12.609+00:00",
       "$permissions": [
         "create(\"users\")",
         "read(\"users\")",
@@ -155,8 +155,8 @@
     },
     {
       "$id": "651d86daa59be4aad058",
-      "$createdAt": "2024-01-30T08:55:29.435+00:00",
-      "$updatedAt": "2024-01-30T08:55:29.435+00:00",
+      "$createdAt": "2024-06-02T07:21:18.439+00:00",
+      "$updatedAt": "2024-06-02T07:21:18.439+00:00",
       "$permissions": [
         "create(\"users\")",
         "read(\"users\")",
@@ -248,8 +248,8 @@
     },
     {
       "$id": "6559b707984a4f046a08",
-      "$createdAt": "2024-01-30T08:55:33.146+00:00",
-      "$updatedAt": "2024-01-30T08:55:33.146+00:00",
+      "$createdAt": "2024-06-02T07:21:21.836+00:00",
+      "$updatedAt": "2024-06-02T07:21:21.836+00:00",
       "$permissions": [
         "create(\"users\")",
         "read(\"users\")",
@@ -290,8 +290,8 @@
     },
     {
       "$id": "65acb78f522ef1f69f60",
-      "$createdAt": "2024-01-30T08:55:35.310+00:00",
-      "$updatedAt": "2024-01-30T08:55:35.310+00:00",
+      "$createdAt": "2024-06-02T07:21:23.345+00:00",
+      "$updatedAt": "2024-06-02T07:21:23.345+00:00",
       "$permissions": [
         "create(\"users\")",
         "read(\"users\")",
@@ -306,8 +306,8 @@
         {
           "key": "userId",
           "type": "relationship",
-          "status": "available",
-          "error": "",
+          "status": "failed",
+          "error": "Invalid index attribute \"65acb78f522ef1f69f60\" not found",
           "required": false,
           "array": false,
           "relatedCollection": "651d85ff826413d8f258",
@@ -336,8 +336,8 @@
     },
     {
       "$id": "65acb888874a695c8012",
-      "$createdAt": "2024-01-30T08:55:36.526+00:00",
-      "$updatedAt": "2024-01-30T08:55:36.526+00:00",
+      "$createdAt": "2024-06-02T07:21:24.803+00:00",
+      "$updatedAt": "2024-06-02T07:21:24.803+00:00",
       "$permissions": [
         "create(\"users\")",
         "read(\"users\")",
@@ -384,8 +384,8 @@
     },
     {
       "$id": "65cbb76c6ffb060ac5f6",
-      "$createdAt": "2024-02-13T18:39:40.459+00:00",
-      "$updatedAt": "2024-02-17T14:53:26.625+00:00",
+      "$createdAt": "2024-06-02T07:21:26.472+00:00",
+      "$updatedAt": "2024-06-02T07:21:26.472+00:00",
       "$permissions": [
         "create(\"users\")",
         "read(\"users\")",
@@ -418,8 +418,8 @@
   "buckets": [
     {
       "$id": "65a27126f17d920bff46",
-      "$createdAt": "2024-01-30T08:55:38.510+00:00",
-      "$updatedAt": "2024-02-06T03:40:12.783+00:00",
+      "$createdAt": "2024-06-02T07:21:27.621+00:00",
+      "$updatedAt": "2024-06-02T07:21:27.621+00:00",
       "$permissions": [
         "create(\"users\")",
         "read(\"users\")",
@@ -437,8 +437,8 @@
     },
     {
       "$id": "65cce67fb6df72883fba",
-      "$createdAt": "2024-02-14T16:12:47.750+00:00",
-      "$updatedAt": "2024-02-14T16:14:06.619+00:00",
+      "$createdAt": "2024-06-02T07:21:28.597+00:00",
+      "$updatedAt": "2024-06-02T07:21:28.597+00:00",
       "$permissions": [
         "create(\"users\")",
         "read(\"users\")",
