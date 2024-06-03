@@ -27,9 +27,10 @@ export type userCollectionDB = {
 // };
 
 export type userDetails = {
-  data: userCollectionDB | {};
+  data: userCollectionDB | unknown;
   error: boolean;
   loading: boolean;
+  accountId?: string;
 };
 
 export enum LoginOptions {
