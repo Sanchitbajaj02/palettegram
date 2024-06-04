@@ -1,7 +1,7 @@
 "use client";
 import { account, db, ID, palettegramDB, usersCollection, Query } from "./appwrite.config";
 import { generateAvatar } from "@/helper/avatarGenerator";
-import { Models } from "appwrite";
+import { Models, OAuthProvider } from "appwrite";
 
 /**
  * @abstract Register the user into the database
@@ -31,7 +31,7 @@ const register = async (userData: {
       throw new Error("User registration failed");
     }
 
-    const session = await account.createEmailSession(userData.email, userData.password);
+    const session = await account.createEmailPasswordSession(userData.email, userData.password);
 
     if (!session) {
       throw new Error("Session failed");
@@ -145,7 +145,7 @@ const getUserByUserId = async (userId: string) => {
 const login = async (email: string, password: string) => {
   try {
     await account.deleteSessions();
-    const response = await account.createEmailSession(email, password);
+    const response = await account.createEmailPasswordSession(email, password);
 
     if (!response) {
       throw new Error("Login failed");
@@ -203,7 +203,7 @@ const updatepassword = async (userData: any) => {
     if (password === "" || confirmpassword === "" || USER_ID === "" || SECRET === " ") {
       throw new Error("Request has failed");
     }
-    const response = await account.updateRecovery(USER_ID, SECRET, password, confirmpassword);
+    const response = await account.updateRecovery(USER_ID, SECRET, password);
     return response;
   } catch (error: any) {
     console.log(error);
@@ -287,7 +287,7 @@ const getSingleUser = async (email: string) => {
 const loginWithGithub = async () => {
   try {
     account.createOAuth2Session(
-      "github",
+      OAuthProvider.Github,
       `${process.env.NEXT_PUBLIC_BASE_URL}/feed`,
       `${process.env.NEXT_PUBLIC_BASE_URL}/login`,
       ["repo", "user"],
