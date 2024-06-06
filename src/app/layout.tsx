@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import { Metadata } from "next";
 import ReduxProvider from "@/redux/ReduxProvider";
 import { Toaster } from "sonner";
+import AnimatedCursor from "react-animated-cursor";
 
 import { Providers } from "./providers";
 
@@ -52,6 +53,27 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       suppressHydrationWarning
     >
       <body className={`${poppinsFont.className}  bg-white dark:bg-secondary`}>
+      <AnimatedCursor 
+        innerSize={9}
+        outerSize={40}
+        color="2, 2, 2"
+        outerAlpha={.2}
+        innerScale={0.7}
+        outerScale={3}
+        clickables={[
+          
+          'a',
+          'input[type="text"]',
+          'input[type="email"]',
+          'input[type="number"]',
+          'input[type="submit"]',
+          'input[type="image"]',
+          'label[for]',
+          'select',
+          'textarea',
+          'button',
+          '.link'
+        ]} />
         <Toaster
           position="top-right"
           duration={3000}
