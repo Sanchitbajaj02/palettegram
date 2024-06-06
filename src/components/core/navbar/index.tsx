@@ -252,7 +252,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
                 Login
               </Link>
 
-              {userAuth && userAuth.data?.$id && (
+              {userAuth?.data?.$id && (
                 <>
                   <Link
                     href={`/user/${userAuth.data?.$id}`}
