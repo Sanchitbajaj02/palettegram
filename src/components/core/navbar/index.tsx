@@ -40,8 +40,6 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
 
   const currentUser = useCallback(
     (userIdFromCookies: string) => {
-      console.log("inside currentUser");
-
       if (userIdFromCookies) {
         getUserByUserId(userIdFromCookies)
           .then((currUser: any) => {
@@ -54,8 +52,6 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
   );
 
   const getPostsFromDatabase = useCallback(() => {
-    console.log("inside getPostsFromDatabase");
-
     if (userIdFromCookies) {
       getAllPosts()
         .then((posts) => {
@@ -71,8 +67,6 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
 
   const getBookmarksFromDatabase = useCallback(
     (userIdFromCookies: string) => {
-      console.log("inside getBookmarksFromDatabase");
-
       if (userIdFromCookies) {
         getBookmarks(userIdFromCookies)
           .then((bookmarks) => {
@@ -120,7 +114,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
         <div className="max-w-screen-lg mx-auto flex items-center content-center justify-between backdrop-blur-sm bg-grey-100 bg-opacity-20 h-16 my-2">
           <Link href={userAuth.creds?.userId ? "/feed" : "/"}>
             <Image
-              className="navbar-brand fw-bold w-10 h-10 cursor pointer dark:shadow-md dark:shadow-gray-500 rounded-full ml-2 md:ml-0 hero"
+              className="navbar-brand fw-bold w-10 h-10 cursor-pointer dark:shadow-md dark:shadow-gray-500 rounded-full ml-2 md:ml-0 hero"
               src={"/assets/logo.png"}
               alt="settings"
               width={100}
@@ -129,7 +123,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
           </Link>
 
           {/* Hamburger menu button for small screens */}
-          <div className="md:hidden flex justify-end items-center ">
+          <div className="md:hidden flex justify-end items-center">
             <div className="mr-2">
               <ThemeButton iconSize={18} />
             </div>
@@ -161,24 +155,25 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
                     href="/feed"
                     className="mx-2 px-2 py-2 rounded-full bg-primary text-white hover:bg-primary-light hover:scale-105"
                   >
-                    <Home size={22} className="transition-all duration-300 " />
+                    <Home size={22} className="transition-all duration-300" />
                   </Link>
                 )}
                 <Link
                   href={`/user/${userAuth.data?.$id}`}
                   className="mx-2 px-2 py-2 rounded-full bg-primary text-white hover:bg-primary-light hover:scale-105"
                 >
-                  <User size={22} className="transition-all duration-300 " />
+                  <User size={22} className="transition-all duration-300" />
                 </Link>
 
                 <Link
                   href={`/user/bookmarks`}
                   className="mx-2 px-2 py-2 rounded-full bg-primary text-white hover:bg-primary-light hover:scale-105"
                 >
-                  <Bookmark size={22} className="transition-all duration-300 " />
+                  <Bookmark size={22} className="transition-all duration-300" />
                 </Link>
 
                 <button
+                  type="button"
                   className="mx-2 px-2 py-2 rounded-full bg-primary transition hover:bg-primary-light hover:scale-105 text-white"
                   onClick={logout}
                 >
@@ -233,7 +228,6 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
               >
                 Start Tour
               </button>
-              
               <Link
                 href="https://github.com/Sanchitbajaj02/palettegram"
                 target="_blank"
@@ -242,21 +236,18 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
               >
                 <Github size={20} className="mr-4" /> {starCount} Stars
               </Link>
-
               <Link
                 href="/register"
                 className="inline-block mx-2 px-6 py-2 text-sm rounded-full text-white bg-primary text-center hover:border-2 hover:bg-transparent"
               >
                 Register
               </Link>
-
               <Link
                 href="/login"
                 className="inline-block mx-2 px-6 py-2 text-sm rounded-full text-white bg-primary text-center hover:border-2 hover:bg-transparent"
               >
                 Login
               </Link>
-
               {userAuth && userAuth.data?.$id && (
                 <>
                   <Link
@@ -272,6 +263,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
                     <Bookmark size={22} className="transition-all duration-300" />
                   </Link>
                   <button
+                    type="button"
                     className="mx-2 px-2 py-2 rounded-full bg-primary transition text-white"
                     onClick={logout}
                   >
