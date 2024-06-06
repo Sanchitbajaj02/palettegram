@@ -228,6 +228,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
               >
                 Start Tour
               </button>
+
               <Link
                 href="https://github.com/Sanchitbajaj02/palettegram"
                 target="_blank"
@@ -236,18 +237,21 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
               >
                 <Github size={20} className="mr-4" /> {starCount} Stars
               </Link>
+
               <Link
                 href="/register"
                 className="inline-block mx-2 px-6 py-2 text-sm rounded-full text-white bg-primary text-center hover:border-2 hover:bg-transparent"
               >
                 Register
               </Link>
+
               <Link
                 href="/login"
                 className="inline-block mx-2 px-6 py-2 text-sm rounded-full text-white bg-primary text-center hover:border-2 hover:bg-transparent"
               >
                 Login
               </Link>
+
               {userAuth && userAuth.data?.$id && (
                 <>
                   <Link
