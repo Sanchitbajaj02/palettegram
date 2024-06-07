@@ -3,6 +3,8 @@ import Image from "next/image";
 import { ButtonLong } from "@/components/core/buttons";
 import { motion } from "framer-motion";
 
+import Newsletter from "../../core/newsletter/index";
+
 function HomePage({ accountId }: { accountId: string | undefined }) {
   return (
     <>
@@ -250,7 +252,9 @@ function HomePage({ accountId }: { accountId: string | undefined }) {
             </motion.p>
           </article>
         </section>
-
+        <section className="w-full">
+              <Newsletter />
+        </section> 
       </main>
     </>
   );
