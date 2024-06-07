@@ -10,7 +10,7 @@ export default function Custom404() {
       <Navbar />
       <section className="max-w-screen-lg mx-auto">
         <div className="flex flex-col items-center justify-center h-[80vh]">
-          <img src={NotFoundPic.src} alt="not found image" className="w-2/3 fluid" />
+          <img src={NotFoundPic.src} alt="not found image" className="max:w-2/3 sm:w-2/3 fluid" />
           <ButtonLong href="/" children={"Go Home"} size={"big"}/>
         </div>
       </section>
