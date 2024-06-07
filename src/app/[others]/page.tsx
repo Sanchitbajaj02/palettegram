@@ -1,25 +1,23 @@
 import { ButtonLong } from "@/components/core/buttons";
 import Footer from "@/components/core/footer";
 import Navbar from "@/components/core/navbar";
+import NotFoundPic from "/public/assets/404.png";
+import './page.css';
 
 export default function Custom404() {
   return (
     <>
       <Navbar />
-
       <section className="max-w-screen-lg mx-auto">
-        <div className="flex flex-col items-center justify-center h-[64vh]">
-          <h1 className="my-4 font-semibold text-4xl tracking-wide">
-            Error 404: Page does not Exist!
-          </h1>
-          <h2 className="my-4 text-2xl">Please check the url again</h2>
-          <ButtonLong href="/" size="big">
-            Get Back To Home
-          </ButtonLong>
+        <div className="flex flex-col items-center justify-center h-[80vh]">
+          <img src={NotFoundPic.src} alt="not found image" className="max:w-2/3 sm:w-2/3 fluid" />
+          <ButtonLong href="/" children={"Go Home"} size={"big"}/>
         </div>
       </section>
-
-      <Footer />
+        <br />
+        <br />
+        <br />
+      <Footer/>
     </>
   );
 }
