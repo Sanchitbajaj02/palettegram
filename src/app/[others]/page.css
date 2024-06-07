@@ -1,12 +1,12 @@
-.fluid{
-    animation: updown 1.5s ease-in-out infinite alternate;
+.fluid {
+  animation: updown 1.5s ease-in-out infinite alternate;
 }
 
 @keyframes updown {
-    from {
-        transform: translateY(0px);
-    }
-    to {
-        transform: translateY(10px);
-    }
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(10px);
+  }
 }
