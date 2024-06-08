@@ -25,8 +25,8 @@ const ScrollToTop: React.FC = () => {
     return () => {
       window.removeEventListener('scroll', toggleVisibility);
     };
-  }, []);
-
+  },  [toggleVisibility]);
+  
   return (
     <div className="fixed bottom-9 right-5 z-50">
       {isVisible && (
