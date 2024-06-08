@@ -356,6 +356,11 @@
   dependencies:
     glob "7.1.7"
 
+"@next/swc-win32-x64-msvc@13.5.4":
+  version "13.5.4"
+  resolved "https://registry.npmjs.org/@next/swc-win32-x64-msvc/-/swc-win32-x64-msvc-13.5.4.tgz"
+  integrity sha512-cyRvlAxwlddlqeB9xtPSfNSCRy8BOa4wtMo0IuI9P7Y0XT2qpDrpFKRyZ7kUngZis59mPVla5k8X1oOJ8RxDYg==
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.npmjs.org/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz"
@@ -856,7 +861,7 @@ anymatch@~3.1.2:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
-"appwrite-gen@file:C:\\Users\\milky_33vggyi\\palettegram\\appwrite-gen":
+"appwrite-gen@file:C:\\Users\\hp\\Documents\\GitHub\\palettegram\\appwrite-gen":
   version "1.0.0"
   resolved "file:appwrite-gen"
   dependencies:
