@@ -16,7 +16,7 @@ export default async function Terms() {
           updatedDate="2024-02-26"
           effectiveDate="2024-02-26"
         />
-        <section>
+        <section className="sm:px-0 px-5 wrap">
           <h2 className="text-2xl my-4 font-semibold tracking-wide">Welcome to Palettegram!</h2>
 
           <p className="text-base my-1">
