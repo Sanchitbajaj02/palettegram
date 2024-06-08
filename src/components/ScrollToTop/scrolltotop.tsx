@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import './scrolltotop.css';
 
 const ScrollToTop: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -29,9 +28,12 @@ const ScrollToTop: React.FC = () => {
   }, []);
 
   return (
-    <div className="scroll-to-top">
+    <div className="fixed bottom-9 right-5 z-50">
       {isVisible && (
-        <button onClick={scrollToTop} className="scroll-to-top-button">
+        <button
+          onClick={scrollToTop}
+          className="bg-pink-500 hover:bg-pink-600 text-white p-2 rounded-full h-12 w-12 flex items-center justify-center shadow-lg transition-transform transform hover:scale-110"
+        >
           ↑
         </button>
       )}
