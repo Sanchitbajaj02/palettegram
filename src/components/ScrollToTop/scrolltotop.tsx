@@ -30,7 +30,8 @@ const ScrollToTop: React.FC = () => {
   return (
     <div className="fixed bottom-9 right-5 z-50">
       {isVisible && (
-        <button
+        <button 
+          type="button"
           onClick={scrollToTop}
           className="bg-pink-500 hover:bg-pink-600 text-white p-2 rounded-full h-12 w-12 flex items-center justify-center shadow-lg transition-transform transform hover:scale-110"
         >
