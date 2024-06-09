@@ -33,7 +33,7 @@ const ScrollToTop: React.FC = () => {
         <button 
           type="button"
           onClick={scrollToTop}
-          className="bg-pink-500 hover:bg-pink-600 text-white p-2 rounded-full h-12 w-12 flex items-center justify-center shadow-lg transition-transform transform hover:scale-110"
+          className="bg-primary hover:bg-primary-105 text-white p-2 rounded-full h-12 w-12 flex items-center justify-center shadow-lg transition-transform transform hover:scale-110"
         >
           ↑
         </button>
