@@ -3,7 +3,9 @@ import { Poppins } from "next/font/google";
 import { Metadata } from "next";
 import ReduxProvider from "@/redux/ReduxProvider";
 import { Toaster } from "sonner";
+
 import AnimatedCursor from "react-animated-cursor";
+
 
 import { Providers } from "./providers";
 
@@ -85,6 +87,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <Providers>
           <ReduxProvider>{children}</ReduxProvider>
         </Providers>
+        <ScrollToTop />
       </body>
     </html>
   );
