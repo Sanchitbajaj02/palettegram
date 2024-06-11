@@ -5,7 +5,7 @@ import ReduxProvider from "@/redux/ReduxProvider";
 import { Toaster } from "sonner";
 
 import AnimatedCursor from "react-animated-cursor";
-
+import ScrollToTop from "@/components/ScrollToTop/scrolltotop";
 
 import { Providers } from "./providers";
 
