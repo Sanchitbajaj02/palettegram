@@ -1,6 +1,10 @@
 export async function getGithubStars(): Promise<number> {
   try {
-    const githubApiData = await fetch("https://api.github.com/repos/sanchitbajaj02/palettegram");
+    const githubApiData = await fetch("https://api.github.com/repos/sanchitbajaj02/palettegram", {
+      next: {
+        revalidate: 3600,
+      },
+    });
     if (!githubApiData.ok) {
       throw new Error("Not fetching data from API");
     }
