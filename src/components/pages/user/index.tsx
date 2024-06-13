@@ -66,7 +66,7 @@ export default function User({ userId }: { userId: string }) {
       };
       await navigator.share(shareData);
     } catch (err) {
-      console.log("Error : ", err);
+      + toastify(`Failed to share profile`, "error");
     }
   };
 
@@ -75,7 +75,7 @@ export default function User({ userId }: { userId: string }) {
       await navigator.clipboard.writeText(window.location.href);
       toastify("Profile URL copied!!", "success");
     } catch (err) {
-      console.log("Error : ", err);
+      + toastify(`Failed to share profile`, "error");
     }
   };
 
@@ -154,8 +154,8 @@ export default function User({ userId }: { userId: string }) {
                     className=" w-[135px] h-[135px] relative inline-block border-4 border-white dark:border-slate-800 rounded-full object-cover cursor-pointer"
                   />
                 </div>
-                <div className="flex gap-4 items-center">
-                  <button>
+                <div className="flex gap-2 sm:gap-4 items-center">
+                  <button type="button">
                     <Share2
                       width={22}
                       onClick={() => ShareHandler()}
@@ -167,7 +167,7 @@ export default function User({ userId }: { userId: string }) {
                       className="hidden sm:inline h-7 w-7 sm:h-9 sm:w-9 border-2 p-1 rounded-full text-slate-700 dark:text-slate-400 border-slate-700 dark:border-slate-400 cursor-pointer "
                     />
                   </button>
-                  <button>
+                  <button type="button">
                     {currentUserID && (
                       <Edit
                         width={25}
