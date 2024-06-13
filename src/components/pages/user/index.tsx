@@ -1,6 +1,16 @@
 "use client";
 import { useState, Suspense, useMemo } from "react";
-import { Briefcase, Link2, Mail, MapPin, ArrowLeft, Edit, Edit3, Calendar } from "lucide-react";
+import {
+  Briefcase,
+  Link2,
+  Mail,
+  MapPin,
+  ArrowLeft,
+  Edit,
+  Edit3,
+  Calendar,
+  Share2,
+} from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -9,7 +19,7 @@ import Loader from "@/app/loading";
 import TrendingFeed from "@/components/core/trendingFeed";
 import Footer from "@/components/core/footer";
 import { ButtonLong } from "@/components/core/buttons";
-
+import { toastify } from "@/helper/toastify";
 import UserPosts from "./userPosts";
 import ImageUpload from "./imageUpload";
 import UpdateCard from "./updateCard";
@@ -45,6 +55,28 @@ export default function User({ userId }: { userId: string }) {
       title: title,
     });
     setHovered(true);
+  };
+
+  const ShareHandler = async () => {
+    try {
+      const shareData = {
+        title: "Share Profile!!",
+        text: "Share your profile!!",
+        url: window.location.href,
+      };
+      await navigator.share(shareData);
+    } catch (err) {
+      console.log("Error : ", err);
+    }
+  };
+
+  const CopyHandler = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      toastify("Profile URL copied!!", "success");
+    } catch (err) {
+      console.log("Error : ", err);
+    }
   };
 
   return (
@@ -123,6 +155,18 @@ export default function User({ userId }: { userId: string }) {
                   />
                 </div>
                 <div className="flex gap-4 items-center">
+                  <button>
+                    <Share2
+                      width={22}
+                      onClick={() => ShareHandler()}
+                      className="sm:hidden h-7 w-7 sm:h-9 sm:w-9 border-2 p-1 rounded-full text-slate-700 dark:text-slate-400 border-slate-700 dark:border-slate-400 cursor-pointer "
+                    />
+                    <Share2
+                      width={22}
+                      onClick={() => CopyHandler()}
+                      className="hidden sm:inline h-7 w-7 sm:h-9 sm:w-9 border-2 p-1 rounded-full text-slate-700 dark:text-slate-400 border-slate-700 dark:border-slate-400 cursor-pointer "
+                    />
+                  </button>
                   <button>
                     {currentUserID && (
                       <Edit
