@@ -276,13 +276,13 @@ const getSingleUser = async (email: string) => {
   }
 };
 
-/* const loginWithGoogle = async () => {
+const loginWithGoogle = async () => {
   account.createOAuth2Session(
     "google",
     "http://localhost:3000/feed", // Success URL
     "http://localhost:3000", // Failure URL
   );
-}; */
+};
 
 const loginWithGithub = async () => {
   try {
@@ -360,5 +360,6 @@ export {
   updatepassword,
   // getUserDetails,
   loginWithGithub,
+  loginWithGoogle,
   getUserByUserId,
 };
