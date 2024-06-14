@@ -12,7 +12,13 @@ const nextConfig = {
   },
   images: {
     dangerouslyAllowSVG: true,
-    domains: ["cloud.appwrite.io", "source.boringavatars.com", "media.dev.to", "placehold.co"],
+    domains: [
+      "cloud.appwrite.io",
+      "source.boringavatars.com",
+      "media.dev.to",
+      "placehold.co",
+      "img.icons8.com",
+    ],
   },
 
   experimental: {
@@ -22,7 +28,7 @@ const nextConfig = {
       "@react-email/html",
     ],
   },
-  transpilePackages: ["@react-email/components", "@react-email/render", "@react-email/html"],
+  transpilePackages: [],
 };
 
 module.exports = nextConfig;
