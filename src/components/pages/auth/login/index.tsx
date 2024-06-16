@@ -64,7 +64,7 @@ export default function LoginComponent() {
         throw new Error("password format not matched");
       }
 
-      const resp = await login(data.email, data.password);
+      const { user: resp, expires } = await login(data.email, data.password);
 
       if (resp && resp.email === data.email) {
         const payload: userCollectionDB = {
@@ -78,9 +78,9 @@ export default function LoginComponent() {
           $updatedAt: resp.$updatedAt,
         };
 
-        setCookie(null, "accountId", payload?.accountId);
-        setCookie(null, "isVerified", String(payload?.isVerified));
-        setCookie(null, "userId", payload?.$id);
+        setCookie(null, "accountId", payload?.accountId, { expires });
+        setCookie(null, "isVerified", String(payload?.isVerified), { expires });
+        setCookie(null, "userId", payload?.$id, { expires });
 
         dispatch(saveUserToStore(payload));
         toastify("Login Successful", "success");

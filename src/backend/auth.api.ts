@@ -143,18 +143,20 @@ const getUserByUserId = async (userId: string) => {
 };
 
 const login = async (email: string, password: string) => {
+  // Delete current session, if any
   try {
-    await account.deleteSessions();
-    const response = await account.createEmailSession(email, password);
-
-    if (!response) {
+    await account.deleteSession("current");
+  } catch (error: any) {
+    if (error?.type !== "general_unauthorized_scope") {
       throw new Error("Login failed");
     }
+  }
 
-    const accountId: string = response && response.userId;
-
+  try {
+    const session = await account.createEmailSession(email, password);
+    const { userId: accountId, expire } = session;
     const user = await getUserByAccountId(accountId);
-    return user;
+    return { user, expires: new Date(expire) };
   } catch (error: any) {
     console.log(error);
     throw new Error(error.message);
