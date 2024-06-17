@@ -716,7 +716,7 @@
   resolved "https://registry.npmjs.org/@tiptap/extension-text/-/extension-text-2.2.4.tgz"
   integrity sha512-NlKHMPnRJXB+0AGtDlU0P2Pg+SdesA2lMMd7JzDUgJgL7pX2jOb8eUqSeOjFKuSzFSqYfH6C3o6mQiNhuQMv+g==
 
-"@tiptap/pm@~2.1.16":
+"@tiptap/pm@2.1.16":
   version "2.1.16"
   resolved "https://registry.yarnpkg.com/@tiptap/pm/-/pm-2.1.16.tgz#1f43024e2660f2a9fe3057b71e57f0550f7d3387"
   integrity sha512-yibLkjtgbBSnWCXbDyKM5kgIGLfMvfbRfFzb8T0uz4PI/L54o0a4fiWSW5Fg10B5+o+NAXW2wMxoId8/Tw91lQ==
@@ -3381,7 +3381,7 @@ next-themes@0.2.1:
   resolved "https://registry.yarnpkg.com/next-themes/-/next-themes-0.2.1.tgz#0c9f128e847979daf6c67f70b38e6b6567856e45"
   integrity sha512-B+AKNfYNIzh0vqQQKqQItTS8evEouKD7H5Hj3kmuPERwddR2TxvDSFZuTj6T7Jfn1oyeUyJMydPl1Bkxkh0W7A==
 
-next@^13.5.4:
+next@13.5.4:
   version "13.5.4"
   resolved "https://registry.yarnpkg.com/next/-/next-13.5.4.tgz#7e6a93c9c2b9a2c78bf6906a6c5cc73ae02d5b4d"
   integrity sha512-+93un5S779gho8y9ASQhb/bTkQF17FNQOtXLKAj3lsNgltEcF0C5PMLLncDmH+8X1EnJH1kbqAERa29nRXqhjA==
@@ -4008,10 +4008,10 @@ react-property@2.0.2:
   resolved "https://registry.npmjs.org/react-property/-/react-property-2.0.2.tgz"
   integrity sha512-+PbtI3VuDV0l6CleQMsx2gtK0JZbZKbpdu5ynr+lbsuvtmgbNcS3VM0tuY2QjFNOcWxvXeHjDpy42RO+4U2rug==
 
-react-redux@~8.1.2:
-  version "8.1.3"
-  resolved "https://registry.npmjs.org/react-redux/-/react-redux-8.1.3.tgz"
-  integrity sha512-n0ZrutD7DaX/j9VscF+uTALI3oUPa/pO4Z3soOBIjuRn/FzVu6aehhysxZCLi6y7duMf52WNZGMl7CtuK5EnRw==
+react-redux@8.1.2:
+  version "8.1.2"
+  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-8.1.2.tgz#9076bbc6b60f746659ad6d51cb05de9c5e1e9188"
+  integrity sha512-xJKYI189VwfsFc4CJvHqHlDrzyFTY/3vZACbE+rr/zQ34Xx1wQfB4OTOSeOSNrF6BDVe8OOdxIrAnMGXA3ggfw==
   dependencies:
     "@babel/runtime" "^7.12.1"
     "@types/hoist-non-react-statics" "^3.3.1"
@@ -4460,6 +4460,7 @@ string-argv@0.3.2:
   integrity sha512-aqD2Q0144Z+/RqG52NeHEkZauTAUWJO8c6yTftGJKO3Tja5tUgIfmIl6kExvhtxSDP7fXB6DvzkfMpCd/F3G+Q==
 
 "string-width-cjs@npm:string-width@^4.2.0", string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
+  name string-width-cjs
   version "4.2.3"
   resolved "https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -4970,6 +4971,7 @@ which@^2.0.1:
     isexe "^2.0.0"
 
 "wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@^7.0.0:
+  name wrap-ansi-cjs
   version "7.0.0"
   resolved "https://registry.npmjs.org/wrap-ansi/-/wrap-ansi-7.0.0.tgz"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
