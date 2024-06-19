@@ -124,7 +124,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
 
           {/* Hamburger menu button for small screens */}
           <div className="md:hidden flex justify-end items-center">
-            <div className="mr-2">
+            <div className="mr-2" id="nav-theme">
               <ThemeButton iconSize={18} />
             </div>
             <div className="flex">
@@ -140,7 +140,9 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
           </div>
 
           <div className="hidden md:flex gap-2 flex-row items-center">
-            <ThemeButton iconSize={22} />
+            <div id="theme">
+              <ThemeButton iconSize={22} />
+            </div>
             <button
               type="button"
               className="px-10 py-2 text-base rounded-full bg-primary text-white hover:bg-primary-light hover:scale-105"
