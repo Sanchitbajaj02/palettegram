@@ -35,7 +35,7 @@ export const startTour = () => {
     id: "step2",
     text: "Click to change the theme either dark mode or light mode.",
     attachTo: {
-      element: ".themeButton",
+      element: "#theme",
       on: "bottom",
     },
     buttons: [
@@ -99,8 +99,8 @@ export const startTour = () => {
     id: "step6",
     text: 'Click "Start your journey" to begin exploring all the exciting features we offer. Let\'s get started on creating something amazing together!',
     attachTo: {
-      element: "section:nth-of-type(1)",
-      on: "bottom",
+      element: "#start-your-journey",
+      on: "bottom-start",
     },
     buttons: [
       {
