@@ -51,6 +51,7 @@ function HomePage({ accountId }: { accountId: string | undefined }) {
                 delay: 0.2,
               }}
               className="flex justify-center md:justify-start"
+              id="start-your-journey"
             >
               {accountId ? (
                 <ButtonLong href="/feed" size="big">
