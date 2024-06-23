@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Twitter, Facebook, Linkedin, Github } from "lucide-react";
 
 export default function Footer({ isFixed }: { isFixed?: boolean }) {
   const generalList = [
@@ -58,12 +59,12 @@ export default function Footer({ isFixed }: { isFixed?: boolean }) {
           <div className="text-left">
             <h2 className="text-secondary dark:text-white text-xl">Palettegram</h2>
             <p className="text-slate-500 text-sm pt-2">Social Media for Professionals</p>
+            <span className="text-slate-500 text-sm pt-2"> A social media platform built exclusively for design professionals to share.</span>
           </div>
         </div>
         <div className="flex w-full md:w-auto justify-between">
           <div className="flex flex-wrap flex-col gap-2 text-left px-5 py-2 lg:w-60">
             <h3 className="text-secondary dark:text-white text-xl mb-2">General</h3>
-
             {generalList &&
               generalList.map((item) => {
                 return (
@@ -91,9 +92,25 @@ export default function Footer({ isFixed }: { isFixed?: boolean }) {
                   </Link>
                 );
               })}
+              <h1 className="text-secondary dark:text-white text-lg">Social media</h1>
+              <div className="flex justify-start  space-x-4">
+        <Link href="https://twitter.com">
+          <Twitter className="text-slate-400 hover:text-primary-light transition-all duration-300" size={24} />
+        </Link>
+        <Link href="https://facebook.com">
+          <Facebook className="text-slate-400 hover:text-primary-light transition-all duration-300" size={24} />
+        </Link>
+        <Link href="https://linkedin.com">
+          <Linkedin className="text-slate-400 hover:text-primary-light transition-all duration-300" size={24} />
+        </Link>
+        <Link href="https://github.com">
+          <Github className="text-slate-400 hover:text-primary-light transition-all duration-300" size={24} />
+        </Link>
+      </div>
           </div>
         </div>
       </div>
+      
       <div className="py-4 space-y-2 text-center">
         <p className="text-xs">
           Copyright &copy; {new Date().getFullYear()} Palettegram | MIT License <br />
@@ -103,3 +120,4 @@ export default function Footer({ isFixed }: { isFixed?: boolean }) {
     </section>
   );
 }
+ 
