@@ -11,11 +11,3 @@ jobs:
       - uses: toshimaru/auto-author-assign@v1.1.0
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-
-      - name: Add Reviewers
-        uses: kentaro-m/auto-assign-action@v2.0.0
-        with:
-          add-reviewers: true
-          reviewers: 
-            - sanchitbajaj02
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
