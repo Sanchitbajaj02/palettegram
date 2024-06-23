@@ -94,10 +94,9 @@ This repository also provides one such platform where contributors come over and
 
 ### Demo Credentials to test applications:
 
-|Email Address| Password|
-|--------|--------------|
-|demo@gmail.com|SharePassword@101|
-
+| Email Address  | Password          |
+| -------------- | ----------------- |
+| demo@gmail.com | SharePassword@101 |
 
 ## 👋 Introduction
 
@@ -157,6 +156,10 @@ Contributing to open-source software (OSS) projects can be a rewarding and fulfi
 - [Setting up a development environment](docs/setup.md)
 
 - [Setting up Appwrite](docs/appwrite.md)
+
+## 📈 Repository Stats
+
+![Repository Stats](https://repobeats.axiom.co/api/embed/132a4dc81996b999ecca37a3833be6e21973b3ab.svg "Repobeats analytics image")
 
 ## ✨ Top Contributors
 
