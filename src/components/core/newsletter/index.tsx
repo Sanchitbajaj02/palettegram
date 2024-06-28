@@ -1,19 +1,34 @@
 "use client";
 import React, { useState } from "react";
+import emailjs from 'emailjs-com';
 // import { Linkedin, Facebook, Twitter, Instagram } from "lucide-react";
 import { ButtonLong } from "../buttons/index";
 
 const Newsletter: React.FC = () => {
   const [subscriberEmail, setSubscriberEmail] = useState("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // const { name , value } = e.target ;
-    setSubscriberEmail(e.target.value);
-  };
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   // const { name , value } = e.target ;
+  //   setSubscriberEmail(e.target.value);
+  // };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("clicked subscribe button ");
+    const templateParams={
+      from_name:"PaletteGram",
+      subject:"Welcome to PaletteGram Newsletter!",
+      email_id:subscriberEmail,
+      message:"Thank you for subscribing to our newsletter. We will keep you updated with our latest offers and updates.",
+    }
+
+    emailjs.send("service_7lb51ka","template_njg2wcp",templateParams,"-OBmWZjadmE1odXKm")
+    .then((response)=>{
+      console.log("email sent",response)
+      setSubscriberEmail("");
+    })
+    .catch((err)=>{
+      console.log("error",err)
+    })
 
     // endpoint for appwrite backend
   };
@@ -26,7 +41,7 @@ const Newsletter: React.FC = () => {
       </h2>
       <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4 md:flex-row">
         <input
-          onChange={handleChange}
+          onChange={(e)=>setSubscriberEmail(e.target.value)}
           name="subscriberEmail"
           type="text"
           placeholder="Email Address"
