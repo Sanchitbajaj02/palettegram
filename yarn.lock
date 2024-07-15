@@ -861,7 +861,7 @@ anymatch@~3.1.2:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
-"appwrite-gen@file:C:\\Users\\siddi\\OneDrive\\Desktop\\Contribute\\palettegram\\appwrite-gen":
+"appwrite-gen@file:C:\\Users\\hp\\palettegram\\appwrite-gen":
   version "1.0.0"
   resolved "file:appwrite-gen"
   dependencies:

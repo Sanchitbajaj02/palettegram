@@ -256,6 +256,7 @@ function HomePage({ accountId }: { accountId: string | undefined }) {
         <section className="w-full">
               <Newsletter />
         </section> 
+        <script src="//code.tidio.co/fdylvmddtyb7vzsk5frdt3ncrk6cwobs.js" async></script>
       </main>
     </>
   );
