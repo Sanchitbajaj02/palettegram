@@ -3,7 +3,7 @@
 @import "tailwindcss/utilities";
 
 .shepherd-element {
-    @apply bg-white rounded-xl border-4 border-primary shadow-lg p-1 transform transition-transform duration-300 scale-100;
+    @apply bg-white rounded-xl border-4 border-primary shadow-lg p-1 transform transition-transform duration-300 scale-100 z-custom;
 }
 
 .shepherd-element:hover {
@@ -45,4 +45,8 @@
 
 .shepherd-button:active {
     @apply transform translate-y-0;
+}
+
+.shepherd-modal-overlay-container {
+    @apply z-50
 }
