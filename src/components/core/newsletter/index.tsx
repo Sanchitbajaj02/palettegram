@@ -43,7 +43,7 @@ const Newsletter: React.FC = () => {
         <input
           onChange={(e)=>setSubscriberEmail(e.target.value)}
           name="subscriberEmail"
-          type="text"
+          type="email"
           placeholder="Email Address"
           className="w-full bg-white text-black border border-black py-1 px-3 rounded"
         />
