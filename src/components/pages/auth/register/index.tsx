@@ -89,8 +89,13 @@ export default function RegisterComponent() {
       dispatch(saveUserToStore(payload));
 
       setIsLoading(false);
-      toastify("Register Successful. Please check your email to verify", "success");
-      router.push("/verify");
+      if (process.env.NODE_ENV === "production") {
+        toastify("Register Successful. Please check your email to verify", "success");
+        router.push("/verify");
+      } else {
+        toastify("Register Successful", "success");
+        router.push("/feed");
+      }
     } catch (error: any) {
       setIsLoading(false);
 
