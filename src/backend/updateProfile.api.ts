@@ -39,7 +39,7 @@ const saveImage = async (image: File) => {
     const resp = await storage.createFile(userBucketStorage, ID.unique(), image);
 
     if (!resp) {
-      console.log(resp);
+      // console.log(resp);
       throw new Error("Photo cannot be uploaded");
     }
     return resp;
@@ -50,7 +50,7 @@ const saveImage = async (image: File) => {
 
 const updateImageURL = async (userId: string, image: string, isBanner: boolean) => {
   try {
-    console.log(image);
+    // console.log(image);
 
     if (isBanner) {
       const result01 = await db.updateDocument(palettegramDB, usersCollection, userId, {

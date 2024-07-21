@@ -95,7 +95,7 @@ const Navbar = ({ starCount }: { starCount?: number }) => {
     }
 
     return () => {
-      console.log("cleanup");
+      // console.log("cleanup");
     };
   }, [currentUser, getBookmarksFromDatabase, getPostsFromDatabase, userIdFromCookies]);
 
