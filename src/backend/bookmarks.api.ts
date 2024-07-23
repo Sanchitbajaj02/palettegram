@@ -33,7 +33,7 @@ const getBookmarks = async (userId: string) => {
 const saveBookmark = async (userId: string, postId: string) => {
   try {
     const getSavedBookmarkData = await getBookmarks(userId);
-    console.log(getSavedBookmarkData);
+    // console.log(getSavedBookmarkData);
     if (!getSavedBookmarkData) {
       throw new Error("Account does not exist");
     }
