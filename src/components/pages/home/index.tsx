@@ -138,7 +138,7 @@ function HomePage({ accountId }: { accountId: string | undefined }) {
               }}
               className="text-xl md:text-lg lg:text-xl text-center my-8 text-black dark:text-white md:text-right"
             >
-              A social media platform built exclusively for design professionals to share, discover and discuss cutting-edge UI/UX designs and color palettes.
+              Palettegram is a dedicated online community for design professionals where they can share, explore, and collaborate on innovative UI/UX designs and color schemes.
             </motion.p>
           </article>
         </section>
@@ -171,7 +171,7 @@ function HomePage({ accountId }: { accountId: string | undefined }) {
               }}
               className="text-xl my-6 font-medium text-center text-secondary dark:text-white md:text-2xl md:text-left"
             >
-              Are you a developer looking for design inspiration for your next website? Browse through a variety of styles by other developers and get inspired!
+              Are you a developer in search of design inspiration for your next website? Discover a wide array of styles crafted by fellow developers and get inspired!
             </motion.p>
           </article>
 
@@ -235,7 +235,7 @@ function HomePage({ accountId }: { accountId: string | undefined }) {
               }}
               className="text-3xl md:text-6xl text-center font-extrabold tracking-wide text-black dark:text-white md:text-right"
             >
-              Create, Showcase Collaborate
+              Create, Showcase, and Collaborate
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, x: 100 }}
@@ -249,7 +249,7 @@ function HomePage({ accountId }: { accountId: string | undefined }) {
               }}
               className="text-xl md:text-2xl text-center my-8 text-black dark:text-white md:text-right"
             >
-              Show off your design talent through projects, blogs and get feedback from other developers. Partner up with others, be a part of a collaborative community. 
+              Demonstrate your design skills through projects and blogs, and receive feedback from fellow developers. Join a collaborative community and partner with others to enhance your work.
             </motion.p>
           </article>
         </section>
