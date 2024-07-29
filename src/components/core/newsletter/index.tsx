@@ -23,7 +23,7 @@ const Newsletter: React.FC = () => {
 
     emailjs.send("service_7lb51ka","template_njg2wcp",templateParams,"-OBmWZjadmE1odXKm")
     .then((response)=>{
-      console.log("email sent",response)
+      // console.log("email sent",response)
       setSubscriberEmail("");
     })
     .catch((err)=>{

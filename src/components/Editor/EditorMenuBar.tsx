@@ -163,7 +163,7 @@ const EditorMenubar = ({ editor }: { editor: Editor }) => {
               onClick={(e) => {
                 e.preventDefault();
                 menu.onFunction();
-                console.log("cick");
+                // console.log("cick");
               }}
               disabled={!menu.offFunction}
               className={

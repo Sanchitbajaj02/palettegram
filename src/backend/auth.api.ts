@@ -74,7 +74,7 @@ const register = async (userData: {
 
 const verifyUser = async (accountId: string, secret: string) => {
   try {
-    console.log("data:", accountId, secret);
+    // console.log("data:", accountId, secret);
 
     const verifyResponse = await account.updateVerification(accountId, secret);
 
@@ -259,7 +259,7 @@ const saveDataToDatabase = async (session: any) => {
     if (!resp) {
       throw new Error("Database not working");
     }
-    console.log(resp);
+    // console.log(resp);
     return resp;
   } catch (error: any) {
     console.log(error.message);
@@ -330,7 +330,7 @@ const saveDataToDatabaseForOauth = async (session: Models.User<Models.Preference
     if (!resp) {
       throw new Error("Database not working");
     }
-    console.log(resp);
+    // console.log(resp);
     return resp;
   } catch (error: any) {
     console.log(error.message);
