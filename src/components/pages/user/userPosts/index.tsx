@@ -34,7 +34,7 @@ export default function UserPosts({ userId }: { userId: string }) {
   useEffect(() => {
     getAllUserPosts(userId)
       .then((allPosts: any | undefined) => {
-        console.log("posts inside api", allPosts);
+        // console.log("posts inside api", allPosts);
         if (allPosts && allPosts.length > 0) {
           setUserPosts(allPosts);
         }
@@ -45,11 +45,11 @@ export default function UserPosts({ userId }: { userId: string }) {
       });
 
     return () => {
-      console.log("cleanup");
+      // console.log("cleanup");
     };
   }, [userId]);
 
-  console.log("all user posts:", userPosts);
+  // console.log("all user posts:", userPosts);
 
   return (
     <>

@@ -8,6 +8,9 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      zIndex: {
+        custom: 900,
+      },
       colors: {
         primary: "#f02e65",
         onhover: "#F97AC0",

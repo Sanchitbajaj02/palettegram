@@ -78,7 +78,7 @@ const CreatePost = () => {
       if (!savetoDb) {
         throw new Error();
       }
-      console.log(savetoDb, "svaetoDB");
+      // console.log(savetoDb, "svaetoDB");
       dispatch(addPost(finalDataToUpload));
       toastify("Post uploaded successfully", "success");
 
