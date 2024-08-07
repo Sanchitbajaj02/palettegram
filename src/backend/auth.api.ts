@@ -47,12 +47,15 @@ const register = async (userData: {
       throw new Error("User data can't be saved properly");
     }
 
-    const createVerify = await account.createVerification(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/verify`,
-    );
+    // send verification email in production mode
+    if (process.env.NODE_ENV === "production") {
+      const createVerify = await account.createVerification(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/verify`,
+      );
 
-    if (!createVerify) {
-      throw new Error("Error sending verification email");
+      if (!createVerify) {
+        throw new Error("Error sending verification email");
+      }
     }
 
     return dbData;
@@ -71,7 +74,7 @@ const register = async (userData: {
 
 const verifyUser = async (accountId: string, secret: string) => {
   try {
-    console.log("data:", accountId, secret);
+    // console.log("data:", accountId, secret);
 
     const verifyResponse = await account.updateVerification(accountId, secret);
 
@@ -245,7 +248,10 @@ const saveDataToDatabase = async (session: any) => {
     const resp = await db.createDocument(palettegramDB, usersCollection, ID.unique(), {
       email: session.email,
       fullName: session.name,
-      isVerified: session.emailVerification,
+      isVerified:
+        process.env.NODE_ENV === "development"
+          ? true // user verified by default in dev environment
+          : session.emailVerification,
       accountId: session.$id,
       username: session?.prefs?.username,
       avatarURL: avatar,
@@ -253,7 +259,7 @@ const saveDataToDatabase = async (session: any) => {
     if (!resp) {
       throw new Error("Database not working");
     }
-    console.log(resp);
+    // console.log(resp);
     return resp;
   } catch (error: any) {
     console.log(error.message);
@@ -324,7 +330,7 @@ const saveDataToDatabaseForOauth = async (session: Models.User<Models.Preference
     if (!resp) {
       throw new Error("Database not working");
     }
-    console.log(resp);
+    // console.log(resp);
     return resp;
   } catch (error: any) {
     console.log(error.message);

@@ -8,6 +8,7 @@ import AnimatedCursor from "react-animated-cursor";
 import ScrollToTop from "@/components/ScrollToTop/scrolltotop";
 
 import { Providers } from "./providers";
+import LenisWrapper from "@/helper/leniswrapper";
 
 const poppinsFont = Poppins({
   subsets: ["latin"],
@@ -49,6 +50,7 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
+    <LenisWrapper>
     <html
       lang="en"
       className={`${poppinsFont.className} scrollbar-thin scrollbar-thumb-primary scrollbar-track-secondary-light scrollbar-track-rounded-full`}
@@ -90,5 +92,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <ScrollToTop />
       </body>
     </html>
+    </LenisWrapper>
   );
 }
