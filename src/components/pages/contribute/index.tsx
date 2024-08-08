@@ -5,6 +5,7 @@ import Footer from "@/components/core/footer";
 import Navbar from "@/components/core/navbar";
 import { Forking, AppwriteSetup, DevSetup } from "@/components/core/contributionSections";
 import { motion, useScroll, useSpring } from "framer-motion";
+import ProgressBar from "@/components/ProgressBar";
 
 // Component to render the contribution guide with dynamic tabs
 export default function Contribute() {
@@ -75,10 +76,11 @@ export default function Contribute() {
         </article>
         <article>
           <Tabs currentTab={currentTab || ""} />
-          <motion.div
+          {/* <motion.div
             className="fixed bottom-0 left-0 right-0 h-2 bg-primary origin-center"
             style={{ scaleX }}
-          />
+          /> */}
+          <ProgressBar start={"origin-center"} />
         </article>
       </section>
       <Footer />

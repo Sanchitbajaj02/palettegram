@@ -14,7 +14,7 @@ export default async function Home() {
 
   return (
     <>
-      <ProgressBar />
+      <ProgressBar start={"origin-left"} />
       <Navbar starCount={starCount} />
       <HomePage accountId={accountId} />
       <Footer />
