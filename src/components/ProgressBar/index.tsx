@@ -14,7 +14,6 @@ const ProgressBar = () => {
             const scrollPercentage = Math.floor((scrollY / (docHeight - windowHeight)) * 100);
             setProgressWidth(scrollPercentage);
         }
-        console.log(progressWidth)
 
       window.addEventListener("scroll", handleScroll);
 
