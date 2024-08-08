@@ -1022,6 +1022,16 @@ anymatch@~3.1.2:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
+"appwrite-gen@file:C:\\Users\\hp\\palettegram\\appwrite-gen":
+  version "1.0.0"
+  resolved "file:appwrite-gen"
+  dependencies:
+    "@types/react" "^18.3.2"
+    dotenv "^16.3.1"
+    node-appwrite "^11.1.0"
+    ts-node "^10.9.2"
+    typescript "^5.3.3"
+
 appwrite@15.0.0:
   version "15.0.0"
   resolved "https://registry.npmjs.org/appwrite/-/appwrite-15.0.0.tgz"

@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import Image from "next/image";
 import { ButtonLong } from "@/components/core/buttons";
 import { motion } from "framer-motion";
@@ -6,6 +7,19 @@ import { motion } from "framer-motion";
 import Newsletter from "../../core/newsletter/index";
 
 function HomePage({ accountId }: { accountId: string | undefined }) {
+  useEffect(() => {
+    // Initialize Tidio
+    const tidioScript = document.createElement("script");
+    tidioScript.src = "https://code.tidio.co/fdylvmddtyb7vzsk5frdt3ncrk6cwobs.js";
+    tidioScript.async = true;
+    document.body.appendChild(tidioScript);
+
+    return () => {
+      // Clean up script when component unmounts
+      document.body.removeChild(tidioScript);
+    };
+  }, []);
+
   return (
     <>
       <main className="max-w-screen-lg mx-auto px-4 md:px-10 lg:px-5">
@@ -138,7 +152,9 @@ function HomePage({ accountId }: { accountId: string | undefined }) {
               }}
               className="text-xl md:text-lg lg:text-xl text-center my-8 text-black dark:text-white md:text-right"
             >
-              A social media platform built exclusively for design professionals to share, discover and discuss cutting-edge UI/UX designs and color palettes.
+              A social media platform built exclusively for design professionals
+              to share, discover and discuss cutting-edge UI/UX designs and
+              color palettes.
             </motion.p>
           </article>
         </section>
@@ -171,7 +187,9 @@ function HomePage({ accountId }: { accountId: string | undefined }) {
               }}
               className="text-xl my-6 font-medium text-center text-secondary dark:text-white md:text-2xl md:text-left"
             >
-              Are you a developer looking for design inspiration for your next website? Browse through a variety of styles by other developers and get inspired!
+              Are you a developer looking for design inspiration for your next
+              website? Browse through a variety of styles by other developers
+              and get inspired!
             </motion.p>
           </article>
 
@@ -198,7 +216,7 @@ function HomePage({ accountId }: { accountId: string | undefined }) {
             </motion.div>
           </figure>
         </section>
-        
+
         <section className="flex items-center flex-col-reverse md:flex-row gap-4 mt-32 mb-32">
           <figure className="w-[70%]">
             <motion.div
@@ -249,15 +267,18 @@ function HomePage({ accountId }: { accountId: string | undefined }) {
               }}
               className="text-xl md:text-2xl text-center my-8 text-black dark:text-white md:text-right"
             >
-              Show off your design talent through projects, blogs and get feedback from other developers. Partner up with others, be a part of a collaborative community. 
+              Share your UI/UX designs with a global audience and get feedback
+              and insights from industry leaders.
             </motion.p>
           </article>
         </section>
-        <section className="w-full">
-              <Newsletter />
-        </section> 
+
+        <section className="mt-24 mb-8">
+          <Newsletter />
+        </section>
       </main>
     </>
   );
 }
+
 export default HomePage;
