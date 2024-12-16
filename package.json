@@ -48,6 +48,7 @@
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.13",
     "framer-motion": "10.18.0",
+    "gsap": "^3.12.5",
     "html-react-parser": "5.1.1",
     "lenis": "^1.1.6",
     "lucide-react": "0.316.0",
