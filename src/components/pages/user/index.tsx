@@ -17,7 +17,6 @@ import { useRouter } from "next/navigation";
 import { parseCookies } from "nookies";
 import Loader from "@/app/loading";
 import TrendingFeed from "@/components/core/trendingFeed";
-import Footer from "@/components/core/footer";
 import { ButtonLong } from "@/components/core/buttons";
 import { toastify } from "@/helper/toastify";
 import UserPosts from "./userPosts";
@@ -250,7 +249,6 @@ export default function User({ userId }: { userId: string }) {
           </div>
         </main>
       </Suspense>
-      <Footer />
     </>
   );
 }

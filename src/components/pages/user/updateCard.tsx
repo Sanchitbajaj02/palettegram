@@ -6,6 +6,7 @@ import { parseCookies } from "nookies";
 import { toastify } from "@/helper/toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { saveUserToStore } from "@/redux/reducers/authReducer";
+import ConfirmationPopup from "@/components/core/confirmationPopup";
 
 export default function UpdateCard({
   setProfileUpdate,
@@ -27,6 +28,7 @@ export default function UpdateCard({
     userLink: userDataFromStore && userDataFromStore?.userLink ? userDataFromStore?.userLink : "",
   });
   const [isLoading, setIsLoading] = useState<Boolean>(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -50,6 +52,7 @@ export default function UpdateCard({
       if (!resp) throw new Error("Error in updating, retry!");
 
       toastify("Update Successfully", "success");
+      setShowConfirmation(true);
 
       dispatcher(saveUserToStore(resp));
 
@@ -62,6 +65,12 @@ export default function UpdateCard({
   };
 
   return (
+    <>
+      <ConfirmationPopup
+        message="Profile updated successfully"
+        isVisible={showConfirmation}
+        onClose={() => setShowConfirmation(false)}
+      />
     <div className="fixed top-0 right-0 left-0 z-50  w-full backdrop-blur-lg bg-secondary-200  ">
       <section className="max-w-screen-sm mx-auto h-screen flex justify-center items-center ">
         <div className="card">
@@ -196,5 +205,6 @@ export default function UpdateCard({
         </div>
       </section>
     </div>
+    </>
   );
 }

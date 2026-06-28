@@ -73,11 +73,11 @@ contributors to open-source software development. <a href="docs/iwoc.md">Click h
 - [Top Contributors](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#-top-contributors)
 - [Support](https://github.com/Sanchitbajaj02/palettegram?tab=readme-ov-file#-top-contributors)
 
-## 🤔 Why open source
+## 🤔 Why Open Source?
 
-Contributing to open source increases your opportunities to work with different projects and mentors, getting to know various insights and ideas. It is a platform where contributors grow together with a constructive and positive attitude.
+Contributing to open source opens doors to work on diverse projects, learn from experienced mentors, and gain exposure to a wide range of perspectives and ideas. It is a collaborative ecosystem where contributors grow together with a constructive and positive mindset.
 
-This repository also provides one such platform where contributors come over and put their ideas for new games and make our website as interactive as they can!
+This repository serves as a platform for contributors to bring their ideas, enhance existing features, and make Palettegram more interactive, accessible, and valuable for the design community.
 
 <h5 align="center"><i>If you like the project, please <a href="https://github.com/Sanchitbajaj02/palettegram/stargazers">★</a> this repository to show your support! 🤩</i></h5>
 
@@ -145,7 +145,7 @@ Contributing to open-source software (OSS) projects can be a rewarding and fulfi
 
 - Follow the [Contribution Guidelines](CONTRIBUTING.md).
 
-- Create an [issue](https://github.com/GIrish-bari/comic-cult/issues) to report bugs, and vulnerabilities or add a new feature.
+- Create an [issue](https://github.com/Sanchitbajaj02/palettegram/issues) to report bugs, vulnerabilities, or suggest new features.
 
 - Remember to add a good commit message.
 
@@ -171,4 +171,4 @@ Without the tireless efforts and dedication of these exceptional developers, Pal
 
 ## 🙏🏽 Support
 
-This project needs a star️ from you. Don't forget to leave a star 🌟
+If you find this project useful, please consider giving it a star ⭐ — it helps others discover it and motivates the maintainers!
