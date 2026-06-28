@@ -22,7 +22,7 @@ export default function ConfirmationPopup({ message, isVisible, onClose }: Confi
 
   return (
     <div className="fixed top-5 right-5 z-[100] animate-in slide-in-from-right fade-in duration-300">
-      <div className="flex items-center gap-3 bg-green-500 text-white px-5 py-3 rounded-lg shadow-lg">
+      <div role="status" aria-live="polite" className="flex items-center gap-3 bg-green-500 text-white px-5 py-3 rounded-lg shadow-lg">
         <CheckCircle size={20} />
         <span className="font-medium">{message}</span>
       </div>

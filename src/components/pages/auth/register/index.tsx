@@ -49,6 +49,10 @@ export default function RegisterComponent() {
   }
 
   function evaluatePasswordStrength(password: string) {
+    if (disallowedPasswordRegex.test(password)) {
+      return { label: "Weak", score: 1, color: "bg-red-500" };
+    }
+
     let score = 0;
     if (password.length >= 6) score++;
     if (password.length >= 12) score++;
