@@ -172,3 +172,4 @@ Without the tireless efforts and dedication of these exceptional developers, Pal
 ## 🙏🏽 Support
 
 This project needs a star️ from you. Don't forget to leave a star 🌟
+# TODO: feat: add a "feedback form/page with button to website
