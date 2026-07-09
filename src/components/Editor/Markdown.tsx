@@ -113,7 +113,7 @@ const Markdown = ({ editorState, setEditorState, charLimit }: EditorProps) => {
 
   return (
     <>
-      <main className="dark:bg-secondary-light outline-none focus:ring rounded-lg p-3 text-white dark:text-white placholder:text-gray-400 text-lg w-full mb-2 max-w-full ">
+      <main className="bg-white dark:bg-secondary-light outline-none focus:ring rounded-lg p-3 text-secondary dark:text-white placeholder:text-gray-400 text-lg w-full mb-2 max-w-full border border-gray-300 dark:border-gray-600">
         {editor && (
           <BubbleMenu className="bubble-menu" tippyOptions={{ duration: 100 }} editor={editor}>
             <div className="flex gap-1 bg-white px-4 py-1 text-black rounded-sm">

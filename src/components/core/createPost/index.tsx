@@ -11,6 +11,7 @@ import { addPost } from "@/redux/reducers/postsReducer";
 import { PostInstanceType } from "@/types/index.d";
 import { isCtrlEnter } from "@/helper/isCtrlEnter";
 import Markdown from "@/components/Editor/Markdown";
+import ConfirmationPopup from "@/components/core/confirmationPopup";
 
 const CHAR_LIMIT = 500;
 
@@ -18,6 +19,7 @@ const CreatePost = () => {
   const postSelector = useSelector((state: any) => state.posts);
   const dispatch = useDispatch();
   const submitRef = useRef() as React.MutableRefObject<HTMLButtonElement>;
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   // State to manage text field
   const [editorState, setEditorState] = useState("");
@@ -81,6 +83,7 @@ const CreatePost = () => {
       // console.log(savetoDb, "svaetoDB");
       dispatch(addPost(finalDataToUpload));
       toastify("Post uploaded successfully", "success");
+      setShowConfirmation(true);
 
       setEditorState("");
       setimageStorage({
@@ -139,7 +142,12 @@ const CreatePost = () => {
 
   return (
     <>
-      <section className="border border-gray-500 rounded-md shadow-sm mb-4 p-2">
+      <ConfirmationPopup
+        message="Post uploaded successfully"
+        isVisible={showConfirmation}
+        onClose={() => setShowConfirmation(false)}
+      />
+      <section className="border border-gray-300 dark:border-gray-500 rounded-md shadow-sm mb-4 p-2 bg-white dark:bg-transparent">
         <small className="text-slate-400 p-1">
           You have {CHAR_LIMIT - editorState.replaceAll(/<[^>]*>/g, "").length} characters left
         </small>

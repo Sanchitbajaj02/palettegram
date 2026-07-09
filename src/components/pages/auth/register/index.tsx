@@ -25,6 +25,7 @@ export default function RegisterComponent() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [passwordStrength, setPasswordStrength] = useState({ label: "", score: 0, color: "" });
   const [data, setData] = useState({
     fullName: "",
     email: "",
@@ -41,6 +42,29 @@ export default function RegisterComponent() {
     setData((prevState) => {
       return { ...prevState, [name]: value };
     });
+
+    if (name === "password") {
+      setPasswordStrength(evaluatePasswordStrength(value));
+    }
+  }
+
+  function evaluatePasswordStrength(password: string) {
+    if (disallowedPasswordRegex.test(password)) {
+      return { label: "Weak", score: 1, color: "bg-red-500" };
+    }
+
+    let score = 0;
+    if (password.length >= 6) score++;
+    if (password.length >= 12) score++;
+    if (/[A-Z]/.test(password)) score++;
+    if (/[a-z]/.test(password)) score++;
+    if (/[0-9]/.test(password)) score++;
+    if (/[^A-Za-z0-9]/.test(password)) score++;
+
+    if (score <= 2) return { label: "Weak", score: 1, color: "bg-red-500" };
+    if (score <= 3) return { label: "Medium", score: 2, color: "bg-orange-500" };
+    if (score <= 4) return { label: "Strong", score: 3, color: "bg-yellow-500" };
+    return { label: "Very Strong", score: 4, color: "bg-green-500" };
   }
 
   async function submitHander(event: React.FormEvent<HTMLFormElement>) {
@@ -227,6 +251,41 @@ export default function RegisterComponent() {
                 </button>
               </div>
               <small>Password must contain a character, a number and a special character</small>
+              {data.password && (
+                <div className="mt-2">
+                  <div className="flex gap-1">
+                    {[1, 2, 3, 4].map((level) => (
+                      <div
+                        key={level}
+                        className={`h-1.5 flex-1 rounded-full transition-all duration-300 ${
+                          level <= passwordStrength.score
+                            ? passwordStrength.score === 1
+                              ? "bg-red-500"
+                              : passwordStrength.score === 2
+                                ? "bg-orange-500"
+                                : passwordStrength.score === 3
+                                  ? "bg-yellow-500"
+                                  : "bg-green-500"
+                            : "bg-gray-300 dark:bg-gray-600"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <p
+                    className={`text-xs mt-1 font-medium ${
+                      passwordStrength.score === 1
+                        ? "text-red-500"
+                        : passwordStrength.score === 2
+                          ? "text-orange-500"
+                          : passwordStrength.score === 3
+                            ? "text-yellow-500"
+                            : "text-green-500"
+                    }`}
+                  >
+                    {passwordStrength.label}
+                  </p>
+                </div>
+              )}
             </motion.div>
 
             <motion.div
