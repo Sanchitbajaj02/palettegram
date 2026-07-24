@@ -18,8 +18,7 @@ export function toastify(text: string, statusType: ToastTypes) {
       return toast.error(text);
     case "warning":
       return toast.warning(text);
-    // default:
-    //   return toast.message(text);
-    //   break;
+    default:
+      return toast.message(text);
   }
 }
