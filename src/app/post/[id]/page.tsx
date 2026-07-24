@@ -38,7 +38,7 @@ const PostDisplay = ({ params: { id } }: Prop) => {
             postTitle: res.postTitle,
             postImages: res.postImages,
             colors: res.colors || [],
-            commentsCount: res.commentCount || [],
+            commentsCount: res.commentCount || 0,
             likesCount: res.likesCount,
             $id: res.$id || "",
             $collectionId: res.$collectionId || "",
